@@ -39,16 +39,14 @@ Environment::getUser()->setNamespace("interlos");
 $application = Environment::getApplication();
 
 // Step 6: Setup application router
-//$router = $application->getRouter();
-//
-//$router[] = FrontendModule::createRouter();
+$router = $application->getRouter();
+$router[] = FrontendModule::createRouter();
 
 // Step 7: Connect to the database
 dibi::connect(Environment::getConfig("database"));
 
-if (isset($_GET["update-database"])) {
-    Interlos::resetTemporaryTables();
-}
+// Step 8: Reset temporary tables
+Interlos::resetTemporaryTables();
 
-// Step 8: Run the application!
+// Step 9: Run the application!
 $application->run();

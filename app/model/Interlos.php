@@ -55,16 +55,24 @@ class Interlos {
 		return self::$loggedTeam;
 	}
 
+    public static function isAdminAccess() {
+        return isset($_GET["admin-key"]) && Environment::getConfig("admin.key", NULL) == $_GET["admin-key"];
+    }
+    
+    public static function isCronAccess() {
+        return isset($_GET["admin-key"]) && Environment::getConfig("cron.key", NULL) == $_GET["cron-key"];
+    }
+    
     public static function isGameActive() {
         return self::isGameStarted() && !self::isGameEnd();
     }
     
     public static function isGameEnd() {
-        return (time() > strtotime(Interlos::getCurrentYear()->game_end));
+        return (time() > strtotime(Interlos::getCurrentYear()->game_end) || (self::isAdminAccess() && isset($_GET["game-end"])));
     }
     
     public static function isGameStarted() {
-        return (strtotime(Interlos::getCurrentYear()->game_start) < time());
+        return (strtotime(Interlos::getCurrentYear()->game_start) < time() || (self::isAdminAccess() && isset($_GET["game-started"])));
     }
     
     public static function isRegistrationActive() {
@@ -72,14 +80,17 @@ class Interlos {
     }
 
     public static function isRegistrationEnd() {
-        return (strtotime(Interlos::getCurrentYear()->registration_end) < time());
+        return (strtotime(Interlos::getCurrentYear()->registration_end) < time() || (self::isAdminAccess() && isset($_GET["registration-end"])));
     }
     
     public static function isRegistrationStarted() {
-        return (strtotime(Interlos::getCurrentYear()->registration_start) < time());
+        return (strtotime(Interlos::getCurrentYear()->registration_start) < time() || (self::isAdminAccess() && isset($_GET["registration-started"])));
     }
     
 	public static function resetTemporaryTables() {
+        if (!self::isCronAccess() || !isset($_GET["update-database"])) {
+            return;
+        }
 		self::getConnection()->begin();
 		// Total results
 		self::getConnection()->query("DROP TABLE IF EXISTS [tmp_total_result]");
