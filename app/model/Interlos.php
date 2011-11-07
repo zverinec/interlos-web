@@ -115,7 +115,7 @@ class Interlos {
     }
     
     public static function isRegistrationActive() {
-        return self::isGameStarted() && !self::isRegistrationEnd();
+        return self::isRegistrationStarted() && !self::isRegistrationEnd();
     }
 
     public static function isRegistrationEnd() {
