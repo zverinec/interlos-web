@@ -96,8 +96,8 @@ class Interlos {
     }
     
     public static function isGameEnd() {
-        if (self::isAdminPropertyAvailableInURL("game-end")) {
-            return self::getAdminPropertyValueFromURL("game-end");
+        if (self::loadAdminProperty("game-end")) {
+            return self::loadAdminProperty("game-end");
         }
         else {
             return self::getCurrentTime() > strtotime(Interlos::getCurrentYear()->game_end);
@@ -105,8 +105,8 @@ class Interlos {
     }
     
     public static function isGameStarted() {
-        if (self::isAdminPropertyAvailableInURL("game-started")) {
-            return self::getAdminPropertyValueFromURL("game-started");
+        if (self::loadAdminProperty("game-started") !== null) {
+            return self::loadAdminProperty("game-started");
         }
         else {
             return strtotime(Interlos::getCurrentYear()->game_start) < self::getCurrentTime();
@@ -119,8 +119,8 @@ class Interlos {
     }
 
     public static function isRegistrationEnd() {
-        if (self::isAdminPropertyAvailableInURL("registration-end")) {
-            return self::getAdminPropertyValueFromURL("game-end");
+        if (self::loadAdminProperty("registration-end")) {
+            return self::loadAdminProperty("game-end");
         }
         else {        
             return strtotime(Interlos::getCurrentYear()->registration_end) < self::getCurrentTime();
@@ -128,8 +128,8 @@ class Interlos {
     }
     
     public static function isRegistrationStarted() {
-        if (self::isAdminPropertyAvailableInURL("registration-started")) {
-            return self::getAdminPropertyValueFromURL("game-started");
+        if (self::loadAdminProperty("registration-started")) {
+            return self::loadAdminProperty("game-started");
         }
         else {     
             return strtotime(Interlos::getCurrentYear()->registration_start) < self::getCurrentTime();
