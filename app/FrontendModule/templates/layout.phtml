@@ -54,7 +54,7 @@
 				{if Interlos::isRegistrationStarted()}
 					<li><a href="{link Default:chat}" title="Diskuse">Diskuse</a></li>
 					<li><a href="{link Team:list}" title="Týmy">Týmy</a></li>
-			    {if Interlos::isGameActive()}
+			    {if Interlos::isGameStarted()}
 					{if Environment::getUser()->isLoggedIn()}
 						<li><a href="{link Game:default}" title="Hra">Hra</a></li>
 					{/if}
@@ -68,7 +68,7 @@
 			<!-- PAGE TITLE -->
 			<h1>{$pageTitle}</h1>
 			<!-- FLASH MESSAGES -->
-		{widget flashMessages}
+            {widget flashMessages}
 			<!-- CONTENT -->
 			<div id="content">
 		    {block #content}{/block}

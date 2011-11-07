@@ -47,7 +47,7 @@ class Interlos {
             $presenter->flashMessage("Začátek registrace nastaven na ". (self::loadAdminProperty("registration-started") ? "TRUE" : "FALSE") .".");
         }        
         if (self::loadAdminProperty("time") !== NULL) {
-            $presenter->flashMessage("Herní čas nastaven na ". $_GET["time"] .".");
+            $presenter->flashMessage("Herní čas nastaven na ". self::loadAdminProperty("time") .".");
         }        
         self::$adminMessages = TRUE;
     }    
@@ -100,7 +100,7 @@ class Interlos {
             return self::getAdminPropertyValueFromURL("game-end");
         }
         else {
-            return time() > strtotime(Interlos::getCurrentYear()->game_end);
+            return self::getCurrentTime() > strtotime(Interlos::getCurrentYear()->game_end);
         }
     }
     
@@ -109,7 +109,7 @@ class Interlos {
             return self::getAdminPropertyValueFromURL("game-started");
         }
         else {
-            return strtotime(Interlos::getCurrentYear()->game_start) < time();
+            return strtotime(Interlos::getCurrentYear()->game_start) < self::getCurrentTime();
         }        
         
     }
@@ -123,7 +123,7 @@ class Interlos {
             return self::getAdminPropertyValueFromURL("game-end");
         }
         else {        
-            return strtotime(Interlos::getCurrentYear()->registration_end) < time();
+            return strtotime(Interlos::getCurrentYear()->registration_end) < self::getCurrentTime();
         }
     }
     
@@ -132,7 +132,7 @@ class Interlos {
             return self::getAdminPropertyValueFromURL("game-started");
         }
         else {     
-            return strtotime(Interlos::getCurrentYear()->registration_start) < time();
+            return strtotime(Interlos::getCurrentYear()->registration_start) < self::getCurrentTime();
         }
     }
     
@@ -156,7 +156,7 @@ class Interlos {
     }
     
 	public static function resetTemporaryTables() {
-        if (!self::isCronAccess() || !isset($_GET["update-database"])) {
+        if ((!self::isCronAccess() && !self::isAdminAccess()) || !isset($_GET["update-database"])) {
             return;
         }
 		self::getConnection()->begin();
@@ -228,8 +228,8 @@ class Interlos {
 	}
 
     public static function getCurrentTime() {
-        if (self::isAdminAccess() && isset($_GET["time"])) {
-            return strtotime($_GET["time"]);
+        if (self::loadAdminProperty("time") !== NULL) {
+            return strtotime(self::loadAdminProperty("time"));
         }
         else {
             return time();
