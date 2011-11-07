@@ -140,14 +140,13 @@ class Interlos {
         if (!self::isAdminAccess()) {
             return;
         }
-        $propertiesToStore = array("game-end", "game-start", "registration-end", "registration-start", "time");
+        $propertiesToStore = array("game-end", "game-started", "registration-end", "registration-started", "time");
         $session = Environment::getSession("admin.property");
         if (self::isAdminPropertyAvailableInURL("reset-admin-properties")) {
             foreach($propertiesToStore AS $property) {
                 $session[$property] = NULL;
             }
         }
-        $propertiesToStore = array("game-end", "game-start", "registration-end", "registration-start", "time");
         foreach($propertiesToStore AS $property) {
             if (self::isAdminPropertyAvailableInURL($property)) {
                 self::storeAdminProperty($property);
