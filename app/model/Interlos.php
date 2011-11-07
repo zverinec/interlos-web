@@ -1,6 +1,8 @@
 <?php
 class Interlos {
 
+    private static $adminMessages = FALSE;
+    
 	private static $connection;
 
 	private static $currentYear;
@@ -24,6 +26,32 @@ class Interlos {
 		return self::getModel("competitors");
 	}
 
+    public static function createAdminMessages() {
+        if (self::$adminMessages) {
+            return;
+        }
+        $presenter = Environment::getApplication()->getPresenter();
+        if (self::isAdminAccess()) {
+                $presenter->flashMessage("Přístup administrátora schválen.", "info");
+        }
+        if (self::loadAdminProperty("game-end") !== NULL) {
+            $presenter->flashMessage("Konec hry nastaven na ". (self::loadAdminProperty("game-end") ? "TRUE" : "FALSE") .".");
+        }
+        if (self::loadAdminProperty("game-started") !== NULL) {
+            $presenter->flashMessage("Začátek hry nastaven na ". (self::loadAdminProperty("game-started") ? "TRUE" : "FALSE") .".");
+        }
+        if (self::loadAdminProperty("registration-end") !== NULL) {
+            $presenter->flashMessage("Konec registrace nastaven na ". (self::loadAdminProperty("registration-end") ? "TRUE" : "FALSE") .".");
+        }
+        if (self::loadAdminProperty("registration-started") != NULL) {
+            $presenter->flashMessage("Začátek registrace nastaven na ". (self::loadAdminProperty("registration-started") ? "TRUE" : "FALSE") .".");
+        }        
+        if (self::loadAdminProperty("time") !== NULL) {
+            $presenter->flashMessage("Herní čas nastaven na ". $_GET["time"] .".");
+        }        
+        self::$adminMessages = TRUE;
+    }    
+    
 	/** @return DibiConnection */
 	public static function getConnection() {
 		if (empty(self::$connection)) {
@@ -33,7 +61,7 @@ class Interlos {
 			return self::$connection;
 		}
 	}
-
+    
 	/** @return DibiRow */
 	public static function getCurrentYear() {
 		if (!isset(self::$currentYear)) {
@@ -56,11 +84,11 @@ class Interlos {
 	}
 
     public static function isAdminAccess() {
-        return isset($_GET["admin-key"]) && Environment::getConfig("admin.key", NULL) == $_GET["admin-key"];
+        return isset($_GET["admin-key"]) && Environment::getConfig("admin")->key == $_GET["admin-key"];
     }
     
     public static function isCronAccess() {
-        return isset($_GET["admin-key"]) && Environment::getConfig("cron.key", NULL) == $_GET["cron-key"];
+        return isset($_GET["cron-key"]) && Environment::getConfig("cron")->key == $_GET["cron-key"];
     }
     
     public static function isGameActive() {
@@ -68,11 +96,22 @@ class Interlos {
     }
     
     public static function isGameEnd() {
-        return (time() > strtotime(Interlos::getCurrentYear()->game_end) || (self::isAdminAccess() && isset($_GET["game-end"])));
+        if (self::isAdminPropertyAvailableInURL("game-end")) {
+            return self::getAdminPropertyValueFromURL("game-end");
+        }
+        else {
+            return time() > strtotime(Interlos::getCurrentYear()->game_end);
+        }
     }
     
     public static function isGameStarted() {
-        return (strtotime(Interlos::getCurrentYear()->game_start) < time() || (self::isAdminAccess() && isset($_GET["game-started"])));
+        if (self::isAdminPropertyAvailableInURL("game-started")) {
+            return self::getAdminPropertyValueFromURL("game-started");
+        }
+        else {
+            return strtotime(Interlos::getCurrentYear()->game_start) < time();
+        }        
+        
     }
     
     public static function isRegistrationActive() {
@@ -80,11 +119,40 @@ class Interlos {
     }
 
     public static function isRegistrationEnd() {
-        return (strtotime(Interlos::getCurrentYear()->registration_end) < time() || (self::isAdminAccess() && isset($_GET["registration-end"])));
+        if (self::isAdminPropertyAvailableInURL("registration-end")) {
+            return self::getAdminPropertyValueFromURL("game-end");
+        }
+        else {        
+            return strtotime(Interlos::getCurrentYear()->registration_end) < time();
+        }
     }
     
     public static function isRegistrationStarted() {
-        return (strtotime(Interlos::getCurrentYear()->registration_start) < time() || (self::isAdminAccess() && isset($_GET["registration-started"])));
+        if (self::isAdminPropertyAvailableInURL("registration-started")) {
+            return self::getAdminPropertyValueFromURL("game-started");
+        }
+        else {     
+            return strtotime(Interlos::getCurrentYear()->registration_start) < time();
+        }
+    }
+    
+    public static function prepareAdminProperties() {
+        if (!self::isAdminAccess()) {
+            return;
+        }
+        $propertiesToStore = array("game-end", "game-start", "registration-end", "registration-start", "time");
+        $session = Environment::getSession("admin.property");
+        if (self::isAdminPropertyAvailableInURL("reset-admin-properties")) {
+            foreach($propertiesToStore AS $property) {
+                $session[$property] = NULL;
+            }
+        }
+        $propertiesToStore = array("game-end", "game-start", "registration-end", "registration-start", "time");
+        foreach($propertiesToStore AS $property) {
+            if (self::isAdminPropertyAvailableInURL($property)) {
+                self::storeAdminProperty($property);
+            }
+        }
     }
     
 	public static function resetTemporaryTables() {
@@ -143,7 +211,7 @@ class Interlos {
 	}
 
 	// ---- PRIVATE METHODS
-
+    
 	private static function createModel($name) {
 		$className = ucfirst($name) . "Model";
 		// Check whether the model class exist
@@ -159,6 +227,15 @@ class Interlos {
 		return new $className(self::getConnection());
 	}
 
+    public static function getCurrentTime() {
+        if (self::isAdminAccess() && isset($_GET["time"])) {
+            return strtotime($_GET["time"]);
+        }
+        else {
+            return time();
+        }
+    }    
+    
 	private static function getModel($name) {
 		if (empty(self::$models[$name])) {
 			self::$models[$name] = self::createModel($name);
@@ -166,4 +243,52 @@ class Interlos {
 		return self::$models[$name];
 	}
 
+    private static function getAdminPropertyValueFromURL($property) {
+        if (!self::isAdminAccess()) {
+            return false;
+        }
+        if (!isset($_GET[$property])) {
+            return false;
+        }              
+        $trues = array("1", "TRUE", "true", "yes", "YES");
+        $falses = array("0", "FALSE", "false", "no", "NO");
+        if (in_array($_GET[$property], $trues)) {
+            return true;
+        }
+        else if (in_array($_GET[$property], $falses)) {
+            return false;
+        }
+        else {
+            return $_GET[$property];
+        }
+    }
+
+    private static function isAdminPropertyAvailableInURL($property) {
+        if (!self::isAdminAccess()) {
+            return false;
+        }
+        if (!isset($_GET[$property])) {
+            return false;
+        }        
+        return true;
+    }
+    
+    private static function loadAdminProperty($property) {
+        $session = Environment::getSession("admin.property");
+        if (isset($session[$property])) {
+            return $session[$property];
+        }
+        else {
+            return NULL;
+        }
+    }
+    
+    private static function storeAdminProperty($property) {
+        $session = Environment::getSession("admin.property");
+        if (!self::isAdminPropertyAvailableInURL($property)) {
+            return;
+        }
+        $session[$property] = self::getAdminPropertyValueFromURL($property);
+    }
+    
 }

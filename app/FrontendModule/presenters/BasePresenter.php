@@ -26,6 +26,8 @@ class Frontend_BasePresenter extends Presenter {
 
 	protected function startUp() {
 		parent::startup();
+        Interlos::prepareAdminProperties();
+        Interlos::createAdminMessages();
 		$this->oldModuleMode = FALSE;
 	}
 
