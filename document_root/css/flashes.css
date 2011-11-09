@@ -1,4 +1,4 @@
-#flashes .flash, ul.error li {
+.flash, ul.error li {
     padding: 30px;
     padding-left: 70px;
     font-size: 1.2em;
@@ -11,19 +11,19 @@
 	list-style: none;
 }
 
-#flashes .error, ul.error li {
+.error, ul.error li {
     color: #7B0404;
     background-color: #ffeedd;
     background-image: url(../images/icons/flash-error.png);
 }
 
-#flashes .success {
+.success {
     color: #1E3712;
     background-color: #ddffdd;
     background-image: url(../images/icons/flash-success.png);
 }
 
-#flashes .info {
+.info {
     color: #0D58A6;
     background-color: #eeeeff;
     background-image: url(../images/icons/flash-info.png);
