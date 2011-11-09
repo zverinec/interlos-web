@@ -7,7 +7,7 @@ class AnswerFormComponent extends BaseComponent
 
 		try {
 			$task = Interlos::tasks()->find($values["task"]);
-			$solution = strtoupper(trim($values["solution"], " "));
+			$solution = strtoupper(strtr($values["solution"], array(" " => "")));
 			Interlos::answers()->insert(Interlos::getLoggedTeam()->id_team, $values["task"], $solution);
 			if ($task->code == $solution) {
 				$this->getPresenter()->flashMessage("Vaše odpověď je správně.", "success");
@@ -61,7 +61,7 @@ class AnswerFormComponent extends BaseComponent
 		// Solution
 		$form->addText("solution", "Kód")
 				->addRule(Form::FILLED, "Vyplňte prosím řešení úkolu.")
-				->setOption("description","Výsledný kód zadávejte velkými písmeny a bez diakritiky.");;
+				->setOption("description","Výsledný kód zadávejte velkými písmeny, bez mezer a bez diakritiky.");;
 
 		$form->addSubmit("solution_submit", "Odeslat řešení");
 		$form->onSubmit[] = array($this, "formSubmitted");
