@@ -134,6 +134,7 @@ class TeamFormComponent extends BaseComponent {
 					->addConditionOn($form[$i."_school"], Form::EQUAL, "other")
 					->addRule(Form::FILLED, "U $i. člena je vyplněno jméno, ale není u něj vyplněna škola.");
 			$form[$i."_otherschool"]->getLabelPrototype()->id = "frm".$name."-".$i."_otherschool-label";
+			$form[$i."_school"]->setOption("description", "Pokud není vaše škola přítomna vyberte položku \"Jiná\".");
 			if ($i == 1) {
 				$form[$i."_competitor_name"]->addRule(Form::FILLED, "Jméno prvního člena musí být vyplněno.");
 			}

@@ -1,26 +1,12 @@
 {extends layout.phtml}
 
 {block #content}
-    <script>
-	$(document).ready(function(){
-	    $(".solution").next().hide();
-
-	    $(".solution").click(function(){
-		$(this).toggleClass("unpacked").next().slideToggle("slow");
-	    });
-	});
-
-    </script>
-
-    <p>
-	Pro lepší představu o tom, jaké úlohy vás čekají, doporučujeme podívat se na zadání z ročníku 2009:</p>
-	<ul>
-	<li><a href="{$baseUri}download/years/2009/zadani-1.pdf">sada&nbsp;1</a></li>
-	<li><a href="{$baseUri}download/years/2009/zadani-2.pdf">sada&nbsp;2</a></li>
-	<li><a href="{$baseUri}download/years/2009/zadani-3.pdf">sada&nbsp;3</a></li>
-        </ul>
-    <p>Můžete si též stáhnout <a href="{$baseUri}download/years/2009/zadani-all.zip">zadání všech úloh včetně doplňujících souborů</a>.</p>
-									     <p>V letošním ročníku budou trochu zjednodušeny a zpestřeny programátorské úlohy (půjde nejen o programování, ale i o další aplikace počítačů).  </p>
-
-									     
+     <div class="flash info">
+             Nechcete pohořet a pořádně si Interlosa užít? Tak to hledáte na správném místě!
+     </div>
+     <h2>Šifry z předchozích ročníků</h2>
+     <p>Naleznete na stránce <a href="{plink Default:lastYears}">minulé ročníky</a> spolu se vzorovými řešeními.</p>
+{*     <h2>Příručka hráče</h2>
+     <p>Dále jsme pro vás připravili herní <a href="http://interlos.fi.muni.cz/download/interlos-2011-prirucka-hrace.pdf">příručku</a>, ve které najdete spoustu užitečných tipů a rozehřívací příklady.</p>*}
+{*     <h2>Jinde</h2>*}
 {/block}

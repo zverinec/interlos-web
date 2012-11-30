@@ -38,6 +38,13 @@ Environment::getUser()->setNamespace("interlos");
 // Step 5: Get the front controller
 $application = Environment::getApplication();
 
+// Step 5.5: Maitenance mode
+/*$maint = Environment::getHttpRequest()->getQuery("maint");
+if($maint == NULL && $_SERVER['REMOTE_ADDR'] != "83.240.6.212") {
+    echo "<p><strong>Interlos IV. proběhne v sobotu 1. 12. 2012.<br />Registrace bude otevřená od 28. 10. do 30. 11.</strong></p>";
+    die;
+}*/
+
 // Step 6: Setup application router
 $router = $application->getRouter();
 $router[] = FrontendModule::createRouter();

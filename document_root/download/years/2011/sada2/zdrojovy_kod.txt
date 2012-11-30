@@ -1,0 +1,177 @@
+---------------------------------------
+C
+---------------------------------------
+
+#include<stdio.h>
+#define DELKA 9
+
+int prvni_pole[DELKA], druhe_pole[DELKA];
+
+void swap(int k, int l){
+    int temp;
+    temp = prvni_pole[k];
+    prvni_pole[k]= prvni_pole[l];
+    prvni_pole[l] = temp;
+    temp = druhe_pole[k];
+    druhe_pole[k] = druhe_pole[l];
+    druhe_pole[l] = temp;
+}
+
+int main(){
+    int i,j;
+    char kod[42];
+    scanf("%s\n", kod);
+    for (i=0; i<DELKA; i++){
+        prvni_pole[i] = kod[i]-'a'+1;
+        druhe_pole[i] = i;
+    }
+
+    for (i=0; i<DELKA; i++)
+        for (j=0; j<DELKA-1; j++)
+            if (prvni_pole[j] > prvni_pole[j+1])
+                swap(j, j+1);
+
+    for (i=DELKA-1; i>0; i--){
+        prvni_pole[i] -= prvni_pole[i-1];
+    }
+
+    for (i=0; i<42; i++){
+        swap(i%DELKA, 0);
+    }
+
+	for (i=1; i<DELKA; i++){
+        prvni_pole[i] += prvni_pole[i-1];
+    }
+
+    for (i=0; i<DELKA; i++)
+        for (j=0; j<DELKA-1; j++)
+            if (druhe_pole[j] > druhe_pole[j+1])
+                swap(j, j+1);
+
+    for (i=0; i<DELKA; i++){
+        printf("%c", 'a'-1+prvni_pole[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+---------------------------------------
+Python
+---------------------------------------
+
+DELKA = 9
+prvni_pole = [0]*DELKA
+druhe_pole = [0]*DELKA
+
+def swap(k, l):
+	temp = prvni_pole[k];
+	prvni_pole[k]= prvni_pole[l];
+	prvni_pole[l] = temp;
+	temp = druhe_pole[k];
+	druhe_pole[k] = druhe_pole[l];
+	druhe_pole[l] = temp;
+
+
+kod = raw_input("")
+
+for i in range(DELKA):
+	prvni_pole[i] = ord(kod[i])-ord('a')+1;
+	druhe_pole[i] = i;
+
+for i in range(DELKA):
+	for j in range(DELKA-1):
+		if prvni_pole[j] > prvni_pole[j+1]:
+			swap(j, j+1);
+
+for i in range(DELKA-1,0,-1):
+	prvni_pole[i] -= prvni_pole[i-1];
+
+for i in range(42):
+	swap(i%DELKA, 0);
+
+for i in range(1,DELKA):
+	prvni_pole[i] += prvni_pole[i-1];
+
+for i in range(DELKA):
+	for j in range(DELKA-1):
+		if druhe_pole[j] > druhe_pole[j+1]:
+			swap(j, j+1);
+
+for i in range(DELKA):
+	print chr(ord('a')-1+prvni_pole[i]),
+
+print
+
+
+---------------------------------------
+Pascal
+---------------------------------------
+
+program interlos;
+
+const
+	DELKA = 9;
+
+var
+	i,j : Integer;
+	prvni_pole: array [0..DELKA-1] of Integer;
+	druhe_pole: array [0..DELKA-1] of Integer;
+	kod : String;
+
+
+procedure swap(k: Integer; l: Integer);
+var
+	temp: Integer;
+begin
+    temp := prvni_pole[k];
+    prvni_pole[k] := prvni_pole[l];
+    prvni_pole[l] := temp;
+    temp := druhe_pole[k];
+    druhe_pole[k] := druhe_pole[l];
+    druhe_pole[l] := temp;
+end;
+
+
+begin
+	ReadLn(kod);
+    for i:=0 to DELKA-1 do begin
+        prvni_pole[i] := ord(kod[i+1])-ord('a')+1;
+        druhe_pole[i] := i;
+    end;
+
+    for i:=0 to DELKA-1 do begin
+        for j:=0 to DELKA-2 do begin
+            if (prvni_pole[j] > prvni_pole[j+1]) then begin
+                swap(j, j+1);
+			end;
+		end;
+	end;
+
+    for i:=DELKA-1 downto 1 do begin
+        prvni_pole[i] := prvni_pole[i] - prvni_pole[i-1];
+    end;
+
+    for i:=0 to 41 do begin
+        swap(i mod DELKA, 0);
+    end;
+
+	for i:=1 to DELKA-1 do begin
+        prvni_pole[i] := prvni_pole[i] + prvni_pole[i-1];
+    end;
+
+	for i:=0 to DELKA-1 do begin
+		for j:=0 to DELKA-2 do begin
+			if (druhe_pole[j] > druhe_pole[j+1]) then begin
+				swap(j,j+1);
+			end;
+		end;
+	end;
+
+    for i:=0 to DELKA-1 do begin
+        Write(chr(ord('a')-1+prvni_pole[i]));
+    end;
+
+    WriteLn;
+end.
+
