@@ -53,7 +53,7 @@ $router[] = FrontendModule::createRouter();
 dibi::connect(Environment::getConfig("database"));
 
 // Step 8: Reset temporary tables
-Interlos::resetTemporaryTables();
+//Interlos::resetTemporaryTables();
 
 // Step 9: Run the application!
 $application->run();
