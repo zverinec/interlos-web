@@ -1,6 +1,6 @@
 # configure PHP
- php_flag magic_quotes_gpc off
- php_flag register_globals off
+# php_flag magic_quotes_gpc off
+# php_flag register_globals off
 
 # mod_rewrite
 RewriteEngine On
