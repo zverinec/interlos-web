@@ -2,7 +2,7 @@
 class AnswerFormComponent extends BaseComponent
 {
 
-	public function formSubmitted(Form $form) {
+	public function formSubmitted(Nette\Forms\Form $form) {
 		$values = $form->getValues();
 
 		try {
@@ -16,14 +16,14 @@ class AnswerFormComponent extends BaseComponent
 				$this->getPresenter()->flashMessage("Vaše odpověď je špatně.", "error");
 			}
 		}
-		catch(InvalidStateException $e) {
+		catch(Nette\InvalidStateException $e) {
 			if ($e->getCode() == AnswersModel::ERROR_TIME_LIMIT) {
 				$this->getPresenter()->flashMessage("Od vaší poslední špatné odpovědi ještě neuplynulo 30 sekund.", "error");
 				return;
 			}
 			else {
 				$this->getPresenter()->flashMessage("Stala se neočekávaná chyba.", "error");
-				Debug::processException($e, TRUE);
+				Nette\Diagnostics\Debugger::processException($e, TRUE);
 				//error_log($e->getTraceAsString());
 				return;
 			}
@@ -34,14 +34,14 @@ class AnswerFormComponent extends BaseComponent
 			}
 			else {
 				$this->getPresenter()->flashMessage("Stala se neočekávaná chyba.", "error");
-				Debug::processException($e, TRUE);
+				Nette\Diagnostics\Debugger::processException($e, TRUE);
 				//error_log($e->getTraceAsString());
 			}
 			return;
 		}
 		catch(Exception $e) {
 			$this->getPresenter()->flashMessage("Stala se neočekávaná chyba.", "error");
-			Debug::processException($e, TRUE);
+			Nette\Diagnostics\Debugger::processException($e, TRUE);
 			//error_log($e->getTraceAsString());
 			return;
 		}
@@ -57,10 +57,10 @@ class AnswerFormComponent extends BaseComponent
 			->fetchPairs("id_task", "code_name");
 		$form->addSelect("task", "Úkol", $tasks )
 				->skipFirst()
-				->addRule(Form::FILLED, "Vyberte prosím řešený úkol.");
+				->addRule(Nette\Forms\Form::FILLED, "Vyberte prosím řešený úkol.");
 		// Solution
 		$form->addText("solution", "Kód")
-				->addRule(Form::FILLED, "Vyplňte prosím řešení úkolu.")
+				->addRule(Nette\Forms\Form::FILLED, "Vyplňte prosím řešení úkolu.")
 				->setOption("description","Výsledný kód zadávejte velkými písmeny, bez mezer a bez diakritiky.");;
 
 		$form->addSubmit("solution_submit", "Odeslat řešení");
@@ -71,8 +71,8 @@ class AnswerFormComponent extends BaseComponent
 
 	protected function startUp() {
 		parent::startUp();
-		if (!Environment::getUser()->isLoggedIn()) {
-			throw new InvalidStateException("There is no logged team.");
+		if (!Nette\Environment::getUser()->isLoggedIn()) {
+			throw new Nette\InvalidStateException("There is no logged team.");
 		}
 		if (Interlos::isGameEnd()) {
 			$this->flashMessage("Čas vypršel.", "error");

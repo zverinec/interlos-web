@@ -1,5 +1,7 @@
 <?php
-class Frontend_StatsPresenter extends Frontend_BasePresenter
+namespace FrontModule;
+
+class StatsPresenter extends BasePresenter
 {
 
 	public function renderDefault() {
@@ -18,15 +20,15 @@ class Frontend_StatsPresenter extends Frontend_BasePresenter
 	}
 
 	protected function createComponentResults($name) {
-		return new ResultsComponent($this, $name);
+		return new \ResultsComponent($this, $name);
 	}
 
 	protected function createComponentScoreList($name) {
-		return new ScoreListComponent($this, $name);
+		return new \ScoreListComponent($this, $name);
 	}
 
 	protected function createComponentTaskStats($name) {
-		return new TaskStatsComponent($this, $name);
+		return new \TaskStatsComponent($this, $name);
 	}
 
 	private function check($componentName) {

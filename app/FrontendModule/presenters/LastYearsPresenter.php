@@ -1,5 +1,7 @@
 <?php
-class Frontend_ArchivePresenter extends Frontend_BasePresenter
+namespace FrontModule;
+
+class ArchivePresenter extends BasePresenter
 {
 
 	public function renderYear2009() {

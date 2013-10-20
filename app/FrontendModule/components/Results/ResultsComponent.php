@@ -9,7 +9,7 @@ class ResultsComponent extends BaseComponent
 
 		$this->getTemplate()->categories = array(
 				TeamsModel::HIGH_SCHOOL => "Středoškoláci",
-				TeamsModel::COLLEGE	    => "Vysokoškoláci",			
+				TeamsModel::COLLEGE	    => "Vysokoškoláci",
 				TeamsModel::OTHER	    => "Ostatní",
 		);
 
@@ -22,4 +22,3 @@ class ResultsComponent extends BaseComponent
 	}
 
 }
-

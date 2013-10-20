@@ -1,5 +1,5 @@
 <?php
-class BaseForm extends AppForm
+class BaseForm extends Nette\Application\UI\Form
 {
 
 }

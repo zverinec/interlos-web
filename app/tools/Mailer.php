@@ -17,7 +17,7 @@ class Mailer
 	 */
 	public static function createPHPMailer() {
 		// SMTP Authorization
-		$config = Environment::getConfig("smtp");
+		$config = Nette\Environment::getConfig("smtp");
 		$mail = new PHPMailer();
 		$mail->isMail();
 		$mail->isSMTP();
@@ -28,11 +28,10 @@ class Mailer
 		// E-mail setting
 		$mail->CharSet = "utf-8";
 		$mail->IsHTML(TRUE);
-		$mail->From = Environment::getConfig("mail")->info;
+		$mail->From = Nette\Environment::getConfig("mail")->info;
 		$mail->FromName = "Interlos";
 
 		return $mail;
 	}
 
 }
-

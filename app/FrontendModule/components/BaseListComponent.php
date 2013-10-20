@@ -52,7 +52,7 @@ abstract class BaseListComponent extends BaseComponent {
 		return $paginator;
 	}
 
-	/** @return Paginator */
+	/** @return Nette\Utils\Paginator */
 	protected function getPaginator() {
 		return $this->getComponent("paginator")->getPaginator();
 	}

@@ -10,7 +10,7 @@ class TeamFormComponent extends BaseComponent {
 
 	/* SUBMITTED FORMS */
 
-	public function insertSubmitted(Form $form) {
+	public function insertSubmitted(Nette\Forms\Form $form) {
 		$values		= $form->getValues();
 		$competitors= $this->loadCompetitorsFromValues($values);
 		if (!$competitors) {
@@ -32,13 +32,13 @@ class TeamFormComponent extends BaseComponent {
 					$values["password"]
 			);
 			// Send e-mail
-			$template = InterlosTemplate::loadTemplate(new Template());
+			$template = InterlosTemplate::loadTemplate(new Nette\Templating\Template());
 			$template->setFile(FrontendModule::getModuleDir() . "/templates/mail/registration.phtml");
 			$template->team = $values["team_name"];
-			$mail = new Mail();
+			$mail = new Nette\Mail\Message();
 			$mail->setBody($template);
 			$mail->addTo($values["email"]);
-			$mail->setFrom(Environment::getConfig("mail")->info, Environment::getConfig("mail")->name);
+			$mail->setFrom(Nette\Environment::getConfig("mail")->info, Nette\Environment::getConfig("mail")->name);
 			$mail->setSubject("Interlos - registrace");
 			// TODO: doresit odesilani e-mailu
 			//$mail->send();
@@ -49,14 +49,14 @@ class TeamFormComponent extends BaseComponent {
 		}
 		catch (DibiDriverException $e) {
 			$this->getPresenter()->flashMessage("Chyba při práci s databází.", "error");
-			Debug::processException($e);
+			Nette\Diagnostics\Debugger::processException($e);
 			return;
 		}
 
 
 	}
 
-	public function updateSubmitted(Form $form) {
+	public function updateSubmitted(Nette\Forms\Form $form) {
 		$values = $form->getValues();
 		try {
 			// Update the team
@@ -75,17 +75,17 @@ class TeamFormComponent extends BaseComponent {
 			$this->getPresenter()->flashMessage("Tým byl úspěšně aktualizován.", "success");
 			$this->getPresenter()->redirect("this");
 		}
-		catch (InvalidArgumentException $e) {
+		catch (Nette\InvalidArgumentException $e) {
 			$this->getPresenter()->flashMessage("Tým musí mít alespoň jednoho člena.", "error");
-			Debug::processException($e);
+			Nette\Diagnostics\Debugger::processException($e);
 		}
 		catch (DuplicityException $e) {
 			$this->getPresenter()->flashMessage("Daný tým již existuje.", "error");
-			Debug::processException($e);
+			Nette\Diagnostics\Debugger::processException($e);
 		}
 		catch (DibiDriveException $e) {
 			$this->getPresenter()->flashMessage("Chyba při práci s databází.", "error");
-			Debug::processException($e);
+			Nette\Diagnostics\Debugger::processException($e);
 		}
 	}
 
@@ -97,13 +97,13 @@ class TeamFormComponent extends BaseComponent {
 		$form->addGroup("Tým");
 
 		// Team name
-		$form->addText("team_name", "Název týmu")->addRule(Form::FILLED, "Název týmu musí být vyplněn");
+		$form->addText("team_name", "Název týmu")->addRule(Nette\Forms\Form::FILLED, "Název týmu musí být vyplněn");
 
 		// Password
 		$form->addPassword("password", "Heslo");
 		$form->addPassword("password_check", "Kontrola hesla")
-				->addConditionOn($form["password"], Form::FILLED)
-				->addRule(Form::EQUAL, "Heslo a kontrola hesla se neshodují.", $form["password"]);
+				->addConditionOn($form["password"], Nette\Forms\Form::FILLED)
+				->addRule(Nette\Forms\Form::EQUAL, "Heslo a kontrola hesla se neshodují.", $form["password"]);
 
 		// Category
 		$form->addSelect("category", "Kategorie", array(
@@ -113,7 +113,7 @@ class TeamFormComponent extends BaseComponent {
 		));
 
 		// E-mails
-		$form->addText("email", "E-mail")->addRule(Form::EMAIL, "E-mail nemá správný formát.");
+		$form->addText("email", "E-mail")->addRule(Nette\Forms\Form::EMAIL, "E-mail nemá správný formát.");
 
 		$schools = Interlos::schools()->findAll()->orderBy("name")->fetchPairs("id_school", "name");
 		$schools = array(NULL => "Nevyplněno") + $schools + array("other" => "Jiná");
@@ -123,20 +123,20 @@ class TeamFormComponent extends BaseComponent {
 			$form->addGroup("$i. člen");
 			$form->addText($i."_competitor_name", "Jméno");
 			$form->addSelect($i."_school", "Škola", $schools)
-					->addConditionOn($form[$i."_competitor_name"], Form::FILLED)
-					->addRule(~Form::EQUAL, "U $i. člena je vyplněno jméno, ale není u něj vyplněna škola.", NULL)
+					->addConditionOn($form[$i."_competitor_name"], Nette\Forms\Form::FILLED)
+					->addRule(~Nette\Forms\Form::EQUAL, "U $i. člena je vyplněno jméno, ale není u něj vyplněna škola.", NULL)
 					->endCondition()
-					->addCondition(Form::EQUAL, "other")
+					->addCondition(Nette\Forms\Form::EQUAL, "other")
 					->toggle("frm".$name."-".$i."_otherschool")
 					->toggle("frm".$name."-".$i."_otherschool-label");
 			$form->addText($i."_otherschool", "Jiná škola")
-					->addConditionOn($form[$i."_competitor_name"], Form::FILLED)
-					->addConditionOn($form[$i."_school"], Form::EQUAL, "other")
-					->addRule(Form::FILLED, "U $i. člena je vyplněno jméno, ale není u něj vyplněna škola.");
+					->addConditionOn($form[$i."_competitor_name"], Nette\Forms\Form::FILLED)
+					->addConditionOn($form[$i."_school"], Nette\Forms\Form::EQUAL, "other")
+					->addRule(Nette\Forms\Form::FILLED, "U $i. člena je vyplněno jméno, ale není u něj vyplněna škola.");
 			$form[$i."_otherschool"]->getLabelPrototype()->id = "frm".$name."-".$i."_otherschool-label";
 			$form[$i."_school"]->setOption("description", "Pokud není vaše škola přítomna vyberte položku \"Jiná\".");
 			if ($i == 1) {
-				$form[$i."_competitor_name"]->addRule(Form::FILLED, "Jméno prvního člena musí být vyplněno.");
+				$form[$i."_competitor_name"]->addRule(Nette\Forms\Form::FILLED, "Jméno prvního člena musí být vyplněno.");
 			}
 		}
 
@@ -144,7 +144,7 @@ class TeamFormComponent extends BaseComponent {
 
 		$form->addGroup();
 
-		if (Environment::getUser()->isLoggedIn()) {
+		if (Nette\Environment::getUser()->isLoggedIn()) {
 			$loggedTeam = Interlos::getLoggedTeam();
 			$defaults += array(
 					"team_name"	=> $loggedTeam->name,
@@ -167,7 +167,7 @@ class TeamFormComponent extends BaseComponent {
 			$form->onSubmit[] = array($this, "updateSubmitted");
 		}
 		else {
-			$form["password"]->addRule(Form::FILLED, "Není vyplněno heslo týmu.");
+			$form["password"]->addRule(Nette\Forms\Form::FILLED, "Není vyplněno heslo týmu.");
 			$form->addSubmit("insert", "Registrovat");
 			$form->onSubmit[] = array($this, "insertSubmitted");
 		}

@@ -1,5 +1,7 @@
 <?php
-class Frontend_CronPresenter extends Frontend_BasePresenter
+namespace FrontModule;
+
+class CronPresenter extends BasePresenter
 {
 
 	public function renderDatabase($key) {
@@ -8,7 +10,7 @@ class Frontend_CronPresenter extends Frontend_BasePresenter
 
 	protected function startup() {
 		parent::startup();
-		if ($this->getParam("key") != Environment::getConfig("cron")->key) {
+		if ($this->getParameter("key") != $this->params['keys']['cron']->key) {
 			die("PERMISSION DENIED");
 		}
 	}

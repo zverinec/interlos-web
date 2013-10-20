@@ -2,28 +2,28 @@
 /**
  * @author Jan Papousek
  */
-class TeamAuthenticator implements IAuthenticator
+class TeamAuthenticator implements Nette\Security\IAuthenticator
 {
 
 	const TEAM = "team";
 
 	public function authenticate(array $credentials) {
-		$name		= $credentials[IAuthenticator::USERNAME];
-		$password	= self::passwordHash($credentials[IAuthenticator::PASSWORD]);
+		$name		= $credentials[Nette\Security\IAuthenticator::USERNAME];
+		$password	= self::passwordHash($credentials[Nette\Security\IAuthenticator::PASSWORD]);
 		$row = Interlos::teams()->findAll()->where("[name] = %s", $name)->fetch();
 		if (empty($row)) {
-			throw new AuthenticationException(
+			throw new Nette\Security\AuthenticationException(
 				"Tým '$name' neexistuje.",
-				IAuthenticator::IDENTITY_NOT_FOUND
+				Nette\Security\IAuthenticator::IDENTITY_NOT_FOUND
 			);
 		}
 		if ($row["password"] != $password) {
-			throw new AuthenticationException(
+			throw new Nette\Security\AuthenticationException(
 				"Heslo se neshoduje.",
-				IAuthenticator::INVALID_CREDENTIAL
+				Nette\Security\IAuthenticator::INVALID_CREDENTIAL
 			);
 		}
-		return new Identity($name, self::TEAM, array("id_team" => $row["id_team"], "role" => self::TEAM));
+		return new Nette\Security\Identity($name, self::TEAM, array("id_team" => $row["id_team"], "role" => self::TEAM));
 	}
 
 	public static function passwordHash($password) {

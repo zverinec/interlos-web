@@ -41,7 +41,7 @@ class AnswersModel extends AbstractModel {
 		// Check it
 		if ($lastInTimeLimit != 0) {
 			$this->log($team, "solution_tried", "The team tried to insert the solution of task [$task] with code [$code].");
-			throw new InvalidStateException("There is a wrong answer in recent 30 seconds.", self::ERROR_TIME_LIMIT);
+			throw new Nette\InvalidStateException("There is a wrong answer in recent 30 seconds.", self::ERROR_TIME_LIMIT);
 		}
 		// Insert a new answer
 		$return = $this->getConnection()->insert("answer", array(

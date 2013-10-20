@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dg/texy" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dibi/dibi" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jandrabek/nette-mailpanel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nette/nette" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/others/eskymo" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Composer Vendors">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/dg/texy" />
+          <root url="file://$MODULE_DIR$/vendor/dibi/dibi" />
+          <root url="file://$MODULE_DIR$/vendor/nette/nette" />
+          <root url="file://$MODULE_DIR$/vendor/others/eskymo" />
+          <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/jandrabek/nette-mailpanel" />
+          <root url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/dg/texy" />
+          <root url="file://$MODULE_DIR$/vendor/dibi/dibi" />
+          <root url="file://$MODULE_DIR$/vendor/nette/nette" />
+          <root url="file://$MODULE_DIR$/vendor/others/eskymo" />
+          <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/jandrabek/nette-mailpanel" />
+          <root url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
+

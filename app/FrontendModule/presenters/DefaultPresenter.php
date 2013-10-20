@@ -1,13 +1,15 @@
 <?php
-class Frontend_DefaultPresenter extends Frontend_BasePresenter {
+namespace FrontModule;
+
+class DefaultPresenter extends BasePresenter {
 
 	public function actionLogout() {
-		Environment::getUser()->logout();
+		$this->user->logout(TRUE);
 		$this->redirect("default");
 	}
 
 	public function renderChat() {
-		$this->getComponent("chat")->setSource(Interlos::chat()->findAll());
+		$this->getComponent("chat")->setSource(\Interlos::chat()->findAll());
 		$this->setPageTitle("Diskuse");
 	}
 
@@ -37,7 +39,7 @@ class Frontend_DefaultPresenter extends Frontend_BasePresenter {
 		$chat = new ChatListComponent($this, $name);
 		return $chat;
 	}
-	
+
 	protected function createComponentLogin($name) {
 		return new LoginFormComponent($this, $name);
 	}

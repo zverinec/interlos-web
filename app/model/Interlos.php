@@ -2,7 +2,7 @@
 class Interlos {
 
     private static $adminMessages = FALSE;
-    
+
 	private static $connection;
 
 	private static $currentYear;
@@ -30,7 +30,7 @@ class Interlos {
         if (self::$adminMessages) {
             return;
         }
-        $presenter = Environment::getApplication()->getPresenter();
+        $presenter = Nette\Environment::getApplication()->getPresenter();
         if (self::isAdminAccess()) {
                 $presenter->flashMessage("Přístup administrátora schválen.", "info");
         }
@@ -45,13 +45,13 @@ class Interlos {
         }
         if (self::loadAdminProperty("registration-started") != NULL) {
             $presenter->flashMessage("Začátek registrace nastaven na ". (self::loadAdminProperty("registration-started") ? "TRUE" : "FALSE") .".");
-        }        
+        }
         if (self::loadAdminProperty("time") !== NULL) {
             $presenter->flashMessage("Herní čas nastaven na ". self::loadAdminProperty("time") .".");
-        }        
+        }
         self::$adminMessages = TRUE;
-    }    
-    
+    }
+
 	/** @return DibiConnection */
 	public static function getConnection() {
 		if (empty(self::$connection)) {
@@ -61,7 +61,7 @@ class Interlos {
 			return self::$connection;
 		}
 	}
-    
+
 	/** @return DibiRow */
 	public static function getCurrentYear() {
 		if (!isset(self::$currentYear)) {
@@ -73,8 +73,8 @@ class Interlos {
 	/** @return DibiRow */
 	public static function getLoggedTeam() {
 		if (!isset(self::$loggedTeam)) {
-			if (Environment::getUser()->isLoggedIn()) {
-				self::$loggedTeam = Interlos::teams()->find(Environment::getUser()->getIdentity()->id_team);
+			if (Nette\Environment::getUser()->isLoggedIn()) {
+				self::$loggedTeam = Interlos::teams()->find(Nette\Environment::getUser()->getIdentity()->id_team);
 			}
 			else {
 				self::$loggedTeam = NULL;
@@ -84,17 +84,17 @@ class Interlos {
 	}
 
     public static function isAdminAccess() {
-        return isset($_GET["admin-key"]) && Environment::getConfig("admin")->key == $_GET["admin-key"];
+        return isset($_GET["admin-key"]) && Nette\Environment::getConfig("admin")->key == $_GET["admin-key"];
     }
-    
+
     public static function isCronAccess() {
-        return isset($_GET["cron-key"]) && Environment::getConfig("cron")->key == $_GET["cron-key"];
+        return isset($_GET["cron-key"]) && Nette\Environment::getConfig("cron")->key == $_GET["cron-key"];
     }
-    
+
     public static function isGameActive() {
         return self::isGameStarted() && !self::isGameEnd();
     }
-    
+
     public static function isGameEnd() {
         if (self::loadAdminProperty("game-end")) {
             return self::loadAdminProperty("game-end");
@@ -103,17 +103,17 @@ class Interlos {
             return self::getCurrentTime() > strtotime(Interlos::getCurrentYear()->game_end);
         }
     }
-    
+
     public static function isGameStarted() {
         if (self::loadAdminProperty("game-started") !== null) {
             return self::loadAdminProperty("game-started");
         }
         else {
             return strtotime(Interlos::getCurrentYear()->game_start) < self::getCurrentTime();
-        }        
-        
+        }
+
     }
-    
+
     public static function isRegistrationActive() {
         return self::isRegistrationStarted() && !self::isRegistrationEnd();
     }
@@ -122,26 +122,26 @@ class Interlos {
         if (self::loadAdminProperty("registration-end")) {
             return self::loadAdminProperty("game-end");
         }
-        else {        
+        else {
             return strtotime(Interlos::getCurrentYear()->registration_end) < self::getCurrentTime();
         }
     }
-    
+
     public static function isRegistrationStarted() {
         if (self::loadAdminProperty("registration-started")) {
             return self::loadAdminProperty("game-started");
         }
-        else {     
+        else {
             return strtotime(Interlos::getCurrentYear()->registration_start) < self::getCurrentTime();
         }
     }
-    
+
     public static function prepareAdminProperties() {
         if (!self::isAdminAccess()) {
             return;
         }
         $propertiesToStore = array("game-end", "game-started", "registration-end", "registration-started", "time");
-        $session = Environment::getSession("admin.property");
+        $session = Nette\Environment::getSession("admin.property");
         if (self::isAdminPropertyAvailableInURL("reset-admin-properties")) {
             foreach($propertiesToStore AS $property) {
                 $session[$property] = NULL;
@@ -153,7 +153,7 @@ class Interlos {
             }
         }
     }
-    
+
 	public static function resetTemporaryTables() {
         if ((!self::isCronAccess() && !self::isAdminAccess()) || !isset($_GET["update-database"])) {
            return;
@@ -210,17 +210,17 @@ class Interlos {
 	}
 
 	// ---- PRIVATE METHODS
-    
+
 	private static function createModel($name) {
 		$className = ucfirst($name) . "Model";
 		// Check whether the model class exist
 		if (!class_exists($className)) {
-			throw  new InvalidStateException("The class [$className] does not exists.");
+			throw  new Nette\InvalidStateException("The class [$className] does not exists.");
 		}
 		// Check whether the class is really the model class
 		$key = ExtraArray::keysOf(class_implements($className), "InterlosModel");
 		if (empty($key)) {
-			throw new InvalidStateException("The class [$className] does not implement interface [InterlosModel]");
+			throw new Nette\InvalidStateException("The class [$className] does not implement interface [InterlosModel]");
 		}
 		// Return new instance of model class
 		return new $className(self::getConnection());
@@ -233,8 +233,8 @@ class Interlos {
         else {
             return time();
         }
-    }    
-    
+    }
+
 	private static function getModel($name) {
 		if (empty(self::$models[$name])) {
 			self::$models[$name] = self::createModel($name);
@@ -248,7 +248,7 @@ class Interlos {
         }
         if (!isset($_GET[$property])) {
             return false;
-        }              
+        }
         $trues = array("1", "TRUE", "true", "yes", "YES");
         $falses = array("0", "FALSE", "false", "no", "NO");
         if (in_array($_GET[$property], $trues)) {
@@ -268,12 +268,12 @@ class Interlos {
         }
         if (!isset($_GET[$property])) {
             return false;
-        }        
+        }
         return true;
     }
-    
+
     private static function loadAdminProperty($property) {
-        $session = Environment::getSession("admin.property");
+        $session = Nette\Environment::getSession("admin.property");
         if (isset($session[$property])) {
             return $session[$property];
         }
@@ -281,13 +281,13 @@ class Interlos {
             return NULL;
         }
     }
-    
+
     private static function storeAdminProperty($property) {
-        $session = Environment::getSession("admin.property");
+        $session = Nette\Environment::getSession("admin.property");
         if (!self::isAdminPropertyAvailableInURL($property)) {
             return;
         }
         $session[$property] = self::getAdminPropertyValueFromURL($property);
     }
-    
+
 }

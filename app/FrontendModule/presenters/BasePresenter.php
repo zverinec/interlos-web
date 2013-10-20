@@ -1,5 +1,9 @@
 <?php
-class Frontend_BasePresenter extends Presenter {
+namespace FrontModule;
+
+use Nette\Application\UI\Presenter;
+
+class BasePresenter extends Presenter {
 
 	public function setPageTitle($pageTitle) {
 		$this->getTemplate()->pageTitle = $pageTitle;
@@ -8,27 +12,24 @@ class Frontend_BasePresenter extends Presenter {
 	// ----- PROTECTED METHODS
 
 	protected function createComponentClock($name) {
-		return new ClockComponent($this, $name);
+		return new \ClockComponent($this, $name);
 	}
 
 	protected function createComponentFlashMessages($name) {
-		return new FlashMessagesComponent($this, $name);
+		return new \FlashMessagesComponent($this, $name);
 	}
 
-	protected function createTemplate() {
-		$this->oldLayoutMode = false;
-
-		$template = parent::createTemplate();
+	protected function createTemplate($class = NULL) {
+		$template = parent::createTemplate($class);
 		$template->today = date("Y-m-d H:i:s");
 
-		return InterlosTemplate::loadTemplate($template);
+		return \InterlosTemplate::loadTemplate($template);
 	}
 
 	protected function startUp() {
 		parent::startup();
-        Interlos::prepareAdminProperties();
-        Interlos::createAdminMessages();
-		$this->oldModuleMode = FALSE;
+        \Interlos::prepareAdminProperties();
+        \Interlos::createAdminMessages();
 	}
 
 }

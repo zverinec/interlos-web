@@ -1,0 +1,25 @@
+<?php
+header('HTTP/1.1 503 Service Unavailable');
+header('Retry-After: 300'); // 5 minutes in seconds
+?>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex">
+	<title>Probíhá údržba</title>
+	<style>
+		body { color: #333; background: white; width: 500px; margin: 100px auto }
+		h1 { font: bold 47px/1.5 sans-serif; margin: .6em 0 }
+		p { font: 21px/1.5 Georgia,serif; margin: 1.5em 0 }
+		small { font-size: 70%; color: gray }
+	</style>
+</head>
+<body>
+	<h1>Probíhá údržba</h1>
+	<p>Vraťte se, prosím, později &ndash; za pár minut.</p>
+</body>
+</html>
+
+<?php
+exit();

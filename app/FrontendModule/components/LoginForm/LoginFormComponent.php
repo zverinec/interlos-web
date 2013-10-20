@@ -2,14 +2,14 @@
 class LoginFormComponent extends BaseComponent
 {
 
-    public function formSubmitted(Form $form) {
+    public function formSubmitted(Nette\Forms\Form $form) {
 	$values = $form->getValues();
 
 	try {
-	    Environment::getUser()->login($values['name'], $values['password']);
+	    Nette\Environment::getUser()->login($values['name'], $values['password']);
 	}
-	catch(AuthenticationException $e) {
-	    if ($e->getCode() == IAuthenticator::IDENTITY_NOT_FOUND) {
+	catch(Nette\Security\AuthenticationException $e) {
+	    if ($e->getCode() == Nette\Security\IAuthenticator::IDENTITY_NOT_FOUND) {
 		$this->getPresenter()->flashMessage("Daný tým neexistuje.", "error");
 	    }
 	    else {
@@ -19,7 +19,7 @@ class LoginFormComponent extends BaseComponent
 	}
 	catch(Exception $e) {
 	    $this->getPresenter()->flashMessage("Stala se neočekávaná chyba.", "error");
-	    Debug::processException($e);
+	    Nette\Diagnostics\Debugger::processException($e);
 	    return;
 	}
 	$this->getPresenter()->redirect("Team:default");
@@ -31,10 +31,10 @@ class LoginFormComponent extends BaseComponent
 	$form = new BaseForm($this, $name);
 
 	$form->addText("name", "Název týmu")
-	    ->addRule(Form::FILLED, "Název týmu musí být vyplněn.");
+	    ->addRule(Nette\Forms\Form::FILLED, "Název týmu musí být vyplněn.");
 
 	$form->addPassword("password", "Heslo")
-	    ->addRule(Form::FILLED, "Heslo musí být vyplněno.");
+	    ->addRule(Nette\Forms\Form::FILLED, "Heslo musí být vyplněno.");
 
 	$form->addSubmit("login", "Přihlásit se");
 	$form->onSubmit[] = array($this, "formSubmitted");

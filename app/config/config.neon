@@ -1,0 +1,50 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+
+parameters:
+	mail:
+		name: Tým InterLoSa
+		info: interlos@fi.muni.cz
+	keys:
+		cron: hesloprocron
+		admin: hesloproadmin
+
+dibi:
+	driver: mysql
+	charset: utf8
+	host: localhost
+	database: interlos
+	user: root
+	password:
+	lazy: true
+	profiler: false
+
+php:
+	date.timezone: Europe/Prague
+
+nette:
+	application:
+		errorPresenter: Error
+
+	session:
+		save_path: "%tempDir%/sessions"
+		autoStart: true
+		expiration: 14 days
+
+services:
+		Nette\Security\IAuthenticator: TeamAuthenticator
+		answersModel: AnswersModel
+		chatModel: ChatModel
+		competitorsModel: CompetitorsModel
+		interlos: Interlos
+		schoolsModel: SchoolsModel
+		scoreModel: ScoreModel
+		seriesModel: SeriesModel
+		tasksModel: TasksModel
+		teamsModel: TeamsModel
+		yearsModel: YearsModel
+

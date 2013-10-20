@@ -29,7 +29,7 @@
  */
 class VisualPaginatorComponent extends BaseComponent
 {
-	/** @var Paginator */
+	/** @var Nette\Utils\Paginator */
 	private $paginator;
 
 	/** @persistent */
@@ -38,12 +38,12 @@ class VisualPaginatorComponent extends BaseComponent
 
 
 	/**
-	 * @return Nette\Paginator
+	 * @return Nette\Utils\Paginator
 	 */
 	public function getPaginator()
 	{
 		if (!$this->paginator) {
-			$this->paginator = new Paginator;
+			$this->paginator = new Nette\Utils\Paginator;
 		}
 		return $this->paginator;
 	}

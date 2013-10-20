@@ -1,2 +1,9 @@
-app/temp/*
-app/config.ini
+temp/*
+!temp/.htaccess
+log/*
+!log/.htaccess
+app/config.local.neon
+.idea/*
+vendor/*
+!vendor/others
+composer.lock

@@ -30,7 +30,7 @@ abstract class AbstractModel implements InterlosModel {
 					))->execute();
 		}
 		catch(Exception $e) {
-			Debug::processException($e);
+			Nette\Diagnostics\Debugger::processException($e);
 		}
 	}
 

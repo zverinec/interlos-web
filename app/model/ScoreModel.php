@@ -1,12 +1,12 @@
 <?php
 class ScoreModel extends AbstractModel {
 	public function find($id) {
-		throw new NotSupportedException();
+		throw new Nette\NotSupportedException();
 	}
 
 
 	public function findAll() {
-		throw new NotSupportedException();
+		throw new Nette\NotSupportedException();
 	}
 
 	/** @return DibiDataSource */
