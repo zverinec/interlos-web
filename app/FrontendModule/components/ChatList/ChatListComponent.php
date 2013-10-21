@@ -8,7 +8,7 @@ class ChatListComponent extends BaseListComponent {
 		// Insert a chat post
 		try {
 			Interlos::chat()->insert(
-					Nette\Environment::getUser()->getIdentity()->id_team,
+					Interlos::getUser()->getIdentity()->id_team,
 					$values["content"]
 			);
 			$this->getPresenter()->flashMessage("Příspěvek byl vložen.", "success");

@@ -3,12 +3,12 @@
     <head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta http-equiv="content-language" content="cs" />
-		<link rel="stylesheet" type="text/css" href="{$baseUri}css/main.css" />
-		<link rel="stylesheet" type="text/css" href="{$baseUri}css/forms.css" />
-		<link rel="stylesheet" type="text/css" href="{$baseUri}css/flashes.css" />
-		<link href="{$baseUri}favicon.png" rel="icon" type="image/png" />
-		<script type="text/javascript" src="{$baseUri}js/jquery-1.4.2.min.js"></script>
-        <script type="text/javascript" src="{$baseUri}js/jquery-ui-1.8.2.custom.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{$basePath}/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="{$basePath}/css/forms.css" />
+		<link rel="stylesheet" type="text/css" href="{$basePath}/css/flashes.css" />
+		<link href="{$basePath}/favicon.png" rel="icon" type="image/png" />
+		<script type="text/javascript" src="{$basePath}/js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="{$basePath}/js/jquery-ui-1.8.2.custom.min.js"></script>
 
 		<title>
 	    Interlos - {$pageTitle}
@@ -34,12 +34,12 @@
 				{/if}
 				<ul id="team-navigation">
 			{if Interlos::isRegistrationActive()}
-			    {if !Environment::getUser()->isLoggedIn()}
+			    {if !$user->isLoggedIn()}
 					<li><a href="{link Team:registration}">Registrace</a></li>
 			    {/if}
 			{/if}
 			{if Interlos::isRegistrationStarted()}
-			    {if !Environment::getUser()->isLoggedIn()}
+			    {if !$user->isLoggedIn()}
 					<li><a href="{link Default:login}">Příhlásit se</a></li>
 			    {else}
 					<li><a href="{link Default:logout}" title="Odhlásit se">Odhlásit se</a></li>
@@ -55,7 +55,7 @@
 					<li><a href="{link Default:chat}" title="Diskuse">Diskuse</a></li>
 					<li><a href="{link Team:list}" title="Týmy">Týmy</a></li>
 			    {if Interlos::isGameStarted()}
-					{if Environment::getUser()->isLoggedIn()}
+					{if $user->isLoggedIn()}
 						<li><a href="{link Game:default}" title="Hra">Hra</a></li>
 					{/if}
 					<li><a href="{link Stats:default}" title="Statistiky">Statistiky</a></li>

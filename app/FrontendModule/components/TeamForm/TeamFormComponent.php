@@ -33,7 +33,7 @@ class TeamFormComponent extends BaseComponent {
 			);
 			// Send e-mail
 			$template = InterlosTemplate::loadTemplate(new Nette\Templating\Template());
-			$template->setFile(FrontendModule::getModuleDir() . "/templates/mail/registration.phtml");
+			$template->setFile(FrontendModule::getModuleDir() . "/templates/mail/registration.latte");
 			$template->team = $values["team_name"];
 			$mail = new Nette\Mail\Message();
 			$mail->setBody($template);

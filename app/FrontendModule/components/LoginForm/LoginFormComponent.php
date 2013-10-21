@@ -6,7 +6,7 @@ class LoginFormComponent extends BaseComponent
 	$values = $form->getValues();
 
 	try {
-	    Nette\Environment::getUser()->login($values['name'], $values['password']);
+	    Interlos::getUser()->login($values['name'], $values['password']);
 	}
 	catch(Nette\Security\AuthenticationException $e) {
 	    if ($e->getCode() == Nette\Security\IAuthenticator::IDENTITY_NOT_FOUND) {

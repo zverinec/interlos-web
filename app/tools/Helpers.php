@@ -87,7 +87,7 @@ final class Helpers {
     private static function getTexy() {
 	if (!isset(self::$texy)) {
 	    self::$texy = new Texy();
-	    self::$texy->encoding = 'utf8';
+	    self::$texy->encoding = 'utf-8';
 	}
 	return self::$texy;
     }

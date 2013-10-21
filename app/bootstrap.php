@@ -38,4 +38,6 @@ $container->router[] = FrontModule::createRouter("Front");
 // Create directory for session data (Nette does not seem to create it on its own, then fails to initialize session)
 @mkdir($container->session->options['save_path'], 0777, true);
 
+Interlos::injectContainer($container);
+
 return $container;

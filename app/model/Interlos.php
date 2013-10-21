@@ -1,15 +1,19 @@
 <?php
 class Interlos {
 
-    private static $adminMessages = FALSE;
+	/** @var SystemContainer */
+	private static $container;
 
-	private static $connection;
+    private static $adminMessages = FALSE;
 
 	private static $currentYear;
 
 	private static $loggedTeam;
 
-	private static $models = array();
+
+	public static function injectContainer(SystemContainer $container) {
+		self::$container = $container;
+	}
 
 	/** @return AnswersModel */
 	public static function answers() {
@@ -54,12 +58,7 @@ class Interlos {
 
 	/** @return DibiConnection */
 	public static function getConnection() {
-		if (empty(self::$connection)) {
-			return dibi::getConnection();
-		}
-		else {
-			return self::$connection;
-		}
+		return self::$container->getService('dibi.connection');
 	}
 
 	/** @return DibiRow */
@@ -81,6 +80,10 @@ class Interlos {
 			}
 		}
 		return self::$loggedTeam;
+	}
+
+	public static function getUser() {
+		return self::$container->getService('user');
 	}
 
     public static function isAdminAccess() {
@@ -141,7 +144,7 @@ class Interlos {
             return;
         }
         $propertiesToStore = array("game-end", "game-started", "registration-end", "registration-started", "time");
-        $session = Nette\Environment::getSession("admin.property");
+        $session = self::getSessionNamespace("admin.property");
         if (self::isAdminPropertyAvailableInURL("reset-admin-properties")) {
             foreach($propertiesToStore AS $property) {
                 $session[$property] = NULL;
@@ -190,10 +193,6 @@ class Interlos {
 		return self::getModel("score");
 	}
 
-	public static function setConnection(DibiConnection $connection) {
-		self::$connection = $connection;
-	}
-
 	/** @return TasksModel */
 	public static function tasks() {
 		return self::getModel("tasks");
@@ -236,10 +235,8 @@ class Interlos {
     }
 
 	private static function getModel($name) {
-		if (empty(self::$models[$name])) {
-			self::$models[$name] = self::createModel($name);
-		}
-		return self::$models[$name];
+		$className = $name . "Model";
+		return self::$container->getService($className);
 	}
 
     private static function getAdminPropertyValueFromURL($property) {
@@ -273,7 +270,7 @@ class Interlos {
     }
 
     private static function loadAdminProperty($property) {
-        $session = Nette\Environment::getSession("admin.property");
+        $session = self::getSessionNamespace("admin.property");
         if (isset($session[$property])) {
             return $session[$property];
         }
@@ -283,11 +280,15 @@ class Interlos {
     }
 
     private static function storeAdminProperty($property) {
-        $session = Nette\Environment::getSession("admin.property");
+        $session = self::getSessionNamespace("admin.property");
         if (!self::isAdminPropertyAvailableInURL($property)) {
             return;
         }
         $session[$property] = self::getAdminPropertyValueFromURL($property);
     }
+
+	private static function getSessionNamespace($namespace) {
+		return self::$container->getService('session')->getSection($namespace);
+	}
 
 }

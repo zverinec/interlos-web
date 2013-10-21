@@ -17,7 +17,7 @@ dibi:
 	driver: mysql
 	charset: utf8
 	host: localhost
-	database: interlos
+	database: interlos_production
 	user: root
 	password:
 	lazy: true

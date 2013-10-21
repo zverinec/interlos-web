@@ -11,22 +11,22 @@ abstract class BaseComponent extends Nette\Application\UI\Control {
 
 	}
 
-	protected function createTemplate() {
-		$template = parent::createTemplate();
+	protected function createTemplate($class = NULL) {
+		$template = parent::createTemplate($class);
 
-		$componentName = strtr($this->getReflection()->getName(), array("Nette\ComponentModel\Component" => ""));
+		$componentName = strtr($this->getReflection()->getName(), array("Component" => ""));
 
 		$template->setFile(
 				dirname(__FILE__) . "/" .
 				$componentName . "/" .
-				ExtraString::lowerFirst($componentName) . ".phtml"
+				ExtraString::lowerFirst($componentName) . ".latte"
 		);
 
 		return InterlosTemplate::loadTemplate($template);
 	}
 
 	protected function getPath() {
-		$componentName = strtr($this->getReflection()->getName(), array("Nette\ComponentModel\Component" => ""));
+		$componentName = strtr($this->getReflection()->getName(), array("Component" => ""));
 		return dirname(__FILE__) . "/" . $componentName . "/";
 	}
 
