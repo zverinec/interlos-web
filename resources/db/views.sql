@@ -91,7 +91,7 @@ DROP VIEW IF EXISTS `view_penality`;
 CREATE VIEW `view_penality` AS
 	SELECT
 		`team`.`id_team`,
-		10*COUNT(`view_incorrect_answer`.`id_answer`) AS `score`
+		30*COUNT(`view_incorrect_answer`.`id_answer`) AS `score`
 	FROM `view_team` AS `team`
 	LEFT JOIN `view_incorrect_answer` USING(`id_team`)
 	GROUP BY `id_team`;

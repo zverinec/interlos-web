@@ -1,3 +1,6 @@
+SET NAMES utf8;
+SET foreign_key_checks = 0;
+
 DROP TABLE IF EXISTS `answer`;
 CREATE TABLE `answer` (
 	`id_answer` int(25) unsigned NOT NULL AUTO_INCREMENT COMMENT 'identifikator',
