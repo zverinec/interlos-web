@@ -7,11 +7,11 @@
 {/if}
 
 {foreach $posts AS $post}
-    <div class="chat-item">
-	<h3>
-	    {$post['team_name']} <span style="float: right">{$post['inserted']|time}</span>
-	</h3>
-	<div class="block" id="chat">{!$post['content']|texy}</div>
+    <div class="discussion-main">
+		<span class="discussion-team">{$post['team_name']}</span>
+		<span class="discussion-date">{$post['inserted']|time}</span>
+		<div class="cleaner-both">&nbsp;</div>
+		{!$post['content']|texy}
     </div>
 {/foreach}
 </div>

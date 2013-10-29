@@ -5,35 +5,6 @@
  *}
 
 {if $paginator->pageCount > 1}
-<style>
-.paginator {
-	margin: 1em 0;
-	font-size: 90%;
-}
-
-.paginator a, .paginator span {
-	margin-right: 0.1em;
-	padding: 0.2em 0.5em;
-	color: #999999;
-}
-
-.paginator a {
-	border: 1px solid #9AAFE5;
-	text-decoration: none;
-	color: #105CB6;
-}
-
-.paginator span.button {
-	border: 1px solid #DDDDDD;
-}
-
-.paginator .current {
-	background: #2E6AB1;
-	border: 1px solid #2E6AB1;
-	color: white;
-	font-weight: bold;
-}
-</style>
 <div class="paginator">
 	{if $paginator->isFirst()}
 	<span class="button">« Předchozí</span>

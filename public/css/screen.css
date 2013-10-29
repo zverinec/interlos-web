@@ -1,0 +1,135 @@
+/* InterLoS stylesheet 
+used colors:
+    dark brown: rgb(45,22,15)
+    light brown: rgb(216,181,94)
+    base field opacity: 0.25
+*/
+
+/* Open Sans font import (Google font API) */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800&subset=latin,latin-ext);
+
+/* top elements - body, root, contents, cleaners, frames */
+body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-size: 90%; line-height: 1.4em; color: rgb(45,22,15); background-color: rgb(255,255,255); text-align:justify; margin: 0; padding: 0; height: 100%; background-image: url("../images/background.png"); background-repeat: repeat; }
+.root { position: absolute; min-height: 100%; min-width: 100%; padding: 0; margin: 0; }
+
+.cleaner-both { display: block; height: 0; overflow: hidden; clear: both; }
+.cleaner-right { display: block; height: 0; overflow: hidden; clear: right; }
+.block { display: block; }
+
+.contents { padding: 0 10px 0 10px; min-width: 320px; max-width: 1200px; margin: 0 auto 0 auto; }
+@media only screen and (min-width: 825px) {
+	.header-team-name { width: 290px; }
+	.contents { width: 90%; }
+}
+@media only screen and (min-width: 950px) {
+	.contents { width: 80%; }
+}
+
+/* info page */
+.info-frame { height: 150px; width: 100%; margin: 0 0 30px 0; border: none; }
+.info-webpage { min-height: 115px; padding: 15px 30px 20px 30px; background-color: rgba(216,181,94,0.25); }
+.info-time { float: left; width: 50px; font-weight: bold; margin: 0 0 5px 0; }
+.info-message { overflow:hidden; margin: 0 0 5px 0; }
+
+/* header */
+.header { min-height: 110px; width: 100%; margin: 0 0 20px 0; }
+.header-line { overflow: hidden; width: 100%; height: 10px; background-color: rgb(45,22,15); border-width: 0 0 2px 0; border-style: solid; border-color: rgb(216,181,94); box-shadow: 0 0 10px rgb(45,22,15); }
+.header-logo { position: relative; top: -12px; height: 110px; width: 90px; float: left; background-color: rgb(216,181,94); background-image: url("../images/logo-logo.png"); background-repeat: no-repeat; box-shadow: 4px 4px 10px rgba(45,22,15,0.6); }
+.header-name { height: 100px; width: 230px; float: left; background-image: url("../images/logo-name.png"); background-repeat: no-repeat; }
+
+.header-login-panel { min-height: 30px; max-width: 420px; float:right; background-color: rgba(216,181,94,0.25); font-size: 10pt; line-height: 30px; vertical-align: middle; }
+.header-team-name { float: left; height: 30px; max-width: 290px; padding: 0 10px 0 10px; font-weight: bold; }
+.header-loginout { float: right; height: 30px; width: 70px; padding: 0 30px 0 10px; background-repeat: no-repeat; }
+.header-loginout:hover { background-position: 0 -30px; color: rgb(216,181,94); }
+.header-login { background-image: url("../images/login.png"); }
+.header-logout { background-image: url("../images/logout.png"); }
+
+.menu { height: 70px; width: 60px; float: right; display: block; background-repeat: no-repeat; text-align: center; font-weight: bold; font-size: 9pt; line-height: 90pt; vertical-align: bottom; }
+.menu:hover { background-position: 0 -70px; color: rgb(216,181,94) }
+.menu-home { background-image: url("../images/home.png"); }
+.menu-about { background-image: url("../images/about.png"); }
+.menu-archive { background-image: url("../images/archive.png"); }
+.menu-puzzles { background-image: url("../images/puzzles.png"); }
+.menu-teams { background-image: url("../images/teams.png"); }
+.menu-discussions { background-image: url("../images/discussions.png"); }
+.menu-register { background-image: url("../images/register.png"); }
+.menu-settings { background-image: url("../images/settings.png"); }
+
+/* footer */
+.footer { position: absolute; bottom: 0; height: 46px; width: 100%; }
+.footer-line { overflow: hidden; width: 100%; height: 4px; background-color: rgb(45,22,15); border-width: 2px 0 0 0; border-style: solid; border-color: rgb(216,181,94); box-shadow: 0 0 15px rgba(45,22,15,0.8); }
+.footer-facebook { height: 40px; width: 100px; float: left; background-image: url("../images/facebook.png"); }
+.footer-facebook:hover { background-position: 0 40px; }
+.footer-contact { padding: 6px 0 6px 0; float: right; font-size: 9pt; line-height: 11pt; text-align: right; }
+
+/* main */
+.main { width: 100%; margin: 0 0 70px 0; padding: 0; }
+.main-block { padding: 15px 30px 20px 30px; margin: 0 0 30px 0; background-color: rgba(216,181,94,0.25); }
+
+/* basic html, basic emphasis */
+h1 { font-size: 200%; line-height: 140%; margin: 0 0 0.3em 0; }
+h2 { font-size: 130%; font-weight: bold; margin: 0.9em 0 0.5em 0; }
+p { margin: 0 0 0.8em 0; }
+ol { margin: 0; }
+ul { margin: 0; }
+ol>li, ul>lis { margin: 0 0 5px 0; }
+a { color: rgb(45,22,15); text-decoration: underline; font-weight: normal; }
+a:hover { color: rgb(216,181,94); }
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+
+/* site-specific CSS */
+table th, td { padding: 2px 10px 2px 10px; overflow: hidden; }
+table th { background-color: rgb(216,181,94); }
+table { min-width: 90%; max-width: 1000px; margin: 10px auto 20px auto; }
+tr.even { background-color: rgba(216,181,94,0.25); }
+.center { text-align: center; }
+.hr { height: 3px; width: 100%; margin: 20px 0 10px 0; overflow: hidden; background-color: rgba(216,181,94,0.25); }
+
+/* discussion */
+.discussion-team { float: left; margin: 0 0 5px 0; font-weight: bold;  }
+.discussion-date { float: right; font-size: 75%; }
+.discussion-main { padding: 10px 15px 5px 15px; margin: 0 0 10px 0; background-color: rgba(216,181,94,0.25); }
+.discussion-reply { margin: 0 0 20px 80px; }
+.discussion-add { height: 25px; padding: 5px 0 0 30px; background-image: url("../images/discussion-add.png"); background-position: 0 0; background-repeat: no-repeat; }
+.discussion-add:hover { background-position: 0 -30px; color: rgb(216,181,94); }
+.paginator { margin: 20px 0 20px 0; }
+.paginator a, .paginator span { margin-right: 0.3em; padding: 0.2em 0.5em; background-color: rgba(216,181,94,0.25); text-decoration: none; }
+.paginator .current { font-weight: bold; }
+
+/* forms */
+fieldset { border-color: rgb(45,22,15); border-width: 1px; border-style: dashed; margin-bottom: 10px; }
+form th { background-color: transparent; }
+input, select { border: none; padding: 5px; background-color: rgba(216,181,94,0.25); color: rgb(45,22,15); }
+input:disabled { background-color: rgb(216,181,94); }
+input.button { border-style: solid; border-width: 2px; border-color: rgb(216,181,94);; padding: 5px 15px 5px 15px; background-color: rgb(216,181,94); color: rgb(45,22,15); font-weight: bold; }
+input.button:hover { border-color: rgb(45,22,15); }
+label { float: right; }
+label:after { content: ":"; }
+
+/* extra */
+div#clock { float: right; }
+
+/* scoring */
+#score-stats-wrapper {
+	overflow: auto;
+}
+table#score-stats {
+	margin: 0px;
+}
+#score-stats td,#score-stats th {
+	min-width: 40px;
+}
+#score-stats th {
+	padding: 2px;
+}
+#score-stats td.team {
+	font-weight: bolder;
+}
+#score-stats td.done {
+	background-color: green;
+	color: white;
+}
+#score-stats tr.line td {
+	border-top: 1px dotted #dddddd;
+}

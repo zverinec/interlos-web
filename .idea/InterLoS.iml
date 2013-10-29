@@ -13,24 +13,24 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="Composer Vendors">
+      <library name="PHP">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/vendor/dg/texy" />
-          <root url="file://$MODULE_DIR$/vendor/dibi/dibi" />
+          <root url="file://$MODULE_DIR$/vendor/jandrabek/nette-mailpanel" />
+          <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/nette/nette" />
           <root url="file://$MODULE_DIR$/vendor/others/eskymo" />
-          <root url="file://$MODULE_DIR$/vendor/composer" />
-          <root url="file://$MODULE_DIR$/vendor/jandrabek/nette-mailpanel" />
+          <root url="file://$MODULE_DIR$/vendor/dg/texy" />
           <root url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
+          <root url="file://$MODULE_DIR$/vendor/dibi/dibi" />
         </CLASSES>
         <SOURCES>
-          <root url="file://$MODULE_DIR$/vendor/dg/texy" />
-          <root url="file://$MODULE_DIR$/vendor/dibi/dibi" />
+          <root url="file://$MODULE_DIR$/vendor/jandrabek/nette-mailpanel" />
+          <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/nette/nette" />
           <root url="file://$MODULE_DIR$/vendor/others/eskymo" />
-          <root url="file://$MODULE_DIR$/vendor/composer" />
-          <root url="file://$MODULE_DIR$/vendor/jandrabek/nette-mailpanel" />
+          <root url="file://$MODULE_DIR$/vendor/dg/texy" />
           <root url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
+          <root url="file://$MODULE_DIR$/vendor/dibi/dibi" />
         </SOURCES>
       </library>
     </orderEntry>

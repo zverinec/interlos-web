@@ -25,7 +25,7 @@ class ChatListComponent extends BaseListComponent {
 	protected function beforeRender() {
 		// Paginator
 		$paginator = $this->getPaginator();
-		$this->getSource()->applyLimit($paginator->itemsPerPage, $paginator->offset);
+		$this->getSource()->orderBy('inserted', 'DESC')->applyLimit($paginator->itemsPerPage, $paginator->offset);
 		// Load template
 		$this->getTemplate()->posts = $this->getSource()->fetchAll();
 	}

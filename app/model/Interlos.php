@@ -72,8 +72,8 @@ class Interlos {
 	/** @return DibiRow */
 	public static function getLoggedTeam() {
 		if (!isset(self::$loggedTeam)) {
-			if (Nette\Environment::getUser()->isLoggedIn()) {
-				self::$loggedTeam = Interlos::teams()->find(Nette\Environment::getUser()->getIdentity()->id_team);
+			if (self::getUser()->isLoggedIn()) {
+				self::$loggedTeam = Interlos::teams()->find(self::getUser()->getIdentity()->id_team);
 			}
 			else {
 				self::$loggedTeam = NULL;

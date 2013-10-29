@@ -1,80 +1,105 @@
-<?xml version="1.0" encoding="utf-8" ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs">
-    <head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta http-equiv="content-language" content="cs" />
-		<link rel="stylesheet" type="text/css" href="{$basePath}/css/main.css" />
-		<link rel="stylesheet" type="text/css" href="{$basePath}/css/forms.css" />
-		<link rel="stylesheet" type="text/css" href="{$basePath}/css/flashes.css" />
-		<link href="{$basePath}/favicon.png" rel="icon" type="image/png" />
-		<script type="text/javascript" src="{$basePath}/js/jquery-1.4.2.min.js"></script>
-        <script type="text/javascript" src="{$basePath}/js/jquery-ui-1.8.2.custom.min.js"></script>
-
-		<title>
-	    Interlos - {$pageTitle}
-		</title>
-
-    </head>
-    <body>
-		{block #body}
-		<!-- HEADER -->
-		<div id="header">
-			<a href="{link Default:default}" title="Interlos">
-				<div class="wrapper">
-					<div id="logo"></div>
-					<h1>Interlos</h1>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-language" content="cz" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+	<meta name="description" content="{$pageDescription}" n:ifset="$pageDescription" />
+	<link href="{$basePath}/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
+	<link rel="icon" href="{$basePath}/images/favicon.ico" type="image/x-icon" />
+	<script type="text/javascript" src="{$basePath}/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="{$basePath}/js/jquery-ui-1.8.2.custom.min.js"></script>
+	<title>{ifset $pageTitle}{$pageTitle} | {/ifset}InterLoS</title>
+</head>
+<body>
+{block #body}
+	<div class="root">
+		<div class="header">
+			<div class="header-line">&nbsp;</div>
+			<div class="contents">
+				<a href="{link Default:default}">
+					<span class="block header-logo" title="InterLoS - INTERnetová LOgická Soutěž">&nbsp;</span>
+					<span class="block header-name" title="InterLoS - INTERnetová LOgická Soutěž">&nbsp;</span>
+				</a>
+				<div class="header-login-panel">
+					{if Interlos::isRegistrationStarted()}
+						{if !$user->isLoggedIn()}
+							<div class="header-team-name">tým nepřihlášen</div>
+							<a href="{link Default:login}">
+								<span class="block header-login header-loginout">přihlásit se</span>
+							</a>
+						{else}
+							<div class="header-team-name"><a href="{link Team:default}" title="{Interlos::getLoggedTeam()->name}">{Interlos::getLoggedTeam()->name|truncate:15}</a></div>
+							<a href="{link Default:logout}">
+								<span class="block header-logout header-loginout">odhlásit se</span>
+							</a>
+						{/if}
+					{/if}
+					<div class="cleaner-both">&nbsp;</div>
 				</div>
-			</a>
-		</div>
-		<!-- MENU -->
-		<div id="menu">
-			<div class="wrapper">
-				{if Interlos::isGameActive()}
-					{widget clock}
-				{/if}
-				<ul id="team-navigation">
-			{if Interlos::isRegistrationActive()}
-			    {if !$user->isLoggedIn()}
-					<li><a href="{link Team:registration}">Registrace</a></li>
-			    {/if}
-			{/if}
-			{if Interlos::isRegistrationStarted()}
-			    {if !$user->isLoggedIn()}
-					<li><a href="{link Default:login}">Příhlásit se</a></li>
-			    {else}
-					<li><a href="{link Default:logout}" title="Odhlásit se">Odhlásit se</a></li>
-					<li><a href="{link Team:default}" title="{=Interlos::getLoggedTeam()->name}">{=String::truncate(Interlos::getLoggedTeam()->name, 15)}</a></li>
-			    {/if}
-			{/if}
-				</ul>
+				<div class="cleaner-right">&nbsp;</div>
+				{*
 				<ul id="general-navigation">
 					<li><a href="{link Default:rules}" title="Pravidla">Pravidla</a></li>
 					<li><a href="{link Default:lastYears}" title="Minulé ročníky">Minulé ročníky</a></li>
 					<li><a href="{link Default:taskExamples}" title="Rozcvička">Rozcvička</a></li>
-				{if Interlos::isRegistrationStarted()}
+					{if Interlos::isRegistrationStarted()}
 					<li><a href="{link Default:chat}" title="Diskuse">Diskuse</a></li>
 					<li><a href="{link Team:list}" title="Týmy">Týmy</a></li>
-			    {if Interlos::isGameStarted()}
+					{if Interlos::isGameStarted()}
 					{if $user->isLoggedIn()}
-						<li><a href="{link Game:default}" title="Hra">Hra</a></li>
+					<li><a href="{link Game:default}" title="Hra">Hra</a></li>
 					{/if}
 					<li><a href="{link Stats:default}" title="Statistiky">Statistiky</a></li>
-			    {/if}
-			{/if}
-				</ul>
+					{/if}
+					{/if}
+				</ul>*}
+
+				{if Interlos::isRegistrationActive()}
+					{if !$user->isLoggedIn()}
+						<a href="{link Team:registration}"><span class="menu menu-register">Přidat se</span></a>
+					{else}
+						<a href="{link Team:settings}"><span class="menu menu-settings">O týmu</span></a>
+					{/if}
+				{/if}
+				<a href="{link Default:chat}"><span class="menu menu-discussions">Diskuze</span></a>
+				<a href="{link Team:list}"><span class="menu menu-teams">Týmy</span></a>
+				{if Interlos::isGameStarted() && $user->isLoggedIn()}
+					<a href="{link Game:default}"><span class="menu menu-puzzles">Úlohy</span></a>
+				{/if}
+				<a href="{link Archive:}"><span class="menu menu-archive">Archiv</span></a>
+				<a href="{link Default:about}"><span class="menu menu-about">O soutěži</span></a>
+				<a href="{link Default:}"><span class="menu menu-home">Domů</span></a>
+				<div class="cleaner-both">&nbsp;</div>
 			</div>
 		</div>
-		<div class="wrapper">
-			<!-- PAGE TITLE -->
-			<h1>{$pageTitle}</h1>
-			<!-- FLASH MESSAGES -->
-            {widget flashMessages}
-			<!-- CONTENT -->
-			<div id="content">
-		    {block #content}{/block}
+
+		<div class="main">
+
+			<div class="contents">
+				{widget flashMessages}
+				{block #content}
+
+				{/block}
 			</div>
 		</div>
-		<div id="footer"></div>
-		{/block}
-    </body>
+
+		<div  class="footer">
+			<div class="contents">
+				<a href="http://www.facebook.com/interlos">
+					<span class="footer-facebook">&nbsp;</span>
+				</a>
+				<div class="footer-contact">
+					<span class="bold">{(new Nette\DateTime())|date:"j. n. Y."}, {widget clock}</span><br />
+					<a href="mailto:%69%6e%74%65%72%6c%6f%73@%66%69.%6d%75%6e%69.%63%7a">interlos[at]fi.muni.cz</a>
+				</div>
+				<div class="cleaner-both">&nbsp;</div>
+			</div>
+			<div class="footer-line">&nbsp;</div>
+		</div>
+
+	</div>
+{/block}
+</body>
 </html>
