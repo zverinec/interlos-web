@@ -3,6 +3,10 @@ class AnswerFormComponent extends BaseComponent
 {
 
 	public function formSubmitted(Nette\Forms\Form $form) {
+		if (\Interlos::getLoggedTeam() == null) {
+			$form->addError('Odpovídat mohou jen přihlášené týmy.');
+			return;
+		}
 		$values = $form->getValues();
 
 		try {

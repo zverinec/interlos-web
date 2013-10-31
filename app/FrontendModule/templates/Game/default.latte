@@ -50,7 +50,7 @@
 	<p><strong>Žádná zveřejněná zadání</strong></p>
 	{/if}
 </div>
-<div class="main-block">
+<div class="main-block" n:if="$user->isLoggedIn()">
 	<h1>Odevzdat řešení</h1>
 	{widget answerForm}
 </div>
@@ -59,7 +59,7 @@
 	<p>Podrobnou statistiku celé hry najdete na <a href="{plink Stats:}">samostatné stránce</a>.</p>
 	{widget taskStats}
 </div>
-<div class="main-block">
+<div class="main-block" n:if="$user->isLoggedIn()">
 	<h1>Historie odpovědí</h1>
 	{widget answerHistory}
 </div>

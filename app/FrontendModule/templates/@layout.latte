@@ -39,22 +39,6 @@
 					<div class="cleaner-both">&nbsp;</div>
 				</div>
 				<div class="cleaner-right">&nbsp;</div>
-				{*
-				<ul id="general-navigation">
-					<li><a href="{link Default:rules}" title="Pravidla">Pravidla</a></li>
-					<li><a href="{link Default:lastYears}" title="Minulé ročníky">Minulé ročníky</a></li>
-					<li><a href="{link Default:taskExamples}" title="Rozcvička">Rozcvička</a></li>
-					{if Interlos::isRegistrationStarted()}
-					<li><a href="{link Default:chat}" title="Diskuse">Diskuse</a></li>
-					<li><a href="{link Team:list}" title="Týmy">Týmy</a></li>
-					{if Interlos::isGameStarted()}
-					{if $user->isLoggedIn()}
-					<li><a href="{link Game:default}" title="Hra">Hra</a></li>
-					{/if}
-					<li><a href="{link Stats:default}" title="Statistiky">Statistiky</a></li>
-					{/if}
-					{/if}
-				</ul>*}
 
 				{if !$user->isLoggedIn()}
 					<a href="{link Team:registration}"><span class="menu menu-register">Přidat se</span></a>
@@ -63,7 +47,7 @@
 				{/if}
 				<a href="{link Default:chat}"><span class="menu menu-discussions">Diskuze</span></a>
 				<a href="{link Team:list}"><span class="menu menu-teams">Týmy</span></a>
-				{if Interlos::isGameStarted() && $user->isLoggedIn()}
+				{if true}
 					<a href="{link Game:default}"><span class="menu menu-puzzles">Úlohy</span></a>
 				{/if}
 				<a href="{link Archive:}"><span class="menu menu-archive">Archiv</span></a>
