@@ -53,7 +53,7 @@ class TeamFormComponent extends BaseComponent {
 			$mail->addTo($values["email"]);
 			$mail->setFrom($this->mailParams['info'], $this->mailParams['name']);
 			$mail->setSubject("Interlos - registrace");
-			$mail->send();
+			//$mail->send();
 			// Redirect
 			$this->insertCompetitorsFromValues($insertedTeam, $values);
 			$this->getPresenter()->flashMessage("Tým '".$values["team_name"]."' byl úspěšně zaregistrován.", "success");
