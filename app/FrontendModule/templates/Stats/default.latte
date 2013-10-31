@@ -1,8 +1,8 @@
-{extends layout.phtml}
+{extends ../@layout.latte}
 
-{block #subcontent}
+{block #body}
+	{widget flashMessages}
 	{if $available}
-		<p>Statistiky nemusí být zcela aktuální. Údaje pravidelně přepočítáváme.</p>
-		{widget results}
+		{widget scoreList}
 	{/if}
 {/block}

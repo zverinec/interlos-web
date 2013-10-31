@@ -19,8 +19,8 @@
 			<div class="header-line">&nbsp;</div>
 			<div class="contents">
 				<a href="{link Default:default}">
-					<span class="block header-logo" title="InterLoS - INTERnetová LOgická Soutěž">&nbsp;</span>
-					<span class="block header-name" title="InterLoS - INTERnetová LOgická Soutěž">&nbsp;</span>
+					<span class="block header-logo" title="InterLoS &ndash; INTERnetová LOgická Soutěž">&nbsp;</span>
+					<span class="block header-name" title="InterLoS &ndash; INTERnetová LOgická Soutěž">&nbsp;</span>
 				</a>
 				<div class="header-login-panel">
 					{if Interlos::isRegistrationStarted()}
@@ -30,7 +30,7 @@
 								<span class="block header-login header-loginout">přihlásit se</span>
 							</a>
 						{else}
-							<div class="header-team-name"><a href="{link Team:default}" title="{Interlos::getLoggedTeam()->name}">{Interlos::getLoggedTeam()->name|truncate:15}</a></div>
+							<div class="header-team-name"><a href="{link Team:default}" title="{Interlos::getLoggedTeam()->name}">{Interlos::getLoggedTeam()->name|truncate:15} ({Interlos::getLoggedTeam()->id_team})</a></div>
 							<a href="{link Default:logout}">
 								<span class="block header-logout header-loginout">odhlásit se</span>
 							</a>
@@ -56,12 +56,10 @@
 					{/if}
 				</ul>*}
 
-				{if Interlos::isRegistrationActive()}
-					{if !$user->isLoggedIn()}
-						<a href="{link Team:registration}"><span class="menu menu-register">Přidat se</span></a>
-					{else}
-						<a href="{link Team:settings}"><span class="menu menu-settings">O týmu</span></a>
-					{/if}
+				{if !$user->isLoggedIn()}
+					<a href="{link Team:registration}"><span class="menu menu-register">Přidat se</span></a>
+				{else}
+					<a href="{link Team:}"><span class="menu menu-settings">O týmu</span></a>
 				{/if}
 				<a href="{link Default:chat}"><span class="menu menu-discussions">Diskuze</span></a>
 				<a href="{link Team:list}"><span class="menu menu-teams">Týmy</span></a>

@@ -8,9 +8,19 @@ class TeamFormComponent extends BaseComponent {
 
 	const NUMBER_OF_MEMBERS = 5;
 
+	private $mailParams;
+
+	public function setMailParameters($params) {
+		$this->mailParams = $params;
+	}
+
 	/* SUBMITTED FORMS */
 
 	public function insertSubmitted(Nette\Forms\Form $form) {
+		if(!Interlos::isRegistrationActive()) {
+			$form->addError('Momentálně neproníhá registrace.');
+			return;
+		}
 		$values		= $form->getValues();
 		$competitors= $this->loadCompetitorsFromValues($values);
 		if (!$competitors) {
@@ -32,16 +42,18 @@ class TeamFormComponent extends BaseComponent {
 					$values["password"]
 			);
 			// Send e-mail
-			$template = InterlosTemplate::loadTemplate(new Nette\Templating\Template());
-			$template->setFile(FrontendModule::getModuleDir() . "/templates/mail/registration.latte");
+			$template = InterlosTemplate::loadTemplate(new Nette\Templating\FileTemplate());
+			$template->registerFilter(new Nette\Latte\Engine);
+			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+			$template->setFile(__DIR__ . "/../../templates/mail/registration.latte");
 			$template->team = $values["team_name"];
+			$template->id = $insertedTeam;
 			$mail = new Nette\Mail\Message();
 			$mail->setBody($template);
 			$mail->addTo($values["email"]);
-			$mail->setFrom(Nette\Environment::getConfig("mail")->info, Nette\Environment::getConfig("mail")->name);
+			$mail->setFrom($this->mailParams['info'], $this->mailParams['name']);
 			$mail->setSubject("Interlos - registrace");
-			// TODO: doresit odesilani e-mailu
-			//$mail->send();
+			$mail->send();
 			// Redirect
 			$this->insertCompetitorsFromValues($insertedTeam, $values);
 			$this->getPresenter()->flashMessage("Tým '".$values["team_name"]."' byl úspěšně zaregistrován.", "success");
@@ -142,7 +154,7 @@ class TeamFormComponent extends BaseComponent {
 
 		$defaults = array();
 
-		$form->addGroup();
+
 
 		if (Nette\Environment::getUser()->isLoggedIn()) {
 			$loggedTeam = Interlos::getLoggedTeam();
@@ -163,13 +175,15 @@ class TeamFormComponent extends BaseComponent {
 			}
 			$form["team_name"]->setDisabled();
 			$form->addHidden("id_team");
+			$form->setCurrentGroup(null);
 			$form->addSubmit("update", "Upravit");
-			$form->onSubmit[] = array($this, "updateSubmitted");
+			$form->onSuccess[] = array($this, "updateSubmitted");
 		}
 		else {
 			$form["password"]->addRule(Nette\Forms\Form::FILLED, "Není vyplněno heslo týmu.");
+			$form->setCurrentGroup(null);
 			$form->addSubmit("insert", "Registrovat");
-			$form->onSubmit[] = array($this, "insertSubmitted");
+			$form->onSuccess[] = array($this, "insertSubmitted");
 		}
 
 		$form->setDefaults($defaults);
@@ -203,7 +217,11 @@ class TeamFormComponent extends BaseComponent {
 				$competitors[] = $competitor;
 			}
 		}
-		$schoolExists = Interlos::schools()->findAll()->where("[name] IN %l", $schoolsToInsert)->count();
+		if(count($schoolsToInsert) === 0) {
+			$schoolExists = 0;
+		} else {
+			$schoolExists = Interlos::schools()->findAll()->where("[name] IN %l", $schoolsToInsert)->count();
+		}
 		if ($schoolExists) {
 			return FALSE;
 		}

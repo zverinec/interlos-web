@@ -4,22 +4,19 @@ namespace FrontModule;
 class GamePresenter extends BasePresenter
 {
 
-	public function renderAnswer() {
-		$this->setPageTitle("Odevzdat řešení");
-	}
-
 	public function renderDefault() {
 		$this->setPageTitle("Zadání");
+		$this->check('taskStats');
+		$this->getComponent("answerHistory")->setSource(
+			\Interlos::answers()->findAll()
+				->where("[id_team] = %i", \Interlos::getLoggedTeam()->id_team)
+				->orderBy("inserted", "DESC")
+		);
+		$this->getComponent("answerHistory")->setLimit(50);
 	}
 
 	public function renderHistory() {
 		$this->setPageTitle("Historie odpovědí");
-		$this->getComponent("answerHistory")->setSource(
-				\Interlos::answers()->findAll()
-					->where("[id_team] = %i", \Interlos::getLoggedTeam()->id_team)
-					->orderBy("inserted", "DESC")
-		);
-		$this->getComponent("answerHistory")->setLimit(50);
 	}
 
 	protected function startUp() {
@@ -36,6 +33,10 @@ class GamePresenter extends BasePresenter
 
 	protected function createComponentAnswerHistory($name) {
 		return new \AnswerHistoryComponent($this, $name);
+	}
+
+	protected function createComponentTaskStats($name) {
+		return new \TaskStatsComponent($this, $name);
 	}
 
 }

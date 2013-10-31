@@ -6,10 +6,13 @@ class TeamPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
+		if(!$this->user->isLoggedIn()) {
+			$this->redirect('Default:login');
+		}
 		$this->setPageTitle(\Interlos::getLoggedTeam()->name);
 	}
 
-	public function renderList()
+	public function actionList()
 	{
 		$this->setPageTitle("Seznam týmů");
 		$this->getComponent("teamList")->setSource(
@@ -20,6 +23,17 @@ class TeamPresenter extends BasePresenter
 			\TeamsModel::COLLEGE => "Vysokoškoláci",
 			\TeamsModel::OTHER => "Ostatní",
 		);
+		$this->check("results");
+	}
+
+	public function actionRegistration()
+	{
+		if($this->user->isLoggedIn()) {
+			$this->redirect('default');
+		}
+		if(!\Interlos::isRegistrationActive()) {
+			$this->flashMessage('Momentálně neprobíhá registrace.', 'error');
+		}
 	}
 
 	public function renderRegistration()
@@ -31,7 +45,13 @@ class TeamPresenter extends BasePresenter
 
 	protected function createComponentTeamForm($name)
 	{
-		return new \TeamFormComponent($this, $name);
+		$comp = new \TeamFormComponent($this, $name);
+		$comp->setMailParameters($this->context->parameters['mail']);
+		return $comp;
+	}
+
+	protected function createComponentResults($name) {
+		return new \ResultsComponent($this, $name);
 	}
 
 	protected function createComponentTeamList($name)

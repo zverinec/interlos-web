@@ -33,11 +33,11 @@ class ChatListComponent extends BaseListComponent {
 	protected function createComponentChatForm($name) {
 		$form = new BaseForm($this, $name);
 
-		$form->addTextArea("content","")
+		$form->addTextArea("content","Text příspěvku", 80, 10)
 				->addRule(Nette\Forms\Form::FILLED, "Obsah příspěvku není vyplněn.");
 
 		$form->addSubmit("chatSubmit","Přidat příspěvek");
-		$form->onSubmit[] = array($this, "chatSubmitted");
+		$form->onSuccess[] = array($this, "chatSubmitted");
 
 		return $form;
 	}

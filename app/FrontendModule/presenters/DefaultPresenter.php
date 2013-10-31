@@ -25,14 +25,6 @@ class DefaultPresenter extends BasePresenter {
 		$this->setPagetitle("Přihlásit se");
 	}
 
-	public function renderRules() {
-		$this->setPagetitle("Pravidla");
-	}
-
-	public function renderTaskExamples() {
-		$this->setPagetitle("Rozcvička");
-	}
-
 	// ----- PROTECTED METHODS
 
 	protected function createComponentChat($name) {

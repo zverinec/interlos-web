@@ -32,4 +32,15 @@ class BasePresenter extends Presenter {
         \Interlos::createAdminMessages();
 	}
 
+	protected function check($componentName) {
+		try {
+			$this->getComponent($componentName);
+			$this->getTemplate()->available = TRUE;
+		}
+		catch(Exception $e) {
+			$this->flashMessage("Statistiky jsou momentálně nedostupné. Pravděpodobně dochází k přepočítávání.", "error");
+			$this->getTemplate()->available = FALSE;
+		}
+	}
+
 }

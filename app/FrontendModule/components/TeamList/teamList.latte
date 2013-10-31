@@ -1,20 +1,18 @@
 {foreach $teams AS $category => $teamsInCategory}
-	<div class="main-block">
-		<h2 id="{$category}">{$categories[$category]}</h2>
-		<ol>
-			{foreach $teamsInCategory AS $team}
-			<li>
-				<strong>{$team->name}</strong>:
-					{if isset($competitors[$team->id_team])}
-						{foreach $competitors[$team->id_team] AS $competitor}
-							{$competitor->name} {if $competitor->school_name != NULL}({$competitor->school_name}){/if}{if !$iterator->isLast()}, {/if}
-						{/foreach}
-					{else}
-					informace o členech týmu nejsou dostupné
-					{/if}
-			</li>
-			{/foreach}
-		</ol>
-	</div>
+	<h2 id="{$category}">{$categories[$category]}</h2>
+	<ol>
+		{foreach $teamsInCategory AS $team}
+		<li>
+			<strong>{$team->name}</strong>:
+				{if isset($competitors[$team->id_team])}
+					{foreach $competitors[$team->id_team] AS $competitor}
+						{$competitor->name} {if $competitor->school_name != NULL}({$competitor->school_name}){/if}{if !$iterator->isLast()}, {/if}
+					{/foreach}
+				{else}
+				informace o členech týmu nejsou dostupné
+				{/if}
+		</li>
+		{/foreach}
+	</ol>
 {/foreach}
 

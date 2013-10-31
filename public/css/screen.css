@@ -38,7 +38,7 @@ body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-siz
 .header-name { height: 100px; width: 230px; float: left; background-image: url("../images/logo-name.png"); background-repeat: no-repeat; }
 
 .header-login-panel { min-height: 30px; max-width: 420px; float:right; background-color: rgba(216,181,94,0.25); font-size: 10pt; line-height: 30px; vertical-align: middle; }
-.header-team-name { float: left; height: 30px; max-width: 290px; padding: 0 10px 0 10px; font-weight: bold; }
+.header-team-name, .header-team-name a { float: left; height: 30px; max-width: 290px; padding: 0 10px 0 10px; font-weight: bold; text-decoration: none; }
 .header-loginout { float: right; height: 30px; width: 70px; padding: 0 30px 0 10px; background-repeat: no-repeat; }
 .header-loginout:hover { background-position: 0 -30px; color: rgb(216,181,94); }
 .header-login { background-image: url("../images/login.png"); }
@@ -72,7 +72,7 @@ h2 { font-size: 130%; font-weight: bold; margin: 0.9em 0 0.5em 0; }
 p { margin: 0 0 0.8em 0; }
 ol { margin: 0; }
 ul { margin: 0; }
-ol>li, ul>lis { margin: 0 0 5px 0; }
+ol>li, ul>li { margin: 0 0 5px 0; }
 a { color: rgb(45,22,15); text-decoration: underline; font-weight: normal; }
 a:hover { color: rgb(216,181,94); }
 .bold { font-weight: bold; }
@@ -100,6 +100,7 @@ tr.even { background-color: rgba(216,181,94,0.25); }
 /* forms */
 fieldset { border-color: rgb(45,22,15); border-width: 1px; border-style: dashed; margin-bottom: 10px; }
 form th { background-color: transparent; }
+legend { font-weight: bold; background-color: rgb(216,181,94); padding: 5px 10px 5px 10px;}
 input, select { border: none; padding: 5px; background-color: rgba(216,181,94,0.25); color: rgb(45,22,15); }
 input:disabled { background-color: rgb(216,181,94); }
 input.button { border-style: solid; border-width: 2px; border-color: rgb(216,181,94);; padding: 5px 15px 5px 15px; background-color: rgb(216,181,94); color: rgb(45,22,15); font-weight: bold; }
@@ -107,8 +108,18 @@ input.button:hover { border-color: rgb(45,22,15); }
 label { float: right; }
 label:after { content: ":"; }
 
+/* messages */
+ul.error { list-style: none; background: none; padding: 0px; }
+.main-message, .flash, ul.error li { min-height: 30px; padding: 10px 30px 10px 60px; margin: 0 0 10px 0; font-size: 120%; line-height: 30px; font-weight: bold; background-repeat: no-repeat; }
+.ok, .success { background-color: rgba(194,224,182,0.25); color: rgb(26,110,0);  background-image: url("../images/ok.png"); }
+.nok, .error, ul.error li { background-color: rgba(247,198,198,0.25); color: rgb(186,13,13);  background-image: url("../images/nok.png"); background-repeat: no-repeat; }
+
+
 /* extra */
 div#clock { float: right; }
+div#logos a { margin: 30px; display: block; float: left; }
+table#overview { margin: 0px; }
+table#overview th { font-size: 1.2em; background: inherit; padding-left: 0px; }
 
 /* scoring */
 #score-stats-wrapper {

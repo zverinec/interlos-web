@@ -1,1 +1,8 @@
-{extends @layout.latte}
+{extends ../@layout.latte}
+
+{block #content}
+	<div class="main-block">
+		<h1>Registrace týmu</h1>
+		{widget teamForm}
+	</div>
+{/block}
