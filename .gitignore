@@ -7,3 +7,4 @@ app/config.local.neon
 vendor/*
 !vendor/others
 composer.lock
+composer.phar

@@ -74,6 +74,7 @@ ol { margin: 0; }
 ul { margin: 0; }
 ol>li, ul>li { margin: 0 0 5px 0; }
 a { color: rgb(45,22,15); text-decoration: underline; font-weight: normal; }
+a img { border: none; }
 a:hover { color: rgb(216,181,94); }
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
