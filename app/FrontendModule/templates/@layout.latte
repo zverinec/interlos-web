@@ -27,12 +27,12 @@
 						{if !$user->isLoggedIn()}
 							<div class="header-team-name">tým nepřihlášen</div>
 							<a href="{link Default:login}">
-								<span class="block header-login header-loginout">přihlásit se</span>
+								<span class="block header-login header-loginout">přihlásit&nbsp;se</span>
 							</a>
 						{else}
 							<div class="header-team-name"><a href="{link Team:default}" title="{Interlos::getLoggedTeam()->name}">{Interlos::getLoggedTeam()->name|truncate:15} ({Interlos::getLoggedTeam()->id_team})</a></div>
 							<a href="{link Default:logout}">
-								<span class="block header-logout header-loginout">odhlásit se</span>
+								<span class="block header-logout header-loginout">odhlásit&nbsp;se</span>
 							</a>
 						{/if}
 					{/if}
@@ -41,9 +41,9 @@
 				<div class="cleaner-right">&nbsp;</div>
 
 				{if !$user->isLoggedIn()}
-					<a href="{link Team:registration}"><span class="menu menu-register">Přidat se</span></a>
+					<a href="{link Team:registration}"><span class="menu menu-register">Přidat&nbsp;se</span></a>
 				{else}
-					<a href="{link Team:}"><span class="menu menu-settings">O týmu</span></a>
+					<a href="{link Team:}"><span class="menu menu-settings">O&nbsp;týmu</span></a>
 				{/if}
 				<a href="{link Default:chat}"><span class="menu menu-discussions">Diskuze</span></a>
 				<a href="{link Team:list}"><span class="menu menu-teams">Týmy</span></a>
@@ -51,7 +51,7 @@
 					<a href="{link Game:default}"><span class="menu menu-puzzles">Úlohy</span></a>
 				{/if}
 				<a href="{link Archive:}"><span class="menu menu-archive">Archiv</span></a>
-				<a href="{link Default:about}"><span class="menu menu-about">O soutěži</span></a>
+				<a href="{link Default:about}"><span class="menu menu-about">O&nbsp;soutěži</span></a>
 				<a href="{link Default:}"><span class="menu menu-home">Domů</span></a>
 				<div class="cleaner-both">&nbsp;</div>
 			</div>
