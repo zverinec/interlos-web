@@ -122,7 +122,7 @@ ul.error { list-style: none; background: none; padding: 0px; }
 /* extra */
 div#clock { float: right; }
 div#logos a { margin: 30px; display: block; float: left; }
-table#overview { margin: 0px; min-width: auto; }
+table#overview { margin: 0px; min-width: auto; display: block; }
 table#overview th { font-size: 1.2em; background: inherit; padding: 5px 0 5px 0; }
 .posterLandscape { float: right; margin: 0 0 10px 20px; border: none; width: 50%; height: 50%; }
 @media only screen and (min-width: 1200px) {

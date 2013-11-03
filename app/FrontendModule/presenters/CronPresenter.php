@@ -4,15 +4,13 @@ namespace FrontModule;
 class CronPresenter extends BasePresenter
 {
 
-	public function renderDatabase($key) {
-		Interlos::resetTemporaryTables();
-	}
-
-	protected function startup() {
-		parent::startup();
-		if ($this->getParameter("key") != $this->params['keys']['cron']->key) {
-			die("PERMISSION DENIED");
+	public function actionDatabase($key) {
+		if(\Interlos::resetTemporaryTables()) {
+			print "TEMPORARY TABLES: CREATED";
+		} else {
+			print "TEMPORARY TABLES: PERMISSION DENIED";
 		}
+		$this->terminate();
 	}
 
 }

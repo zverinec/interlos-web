@@ -28,7 +28,7 @@ php:
 
 nette:
 	application:
-		#errorPresenter: Error
+		errorPresenter: Front:Error
 
 	session:
 		save_path: "%tempDir%/sessions"

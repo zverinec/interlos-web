@@ -6,6 +6,10 @@
     </div>
 {/if}
 
+{if count($posts) == 0}
+	<p><strong>V diskuzi nejsou žádné příspěvky.</strong></p>
+{/if}
+
 {foreach $posts AS $post}
     <div class="discussion-main">
 		<span class="discussion-team">{$post['team_name']}</span>

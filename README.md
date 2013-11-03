@@ -21,13 +21,14 @@ Installation
 4. Copy /app/config/config.local.neon.example to /app/config/config.local.neon and overwrite parameters of config.neon (DB credentials...)
 5. Make directories /temp and /log writable
 6. Create database schema executing /resources/db/tables.sql and /resources/db/views.sql
+7. Create temporary tables
 
 
 Creating new contest
 --------------------
 
-1. Create contest and set dates
-2. Test registration
+1. Create contest and set dates in table `year`
+2. Test registration by registering team
 
 Running the contest
 -------------------

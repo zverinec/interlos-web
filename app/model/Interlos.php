@@ -87,11 +87,11 @@ class Interlos {
 	}
 
     public static function isAdminAccess() {
-        return isset($_GET["admin-key"]) && Nette\Environment::getConfig("admin")->key == $_GET["admin-key"];
+        return isset($_GET["admin-key"]) && self::$container->parameters['keys']['admin'] == $_GET["admin-key"];
     }
 
     public static function isCronAccess() {
-        return isset($_GET["cron-key"]) && Nette\Environment::getConfig("cron")->key == $_GET["cron-key"];
+        return isset($_GET["cron-key"]) && self::$container->parameters['keys']['cron'] == $_GET["cron-key"];
     }
 
     public static function isGameActive() {
@@ -157,9 +157,14 @@ class Interlos {
         }
     }
 
+	/**
+	 * Beware, use only in CronPresenter!
+	 * It has performance problems
+	 * @return bool
+	 */
 	public static function resetTemporaryTables() {
-        if ((!self::isCronAccess() && !self::isAdminAccess()) || !isset($_GET["update-database"])) {
-           return;
+		if(!self::isCronAccess() && !self::isAdminAccess()) { // Cron or admin code must be provided in URL
+           	return false;
         }
 		self::getConnection()->begin();
 		// Total results
@@ -181,6 +186,7 @@ class Interlos {
 		self::getConnection()->query("DROP TABLE IF EXISTS [tmp_bonus]");
 		self::getConnection()->query("CREATE TABLE [tmp_bonus] AS SELECT * FROM [view_bonus]");
 		self::getConnection()->commit();
+		return true;
 	}
 
 	/** @return SchoolsModel */

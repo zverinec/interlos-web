@@ -3,6 +3,11 @@
 {block #content}
 	<div class="main-block">
 		<h1>Registrace týmu</h1>
-		{widget teamForm}
+		{if Interlos::isRegistrationStarted()}
+			{widget teamForm}
+		{else}
+			<p><strong>Momentálně neprobíhá registrace, ta probíhá typicky měsíc před konáním soutěže.</strong></p>
+		{/if}
+
 	</div>
 {/block}

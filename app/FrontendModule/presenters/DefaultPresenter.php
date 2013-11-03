@@ -1,6 +1,9 @@
 <?php
 namespace FrontModule;
 
+use Nette\Application\BadRequestException;
+use Nette\Security\AuthenticationException;
+
 class DefaultPresenter extends BasePresenter {
 
 	public function actionLogout() {
