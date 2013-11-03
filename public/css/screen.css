@@ -78,14 +78,14 @@ a img { border: none; }
 a:hover { color: rgb(216,181,94); }
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
+.hr { height: 3px; width: 100%; margin: 20px 0 10px 0; overflow: hidden; background-color: rgba(216,181,94,0.25); }
 
-/* site-specific CSS */
+/* tables */
 table th, td { padding: 2px 10px 2px 10px; overflow: hidden; }
 table th { background-color: rgb(216,181,94); }
 table { min-width: 90%; max-width: 1000px; margin: 10px auto 20px auto; }
 tr.even { background-color: rgba(216,181,94,0.25); }
 .center { text-align: center; }
-.hr { height: 3px; width: 100%; margin: 20px 0 10px 0; overflow: hidden; background-color: rgba(216,181,94,0.25); }
 
 /* discussion */
 .discussion-team { float: left; margin: 0 0 5px 0; font-weight: bold;  }
@@ -120,28 +120,14 @@ ul.error { list-style: none; background: none; padding: 0px; }
 div#clock { float: right; }
 div#logos a { margin: 30px; display: block; float: left; }
 table#overview { margin: 0px; }
-table#overview th { font-size: 1.2em; background: inherit; padding-left: 0px; }
+table#overview th { font-size: 1.2em; background: inherit; padding: 5px 0 5px 0; }
+.poster { float: right; margin: 20px; border: none; }
 
 /* scoring */
-#score-stats-wrapper {
-	overflow: auto;
-}
-table#score-stats {
-	margin: 0px;
-}
-#score-stats td,#score-stats th {
-	min-width: 40px;
-}
-#score-stats th {
-	padding: 2px;
-}
-#score-stats td.team {
-	font-weight: bolder;
-}
-#score-stats td.done {
-	background-color: green;
-	color: white;
-}
-#score-stats tr.line td {
-	border-top: 1px dotted #dddddd;
-}
+#score-stats-wrapper { overflow: auto; }
+table#score-stats { margin: 0px; }
+#score-stats td,#score-stats th { min-width: 40px; }
+#score-stats th { padding: 2px; }
+#score-stats td.team { font-weight: bolder; }
+#score-stats td.done { background-color: green; color: white; }
+#score-stats tr.line td { border-top: 1px dotted #dddddd; }
