@@ -12,6 +12,7 @@ parameters:
 	keys:
 		cron: hesloprocron
 		admin: hesloproadmin
+	infoPage: http://interlos.yavanna.cz/
 
 dibi:
 	driver: mysql

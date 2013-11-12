@@ -21,12 +21,14 @@ DROP TABLE IF EXISTS `chat`;
 CREATE TABLE `chat` (
 	`id_chat` int(25) unsigned NOT NULL AUTO_INCREMENT COMMENT 'identifikator',
 	`id_team` int(25) unsigned NOT NULL COMMENT 'tym, ktery prispevek vlozil',
+	`id_parent` int(25) unsigned NULL COMMENT 'rodicovsky prispevek',
 	`content` text COLLATE utf8_czech_ci NOT NULL COMMENT 'text prispevku',
 	`inserted` datetime NOT NULL COMMENT 'cas, kdy byla polozka vlozena do systemu',
 	`updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'cas, kdy byla polozka naposledy zmenena',
 	PRIMARY KEY (`id_chat`),
 	KEY `id_team` (`id_team`),
-	CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`id_team`) REFERENCES `team` (`id_team`) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`id_team`) REFERENCES `team` (`id_team`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `chat_ibfk_2` FOREIGN KEY (`id_parent`) REFERENCES `chat` (`id_chat`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci COMMENT='diskusni prispevku na chatu';
 
 

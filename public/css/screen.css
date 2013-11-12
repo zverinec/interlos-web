@@ -29,7 +29,7 @@ body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-siz
 }
 
 /* info page */
-.info-frame { height: 150px; width: 100%; margin: 0 0 30px 0; border: none; }
+.info-frame { height: 240px; width: 100%; margin: 0 0 30px 0; border: none; }
 .info-webpage { min-height: 115px; padding: 15px 30px 20px 30px; background-color: rgba(216,181,94,0.25); }
 .info-time { float: left; width: 50px; font-weight: bold; margin: 0 0 5px 0; }
 .info-message { overflow:hidden; margin: 0 0 5px 0; }
@@ -135,5 +135,7 @@ table#score-stats { margin: 0px; }
 #score-stats td,#score-stats th { min-width: 40px; }
 #score-stats th { padding: 2px; }
 #score-stats td.team { font-weight: bolder; }
-#score-stats td.done { background-color: green; color: white; }
+#score-stats td.done { background-color: rgb(26,110,0); color: white; }
 #score-stats tr.line td { border-top: 1px dotted #dddddd; }
+#answer-history td.code { background-color: rgb(186,13,13); color: white;}
+#answer-history .correct td.code { background-color: rgb(26,110,0); color: white; }

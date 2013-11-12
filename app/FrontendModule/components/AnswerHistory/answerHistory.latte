@@ -10,7 +10,7 @@
 		<td>{$answer->id_answer}</td>
 		<td>{$tasks[$answer->id_task]->code_name}</td>
 		<td>{$answer->inserted|timeOnly}</td>
-		<td>{$answer->code}</td>
+		<td class="code">{$answer->code}</td>
 	</tr>
 	{/foreach}
 </table>

@@ -13,7 +13,7 @@ class AnswerFormComponent extends BaseComponent
 			$task = Interlos::tasks()->find($values["task"]);
 			$solution = strtoupper(strtr($values["solution"], array(" " => "")));
 			Interlos::answers()->insert(Interlos::getLoggedTeam()->id_team, $values["task"], $solution);
-			if ($task->code == $solution) {
+			if (\Nette\Utils\Strings::upper($task->code) == \Nette\Utils\Strings::upper($solution)) {
 				$this->getPresenter()->flashMessage("Vaše odpověď je správně.", "success");
 			}
 			else {
@@ -56,11 +56,11 @@ class AnswerFormComponent extends BaseComponent
 		$form = new BaseForm($this, $name);
 
 		// Tasks
-		$tasks = array(NULL => " ---- Vybrat ---- ") + Interlos::tasks()
+		$tasks = Interlos::tasks()
 			->findAllAvaiable(Interlos::getLoggedTeam()->id_team)
 			->fetchPairs("id_task", "code_name");
 		$form->addSelect("task", "Úkol", $tasks )
-				->skipFirst()
+				->setPrompt("--- Vyberte ---")
 				->addRule(Nette\Forms\Form::FILLED, "Vyberte prosím řešený úkol.");
 		// Solution
 		$form->addText("solution", "Kód")
@@ -68,7 +68,7 @@ class AnswerFormComponent extends BaseComponent
 				->setOption("description","Výsledný kód zadávejte velkými písmeny, bez mezer a bez diakritiky.");;
 
 		$form->addSubmit("solution_submit", "Odeslat řešení");
-		$form->onSubmit[] = array($this, "formSubmitted");
+		$form->onSuccess[] = array($this, "formSubmitted");
 
 		return $form;
 	}

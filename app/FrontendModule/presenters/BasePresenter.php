@@ -18,6 +18,11 @@ class BasePresenter extends Presenter {
 	protected function createComponentFlashMessages($name) {
 		return new \FlashMessagesComponent($this, $name);
 	}
+	protected function createComponentInfoList($name) {
+		$comp = new \InfoListComponent($this, $name);
+		$comp->setInfoPageUrl($this->context->getParameters()['infoPage']);
+		return $comp;
+	}
 
 	protected function createTemplate($class = NULL) {
 		$template = parent::createTemplate($class);

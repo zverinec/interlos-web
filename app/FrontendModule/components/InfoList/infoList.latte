@@ -1,0 +1,8 @@
+{if \Interlos::isGameStarted()}
+	{var $team = \Interlos::getLoggedTeam()}
+	{var $completeUrl = $url . "?headless=true"}
+	{if $team != NULL}
+		{var $completeUrl = $completeUrl . "&subject=InterLoS: Tým ".$team->name." (".$team->id_team.")"}
+	{/if}
+	<iframe class="info-frame" src="{$completeUrl}"></iframe>
+{/if}
