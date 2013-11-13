@@ -29,7 +29,7 @@ body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-siz
 }
 
 /* info page */
-.info-frame { height: 240px; width: 100%; margin: 0 0 30px 0; border: none; }
+.info-frame { height: 200px; width: 100%; margin: 0 0 30px 0; border: none; }
 .info-webpage { min-height: 115px; padding: 15px 30px 20px 30px; background-color: rgba(216,181,94,0.25); }
 .info-time { float: left; width: 50px; font-weight: bold; margin: 0 0 5px 0; }
 .info-message { overflow:hidden; margin: 0 0 5px 0; }
@@ -103,6 +103,7 @@ tr.even { background-color: rgba(216,181,94,0.25); }
 
 /* forms */
 fieldset { border-color: rgb(45,22,15); border-width: 1px; border-style: dashed; margin-bottom: 10px; }
+textarea { border: none; padding: 5px; background-color: rgba(216,181,94,0.25); color: rgb(45,22,15); font-size: 120%; }
 form th { background-color: transparent; }
 legend { font-weight: bold; background-color: rgb(216,181,94); padding: 5px 10px 5px 10px;}
 input, select { border: none; padding: 5px; background-color: rgba(216,181,94,0.25); color: rgb(45,22,15); }
@@ -125,6 +126,18 @@ div#logos a { margin: 30px; display: block; float: left; }
 table#overview { margin: 0px; min-width: auto; display: block; }
 table#overview th { font-size: 1.2em; background: inherit; padding: 5px 0 5px 0; }
 .posterLandscape { float: right; margin: 0 0 10px 20px; border: none; width: 50%; height: 50%; }
+#chat textarea { float: left; width: 70%}
+#chat label:after { content: ""; }
+#chat input.button { float: right; width: 26%; min-width: 140px; }
+@media only screen and (max-width: 700px) {
+	#chat textarea { width: 98%; }
+	#chat input.button { clear:both; float: left; }
+}
+*::-webkit-input-placeholder { color: rgb(186,13,13); }
+*:-moz-placeholder { color: rgb(186,13,13); }
+*:-ms-input-placeholder { color: rgb(186,13,13);
+}
+
 @media only screen and (min-width: 1200px) {
 	.posterLandscape { width: 499px; height: 356px; }
 }

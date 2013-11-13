@@ -138,11 +138,31 @@ CREATE VIEW `view_task_stat` AS
 	GROUP BY `view_avaiable_task`.`id_task`
 	ORDER BY `view_avaiable_task`.`id_serie`, `view_avaiable_task`.`id_task`;
 
+DROP VIEW IF EXISTS `view_chat_root`;
+CREATE VIEW `view_chat_root` AS
+	SELECT
+		`p`.`id_chat`,
+		MAX(COALESCE(`r`.`inserted`, `p`.`inserted`)) AS `last_post_inserted`
+	FROM `chat` AS `p`
+	LEFT JOIN `chat` AS `r` ON `r`.`id_parent` =  `p`.`id_chat`
+	WHERE `p`.`id_parent` IS NULL AND `p`.`id_team` IN (SELECT `id_team` FROM `view_team`)
+	GROUP BY `p`.`id_chat`, `r`.`id_parent;
+
 DROP VIEW IF EXISTS `view_chat`;
 CREATE VIEW `view_chat` AS
 	SELECT
-		`chat`.*,
-		`team`.`name` AS `team_name`
-	FROM `chat`
-	INNER JOIN `view_team` AS `team` USING(`id_team`)
-	ORDER BY `chat`.`inserted` DESC;
+		`p`.`id_chat` AS `post_id_chat`,
+		`p`.`content` AS `post_content`,
+		`p`.`inserted` AS `post_inserted`,
+		`r`.`id_chat` AS `reply_id_chat`,
+		`r`.`content` AS `reply_content`,
+		`r`.`inserted` AS `reply_inserted`,
+		`team1`.`name` AS `post_team_name`,
+		`team2`.`name` AS `reply_team_name`,
+		`l`.`last_post_inserted`
+	FROM `chat` AS `p`
+	INNER JOIN `view_chat_root` AS `l` ON `p`.`id_chat` = `l`.`id_chat`
+	LEFT JOIN `chat` AS `r` ON `r`.`id_parent` =  `p`.`id_chat`
+	INNER JOIN `view_team` AS `team1` ON `p`.`id_team` = `team1`.`id_team`
+	LEFT JOIN `view_team` AS `team2` ON `r`.`id_team` = `team2`.`id_team`
+	ORDER BY `l`.`last_post_inserted` DESC, `reply_inserted` ASC;

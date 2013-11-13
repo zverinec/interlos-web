@@ -12,6 +12,7 @@ Requirements
 - PHP in congfiguration to run Nette framework, see http://doc.nette.org/cs/requirements
 - MySQL (MariaDB) database
 
+
 Installation
 ------------
 
@@ -24,17 +25,33 @@ Installation
 7. Create temporary tables
 
 
+Config
+------
+- Set mails which are used for sending mail
+- Set cron and admin keys (randomly generated long password)
+- Set database credentials
+
+
 Creating new contest
 --------------------
 
-1. Create contest and set dates in table `year`
-2. Test registration by registering team
+1. Create contest and set dates in table `year`:
+   Name - year, like 2013, used for sorting to get latest year
+   Registration start
+   Registration end - beware of crossed dates
+   Game start
+   Game end - beware of crossed dates
+2. Test registration by registering first team
+3. To run
 
 Running the contest
 -------------------
 
-1. Populate table with correct answers
-2. Run CRON jobs
-3. Contest!
-4. Disable CRON jobs
+1. Create series of task (ciphers, logical, programming) in table `serie` (column `to_show` should be ignored)
+2. Populate table `task` with correct answers. Provide codes in upper case (just for case)
+3. Run CRON jobs (generating statistics)
+   /cron/database?admin-key=hesloproadmin OR /cron/database?cron-key=hesloprocron NEVER BOTH OF THEM
+3. Run it! Test answering with testing team and then remove the answer.
+4. Monitor server performance.
+5. Disable CRON jobs
 
