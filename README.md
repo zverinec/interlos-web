@@ -47,7 +47,7 @@ Creating new contest
 Running the contest
 -------------------
 
-1. Create series of task (ciphers, logical, programming) in table `serie` (column `to_show` should be ignored)
+1. Create series of task (ciphers, logical, programming) in table `serie` (fill `to_show` properly, to prevent answering before release whole series)
 2. Populate table `task` with correct answers. Provide codes in upper case (just for case)
 3. Run CRON jobs (generating statistics)
    /cron/database?admin-key=hesloproadmin OR /cron/database?cron-key=hesloprocron NEVER BOTH OF THEM
