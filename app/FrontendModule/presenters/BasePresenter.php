@@ -20,7 +20,8 @@ class BasePresenter extends Presenter {
 	}
 	protected function createComponentInfoList($name) {
 		$comp = new \InfoListComponent($this, $name);
-		$comp->setInfoPageUrl($this->context->getParameters()['infoPage']);
+		$params = $this->context->getParameters();
+		$comp->setInfoPageUrl($params['infoPage']);
 		return $comp;
 	}
 
