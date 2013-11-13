@@ -17,7 +17,7 @@ Installation
 
 1. Checkout this repository
 2. Set WWW dir to /public/
-3. Run `composer update` from root
+3. Run `composer update` from root. When installing production server use `--no-dev` to use minified nette.
 4. Copy /app/config/config.local.neon.example to /app/config/config.local.neon and overwrite parameters of config.neon (DB credentials...)
 5. Make directories /temp and /log writable
 6. Create database schema executing /resources/db/tables.sql and /resources/db/views.sql
