@@ -39,6 +39,9 @@ class ChatListComponent extends BaseListComponent {
 		// Paginator
 		$paginator = $this->getPaginator();
 		$selection = Interlos::chat()->findAllRoot()->applyLimit($paginator->itemsPerPage, $paginator->offset)->fetchPairs(null, 'id_chat');
+		if(count($selection) == 0) {
+			$selection = array(-1);
+		}
 		$this->getSource()->where('post_id_chat IN %l OR reply_id_chat IN %l', $selection, $selection)->orderBy('last_post_inserted','DESC')->orderBy('reply_inserted', 'ASC');
 		// Load template
 		$this->getTemplate()->posts = $this->getSource()->fetchAssoc('post_id_chat,#');
