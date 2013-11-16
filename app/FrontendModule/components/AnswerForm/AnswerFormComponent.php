@@ -58,7 +58,7 @@ class AnswerFormComponent extends BaseComponent
 		// Tasks
 		$tasks = Interlos::tasks()
 			->findAllAvaiable(Interlos::getLoggedTeam()->id_team)
-			->fetchPairs("id_task", "code_name");
+			->fetchPairs("id_task", "whole_name");
 		$form->addSelect("task", "Úkol", $tasks )
 				->setPrompt("--- Vyberte ---")
 				->addRule(Nette\Forms\Form::FILLED, "Vyberte prosím řešený úkol.");

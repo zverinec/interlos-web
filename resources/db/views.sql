@@ -31,6 +31,11 @@ CREATE VIEW `view_task` AS
 			WHEN 'programming' THEN CONCAT('P', `task`.`number`)
 			WHEN 'idea' THEN CONCAT('S', `task`.`number`)
 		END AS `code_name`,
+		CASE `task`.`type`
+			WHEN 'logical' THEN CONCAT('L',`task`.`number`, ' ', `task`.`name`)
+			WHEN 'programming' THEN CONCAT('P', `task`.`number`, ' ', `task`.`name`)
+			WHEN 'idea' THEN CONCAT('S', `task`.`number`, ' ', `task`.`name`)
+		END AS `whole_name`,
 		`serie`.`to_show` AS `serie_to_show`
 	FROM `task`
 	INNER JOIN `serie` USING(`id_serie`)

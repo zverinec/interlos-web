@@ -44,6 +44,15 @@ Creating new contest
 2. Test registration by registering first team
 3. To run
 
+Cron example
+------------
+
+# Každou minutu
+* * * * * wget -O /dev/null http://interlos-devel.fi.muni.cz/cron/database?cron-key=xyh88QhcVIZNuOJFTtlX > /dev/null 2>&1
+# Každých pět minut
+*/5 * * * * wget -O /dev/null http://interlos-devel.fi.muni.cz/cron/database?cron-key=xyh88QhcVIZNuOJFTtlX > /dev/null 2>&1
+
+
 Running the contest
 -------------------
 
