@@ -143,7 +143,7 @@ table#overview th { font-size: 1.2em; background: inherit; padding: 5px 0 5px 0;
 }
 
 /* scoring */
-#score-stats-wrapper { overflow: auto; }
+#score-stats-wrapper { }
 table#score-stats { margin: 0px; }
 #score-stats td,#score-stats th { min-width: 40px; }
 #score-stats th { padding: 2px; }
