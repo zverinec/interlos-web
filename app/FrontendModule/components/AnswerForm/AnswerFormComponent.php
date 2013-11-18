@@ -7,6 +7,10 @@ class AnswerFormComponent extends BaseComponent
 			$form->addError('Odpovídat mohou jen přihlášené týmy.');
 			return;
 		}
+		if(!\Interlos::isGameActive()) {
+			$form->addError('Odpovídat lze pouze během hry.');
+			return;
+		}
 		$values = $form->getValues();
 
 		try {
