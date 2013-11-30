@@ -18,7 +18,7 @@ class TeamFormComponent extends BaseComponent {
 
 	public function insertSubmitted(Nette\Forms\Form $form) {
 		if(!Interlos::isRegistrationActive()) {
-			$form->addError('Momentálně neproníhá registrace.');
+			$form->addError('Momentálně neprobíhá registrace.');
 			return;
 		}
 		$values		= $form->getValues();
@@ -70,12 +70,19 @@ class TeamFormComponent extends BaseComponent {
 
 	public function updateSubmitted(Nette\Forms\Form $form) {
 		$values = $form->getValues();
+		$loggedTeam = Interlos::getLoggedTeam();
+		if($loggedTeam == null || $values['id_team'] != $loggedTeam->id_team) {
+			$form->addError('Pravděpodobně vypršelo přihlášení týmu, přihlašte se prosím znovu.');
+			return;
+		}
 		try {
 			// Update the team
 			$changes = array(
-					"email"	    => $values["email"],
 					"category"  => $values["category"]
 			);
+			if(isSet($values["email"])) {
+				$changes["email"] = $values["email"];
+			}
 			if (!empty($values["password"])) {
 				$changes["password"] = TeamAuthenticator::passwordHash($values["password"]);
 			}
@@ -174,6 +181,9 @@ class TeamFormComponent extends BaseComponent {
 				$counter++;
 			}
 			$form["team_name"]->setDisabled();
+			if (Interlos::isRegistrationEnd()) {
+				$form["email"]->setDisabled();
+			}
 			$form->addHidden("id_team");
 			$form->setCurrentGroup(null);
 			$form->addSubmit("update", "Upravit");
