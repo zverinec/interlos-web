@@ -9,7 +9,7 @@
 				<th>+</th>
 				<th>-</th>
 				{foreach $tasks AS $task}
-					<th>{$task->code_name}</th>
+					<th title="{$task->whole_name}">{$task->code_name} {substr($task->name,0, 4)}</th>
 				{/foreach}
 			</tr>
 		{/if}
