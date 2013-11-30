@@ -26,7 +26,7 @@ class AnswersModel extends AbstractModel {
 	public function insert($team, $task, $code) {
 		$this->checkEmptiness($team, "team");
 		$this->checkEmptiness($task, "task");
-		$this->checkEmptiness($code, "code");
+		//$this->checkEmptiness($code, "code");
 		// Correct answers of the team
 		$correctAnswers = $this->findAllCorrect($team)
 				->fetchPairs("id_answer", "id_answer");
