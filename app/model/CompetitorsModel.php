@@ -17,6 +17,16 @@ class CompetitorsModel extends AbstractModel {
 	public function findAll() {
 		return $this->getConnection()->dataSource("SELECT * FROM [view_competitor]");
 	}
+	
+	public function findCurrentYearTeamCount() {
+		return $this->getConnection()
+				->select("id_team")
+				->select("COUNT(id_competitor) AS competitors")
+				->from("view_competitor")
+				->where("[id_team] IN (SELECT id_team FROM [view_team])")
+				->groupBy("id_team")
+				->fetchPairs("id_team", "competitors");
+	}
 
 	public function findAllByTeam($team) {
 		$this->checkEmptiness($team, "team");

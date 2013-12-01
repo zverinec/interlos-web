@@ -12,11 +12,7 @@ class TeamListComponent extends BaseListComponent {
 				->orderBy("name")
 				->fetchAssoc("id_team,id_competitor");
 		}
-		$this->getTemplate()->categories = array(
-				TeamsModel::COLLEGE	    => "Vysokoškoláci",
-				TeamsModel::HIGH_SCHOOL => "Středoškoláci",
-				TeamsModel::OTHER	    => "Ostatní",
-		);
+		$this->getTemplate()->categories = Interlos::teams()->getCategories();
 	}
 
 }

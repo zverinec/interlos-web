@@ -26,7 +26,7 @@ body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-siz
 }
 
 /* info page */
-.info-frame { height: 300px; width: 100%; margin: 0 0 30px 0; border: none; }
+.info-frame { height: 150px; width: 100%; margin: 0 0 30px 0; border: none; }
 .info-webpage { min-height: 115px; padding: 15px 30px 20px 30px; background-color: rgba(216,181,94,0.25); }
 .info-time { float: left; width: 50px; font-weight: bold; margin: 0 0 5px 0; }
 .info-message { overflow:hidden; margin: 0 0 5px 0; }
@@ -46,11 +46,11 @@ body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-siz
 .footer-contact { padding: 6px 0 6px 0; float: right; font-size: 9pt; line-height: 11pt; text-align: right; }
 
 /* main */
-.main { width: 100%; margin: 0 0 20px 0; padding: 0; }
+.main { width: 100%; margin: 0 0 70px 0; padding: 0; }
 .main-block { padding: 15px 30px 20px 30px; margin: 0 0 30px 0; background-color: rgba(216,181,94,0.25); }
 
 /* basic html, basic emphasis */
-h1 { font-size: 200%; line-height: 140%; margin: 0 0 0.3em 0; }
+h1 { font-size: 200%; line-height: 140%; margin: 0 0 0.3em 0;}
 h2 { font-size: 130%; font-weight: bold; margin: 0.9em 0 0.5em 0; }
 p { margin: 0 0 0.8em 0; }
 ol { margin: 0; }
@@ -78,3 +78,13 @@ input.button { border-style: solid; border-width: 2px; border-color: rgb(216,181
 input.button:hover { border-color: rgb(45,22,15); }
 label { float: right; }
 label:after { content: ":"; }
+
+/* extras */
+span.date { font-family: monospace; display: block; clear: both;}
+div.time-to-refresh { float: right; font-size: 110%; padding: 8px; margin-right: 10px; }
+.ok, .nok, .neutral { min-height: 30px; padding: 5px 10px 0px; margin: 0 0 5px 0; font-size: 100%; font-weight: bold; background-repeat: no-repeat; }
+.ok { background-color: rgba(194,224,182,0.25); color: rgb(26,110,0); }
+.nok { background-color: rgba(247,198,198,0.25); color: rgb(186,13,13);  }
+.window-opener { text-decoration: none; float: right; border-style: solid; border-width: 2px; border-color: rgb(216,181,94);; padding: 5px 15px 5px 15px; background-color: rgb(216,181,94); font-weight: bold; }
+.window-opener:hover { color: rgb(45,22,15); border-color: rgb(45,22,15); }
+h1.lefted { float: left; }

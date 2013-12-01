@@ -1,4 +1,4 @@
-{if \Interlos::isGameStarted()}
+{if \Interlos::isGameActive()}
 	{var $team = \Interlos::getLoggedTeam()}
 	{var $completeUrl = $url . "?headless=true"}
 	{if $team != NULL}

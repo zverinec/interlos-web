@@ -47,5 +47,13 @@ class TeamsModel extends AbstractModel
     public function update(array $changes) {
 	return $this->getConnection()->update("team", $changes);
     }
+    
+	public function getCategories() {
+		return array(
+			self::COLLEGE	    => "Vysokoškoláci",
+			self::HIGH_SCHOOL => "Středoškoláci",
+			self::OTHER	    => "Ostatní"
+		);
+	}
 
 }

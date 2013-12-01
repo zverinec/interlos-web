@@ -9,7 +9,7 @@
 				<th>+</th>
 				<th>-</th>
 				{foreach $tasks AS $task}
-					<th title="{$task->whole_name}">{$task->code_name} {mb_substr($task->name,0, 4)}</th>
+					<th title="{$task->whole_name}">{$task->code_name}&nbsp;{mb_substr($task->name,0, 3)}{if mb_strlen($task->name) > 3}&hellip;{/if}</th>
 				{/foreach}
 			</tr>
 		{/if}
@@ -19,7 +19,7 @@
 			<tr class="line">
 		{/if}
 			<td>{$iterator->getCounter()}</td>
-			<td class="team">{$team->name}</td>
+			<td class="team">{$team->name}&nbsp;<small>({if isSet($numMembers[$team->id_team])}členů:&nbsp;{$numMembers[$team->id_team]};&nbsp;{/if}{if isSet($categories[$team->category])}{$categories[$team->category]|lower}{/if})</small></td>
 			<td>
 				{if !empty($team->score)}
 					{$team->score}

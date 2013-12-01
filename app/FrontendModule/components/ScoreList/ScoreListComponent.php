@@ -17,6 +17,8 @@ class ScoreListComponent extends BaseComponent
 		$this->getTemplate()->penality = Interlos::score()
 			->findAllPenality()
 			->fetchAssoc("id_team");
+		$this->getTemplate()->categories = Interlos::teams()->getCategories();
+		$this->getTemplate()->numMembers = Interlos::competitors()->findCurrentYearTeamCount();
 	}
 
 }
