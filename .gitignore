@@ -2,7 +2,7 @@ temp/*
 !temp/.htaccess
 log/*
 !log/.htaccess
-app/config.local.neon
+app/config/config.local.neon
 .idea/*
 vendor/*
 !vendor/others
