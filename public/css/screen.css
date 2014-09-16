@@ -143,7 +143,7 @@ table#overview th { font-size: 1.2em; background: inherit; padding: 5px 0 5px 0;
 
 @media only screen and (min-width: 1200px) {
 	.posterLandscape { width: 499px; height: 356px; }
-	.poster { width: 424px; height: 600px; }
+	.poster { width: 212px; height: 300px; }
 }
 
 /* scoring */
