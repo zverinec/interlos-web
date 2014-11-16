@@ -53,7 +53,7 @@
 <div class="main-block">
 	<h1>Odevzdat řešení</h1>
 	{if  $user->isLoggedIn()}
-		{widget answerForm}
+		{control answerForm}
 	{else}
 		<p><strong>Odevzdávání je zpřístupněno pouze přihlášeným týmům v čase hry.</strong></p>
 	{/if}
@@ -61,14 +61,14 @@
 <div class="main-block">
 	<h1>Historie odpovědí</h1>
 	{if  $user->isLoggedIn()}
-	{widget answerHistory}
+		{control answerHistory}
 	{else}
-	<p><strong>Historie odpovědí je zpřístupněna pouze přihlášeným týmům v čase hry.</strong></p>
+		<p><strong>Historie odpovědí je zpřístupněna pouze přihlášeným týmům v čase hry.</strong></p>
 	{/if}
 </div>
 <div class="main-block">
 	<h1>Statistika úkolů</h1>
 	<p>Podrobnou statistiku celé hry najdete na <a href="{plink Stats:}">samostatné stránce</a>.</p>
-	{widget taskStats}
+	{control taskStats}
 </div>
 {/block}

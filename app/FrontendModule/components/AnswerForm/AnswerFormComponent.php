@@ -1,4 +1,6 @@
 <?php
+use Tracy\Debugger;
+
 class AnswerFormComponent extends BaseComponent
 {
 
@@ -31,8 +33,7 @@ class AnswerFormComponent extends BaseComponent
 			}
 			else {
 				$this->getPresenter()->flashMessage("Stala se neočekávaná chyba.", "error");
-				Nette\Diagnostics\Debugger::processException($e, TRUE);
-				//error_log($e->getTraceAsString());
+				Debugger::log($e, Debugger::EXCEPTION);
 				return;
 			}
 		}
@@ -42,15 +43,13 @@ class AnswerFormComponent extends BaseComponent
 			}
 			else {
 				$this->getPresenter()->flashMessage("Stala se neočekávaná chyba.", "error");
-				Nette\Diagnostics\Debugger::processException($e, TRUE);
-				//error_log($e->getTraceAsString());
+				Debugger::log($e, Debugger::EXCEPTION);
 			}
 			return;
 		}
 		catch(Exception $e) {
 			$this->getPresenter()->flashMessage("Stala se neočekávaná chyba.", "error");
-			Nette\Diagnostics\Debugger::processException($e, TRUE);
-			//error_log($e->getTraceAsString());
+			Debugger::log($e, Debugger::EXCEPTION);
 			return;
 		}
 		$this->getPresenter()->redirect("this");

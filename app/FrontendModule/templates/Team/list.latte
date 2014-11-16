@@ -6,13 +6,13 @@
 		<p>Podrobnou statistiku celé hry najdete na <a href="{plink Stats:}">samostatné stránce</a>.</p>
 		{if $available}
 			<p>Statistiky nemusí být zcela aktuální. Údaje pravidelně přepočítáváme.</p>
-			{widget results}
+			{control results}
 		{else}
 			<p>Momentálně nedostupné. Vyčkejte prosím chvíli.</p>
 		{/if}
 	</div>
 	<div class="main-block">
 		<h1>Seznam týmů</h1>
-		{widget teamList}
+		{control teamList}
 	</div>
 {/block}

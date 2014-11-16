@@ -17,12 +17,12 @@ final class Helpers {
      * It returns the callback for helper with given name
      * @param string $helper The name of helper.
      * @return callback The callback to the helper.
-     * @throws NullPointerException if the $helper is empty.
+     * @throws InvalidArgumentException if the $helper is empty.
      * @throws DataNotFoundException if the helper does not exist.
      */
     public static function getHelper($helper) {
 	if (empty($helper)) {
-	    throw NullPointerException("helper");
+	    throw new InvalidArgumentException("helper argument is empty");
 	}
 	switch ($helper) {
 	    case "date": return array(get_class(), 'dateFormatHelper');

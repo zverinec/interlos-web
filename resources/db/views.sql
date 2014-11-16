@@ -111,7 +111,7 @@ CREATE VIEW `view_task_result` AS
 			IF(
 				`answer`.`inserted` IS NULL,
 				0,
-				1000-(SELECT COUNT(`help`.`id_answer`) FROM `view_correct_answer` AS `help` WHERE `help`.`inserted` < `answer`.`inserted` AND `help`.`id_task` = `view_task`.`id_task`)
+				1000-(SELECT COUNT(`help`.`id_answer`) FROM `view_correct_answer` AS `help` WHERE `help`.`inserted` <= `answer`.`inserted` AND `help`.`id_answer` < `answer`.`id_answer`  AND `help`.`id_task` = `view_task`.`id_task`)
 			)
 		) AS `score`
 	FROM (`view_team` AS `team`, `view_avaiable_task` AS `view_task`)

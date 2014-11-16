@@ -8,7 +8,7 @@ Maintenance: Jan Drábek <me@jandrabek.cz>
 Requirements
 ------------
 
-- PHP >= 5.3
+- PHP >= 5.5
 - PHP in congfiguration to run Nette framework, see http://doc.nette.org/cs/requirements
 - MySQL (MariaDB) database
 

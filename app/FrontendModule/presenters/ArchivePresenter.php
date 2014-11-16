@@ -13,5 +13,11 @@ class ArchivePresenter extends BasePresenter
 	public function renderYear2011() {
 		$this->setPageTitle("2011");
 	}
+	public function renderYear2012() {
+		$this->setPageTitle("2012");
+	}
+	public function renderYear2013() {
+		$this->setPageTitle("2013");
+	}
 
 }

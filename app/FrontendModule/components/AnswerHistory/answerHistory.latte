@@ -8,11 +8,11 @@
 	{foreach $history AS $answer}
 	<tr{if isset($correct[$answer->id_answer])} class="correct"{/if}>
 		<td>{$answer->id_answer}</td>
-		<td>{$tasks[$answer->id_task]->code_name}</td>
+		<td>{$tasks[$answer->id_task]->whole_name}</td>
 		<td>{$answer->inserted|timeOnly}</td>
 		<td class="code">{$answer->code}</td>
 	</tr>
 	{/foreach}
 </table>
 
-{widget paginator}
+{control paginator}

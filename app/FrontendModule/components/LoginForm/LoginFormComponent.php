@@ -1,4 +1,6 @@
 <?php
+use Tracy\Debugger;
+
 class LoginFormComponent extends BaseComponent
 {
 
@@ -19,7 +21,7 @@ class LoginFormComponent extends BaseComponent
 	}
 	catch(Exception $e) {
 	    $this->getPresenter()->flashMessage("Stala se neočekávaná chyba.", "error");
-	    Nette\Diagnostics\Debugger::processException($e);
+		Debugger::log($e, Debugger::EXCEPTION);
 	    return;
 	}
 	$this->getPresenter()->redirect("Team:default");

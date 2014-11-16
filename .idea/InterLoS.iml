@@ -6,9 +6,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/dg/texy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dibi/dibi" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jandrabek/nette-mailpanel" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/nette/nette" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nette/nette-minified" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/others/eskymo" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -17,20 +16,30 @@
         <CLASSES>
           <root url="file://$MODULE_DIR$/vendor/jandrabek/nette-mailpanel" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
-          <root url="file://$MODULE_DIR$/vendor/nette/nette" />
+          <root url="file://$MODULE_DIR$/vendor/nette/nette-minified" />
           <root url="file://$MODULE_DIR$/vendor/others/eskymo" />
           <root url="file://$MODULE_DIR$/vendor/dg/texy" />
-          <root url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
           <root url="file://$MODULE_DIR$/vendor/dibi/dibi" />
         </CLASSES>
         <SOURCES>
           <root url="file://$MODULE_DIR$/vendor/jandrabek/nette-mailpanel" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
-          <root url="file://$MODULE_DIR$/vendor/nette/nette" />
+          <root url="file://$MODULE_DIR$/vendor/nette/nette-minified" />
           <root url="file://$MODULE_DIR$/vendor/others/eskymo" />
           <root url="file://$MODULE_DIR$/vendor/dg/texy" />
-          <root url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
           <root url="file://$MODULE_DIR$/vendor/dibi/dibi" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES>
+          <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/vendor/nette/nette-minified/nette.phar" />
+        </CLASSES>
+        <SOURCES>
+          <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/vendor/nette/nette-minified/nette.phar" />
         </SOURCES>
       </library>
     </orderEntry>

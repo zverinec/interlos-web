@@ -3,8 +3,8 @@
 namespace FrontModule;
 
 use Nette,
-	Model,
-	Nette\Diagnostics\Debugger;
+	Model;
+use Tracy\Debugger;
 
 
 /**

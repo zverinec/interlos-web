@@ -1,4 +1,6 @@
 <?php
+use Tracy\Debugger;
+
 /**
  * This form provides inserting and updating of the team.
  *
@@ -61,7 +63,7 @@ class TeamFormComponent extends BaseComponent {
 		}
 		catch (DibiDriverException $e) {
 			$this->getPresenter()->flashMessage("Chyba při práci s databází.", "error");
-			Nette\Diagnostics\Debugger::processException($e);
+			Debugger::log($e, Debugger::EXCEPTION);
 			return;
 		}
 
@@ -96,15 +98,15 @@ class TeamFormComponent extends BaseComponent {
 		}
 		catch (Nette\InvalidArgumentException $e) {
 			$this->getPresenter()->flashMessage("Tým musí mít alespoň jednoho člena.", "error");
-			Nette\Diagnostics\Debugger::processException($e);
+			Debugger::log($e, Debugger::EXCEPTION);
 		}
 		catch (DuplicityException $e) {
 			$this->getPresenter()->flashMessage("Daný tým již existuje.", "error");
-			Nette\Diagnostics\Debugger::processException($e);
+			Debugger::log($e, Debugger::EXCEPTION);
 		}
 		catch (DibiDriveException $e) {
 			$this->getPresenter()->flashMessage("Chyba při práci s databází.", "error");
-			Nette\Diagnostics\Debugger::processException($e);
+			Debugger::log($e, Debugger::EXCEPTION);
 		}
 	}
 

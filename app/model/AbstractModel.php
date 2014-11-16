@@ -1,4 +1,6 @@
 <?php
+use Tracy\Debugger;
+
 abstract class AbstractModel implements InterlosModel {
 
 	private $connection;
@@ -30,7 +32,7 @@ abstract class AbstractModel implements InterlosModel {
 					))->execute();
 		}
 		catch(Exception $e) {
-			Nette\Diagnostics\Debugger::log($e);
+			Debugger::log($e, Debugger::EXCEPTION);
 		}
 	}
 
