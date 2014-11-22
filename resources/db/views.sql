@@ -151,7 +151,7 @@ CREATE VIEW `view_chat_root` AS
 	FROM `chat` AS `p`
 	LEFT JOIN `chat` AS `r` ON `r`.`id_parent` =  `p`.`id_chat`
 	WHERE `p`.`id_parent` IS NULL AND `p`.`id_team` IN (SELECT `id_team` FROM `view_team`)
-	GROUP BY `p`.`id_chat`, `r`.`id_parent;
+	GROUP BY `p`.`id_chat`, `r`.`id_parent`;
 
 DROP VIEW IF EXISTS `view_chat`;
 CREATE VIEW `view_chat` AS
