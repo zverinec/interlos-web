@@ -8,7 +8,11 @@
 			<p>Statistiky nemusí být zcela aktuální. Údaje pravidelně přepočítáváme.</p>
 			{control results}
 		{else}
-			<p>Momentálně nedostupné. Vyčkejte prosím chvíli.</p>
+			{if !Interlos::areStatsShown()}
+				<p><strong>Pořadí týmů není v posledních 30 minutách hry k dispozici.</strong></p>
+			{else}
+				<p>Momentálně nedostupné. Vyčkejte prosím chvíli.</p>
+			{/if}
 		{/if}
 	</div>
 	<div class="main-block">

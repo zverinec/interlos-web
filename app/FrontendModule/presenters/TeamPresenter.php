@@ -24,6 +24,8 @@ class TeamPresenter extends BasePresenter
 			\TeamsModel::OTHER => "Ostatní",
 		);
 		$this->check("results");
+
+		$this->template->available = $this->template->available && \Interlos::areStatsShown();
 	}
 
 	public function actionRegistration()

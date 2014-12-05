@@ -7,6 +7,10 @@ class StatsPresenter extends BasePresenter
 	public function renderDefault() {
 		$this->setPageTitle("Podrobné výsledky");
 		$this->check("scoreList");
+		if (!\Interlos::areStatsShown()) {
+			$this->flashMessage('Pořadí týmů není v posledních 30 minutách hry k dispozici', 'error');
+		}
+		$this->template->available = $this->template->available && \Interlos::areStatsShown();
 	}
 
 	protected function createComponentScoreList($name) {

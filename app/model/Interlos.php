@@ -114,8 +114,18 @@ class Interlos {
         else {
             return strtotime(Interlos::getCurrentYear()->game_start) < self::getCurrentTime();
         }
-
     }
+
+	public static function areStatsShown() {
+		if (self::loadAdminProperty("game-show-stats") !== null) {
+			return self::loadAdminProperty("game-show-stats");
+		}
+		else {
+			// Disable statistics 30 minutes before end of game
+			return (self::getCurrentTime() < (strtotime(Interlos::getCurrentYear()->game_end) - (30 * 60)))
+				|| (self::getCurrentTime() > strtotime(Interlos::getCurrentYear()->game_end));
+		}
+	}
 
     public static function isRegistrationActive() {
         return self::isRegistrationStarted() && !self::isRegistrationEnd();
