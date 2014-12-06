@@ -25,7 +25,7 @@ class TeamPresenter extends BasePresenter
 		);
 		$this->check("results");
 
-		$this->template->available = $this->template->available && \Interlos::areStatsShown();
+		$this->template->available = $this->template->available && (\Interlos::areStatsShown() || \Interlos::isAdminAccess());
 	}
 
 	public function actionRegistration()
