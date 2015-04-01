@@ -158,4 +158,4 @@ table#score-stats { margin: 0px; }
 #answer-history .correct td.code { background-color: rgb(26,110,0); color: white; }
 
 /* leftovers */
-.opvk { text-align:center; margin-top: 30px; }
+.opvk { text-align:center; margin-top: 30px; margin-bottom: 30px; margin-left: 20px; margin-right: 20px; }
