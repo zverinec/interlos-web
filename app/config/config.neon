@@ -12,7 +12,9 @@ parameters:
 	keys:
 		cron: hesloprocron
 		admin: hesloproadmin
-	infoPage: http://interlos.yavanna.cz/
+	infoPage: //interlos.yavanna.cz/
+	securedDomains:
+		- interlos.fi.muni.cz
 
 dibi:
 	driver: mysql

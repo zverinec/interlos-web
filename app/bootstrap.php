@@ -3,6 +3,10 @@
 # include_once __DIR__ . '/templates/.maintenance.phtml';
 
 # Use this when problem in time of contest occures
+use Nette\Application\Routers\Route;
+use Nette\DI\Container;
+use Nette\Http\Request;
+
 $problem = FALSE; // Set to true and add whitelisted IPs
 $remoteIP = $_SERVER['REMOTE_ADDR'];
 $allowedIP = array("127.0.0.0", "::1");
@@ -37,7 +41,16 @@ $configurator->onCompile[] = function ($configurator, $compiler) {
 	$compiler->addExtension('dibi', new \Dibi\Bridges\Nette\DibiExtension22());
 };
 
+/** @var Container $container */
 $container = $configurator->createContainer();
+
+// Turn on HTTPS when on proper domain
+$securedDomains = $container->parameters['securedDomains'];
+/** @var Request $httpRequest */
+$httpRequest = $container->getByType('Nette\\Http\\Request');
+if (in_array($httpRequest->getUrl()->getHost(), $securedDomains, TRUE)) {
+	Route::$defaultFlags = Route::SECURED;
+}
 
 // Setup router
 $container->router[] = FrontModule::createRouter("Front");
