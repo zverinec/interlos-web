@@ -40,7 +40,7 @@ if(new DateTime() >= new DateTime("2015-12-06 18:00:00")) {
 			<li><a href="P7-record.zip">P7-record.zip</a> (P7 ICAO rozhlas)</li>
       			<li><a href="P8-vstup.txt">P8-vstup.txt</a> (P8 Tramtárie)</li>
       			<li><a href="P9-spizy.txt">P9-spizy.txt</a> (P9 Špízy)</li>
-			<li><a href="http://interlos.yavanna.cz/gag/">http://interlos.yavanna.cz/gag/</a> (L9 LosGAG)</li>
+			<li><a href="LosGagMemes.zip">Vybrané memečka nahraná soutěžícími v rámci úkolu</a> (L9 LosGAG)</li>
 		</ul>
 		<div class="hr">&nbsp;</div>
 		<p>Veškeré problémy s úlohami a odevzdávacím systémem hlaste z e-mailové adresy uvedené v profilu týmu na adresu <a href="mailto:interlos@fi.muni.cz"><span class="bold">interlos@fi.muni.cz</span></a>. V předmětu e-mailu musí být uvedeno ID týmu, který najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>

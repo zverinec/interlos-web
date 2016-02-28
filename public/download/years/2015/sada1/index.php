@@ -40,7 +40,7 @@ if(new DateTime() >= new DateTime("2015-12-06 15:00:00")) {
 			<li><a href="P3-hry.txt">P3-hry.txt</a> (P3 Šibenice)</li>
       			<li><a href="P3-slovnik.txt">P3-slovnik.txt</a> (P3 Šibenice)</li>
 			<li><a href="http://interlos2.yavanna.cz:10007/">http://interlos2.yavanna.cz:10007/</a> (L3 Shift Game)</li>
-			<li><a href="http://interlos.yavanna.cz/generator/">http://interlos.yavanna.cz/generator/</a> (S1 Šifra na míru)</li>
+			<li><a href="../generator/">Generátor</a> (S1 Šifra na míru)</li>
 		</ul>
 		<div class="hr">&nbsp;</div>
 		<p>Veškeré problémy s úlohami a odevzdávacím systémem hlaste z e-mailové adresy uvedené v profilu týmu na adresu <a href="mailto:interlos@fi.muni.cz"><span class="bold">interlos@fi.muni.cz</span></a>. V předmětu e-mailu musí být uvedeno ID týmu, který najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>
