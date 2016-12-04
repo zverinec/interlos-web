@@ -27,34 +27,39 @@ class AnswersModel extends AbstractModel {
 		$this->checkEmptiness($team, "team");
 		$this->checkEmptiness($task, "task");
 		//$this->checkEmptiness($code, "code");
-		$this->getConnection()->begin();
-		// Correct answers of the team
-		$correctAnswers = $this->findAllCorrect($team)
+		try {
+			$this->getConnection()->begin();
+			// Correct answers of the team
+			$correctAnswers = $this->findAllCorrect($team)
 				->fetchPairs("id_answer", "id_answer");
-		// Last answer has to be older than 30 seconds
-		$query = $this->findAll()
+			// Last answer has to be older than 30 seconds
+			$query = $this->findAll()
 				->where("[id_team] = %i", $team)
 				->where("[inserted] > NOW() - INTERVAL 30 SECOND");
-		if (!empty($correctAnswers)) {
-			$query->where("[id_answer] NOT IN %l", $correctAnswers);
-		}
-		$lastInTimeLimit = $query->count();
-		// Check it
-		if ($lastInTimeLimit != 0) {
-			$this->log($team, "solution_tried", "The team tried to insert the solution of task [$task] with code [$code].");
+			if (!empty($correctAnswers)) {
+				$query->where("[id_answer] NOT IN %l", $correctAnswers);
+			}
+			$lastInTimeLimit = $query->count();
+			// Check it
+			if ($lastInTimeLimit != 0) {
+				$this->log($team, "solution_tried", "The team tried to insert the solution of task [$task] with code [$code].");
+				$this->getConnection()->commit();
+				throw new Nette\InvalidStateException("There is a wrong answer in recent 30 seconds.", self::ERROR_TIME_LIMIT);
+			}
+			// Insert a new answer
+			$return = $this->getConnection()->insert("answer", array(
+				"id_team" => $team,
+				"id_task" => $task,
+				"code" => $code,
+				"inserted" => new DateTime()
+			))->execute();
+			// Log the action
+			$this->log($team, "solution_inserted", "The team successfuly inserted the solution of task [$task] with code [$code].");
 			$this->getConnection()->commit();
-			throw new Nette\InvalidStateException("There is a wrong answer in recent 30 seconds.", self::ERROR_TIME_LIMIT);
+		} catch (Exception $exception) {
+			$this->getConnection()->rollback();
+			throw $exception;
 		}
-		// Insert a new answer
-		$return = $this->getConnection()->insert("answer", array(
-				"id_team"	=> $team,
-				"id_task"	=> $task,
-				"code"	=> $code,
-				"inserted"	=> new DateTime()
-				))->execute();
-		// Log the action
-		$this->log($team, "solution_inserted", "The team successfuly inserted the solution of task [$task] with code [$code].");
-		$this->getConnection()->commit();
 		return $return;
 	}
 
