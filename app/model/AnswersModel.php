@@ -27,6 +27,7 @@ class AnswersModel extends AbstractModel {
 		$this->checkEmptiness($team, "team");
 		$this->checkEmptiness($task, "task");
 		//$this->checkEmptiness($code, "code");
+		$this->getConnection()->begin();
 		// Correct answers of the team
 		$correctAnswers = $this->findAllCorrect($team)
 				->fetchPairs("id_answer", "id_answer");
@@ -41,6 +42,7 @@ class AnswersModel extends AbstractModel {
 		// Check it
 		if ($lastInTimeLimit != 0) {
 			$this->log($team, "solution_tried", "The team tried to insert the solution of task [$task] with code [$code].");
+			$this->getConnection()->commit();
 			throw new Nette\InvalidStateException("There is a wrong answer in recent 30 seconds.", self::ERROR_TIME_LIMIT);
 		}
 		// Insert a new answer
@@ -52,6 +54,7 @@ class AnswersModel extends AbstractModel {
 				))->execute();
 		// Log the action
 		$this->log($team, "solution_inserted", "The team successfuly inserted the solution of task [$task] with code [$code].");
+		$this->getConnection()->commit();
 		return $return;
 	}
 
