@@ -1,0 +1,31 @@
+'
+INPUT ';' ; i
+'; i = input(42);
+'
+FOR x = 1 TO 3
+LOSLET x - 1 ; x
+LOSLET i - 2 ; i
+IF i = 1 THEN 12
+IF i = 2 THEN 20
+NEXT x
+'; while(i>1){ i = i-2; }if(i==1){'
+LOSLET ';Hello='; h
+LOSLET LFT(h, 1) + LFT(h, 2) + LFT(h, 3) + LFT(h, 4) + LFT(h, 5) ; h
+'; Hello=
+'World
+';
+'
+IF i = 1 THEN 26
+';}else{
+'
+LOSLET ';World='; h
+LOSLET LFT(h, 1) + LFT(h, 2) + LFT(h, 3) + LFT(h, 4) + LFT(h, 5) ; h
+'; Hello=
+'Hello
+';}
+'
+PRINT h
+';print(Hello);END=
+'\n
+';
+END
