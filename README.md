@@ -64,14 +64,24 @@ Cron example
 Running the contest
 -------------------
 
+0. Notify infrastructure operators about future usage (describe event, estimate number of people, describe amount of resources, request contact to technican which will be available)
 1. Create series of task (ciphers, logical, programming) in table `serie` (fill `to_show` properly, to prevent answering before release whole series)
 2. Populate table `task` with correct answers. Provide codes in upper case (just for case)
-3. Update config - set page with in game informations which will be shown below the header after the game beginning.š
-4. Run CRON jobs (generating statistics)
+3. Update config - set page with in game information which will be shown below the header after the game beginning.
+4. Udpate page with proper URLs where the files are hosted.
+5. Run CRON job (generating statistics)
    /cron/database?admin-key=hesloproadmin OR /cron/database?cron-key=hesloprocron NEVER BOTH OF THEM
-5. Run it! Test answering with testing team and then remove the answer.
-6. Monitor server performance.
-7. Disable CRON jobs
+6. Run it! Test answering with testing team and then remove the answer.
+7. Monitor server performance.
+8. Disable CRON jobs
+
+Performance
+-----------
+
+Typical configuration before 2014 was 4 GB RAM, 4 CPUs which made the game totally ok for 150 teams.
+However there was a higher peak at game start due high IO.
+
+In 2016 we used configuration with 6 GB RAM and 6 CPUs (just beacuse our limit have allowed that) and it was totally ok for 200 teams, not even high peak was visible at game start. 
 
 File hosting
 ------------
@@ -111,3 +121,15 @@ Test:
 2. that PHP is running
 3. that you cannot access other files in directory by direct path
 4. that scripts works - renamess .htaccess in proper time (permission to the parent dir must be set correctly).
+
+
+Running the contest
+-------------------
+
+1. Disable CRON job.
+2. Manually trigger (last) update of statistics.
+3. Update homepage with results.
+4. Commit whole year directory (archive also in-game information to the root of this folder; static html files recommended)
+5. Save table with full statistics into static HTML (see previous yearXXXX).
+6. Save list of teams into static HTML (see previous teamsYearXXXX).
+7. Add entry to archive page about the year.
