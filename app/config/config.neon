@@ -12,7 +12,7 @@ parameters:
 	keys:
 		cron: hesloprocron
 		admin: hesloproadmin
-	infoPage: //interlos.yavanna.cz/
+	infoPage: http://los.honzamrazek.cz/iframe/
 	securedDomains:
 		- interlos.fi.muni.cz
 
