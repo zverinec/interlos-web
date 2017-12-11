@@ -1,29 +1,56 @@
-from PIL import Image
+#!/usr/bin/env python3
 
-ca = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+# run as ./P3-solution.py in the directory with the input files
+# (or python3 P3-solution.py)
 
-im = Image.open("in.png")
-w = im.width
-h = im.height
 
-def step(x, y):
-    # compute rule index
-    num = 0
+def load(file):
+    rules = {}
+    with open(file, 'r') as h:
+        rules_done = False
+        for line in h.readlines():
+            if line.strip() == "":
+                rules_done = True
+                continue
+            if not rules_done:
+                l, r = line.split(':')
+                st_from, char_from = l.split(',')
+                st_to, char_to, direct = r.split(',')
+                rules[(int(st_from.strip()), char_from.strip())] = \
+                        (int(st_to.strip()), char_to.strip(), direct.strip())
+            else:
+                return (rules, list(line.strip()))
+
+
+def sim(rules, tape):
+    seen = set()
+
+    p = 0
+    st = 0
     i = 0
-    for dy in range(-1, 2):
-        for dx in range(-1, 2):
-            g = 0 if im.getpixel(( (x + dx)%w , (y + dy)%h ))[0] == 0 else 1
-            num += (2 ** i) * g;
-            i += 1
-    # apply rule
-    return (0, 0, 0) if ca[num] == 0 else (255, 255, 255)
+    while True:
+        v = tape[p]
+        if (st, v) not in rules:
+            print("end after %d iterations (%d, %s)" % (i, st, v))
+            return ''.join(tape)
+        st, w, d = rules[st, v]
+        tape[p] = w
+        if d == 'L':
+            p -= 1
+        else:
+            if p + 1 == len(tape):
+                tape.append('_')
+            p += 1
+        conf = (st, p, ''.join(tape))
+        if conf in seen:
+            print("fix after %d iterations" % i)
+            return ''.join(tape)
+        seen.add(conf)
+        i += 1
 
-for i in range(10): # simulate few steps
-    nim = Image.new("RGB", (w, h), "white")
-    for y in range(w):
-        for x in range(h):
-            nim.putpixel((x, y), step(x, y))
-    im = nim
-    im.save("out_"+str(i)+".png")
+if __name__ == "__main__":
+    r1, i1 = load("P3-sekvence-a.txt")
+    print(sim(r1, i1))
 
-im.save("out.png")
+    r2, i2 = load("P3-sekvence-b.txt")
+    print(sim(r2, i2))
