@@ -38,7 +38,7 @@ if(new DateTime() >= new DateTime("2017-12-10 20:00:59")) {
 		<p>Všechna (textová řešení) v jednom PDF souboru: <a href="reseni.pdf">reseni.pdf</a></p>
 		<h2>Přiložené soubory</h2>
 		<ul>
-			<li><a href="P1s-solution.php">P1s-solution.php</a> (P1 Losí utkání)</li>
+			<li><a href="https://github.com/zverinec/interlos-web/blob/master/public/download/years/2017/reseni/P1s-solution.php">P1s-solution.php</a> (P1 Losí utkání)</li>
 			<li><a href="P2s-solution.py">P2s-solution.py</a> (P2 Los s ručením omezeným)</li>
 			<li><a href="P3s-solution.py">P3s-solution.py</a> (P3 Sekvence)</li>
 			<li><a href="P4s-solution.py">P4s-solution.py</a> (P4 Galton)</li>
