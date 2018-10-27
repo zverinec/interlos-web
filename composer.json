@@ -12,12 +12,9 @@
 		}
 	],
 	"require": {
-		"nette/nette-minified": "2.2.*",
+		"nette/nette": "2.2.*",
 		"dibi/dibi": "2.2.*",
-		"dg/texy": "2.6.*",
+		"texy/texy": "2.6.*",
 		"jandrabek/nette-mailpanel": "3.2"
-	},
-	"require-dev" : {
-		"nette/nette": "2.2.*"
 	}
 }
