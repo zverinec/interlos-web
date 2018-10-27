@@ -3,7 +3,7 @@ parameters:
 	debugMode: false
 
 dibi:
-	driver: mysql
+	driver: mysqli
 	charset: utf8
 	host: localhost
 	database: interlos
