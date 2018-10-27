@@ -29,7 +29,7 @@ Installation
 4. Copy /app/config/config.local.neon.example to /app/config/config.local.neon and overwrite parameters of config.neon (DB credentials...)
 5. Make directories /temp and /log writable
 6. Create database schema executing /resources/db/tables.sql and /resources/db/views.sql
-7. Create temporary tables
+7. Create temporary tables (by running CRON manually)
 
 
 Config
