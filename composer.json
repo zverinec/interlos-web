@@ -15,7 +15,7 @@
 		"nette/nette": "2.4.*",
 		"dibi/dibi": "4.0.*",
 		"texy/texy": "2.9.*",
-		"nextras/mail-panel": "2.4",
+		"nextras/mail-panel": "^2.4",
 		"contributte/recaptcha": "^3.1"
 	}
 }

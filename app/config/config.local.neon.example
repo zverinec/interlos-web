@@ -11,3 +11,24 @@ dibi:
 	password: password
 	lazy: true
 	profiler: false
+
+# On development machine
+#tracy:
+#	bar:
+#		- Nextras\MailPanel\MailPanel(%tempDir%/mail-panel-latte)
+#
+#services:
+#	nette.mailer:
+#		class: Nette\Mail\IMailer
+#		factory: Nextras\MailPanel\FileMailer(%tempDir%/mail-panel-mails)
+
+# On production
+
+mail:
+	smtp: true                  # switches to SmtpMailer from SendmailMailer
+	host: smtp.example.com
+	port: 25
+	username: foo
+	password: bar
+	secure:                     # allowed values ssl, tls., null
+	timeout: 100

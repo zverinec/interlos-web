@@ -37,6 +37,7 @@ Config
 - Set mails which are used for sending mail
 - Set cron and admin keys (randomly generated long password)
 - Set database credentials
+- Set smtp delivery and test registration e-mails
 
 
 Creating new contest

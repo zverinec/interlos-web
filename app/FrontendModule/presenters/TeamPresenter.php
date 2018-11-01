@@ -1,6 +1,8 @@
 <?php
 namespace FrontModule;
 
+use Nette\Mail\IMailer;
+
 class TeamPresenter extends BasePresenter
 {
 
@@ -47,7 +49,7 @@ class TeamPresenter extends BasePresenter
 
 	protected function createComponentTeamForm($name)
 	{
-		$comp = new \TeamFormComponent($this->getUser());
+		$comp = new \TeamFormComponent($this->getUser(), $this->context->getByType(IMailer::class));
 		$comp->setMailParameters($this->context->parameters['mail']);
 		return $comp;
 	}

@@ -2,6 +2,7 @@
 
 use Dibi\DriverException;
 use Nette\Forms\Form;
+use Nette\Mail\IMailer;
 use Nette\Security\User;
 use Tracy\Debugger;
 
@@ -19,9 +20,13 @@ class TeamFormComponent extends BaseComponent {
 	/** @var User */
 	private $user;
 
-	public function __construct(User $user) {
+	/** @var IMailer */
+	private $mailer;
+
+	public function __construct(User $user, IMailer $mailer) {
 		parent::__construct();
 		$this->user = $user;
+		$this->mailer = $mailer;
 	}
 
 	public function setMailParameters($params) {
@@ -63,11 +68,11 @@ class TeamFormComponent extends BaseComponent {
 			$template->team = $values["team_name"];
 			$template->id = $insertedTeam;
 			$mail = new Nette\Mail\Message();
-			$mail->setBody($template);
+			$mail->setHtmlBody($template->renderToString());
 			$mail->addTo($values["email"]);
 			$mail->setFrom($this->mailParams['info'], $this->mailParams['name']);
 			$mail->setSubject("Interlos - registrace");
-			//$mail->send();
+			$this->mailer->send($mail);
 			// Redirect
 			$this->insertCompetitorsFromValues($insertedTeam, $values);
 			$this->getPresenter()->flashMessage("Tým '".$values["team_name"]."' byl úspěšně zaregistrován.", "success");
