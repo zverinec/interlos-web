@@ -151,3 +151,9 @@ Then you have to manually install database via `http://${IP}:8080` (see `docker-
 Afterwards the application is available via `https://${IP}` and `http://${IP}` (should be redirected immediately).
 
 Database is persistent between up & downs and stored in `.mysql` directory.
+
+Various notes
+-------------
+
+MySQL database handles timestamp and datetime types differently (timestamp is stored in UTC, datetime "as is") then translation to
+current connection timezone is done see (https://www.eversql.com/mysql-datetime-vs-timestamp-column-types-which-one-i-should-use/).
