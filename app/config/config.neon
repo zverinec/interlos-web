@@ -19,10 +19,10 @@ parameters:
 dibi:
 	driver: mysqli
 	charset: utf8
-	host: localhost
+	host: db
 	database: interlos_production
-	user: root
-	password:
+	user: user
+	password: password
 	lazy: true
 	profiler: false
 

@@ -1,13 +1,13 @@
 parameters:
-	productionMode: true
-	debugMode: false
+	productionMode: false
+	debugMode: true
 
 dibi:
 	driver: mysqli
 	charset: utf8
-	host: localhost
-	database: interlos
-	user: root
-	password:
+	host: db
+	database: interlos_production
+	user: user
+	password: password
 	lazy: true
 	profiler: false

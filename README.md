@@ -133,3 +133,20 @@ Running the contest
 5. Save table with full statistics into static HTML (see previous yearXXXX).
 6. Save list of teams into static HTML (see previous teamsYearXXXX).
 7. Add entry to archive page about the year.
+
+
+Developing locally
+------------------
+
+Use following setup for docker composition as we need real Apache and MySQL (as PHP built-in-server doesn't handle HTTPS, and with `secure` cookie flag you cannot use the system).
+
+```bash
+$ cd .                  # project root
+$ nano .env             # IP address to bind (docker-machine vs native docker!)
+$ docker-compose up
+```
+
+Then you have to manually install database via `http://${IP}:8080` (see `docker-compose.yml` for credentials).
+Afterwards the application is available via `https://${IP}` and `http://${IP}` (should be redirected immediately).
+
+Database is persistent between up & downs and stored in `.mysql` directory.
