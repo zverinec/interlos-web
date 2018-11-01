@@ -12,7 +12,9 @@ used colors:
 body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-size: 90%; line-height: 1.4em; color: rgb(45,22,15); background-color: rgb(255,255,255); text-align: left; margin: 0; padding: 0; height: 100%; background-image: url("../images/background.png"); background-repeat: repeat; }
 .root { position: absolute; min-height: 100%; min-width: 100%; padding: 0; margin: 0; }
 @media only screen and (min-width: 500px) {
-	text-align: justify;
+	p {
+		text-align: justify;
+	}
 }
 
 .cleaner-both { display: block; height: 0; overflow: hidden; clear: both; }
@@ -123,6 +125,8 @@ ul.error { list-style: none; background: none; padding: 0px; }
 
 
 /* extra */
+.large-text { font-size: 1.5em; }
+.inline-image { display: inline; }
 div#clock { float: right; }
 div#logos a { margin: 30px; margin-left: 20px; margin-right: 20px; display: block; float: left; }
 table#overview { margin: 0px; min-width: auto; display: block; }
