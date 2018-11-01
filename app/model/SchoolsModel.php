@@ -10,6 +10,14 @@ class SchoolsModel extends AbstractModel {
 		return $this->getConnection()->dataSource("SELECT * FROM [school]");
 	}
 
+	public function getByName($name) {
+		$row = $this->findAll()->where('[name] = %s', $name)->fetch();
+		if ($row) {
+			return $row->id_school;
+		}
+		return null;
+	}
+
 	public function insert($name) {
 		$this->checkEmptiness($name, "name");
 		$this->getConnection()->insert("school", array(
