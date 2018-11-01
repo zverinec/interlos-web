@@ -1,31 +1,64 @@
 DROP VIEW IF EXISTS `view_current_year`;
 CREATE VIEW `view_current_year` AS
-    SELECT *
-    FROM `year`
-    ORDER BY `id_year` DESC
-    LIMIT 1;
+		SELECT *
+		FROM `year`
+		ORDER BY `id_year` DESC
+		LIMIT 1;
 
 DROP VIEW IF EXISTS `view_team`;
 CREATE VIEW `view_team` AS
-    SELECT `team`.*
-    FROM `team`
-    INNER JOIN `view_current_year` USING(`id_year`)
-    ORDER BY `category`, `name`;
+		SELECT
+			`team`.`id_team`,
+			`team`.`id_year`,
+			`team`.`name`,
+			`team`.`password`,
+			`team`.`category`,
+			`team`.`email`,
+			`team`.`inserted`,
+			CAST(COALESCE (`team`.`updated`, `team`.`inserted`) AS DATETIME) AS `updated` -- This bypass the problematic default value in views (zeros instead of CURRENT_TIMESTAMP) which causes problem on temporary table creation
+		FROM `team`
+		INNER JOIN `view_current_year` USING(`id_year`)
+		ORDER BY `category`, `name`;
 
 DROP VIEW IF EXISTS `view_serie`;
 CREATE VIEW `view_serie` AS
-    SELECT `serie`.*
-    FROM `serie`
-    INNER JOIN `view_current_year` USING(`id_year`);
+		SELECT
+			`serie`.`id_serie`,
+			`serie`.`id_year`,
+			`serie`.`to_show`,
+			`serie`.`text`,
+			`serie`.`inserted`,
+			CAST(COALESCE (`serie`.`updated`, `serie`.`inserted`) AS DATETIME) AS `updated` -- This bypass the problematic default value in views (zeros instead of CURRENT_TIMESTAMP) which causes problem on temporary table creation
+		FROM `serie`
+		INNER JOIN `view_current_year` USING(`id_year`);
 
 DROP VIEW IF EXISTS `view_competitor`;
 CREATE VIEW `view_competitor` AS
-SELECT `competitor`.`id_competitor` AS `id_competitor`,`competitor`.`id_team` AS `id_team`,`competitor`.`id_school` AS `id_school`,`competitor`.`name` AS `name`,`competitor`.`inserted` AS `inserted`,`competitor`.`updated` AS `updated`,`school`.`name` AS `school_name`,`team`.`name` AS `team_name`,`team`.`category` AS `category` from ((`competitor` join `team` on((`competitor`.`id_team` = `team`.`id_team`))) left join `school` on((`competitor`.`id_school` = `school`.`id_school`))) order by `team`.`category`,`team`.`name`,`competitor`.`name`;
+	SELECT
+		`competitor`.`id_competitor` AS `id_competitor`,
+		`competitor`.`id_team` AS `id_team`,
+		`competitor`.`id_school` AS `id_school`,
+		`competitor`.`name` AS `name`,
+		`competitor`.`inserted` AS `inserted`,
+		`competitor`.`updated` AS `updated`,
+		`school`.`name` AS `school_name`,
+		`team`.`name` AS `team_name`,
+		`team`.`category` AS `category`
+	FROM ((`competitor` JOIN `team` ON ((`competitor`.`id_team` = `team`.`id_team`)))
+	LEFT JOIN `school` ON ((`competitor`.`id_school` = `school`.`id_school`)))
+	ORDER BY `team`.`category`,`team`.`name`,`competitor`.`name`;
 
 DROP VIEW IF EXISTS `view_task`;
 CREATE VIEW `view_task` AS
 	SELECT
-		`task`.*,
+		`task`.`id_task`,
+		`task`.`id_serie`,
+		`task`.`number`,
+		`task`.`type`,
+		`task`.`name`,
+		`task`.`code`,
+		`task`.`inserted`,
+		CAST(COALESCE (`task`.`updated`, `task`.`inserted`) AS DATETIME) AS `updated`, -- This bypass the problematic default value in views (zeros instead of CURRENT_TIMESTAMP) which causes problem on temporary table creation
 		CASE `task`.`type`
 			WHEN 'logical' THEN CONCAT('L',`task`.`number`)
 			WHEN 'programming' THEN CONCAT('P', `task`.`number`)
@@ -42,8 +75,8 @@ CREATE VIEW `view_task` AS
 	INNER JOIN `view_current_year` USING(`id_year`)
 	ORDER BY `task`.`id_serie`, `task`.`id_task`;
 
-DROP VIEW IF EXISTS `view_avaiable_task`;
-CREATE VIEW `view_avaiable_task` AS
+DROP VIEW IF EXISTS `view_available_task`;
+CREATE VIEW `view_available_task` AS
 	SELECT
 		`view_task`.*
 	FROM `view_task`
@@ -52,11 +85,17 @@ CREATE VIEW `view_avaiable_task` AS
 
 DROP VIEW IF EXISTS `view_answer`;
 CREATE VIEW `view_answer` AS
-    SELECT `answer`.*
-    FROM `answer`
-    INNER JOIN `task` USING(`id_task`)
-    INNER JOIN `serie` USING(`id_serie`)
-    INNER JOIN `view_current_year` USING(`id_year`);
+		SELECT
+			`answer`.`id_answer`,
+			`answer`.`id_team`,
+			`answer`.`id_task`,
+			`answer`.`code`,
+			`answer`.`inserted`,
+			CAST(COALESCE (`answer`.`updated`, `answer`.`inserted`) AS DATETIME) AS `updated` -- This bypass the problematic default value in views (zeros instead of CURRENT_TIMESTAMP) which causes problem on temporary table creation
+		FROM `answer`
+		INNER JOIN `task` USING(`id_task`)
+		INNER JOIN `serie` USING(`id_serie`)
+		INNER JOIN `view_current_year` USING(`id_year`);
 
 DROP VIEW IF EXISTS `view_correct_answer`;
 CREATE VIEW `view_correct_answer` AS
@@ -114,14 +153,21 @@ CREATE VIEW `view_task_result` AS
 				1000-(SELECT COUNT(`help`.`id_answer`) FROM `view_correct_answer` AS `help` WHERE `help`.`inserted` <= `answer`.`inserted` AND `help`.`id_answer` < `answer`.`id_answer`  AND `help`.`id_task` = `view_task`.`id_task`)
 			)
 		) AS `score`
-	FROM (`view_team` AS `team`, `view_avaiable_task` AS `view_task`)
+	FROM (`view_team` AS `team`, `view_available_task` AS `view_task`)
 	LEFT JOIN `view_correct_answer` AS `answer` USING(`id_task`, `id_team`);
 
 DROP VIEW IF EXISTS `view_total_result`;
 CREATE VIEW `view_total_result` AS
 	SELECT
-		`team`.*,
-		SUM(`view_task_result`.`score`) + IFNULL(`view_bonus`.`score`,0) - `view_penality`.`score` AS `score`
+		`team`.`id_team`,
+		`team`.`id_year`,
+		`team`.`name`,
+		`team`.`password`,
+		`team`.`category`,
+		`team`.`email`,
+		`team`.`inserted`,
+		CAST(COALESCE(`team`.`updated`, `team`.`inserted`) AS DATETIME) AS `updated`, -- This bypass the problematic default value in views (zeros instead of CURRENT_TIMESTAMP) which causes problem on temporary table creation
+		SUM(`view_task_result`.`score`) + IFNULL(SUM(`view_bonus`.`score`),0) - SUM(`view_penality`.`score`) AS `score`
 	FROM `view_team` AS `team`
 	LEFT JOIN `view_task_result` USING(`id_team`)
 	LEFT JOIN `view_penality` USING(`id_team`)
@@ -132,16 +178,16 @@ CREATE VIEW `view_total_result` AS
 DROP VIEW IF EXISTS `view_task_stat`;
 CREATE VIEW `view_task_stat` AS
 	SELECT
-		`view_avaiable_task`.*,
+		`view_available_task`.*,
 		MIN(`view_correct_answer`.`inserted`) AS `best_time`,
 		MAX(`view_correct_answer`.`inserted`) AS `worst_time`,
 		FROM_UNIXTIME(AVG(UNIX_TIMESTAMP(`view_correct_answer`.`inserted`))) AS `avg_time`,
 		COUNT(`view_correct_answer`.`id_answer`) AS `count_correct_answer`,
-		IFNULL((SELECT COUNT(`view_incorrect_answer`.`id_answer`) FROM `view_incorrect_answer` WHERE `view_incorrect_answer`.`id_task` = `view_avaiable_task`.`id_task` GROUP BY `view_incorrect_answer`.`id_task`),0) AS `count_incorrect_answer`
-	FROM `view_avaiable_task`
+		IFNULL((SELECT COUNT(`view_incorrect_answer`.`id_answer`) FROM `view_incorrect_answer` WHERE `view_incorrect_answer`.`id_task` = `view_available_task`.`id_task` GROUP BY `view_incorrect_answer`.`id_task`),0) AS `count_incorrect_answer`
+	FROM `view_available_task`
 	LEFT JOIN `view_correct_answer` USING(`id_task`)
-	GROUP BY `view_avaiable_task`.`id_task`
-	ORDER BY `view_avaiable_task`.`id_serie`, `view_avaiable_task`.`id_task`;
+	GROUP BY `view_available_task`.`id_task`
+	ORDER BY `view_available_task`.`id_serie`, `view_available_task`.`id_task`;
 
 DROP VIEW IF EXISTS `view_chat_root`;
 CREATE VIEW `view_chat_root` AS
