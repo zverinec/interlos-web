@@ -157,7 +157,8 @@ table#score-stats { margin: 0px; }
 #score-stats th { padding: 2px; }
 #score-stats td.team { font-weight: bolder; }
 #score-stats td.done { background-color: rgb(26,110,0); color: white; }
-#score-stats tr.line td { border-top: 1px dotted #dddddd; }
+#score-stats tr:nth-child(odd) { background: rgba(216, 181, 94, 0.15); }
+#score-stats tr:hover { background: rgba(216, 181, 94, 0.4); }
 #answer-history td.code { background-color: rgb(186,13,13); color: white;}
 #answer-history .correct td.code { background-color: rgb(26,110,0); color: white; }
 
