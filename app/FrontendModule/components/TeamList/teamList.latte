@@ -3,7 +3,11 @@
 	<ol>
 		{foreach $teamsInCategory AS $team}
 		<li>
-			<strong>{$team->name}</strong>:
+			{var $count = 0}
+			{if isset($competitors[$team->id_team])}
+				{var $count = count($competitors[$team->id_team])}
+			{/if}
+			<strong>{$team->name}</strong> ({if $count === 0}?{else}{$count}{/if}):
 				{if isset($competitors[$team->id_team])}
 					{foreach $competitors[$team->id_team] AS $competitor}
 						{$competitor->name} {if $competitor->school_name != NULL}({$competitor->school_name}){/if}{if !$iterator->isLast()}, {/if}
