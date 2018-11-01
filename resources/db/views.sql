@@ -167,7 +167,7 @@ CREATE VIEW `view_total_result` AS
 		`team`.`email`,
 		`team`.`inserted`,
 		CAST(COALESCE(`team`.`updated`, `team`.`inserted`) AS DATETIME) AS `updated`, -- This bypass the problematic default value in views (zeros instead of CURRENT_TIMESTAMP) which causes problem on temporary table creation
-		SUM(`view_task_result`.`score`) + IFNULL(SUM(`view_bonus`.`score`),0) - SUM(`view_penality`.`score`) AS `score`
+		SUM(`view_task_result`.`score`) + IFNULL(MAX(`view_bonus`.`score`),0) - MAX(`view_penality`.`score`) AS `score` -- The MAX is a bit hack (every values are the same and we need just one, but MySQL requires to either use them in group by or in aggregate function.
 	FROM `view_team` AS `team`
 	LEFT JOIN `view_task_result` USING(`id_team`)
 	LEFT JOIN `view_penality` USING(`id_team`)
