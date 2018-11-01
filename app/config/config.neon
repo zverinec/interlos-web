@@ -12,7 +12,7 @@ parameters:
 	keys:
 		cron: hesloprocron
 		admin: hesloproadmin
-	infoPage: http://los.honzamrazek.cz/iframe/
+	infoPage: http://los.honzamrazek.cz/iframe/			# Has to be on HTTPS as mixed content is not allowed.
 
 dibi:
 	driver: mysqli
@@ -60,10 +60,11 @@ http:
 		frame-src:
 			- self
 			- https://www.google.com/recaptcha/
+			- %infoPage%
 
 session:
 	# Problematic with docker
-    #savePath: "%tempDir%/sessions"
+	#savePath: "%tempDir%/sessions"
 	#saveHandler: files
 	autoStart: true
 	cookieSecure: true
