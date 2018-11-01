@@ -9,7 +9,7 @@ use Nette\Http\Request;
 
 $problem = FALSE; // Set to true and add whitelisted IPs
 $remoteIP = $_SERVER['REMOTE_ADDR'];
-$allowedIP = array("127.0.0.0", "::1");
+$allowedIP = array("127.0.0.0", "::1", "192.168.99.1");
 if ($problem && !in_array($remoteIP, $allowedIP)) {
 	include_once __DIR__ . '/templates/.problem.phtml';
 }
@@ -20,40 +20,28 @@ require __DIR__ . '/../vendor/autoload.php';
 $configurator = new Nette\Configurator();
 
 // Enable Nette Debugger for error visualisation & logging
-$configurator->enableDebugger(__DIR__ . '/../log');
+$configurator->setDebugMode(in_array($remoteIP, $allowedIP));
+$configurator->enableTracy(__DIR__ . '/../log');
+
+// Set proper timezone and set up a temp directory
+$configurator->setTimeZone('Europe/Prague');
+$configurator->setTempDirectory(__DIR__ . '/../temp');
 
 // Enable RobotLoader - this will load all classes automatically
-$configurator->setTempDirectory(__DIR__ . '/../temp');
 $configurator->createRobotLoader()
 	->addDirectory(__DIR__)
 	->addDirectory(__DIR__ . '/../vendor/others')
 	->register();
 
 // Create Dependency Injection container from config.neon file
-$configurator->addConfig(__DIR__ . '/config/config.neon', $configurator::NONE);
+$configurator->addConfig(__DIR__ . '/config/config.neon');
 // Tuning config with local only settings like passwords etc.
 if (file_exists(__DIR__ . '/config/config.local.neon')) {
-	$configurator->addConfig(__DIR__ . '/config/config.local.neon', $configurator::NONE);
+	$configurator->addConfig(__DIR__ . '/config/config.local.neon');
 }
-
-// Add DIBI extension for database connection
-$configurator->onCompile[] = function ($configurator, $compiler) {
-	$compiler->addExtension('dibi', new \Dibi\Bridges\Nette\DibiExtension22());
-};
 
 /** @var Container $container */
 $container = $configurator->createContainer();
-
-// Turn on HTTPS when on proper domain
-$securedDomains = $container->parameters['securedDomains'];
-/** @var Request $httpRequest */
-$httpRequest = $container->getByType('Nette\\Http\\Request');
-if (in_array($httpRequest->getUrl()->getHost(), $securedDomains, TRUE)) {
-	Route::$defaultFlags = Route::SECURED;
-}
-
-// Setup router
-$container->router[] = FrontModule::createRouter("Front");
 
 // Create directory for session data (Nette does not seem to create it on its own, then fails to initialize session)
 @mkdir($container->session->options['save_path'], 0777, true);

@@ -1,7 +1,13 @@
 <?php
 abstract class BaseComponent extends Nette\Application\UI\Control {
-	public function __construct(/*Nette\*/Nette\ComponentModel\IContainer $parent = NULL, $name = NULL) {
-		parent::__construct($parent, $name);
+	public function __construct() {
+		parent::__construct();
+
+	}
+
+	protected function attached($form)
+	{
+		parent::attached($form);
 		$this->startUp();
 	}
 
@@ -11,8 +17,8 @@ abstract class BaseComponent extends Nette\Application\UI\Control {
 
 	}
 
-	protected function createTemplate($class = NULL) {
-		$template = parent::createTemplate($class);
+	protected function createTemplate() {
+		$template = parent::createTemplate();
 
 		$componentName = strtr($this->getReflection()->getName(), array("Component" => ""));
 
@@ -35,7 +41,7 @@ abstract class BaseComponent extends Nette\Application\UI\Control {
 	}
 
 	protected function createComponentFlashMessages($name) {
-		return new FlashMessagesComponent($this, $name);
+		return new FlashMessagesComponent();
 	}
 
 	protected function startUp() {}

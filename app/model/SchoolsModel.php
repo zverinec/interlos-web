@@ -16,7 +16,7 @@ class SchoolsModel extends AbstractModel {
 				"name"	=> $name,
 				"inserted"	=> new DateTime()
 				))->execute();
-		$return = $this->getConnection()->insertId();
+		$return = $this->getConnection()->getInsertId();
 		$this->log(NULL, "school_inserted", "The school [$name] has been inserted.");
 		return $return;
 	}

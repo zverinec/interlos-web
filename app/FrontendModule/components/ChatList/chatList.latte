@@ -36,7 +36,7 @@
 		<span class="discussion-team">{$post['post_team_name']}</span>
 		<span class="discussion-date">{$post['post_inserted']|time}</span>
 		<div class="cleaner-both">&nbsp;</div>
-		{!$post['post_content']|texy}
+		{$post['post_content']|texy|noEscape}
     </div>
 	{foreach $subposts as $subpost}
 		{continueIf empty($subpost['reply_id_chat'])}
@@ -44,7 +44,7 @@
 			<span class="discussion-team">{$subpost['reply_team_name']}</span>
 			<span class="discussion-date">{$subpost['reply_inserted']|time}</span>
 			<div class="cleaner-both">&nbsp;</div>
-			{!$subpost['reply_content']|texy}
+			{$subpost['reply_content']|texy|noEscape}
 		</div>
 	{/foreach}
 	{if Interlos::getUser()->isLoggedIn()}

@@ -14,7 +14,7 @@ class StatsPresenter extends BasePresenter
 	}
 
 	protected function createComponentScoreList($name) {
-		return new \ScoreListComponent($this, $name);
+		return new \ScoreListComponent();
 	}
 
 }

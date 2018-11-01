@@ -7,10 +7,10 @@
 	var min = local_time.getMinutes();
 	var sec = local_time.getSeconds();
 	document.getElementById('clock').innerHTML = local_time.getHours() + ':' + (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec;
-    }
-    window.setTimeout(function () { window.setInterval(time_set, 1000); time_set(); }, 1000 - time_server % 1000);
+	}
+	window.setTimeout(function () { window.setInterval(time_set, 1000); time_set(); }, 1000 - time_server % 1000);
 </script>
 
 <div id="clock">
-    {=date("H:i:s")}
+	{=date("H:i:s")}
 </div>

@@ -1,4 +1,8 @@
 <?php
+
+use Dibi\DriverException;
+use Nette\Forms\Form;
+use Nette\Security\User;
 use Tracy\Debugger;
 
 /**
@@ -11,6 +15,14 @@ class TeamFormComponent extends BaseComponent {
 	const NUMBER_OF_MEMBERS = 5;
 
 	private $mailParams;
+
+	/** @var User */
+	private $user;
+
+	public function __construct(User $user) {
+		parent::__construct();
+		$this->user = $user;
+	}
 
 	public function setMailParameters($params) {
 		$this->mailParams = $params;
@@ -44,9 +56,9 @@ class TeamFormComponent extends BaseComponent {
 					$values["password"]
 			);
 			// Send e-mail
-			$template = InterlosTemplate::loadTemplate(new Nette\Templating\FileTemplate());
-			$template->registerFilter(new Nette\Latte\Engine);
-			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+			/** @var \Nette\Bridges\ApplicationLatte\Template $template */
+			$template = InterlosTemplate::loadTemplate($this->createTemplate());
+			$template->getLatte()->addFilter(null, 'Nette\Templating\Helpers::loader');
 			$template->setFile(__DIR__ . "/../../templates/mail/registration.latte");
 			$template->team = $values["team_name"];
 			$template->id = $insertedTeam;
@@ -61,7 +73,7 @@ class TeamFormComponent extends BaseComponent {
 			$this->getPresenter()->flashMessage("Tým '".$values["team_name"]."' byl úspěšně zaregistrován.", "success");
 			$this->getPresenter()->redirect("this");
 		}
-		catch (DibiDriverException $e) {
+		catch (DriverException $e) {
 			$this->getPresenter()->flashMessage("Chyba při práci s databází.", "error");
 			Debugger::log($e, Debugger::EXCEPTION);
 			return;
@@ -104,7 +116,7 @@ class TeamFormComponent extends BaseComponent {
 			$this->getPresenter()->flashMessage("Daný tým již existuje.", "error");
 			Debugger::log($e, Debugger::EXCEPTION);
 		}
-		catch (DibiDriveException $e) {
+		catch (DriverException $e) {
 			$this->getPresenter()->flashMessage("Chyba při práci s databází.", "error");
 			Debugger::log($e, Debugger::EXCEPTION);
 		}
@@ -123,6 +135,7 @@ class TeamFormComponent extends BaseComponent {
 		// Password
 		$form->addPassword("password", "Heslo");
 		$form->addPassword("password_check", "Kontrola hesla")
+			->setRequired(false)
 				->addConditionOn($form["password"], Nette\Forms\Form::FILLED)
 				->addRule(Nette\Forms\Form::EQUAL, "Heslo a kontrola hesla se neshodují.", $form["password"]);
 
@@ -163,9 +176,7 @@ class TeamFormComponent extends BaseComponent {
 
 		$defaults = array();
 
-
-
-		if (Nette\Environment::getUser()->isLoggedIn()) {
+		if ($this->user->isLoggedIn()) {
 			$loggedTeam = Interlos::getLoggedTeam();
 			$defaults += array(
 					"team_name"	=> $loggedTeam->name,
@@ -190,8 +201,7 @@ class TeamFormComponent extends BaseComponent {
 			$form->setCurrentGroup(null);
 			$form->addSubmit("update", "Upravit");
 			$form->onSuccess[] = array($this, "updateSubmitted");
-		}
-		else {
+		} else {
 			$form["password"]->addRule(Nette\Forms\Form::FILLED, "Není vyplněno heslo týmu.");
 			$form->setCurrentGroup(null);
 			$form->addSubmit("insert", "Registrovat");
@@ -219,7 +229,7 @@ class TeamFormComponent extends BaseComponent {
 		$schoolsToInsert = array();
 		for($i=1; $i <= 5; $i++) {
 			if (!empty($values[$i."_competitor_name"])) {
-				$competitor = array();
+				$competitor = [];
 				$competitor["name"]		= $values[$i."_competitor_name"];
 				$competitor["school"]	= $values[$i."_school"];
 				$competitor["otherschool"]	= $values[$i."_otherschool"];

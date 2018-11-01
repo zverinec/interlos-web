@@ -1,8 +1,18 @@
 <?php
+
+use Nette\Security\User;
 use Tracy\Debugger;
 
 class AnswerFormComponent extends BaseComponent
 {
+
+	/** @var User */
+	private $user;
+
+	public function __construct(User $user) {
+		parent::__construct();
+		$this->user = $user;
+	}
 
 	public function formSubmitted(Nette\Forms\Form $form) {
 		if (\Interlos::getLoggedTeam() == null) {
@@ -37,7 +47,7 @@ class AnswerFormComponent extends BaseComponent
 				return;
 			}
 		}
-		catch(DibiDriverException $e) {
+		catch(\Dibi\DriverException $e) {
 			if ($e->getCode() == 1062) {
 				$this->getPresenter()->flashMessage("Na zadaný úkol jste již takto jednou odpovídali.", "error");
 			}
@@ -60,7 +70,7 @@ class AnswerFormComponent extends BaseComponent
 
 		// Tasks
 		$tasks = Interlos::tasks()
-			->findAllAvaiable(Interlos::getLoggedTeam()->id_team)
+			->findAllAvailable(Interlos::getLoggedTeam()->id_team)
 			->fetchPairs("id_task", "whole_name");
 		$form->addSelect("task", "Úkol", $tasks )
 				->setPrompt("--- Vyberte ---")
@@ -78,7 +88,7 @@ class AnswerFormComponent extends BaseComponent
 
 	protected function startUp() {
 		parent::startUp();
-		if (!Nette\Environment::getUser()->isLoggedIn()) {
+		if (!$this->user->isLoggedIn()) {
 			throw new Nette\InvalidStateException("There is no logged team.");
 		}
 		if (Interlos::isGameEnd()) {

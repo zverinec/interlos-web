@@ -47,17 +47,17 @@ class TeamPresenter extends BasePresenter
 
 	protected function createComponentTeamForm($name)
 	{
-		$comp = new \TeamFormComponent($this, $name);
+		$comp = new \TeamFormComponent($this->getUser());
 		$comp->setMailParameters($this->context->parameters['mail']);
 		return $comp;
 	}
 
 	protected function createComponentResults($name) {
-		return new \ResultsComponent($this, $name);
+		return new \ResultsComponent();
 	}
 
 	protected function createComponentTeamList($name)
 	{
-		return new \TeamListComponent($this, $name);
+		return new \TeamListComponent();
 	}
 }

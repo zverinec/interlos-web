@@ -13,8 +13,6 @@ parameters:
 		cron: hesloprocron
 		admin: hesloproadmin
 	infoPage: http://los.honzamrazek.cz/iframe/
-	securedDomains:
-		- interlos.fi.muni.cz
 
 dibi:
 	driver: mysqli
@@ -29,9 +27,8 @@ dibi:
 php:
 	date.timezone: Europe/Prague
 
-nette:
-	application:
-		errorPresenter: Front:Error
+application:
+	errorPresenter: Front:Error
 
 	session:
 		save_path: "%tempDir%/sessions"
@@ -39,15 +36,24 @@ nette:
 		expiration: 14 days
 
 services:
-		Nette\Security\IAuthenticator: TeamAuthenticator
-		answersModel: AnswersModel
-		chatModel: ChatModel
-		competitorsModel: CompetitorsModel
-		interlos: Interlos
-		schoolsModel: SchoolsModel
-		scoreModel: ScoreModel
-		seriesModel: SeriesModel
-		tasksModel: TasksModel
-		teamsModel: TeamsModel
-		yearsModel: YearsModel
+	router: RouterFactory::createRouter()
+	- TeamAuthenticator
+	answersModel: AnswersModel
+	chatModel: ChatModel
+	competitorsModel: CompetitorsModel
+	interlos: Interlos
+	schoolsModel: SchoolsModel
+	scoreModel: ScoreModel
+	seriesModel: SeriesModel
+	tasksModel: TasksModel
+	teamsModel: TeamsModel
+	yearsModel: YearsModel
+
+extensions:
+	dibi: Dibi\Bridges\Nette\DibiExtension22
+	recaptcha: Contributte\ReCaptcha\DI\ReCaptchaExtension
+
+recaptcha:
+	secretKey: 6LeRKngUAAAAADvEUMwK9PeeOEP0ptv213FumZI9
+	siteKey: 6LeRKngUAAAAAFHf_Yuwon1Et8H5t1imMeTATBgQ
 

@@ -1,7 +1,13 @@
 <?php
+
+use Dibi\Row;
+use Nette\DI\Container;
+use Dibi\Connection;
+use Nette\Security\User;
+
 class Interlos {
 
-	/** @var SystemContainer */
+	/** @var Container */
 	private static $container;
 
     private static $adminMessages = FALSE;
@@ -11,7 +17,7 @@ class Interlos {
 	private static $loggedTeam;
 
 
-	public static function injectContainer(SystemContainer $container) {
+	public static function injectContainer(Container $container) {
 		self::$container = $container;
 	}
 
@@ -34,7 +40,9 @@ class Interlos {
         if (self::$adminMessages) {
             return;
         }
-        $presenter = Nette\Environment::getApplication()->getPresenter();
+        /** @var \Nette\Application\Application $application */
+        $application = self::$container->getByType(\Nette\Application\Application::class);
+        $presenter = $application->getPresenter();
         if (self::isAdminAccess()) {
                 $presenter->flashMessage("Přístup administrátora schválen.", "info");
         }
@@ -56,12 +64,12 @@ class Interlos {
         self::$adminMessages = TRUE;
     }
 
-	/** @return DibiConnection */
+	/** @return \Dibi\Connection */
 	public static function getConnection() {
-		return self::$container->getService('dibi.connection');
+		return self::$container->getByType(Connection::class);
 	}
 
-	/** @return DibiRow */
+	/** @return Row */
 	public static function getCurrentYear() {
 		if (!isset(self::$currentYear)) {
 			self::$currentYear = self::years()->findCurrent();
@@ -69,7 +77,7 @@ class Interlos {
 		return self::$currentYear;
 	}
 
-	/** @return DibiRow */
+	/** @return Row */
 	public static function getLoggedTeam() {
 		if (!isset(self::$loggedTeam)) {
 			if (self::getUser()->isLoggedIn()) {
@@ -83,7 +91,7 @@ class Interlos {
 	}
 
 	public static function getUser() {
-		return self::$container->getService('user');
+		return self::$container->getByType(User::class);
 	}
 
     public static function isAdminAccess() {
@@ -304,7 +312,7 @@ class Interlos {
     }
 
 	private static function getSessionNamespace($namespace) {
-		return self::$container->getService('session')->getSection($namespace);
+		return self::$container->getByType(\Nette\Http\Session::class)->getSection($namespace);
 	}
 
 }
