@@ -33,6 +33,12 @@ class BasePresenter extends Presenter {
 		return \InterlosTemplate::loadTemplate($template);
 	}
 
+	protected function beforeRender()
+	{
+		parent::beforeRender();
+		$this->getTemplate()->noticeBoard = $this->context->getParameters()['infoPage'] ?? null;
+	}
+
 	protected function startUp() {
 		parent::startup();
 		\Interlos::prepareAdminProperties();
