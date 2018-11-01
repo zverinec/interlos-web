@@ -1,6 +1,7 @@
 <?php
 
 use Nette\Security\User;
+use Nette\Utils\Strings;
 use Tracy\Debugger;
 
 class AnswerFormComponent extends BaseComponent
@@ -27,9 +28,9 @@ class AnswerFormComponent extends BaseComponent
 
 		try {
 			$task = Interlos::tasks()->find($values["task"]);
-			$solution = strtoupper(strtr($values["solution"], array(" " => "")));
+			$solution = Strings::toAscii(Strings::upper(strtr($values["solution"], array(" " => ""))));
 			Interlos::answers()->insert(Interlos::getLoggedTeam()->id_team, $values["task"], $solution);
-			if (\Nette\Utils\Strings::upper($task->code) == \Nette\Utils\Strings::upper($solution)) {
+			if (Strings::upper($task->code) == Strings::upper($solution)) {
 				$this->getPresenter()->flashMessage("Vaše odpověď je správně.", "success");
 			}
 			else {
