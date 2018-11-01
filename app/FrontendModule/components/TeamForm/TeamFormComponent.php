@@ -204,6 +204,7 @@ class TeamFormComponent extends BaseComponent {
 		} else {
 			$form["password"]->addRule(Nette\Forms\Form::FILLED, "Není vyplněno heslo týmu.");
 			$form->setCurrentGroup(null);
+			$form->addReCaptcha('recaptcha', $label = 'Ochrana před spamboty', $required = TRUE, $message = 'Jste živý člověk?');
 			$form->addSubmit("insert", "Registrovat");
 			$form->onSuccess[] = array($this, "insertSubmitted");
 		}
