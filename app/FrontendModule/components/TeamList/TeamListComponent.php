@@ -13,6 +13,14 @@ class TeamListComponent extends BaseListComponent {
 				->fetchAssoc("id_team,id_competitor");
 		}
 		$this->getTemplate()->categories = Interlos::teams()->getCategories();
+		$this->getTemplate()->countTeamsFunction = function ($teams, $competitors) {
+			return array_reduce($teams, function ($value, $team) use ($competitors) {
+				if (isset($competitors[$team->id_team])) {
+					return $value + count($competitors[$team->id_team]);
+				}
+				return $value;
+			}, 0);
+		};
 	}
 
 }

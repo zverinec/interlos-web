@@ -1,5 +1,8 @@
 {foreach $teams AS $category => $teamsInCategory}
+	{var $numberOfCategoryTeams = count($teamsInCategory)}
+	{var $numberOfCategoryCompetitors = $countTeamsFunction($teamsInCategory, $competitors)}
 	<h2 id="{$category}">{$categories[$category]}</h2>
+	<p><em>Týmů: {$numberOfCategoryTeams}, hráčů: {$numberOfCategoryCompetitors}</em></p>
 	<ol>
 		{foreach $teamsInCategory AS $team}
 		<li>
