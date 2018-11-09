@@ -1,4 +1,7 @@
 <?php
+
+use Dibi\DataSource;
+
 abstract class BaseListComponent extends BaseComponent {
 
 	/** @var int */
@@ -10,7 +13,7 @@ abstract class BaseListComponent extends BaseComponent {
 	/** @persistent */
 	public $sorting;
 
-	/** @var DibiDataSource */
+	/** @var DataSource */
 	private $source;
 
 	public function getLimit() {
@@ -33,7 +36,7 @@ abstract class BaseListComponent extends BaseComponent {
 		$this->limit = $limit;
 	}
 
-	public function setSource(DibiDataSource $source) {
+	public function setSource(DataSource $source) {
 		$this->source = $source;
 	}
 
@@ -46,9 +49,9 @@ abstract class BaseListComponent extends BaseComponent {
 	}
 
 	protected function createComponentPaginator($name) {
-		$paginator = new VisualPaginatorComponent($this, $name);
-		$paginator->paginator->itemsPerPage = $this->getLimit();
-		$paginator->paginator->itemCount = $this->getSource()->count();
+		$paginator = new VisualPaginatorComponent();
+		$paginator->getPaginator()->setItemsPerPage($this->getLimit());
+		$paginator->getPaginator()->setItemCount($this->getSource()->count());
 		return $paginator;
 	}
 
@@ -57,7 +60,7 @@ abstract class BaseListComponent extends BaseComponent {
 		return $this->getComponent("paginator")->getPaginator();
 	}
 
-	/** @return DibiDataSource */
+	/** @return DataSource */
 	protected function getSource() {
 		return $this->source;
 	}

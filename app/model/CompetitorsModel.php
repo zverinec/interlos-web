@@ -35,12 +35,12 @@ class CompetitorsModel extends AbstractModel {
 
 	public function insert($team, $school, $name) {
 		$this->checkEmptiness($team, "team");
-		$this->checkEmptiness($school, "school");
 		$this->checkEmptiness($name, "name");
 		$return = $this->getConnection()->insert("competitor", array(
 				"id_team"	=> $team,
-				"id_school"	=> $school,
-				"name"	=> $name
+				"id_school"	=> $school === '' ? null : $school,
+				"name"	=> $name,
+				"inserted" => new DateTime()
 				))->execute();
 		$this->log($team, "competitor_inserted", "The new competitor [$name] has been inserted and joined to team.");
 		return $return;

@@ -1,4 +1,7 @@
 <?php
+
+use Dibi\DataSource;
+
 class AnswersModel extends AbstractModel {
 
 	const ERROR_TIME_LIMIT = 10;
@@ -9,7 +12,7 @@ class AnswersModel extends AbstractModel {
 	}
 
 	/**
-	 * @return DibiDataSource
+	 * @return DataSource
 	 */
 	public function findAll() {
 		return $this->getConnection()->dataSource("SELECT * FROM [view_answer]");

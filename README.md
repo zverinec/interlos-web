@@ -29,7 +29,7 @@ Installation
 4. Copy /app/config/config.local.neon.example to /app/config/config.local.neon and overwrite parameters of config.neon (DB credentials...)
 5. Make directories /temp and /log writable
 6. Create database schema executing /resources/db/tables.sql and /resources/db/views.sql
-7. Create temporary tables
+7. Create temporary tables (by running CRON manually)
 
 
 Config
@@ -37,6 +37,7 @@ Config
 - Set mails which are used for sending mail
 - Set cron and admin keys (randomly generated long password)
 - Set database credentials
+- Set smtp delivery and test registration e-mails
 
 
 Creating new contest
@@ -133,3 +134,26 @@ Running the contest
 5. Save table with full statistics into static HTML (see previous yearXXXX).
 6. Save list of teams into static HTML (see previous teamsYearXXXX).
 7. Add entry to archive page about the year.
+
+
+Developing locally
+------------------
+
+Use following setup for docker composition as we need real Apache and MySQL (as PHP built-in-server doesn't handle HTTPS, and with `secure` cookie flag you cannot use the system).
+
+```bash
+$ cd .                  # project root
+$ nano .env             # IP address to bind (docker-machine vs native docker!)
+$ docker-compose up
+```
+
+Then you have to manually install database via `http://${IP}:8080` (see `docker-compose.yml` for credentials).
+Afterwards the application is available via `https://${IP}` and `http://${IP}` (should be redirected immediately).
+
+Database is persistent between up & downs and stored in `.mysql` directory.
+
+Various notes
+-------------
+
+MySQL database handles timestamp and datetime types differently (timestamp is stored in UTC, datetime "as is") then translation to
+current connection timezone is done see (https://www.eversql.com/mysql-datetime-vs-timestamp-column-types-which-one-i-should-use/).

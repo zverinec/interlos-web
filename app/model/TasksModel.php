@@ -1,4 +1,7 @@
 <?php
+
+use Dibi\DataSource;
+
 class TasksModel extends AbstractModel {
 
 	public function find($id) {
@@ -7,17 +10,17 @@ class TasksModel extends AbstractModel {
 	}
 
 	/**
-	 * @return DibiDataSource
+	 * @return DataSource
 	 */
 	public function findAll() {
 		return $this->getConnection()->dataSource("SELECT * FROM [view_task]");
 	}
 
 	/**
-	 * @return DibiDataSource
+	 * @return DataSource
 	 */
-	public function findAllAvaiable($teamId = NULL) {
-		$source = $this->getConnection()->dataSource("SELECT * FROM [view_avaiable_task]");
+	public function findAllAvailable($teamId = NULL) {
+		$source = $this->getConnection()->dataSource("SELECT * FROM [view_available_task]");
 		if (!empty($teamId)) {
 			// Find solved tasks
 			$solved = Interlos::answers()
@@ -48,7 +51,7 @@ class TasksModel extends AbstractModel {
 				"serie"	=> $serie,
 				"type"	=> $type,
 				"code"	=> $code,
-				"inserted"	=> $inserted
+				"inserted"	=> new DateTime()
 				))->execute();
 		$this->log(NULL, "task_inserted", "The task [$name] has been inserted.");
 		return $return;

@@ -8,9 +8,12 @@
 	<meta name="description" content="{$pageDescription}" n:ifset="$pageDescription" />
 	<link href="{$basePath}/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
 	<link rel="icon" href="{$basePath}/images/favicon.ico" type="image/x-icon" />
-	<script type="text/javascript" src="{$basePath}/js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="{$basePath}/js/jquery-ui-1.8.2.custom.min.js"></script>
+	<script type="text/javascript" src="{$basePath}/js/jQuery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="{$basePath}/js/netteForms.js"></script>
 	<title>{ifset $pageTitle}{$pageTitle} | {/ifset}InterLoS</title>
+
+	{block #head}
+	{/block}
 </head>
 <body>
 {block #body}

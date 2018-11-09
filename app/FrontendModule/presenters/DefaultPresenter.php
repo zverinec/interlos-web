@@ -31,12 +31,12 @@ class DefaultPresenter extends BasePresenter {
 	// ----- PROTECTED METHODS
 
 	protected function createComponentChat($name) {
-		$chat = new \ChatListComponent($this, $name);
+		$chat = new \ChatListComponent();
 		return $chat;
 	}
 
 	protected function createComponentLogin($name) {
-		return new \LoginFormComponent($this, $name);
+		return new \LoginFormComponent();
 	}
 
 }

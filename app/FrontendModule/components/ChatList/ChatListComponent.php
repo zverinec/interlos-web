@@ -1,4 +1,7 @@
 <?php
+
+use Dibi\Exception;
+
 class ChatListComponent extends BaseListComponent {
 
 	// PUBLIC METHODS
@@ -27,7 +30,7 @@ class ChatListComponent extends BaseListComponent {
 			$this->getPresenter()->flashMessage("Příspěvek byl vložen.", "success");
 			$this->getPresenter()->redirect("Default:chat#post-". $values['id_parent']);
 		}
-		catch (DibiException $e) {
+		catch (Exception $e) {
 			$this->getPresenter()->flashMessage("Chyba při práci s databází.", "error");
 			error_log($e->getTraceAsString());
 		}
@@ -49,9 +52,9 @@ class ChatListComponent extends BaseListComponent {
 
 	/** Override paginator to count only root posts */
 	protected function createComponentPaginator($name) {
-		$paginator = new VisualPaginatorComponent($this, $name);
-		$paginator->paginator->itemsPerPage = $this->getLimit();
-		$paginator->paginator->itemCount = Interlos::chat()->findAllRoot()->count();
+		$paginator = new VisualPaginatorComponent();
+		$paginator->getPaginator()->setItemsPerPage($this->getLimit());
+		$paginator->getPaginator()->setItemCount(Interlos::chat()->findAllRoot()->count());
 		return $paginator;
 	}
 

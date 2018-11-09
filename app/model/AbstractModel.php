@@ -1,11 +1,12 @@
 <?php
 use Tracy\Debugger;
+use Dibi\Connection;
 
 abstract class AbstractModel implements InterlosModel {
 
 	private $connection;
 
-	public function  __construct(DibiConnection $connection) {
+	public function  __construct(Connection $connection) {
 		$this->connection = $connection;
 	}
 
@@ -17,7 +18,7 @@ abstract class AbstractModel implements InterlosModel {
 		}
 	}
 
-	/** @return DibiConnection */
+	/** @return Connection */
 	protected final function getConnection() {
 		return $this->connection;
 	}

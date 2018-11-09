@@ -3,11 +3,13 @@
 		<h2 id="{$category}" class="center">{$name}</h2>
 		<table class="results" cellspacing="0">
 			<thead>
-				<th>#</th>
-				<th>tým</th>
-				<th>celkem bodů</th>
-				<th>bonusové body</th>
-				<th>záporné body</th>
+				<tr>
+					<th>#</th>
+					<th>tým</th>
+					<th>celkem bodů</th>
+					<th>bonusové body</th>
+					<th>záporné body</th>
+				</tr>
 			</thead>
 			{if isset($teams[$category])}
 				{foreach $teams[$category] AS $team}

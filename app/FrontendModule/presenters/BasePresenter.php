@@ -1,6 +1,7 @@
 <?php
 namespace FrontModule;
 
+use Exception;
 use Nette\Application\UI\Presenter;
 
 class BasePresenter extends Presenter {
@@ -12,30 +13,36 @@ class BasePresenter extends Presenter {
 	// ----- PROTECTED METHODS
 
 	protected function createComponentClock($name) {
-		return new \ClockComponent($this, $name);
+		return new \ClockComponent();
 	}
 
 	protected function createComponentFlashMessages($name) {
-		return new \FlashMessagesComponent($this, $name);
+		return new \FlashMessagesComponent();
 	}
 	protected function createComponentInfoList($name) {
-		$comp = new \InfoListComponent($this, $name);
+		$comp = new \InfoListComponent();
 		$params = $this->context->getParameters();
 		$comp->setInfoPageUrl($params['infoPage']);
 		return $comp;
 	}
 
-	protected function createTemplate($class = NULL) {
-		$template = parent::createTemplate($class);
+	protected function createTemplate() {
+		$template = parent::createTemplate();
 		$template->today = date("Y-m-d H:i:s");
 
 		return \InterlosTemplate::loadTemplate($template);
 	}
 
+	protected function beforeRender()
+	{
+		parent::beforeRender();
+		$this->getTemplate()->noticeBoard = $this->context->getParameters()['infoPage'] ?? null;
+	}
+
 	protected function startUp() {
 		parent::startup();
-        \Interlos::prepareAdminProperties();
-        \Interlos::createAdminMessages();
+		\Interlos::prepareAdminProperties();
+		\Interlos::createAdminMessages();
 	}
 
 	protected function check($componentName) {

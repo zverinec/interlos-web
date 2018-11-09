@@ -22,15 +22,15 @@ class GamePresenter extends BasePresenter
 	}
 
 	protected function createComponentAnswerForm($name) {
-		return new \AnswerFormComponent($this, $name);
+		return new \AnswerFormComponent($this->getUser());
 	}
 
 	protected function createComponentAnswerHistory($name) {
-		return new \AnswerHistoryComponent($this, $name);
+		return new \AnswerHistoryComponent();
 	}
 
 	protected function createComponentTaskStats($name) {
-		return new \TaskStatsComponent($this, $name);
+		return new \TaskStatsComponent();
 	}
 
 }
