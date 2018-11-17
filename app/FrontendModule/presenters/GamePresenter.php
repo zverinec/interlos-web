@@ -15,6 +15,8 @@ class GamePresenter extends BasePresenter
 			);
 			$this->getComponent("answerHistory")->setLimit(50);
 		}
+
+		$this->template->available = $this->template->available && (\Interlos::areStatsShown() || \Interlos::isAdminAccess());
 	}
 
 	public function renderHistory() {
