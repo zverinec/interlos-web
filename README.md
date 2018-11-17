@@ -8,9 +8,9 @@ Maintenance: Jan Drábek <me@jandrabek.cz>
 Requirements
 ------------
 
-- PHP >= 5.5
-- PHP in congfiguration to run Nette framework, see http://doc.nette.org/cs/requirements
-- MySQL (MariaDB) database
+- PHP >= 7.0
+- PHP in configuration to run Nette framework, see http://doc.nette.org/cs/requirements
+- MySQL (or MariaDB) database
 
 Hardware
 --------
@@ -25,7 +25,7 @@ Installation
 
 1. Checkout this repository
 2. Set WWW dir to /public/
-3. Run `composer update` from root. When installing production server use `--no-dev` to use minified nette.
+3. Run `composer install` from root. When installing production server use `--no-dev` to use minified nette.
 4. Copy /app/config/config.local.neon.example to /app/config/config.local.neon and overwrite parameters of config.neon (DB credentials...)
 5. Make directories /temp and /log writable
 6. Create database schema executing /resources/db/tables.sql and /resources/db/views.sql
@@ -72,9 +72,11 @@ Running the contest
 4. Udpate page with proper URLs where the files are hosted.
 5. Run CRON job (generating statistics)
    /cron/database?admin-key=hesloproadmin OR /cron/database?cron-key=hesloprocron NEVER BOTH OF THEM
-6. Run it! Test answering with testing team and then remove the answer.
+6. Run it! Test answering with testing team and then remove the answer in the database.
 7. Monitor server performance.
 8. Disable CRON jobs
+
+The statistics are automatically hidden 30 minutes before game end. Admins can get access by appending `?admin-key=hesloproadmin` to the URL.
 
 Performance
 -----------
@@ -121,10 +123,10 @@ Test:
 1. that you can access index.php with index.php and / path
 2. that PHP is running
 3. that you cannot access other files in directory by direct path
-4. that scripts works - renamess .htaccess in proper time (permission to the parent dir must be set correctly).
+4. that scripts works - renames .htaccess in proper time (permission to the parent dir must be set correctly).
 
 
-Running the contest
+After the contest
 -------------------
 
 1. Disable CRON job.
