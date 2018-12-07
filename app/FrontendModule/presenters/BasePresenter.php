@@ -36,7 +36,7 @@ class BasePresenter extends Presenter {
 	protected function beforeRender()
 	{
 		parent::beforeRender();
-		$this->getTemplate()->noticeBoard = $this->context->getParameters()['infoPage'] ?? null;
+		$this->getTemplate()->noticeBoard = isset($this->context->getParameters()['infoPage']) ? $this->context->getParameters()['infoPage'] : null;
 	}
 
 	protected function startUp() {
