@@ -16,7 +16,7 @@
 		{if $iterator->getCounter() % 10 == 1 }
 			<tr>
 		{else}
-			<tr class="line">
+			<tr>
 		{/if}
 			<td>{$iterator->getCounter()}</td>
 			<td class="team">{$team->name}&nbsp;<small>({if isSet($numMembers[$team->id_team])}členů:&nbsp;{$numMembers[$team->id_team]};&nbsp;{/if}{if isSet($categories[$team->category])}{$categories[$team->category]|lower}{/if})</small></td>

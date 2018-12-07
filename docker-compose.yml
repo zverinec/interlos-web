@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+    webserver:
+       build: .
+       ports:
+         - ${IP}:80:80
+         - ${IP}:443:443
+       volumes:
+         - .:/var/www/html/
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+          - ${IP}:8080:8080
+    db:
+        image: mysql:5.7.24
+        restart: always
+        user: mysql
+        ports:
+          - ${IP}:3306:3306
+        volumes:
+           - ./.mysql:/var/lib/mysql
+        environment:
+           MYSQL_ROOT_PASSWORD: root
+           MYSQL_USER: user
+           MYSQL_PASSWORD: password
+           MYSQL_DATABASE: interlos_production

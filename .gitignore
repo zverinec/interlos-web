@@ -6,5 +6,4 @@ app/config/config.local.neon
 .idea/*
 vendor/*
 !vendor/others
-composer.lock
 composer.phar

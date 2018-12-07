@@ -1,13 +1,15 @@
 {if !empty($tasks)}
 	<table id="task-stats" cellspacing="0">
 		<thead>
-			<th>#</th>
-			<th>název</th>
-			<th>nejhorší</th>
-			<th>nejlepší</th>
-			<th>průměrný</th>
-			<th>správně</th>
-			<th>špatně</th>
+			<tr>
+				<th>#</th>
+				<th>název</th>
+				<th>nejhorší</th>
+				<th>nejlepší</th>
+				<th>průměrný</th>
+				<th>správně</th>
+				<th>špatně</th>
+			</tr>
 		</thead>
 		{foreach $tasks AS $task}
 			<tr{if $iterator->isEven()} class="even"{/if}>

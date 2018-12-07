@@ -1,4 +1,7 @@
 <?php
+
+use Dibi\DataSource;
+
 class ChatModel extends AbstractModel {
 
 	public function find($id) {
@@ -7,13 +10,13 @@ class ChatModel extends AbstractModel {
 	}
 
 	/**
-	 * @return DibiDataSource
+	 * @return DataSource
 	 */
 	public function findAll() {
 		return $this->getConnection()->dataSource("SELECT * FROM [view_chat]");
 	}
 	/**
-	 * @return DibiDataSource
+	 * @return DataSource
 	 */
 	public function findAllRoot() {
 		return $this->getConnection()->dataSource('SELECT * FROM [view_chat_root]')->orderBy('last_post_inserted','DESC');

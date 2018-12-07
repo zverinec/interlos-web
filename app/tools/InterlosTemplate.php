@@ -1,4 +1,6 @@
 <?php
+
+use Nette\Application\UI\ITemplate;
 use Nette\Bridges\ApplicationLatte\Template;
 
 final class InterlosTemplate
@@ -6,15 +8,15 @@ final class InterlosTemplate
 
 	final private function  __construct() {}
 
-    public static function loadTemplate( $template) {
-		if (!$template instanceof Template && !$template instanceof \Nette\Templating\ITemplate) {
+	public static function loadTemplate( $template) {
+		if (!$template instanceof Template && !$template instanceof ITemplate) {
 			throw new InvalidArgumentException('Template of wrong class given.');
 		}
 		// register custom helpers
-		$template->registerHelper("date", Helpers::getHelper('date'));
-		$template->registerHelper("time", Helpers::getHelper('time'));
-		$template->registerHelper("timeOnly", Helpers::getHelper('timeOnly'));
-		$template->registerHelper("texy", Helpers::getHelper('texy'));
+		$template->getLatte()->addFilter("date", Helpers::getHelper('date'));
+		$template->getLatte()->addFilter("time", Helpers::getHelper('time'));
+		$template->getLatte()->addFilter("timeOnly", Helpers::getHelper('timeOnly'));
+		$template->getLatte()->addFilter("texy", Helpers::getHelper('texy'));
 
 		return $template;
 	}

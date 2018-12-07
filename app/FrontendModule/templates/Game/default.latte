@@ -67,9 +67,17 @@
 		<p><strong>Historie odpovědí je zpřístupněna pouze přihlášeným týmům v čase hry.</strong></p>
 	{/if}
 </div>
-{*<div class="main-block">
+<div class="main-block">
 	<h1>Statistika úkolů</h1>
-	<p>Podrobnou statistiku celé hry najdete na <a href="{plink Stats:}">samostatné stránce</a>.</p>
-	{control taskStats}
-</div>*}
+	{if $available}
+		<p>Podrobnou statistiku celé hry najdete na <a href="{plink Stats:}">samostatné stránce</a>.</p>
+		{control taskStats}
+	{else}
+		{if !Interlos::areStatsShown()}
+			<div class="flash error"><strong>Pořadí týmů není v posledních 30 minutách hry k dispozici.</strong></div>
+		{else}
+			<p>Momentálně nedostupné. Vyčkejte prosím chvíli.</p>
+		{/if}
+	{/if}
+</div>
 {/block}

@@ -1,4 +1,9 @@
 <?php
+
+use Dibi\DriverException;
+use Nette\Forms\Form;
+use Nette\Mail\IMailer;
+use Nette\Security\User;
 use Tracy\Debugger;
 
 /**
@@ -11,6 +16,18 @@ class TeamFormComponent extends BaseComponent {
 	const NUMBER_OF_MEMBERS = 5;
 
 	private $mailParams;
+
+	/** @var User */
+	private $user;
+
+	/** @var IMailer */
+	private $mailer;
+
+	public function __construct(User $user, IMailer $mailer) {
+		parent::__construct();
+		$this->user = $user;
+		$this->mailer = $mailer;
+	}
 
 	public function setMailParameters($params) {
 		$this->mailParams = $params;
@@ -44,24 +61,24 @@ class TeamFormComponent extends BaseComponent {
 					$values["password"]
 			);
 			// Send e-mail
-			$template = InterlosTemplate::loadTemplate(new Nette\Templating\FileTemplate());
-			$template->registerFilter(new Nette\Latte\Engine);
-			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+			/** @var \Nette\Bridges\ApplicationLatte\Template $template */
+			$template = InterlosTemplate::loadTemplate($this->createTemplate());
+			$template->getLatte()->addFilter(null, 'Nette\Templating\Helpers::loader');
 			$template->setFile(__DIR__ . "/../../templates/mail/registration.latte");
 			$template->team = $values["team_name"];
 			$template->id = $insertedTeam;
 			$mail = new Nette\Mail\Message();
-			$mail->setBody($template);
+			$mail->setHtmlBody($template->renderToString());
 			$mail->addTo($values["email"]);
 			$mail->setFrom($this->mailParams['info'], $this->mailParams['name']);
 			$mail->setSubject("Interlos - registrace");
-			//$mail->send();
+			$this->mailer->send($mail);
 			// Redirect
 			$this->insertCompetitorsFromValues($insertedTeam, $values);
 			$this->getPresenter()->flashMessage("Tým '".$values["team_name"]."' byl úspěšně zaregistrován.", "success");
 			$this->getPresenter()->redirect("this");
 		}
-		catch (DibiDriverException $e) {
+		catch (DriverException $e) {
 			$this->getPresenter()->flashMessage("Chyba při práci s databází.", "error");
 			Debugger::log($e, Debugger::EXCEPTION);
 			return;
@@ -88,10 +105,10 @@ class TeamFormComponent extends BaseComponent {
 			if (!empty($values["password"])) {
 				$changes["password"] = TeamAuthenticator::passwordHash($values["password"]);
 			}
-			Interlos::teams()->update($changes)->where("[id_team] = %i", $values["id_team"])->execute();
+			Interlos::teams()->update($changes)->where("[id_team] = %i", $loggedTeam->id_team)->execute();
 			// Update competitors
-			Interlos::competitors()->deleteByTeam($values["id_team"]);
-			$this->insertCompetitorsFromValues($values["id_team"], $values);
+			Interlos::competitors()->deleteByTeam($loggedTeam->id_team);
+			$this->insertCompetitorsFromValues($loggedTeam->id_team, $values);
 			// Success
 			$this->getPresenter()->flashMessage("Tým byl úspěšně aktualizován.", "success");
 			$this->getPresenter()->redirect("this");
@@ -104,7 +121,7 @@ class TeamFormComponent extends BaseComponent {
 			$this->getPresenter()->flashMessage("Daný tým již existuje.", "error");
 			Debugger::log($e, Debugger::EXCEPTION);
 		}
-		catch (DibiDriveException $e) {
+		catch (DriverException $e) {
 			$this->getPresenter()->flashMessage("Chyba při práci s databází.", "error");
 			Debugger::log($e, Debugger::EXCEPTION);
 		}
@@ -123,6 +140,7 @@ class TeamFormComponent extends BaseComponent {
 		// Password
 		$form->addPassword("password", "Heslo");
 		$form->addPassword("password_check", "Kontrola hesla")
+			->setRequired(false)
 				->addConditionOn($form["password"], Nette\Forms\Form::FILLED)
 				->addRule(Nette\Forms\Form::EQUAL, "Heslo a kontrola hesla se neshodují.", $form["password"]);
 
@@ -134,28 +152,25 @@ class TeamFormComponent extends BaseComponent {
 		));
 
 		// E-mails
-		$form->addText("email", "E-mail")->addRule(Nette\Forms\Form::EMAIL, "E-mail nemá správný formát.");
+		$form->addText("email", "E-mail")
+			->setRequired('Vyplňte, prosím, e-mail.')
+			->addRule(Nette\Forms\Form::EMAIL, "E-mail nemá správný formát.");
 
 		$schools = Interlos::schools()->findAll()->orderBy("name")->fetchPairs("id_school", "name");
-		$schools = array(NULL => "Nevyplněno") + $schools + array("other" => "Jiná");
+		$schools = array(NULL => "-- Nevyplněno/jiná --") + $schools;
 
 		// Members
 		for ($i=1; $i<=self::NUMBER_OF_MEMBERS; $i++) {
 			$form->addGroup("$i. člen");
 			$form->addText($i."_competitor_name", "Jméno");
 			$form->addSelect($i."_school", "Škola", $schools)
-					->addConditionOn($form[$i."_competitor_name"], Nette\Forms\Form::FILLED)
-					->addRule(~Nette\Forms\Form::EQUAL, "U $i. člena je vyplněno jméno, ale není u něj vyplněna škola.", NULL)
-					->endCondition()
-					->addCondition(Nette\Forms\Form::EQUAL, "other")
-					->toggle("frm".$name."-".$i."_otherschool")
-					->toggle("frm".$name."-".$i."_otherschool-label");
+				->setRequired(false)
+				->addCondition(Form::FILLED)
+					->toggle($i."_otherschool_container", false);
 			$form->addText($i."_otherschool", "Jiná škola")
-					->addConditionOn($form[$i."_competitor_name"], Nette\Forms\Form::FILLED)
-					->addConditionOn($form[$i."_school"], Nette\Forms\Form::EQUAL, "other")
-					->addRule(Nette\Forms\Form::FILLED, "U $i. člena je vyplněno jméno, ale není u něj vyplněna škola.");
+				->setOption('id', $i."_otherschool_container");
 			$form[$i."_otherschool"]->getLabelPrototype()->id = "frm".$name."-".$i."_otherschool-label";
-			$form[$i."_school"]->setOption("description", "Pokud není vaše škola přítomna vyberte položku \"Jiná\".");
+			$form[$i."_school"]->setOption("description", "Nenašli jste svoji školu? Vyberte \"Nevyplněno/jiná\" a zadejte název.");
 			if ($i == 1) {
 				$form[$i."_competitor_name"]->addRule(Nette\Forms\Form::FILLED, "Jméno prvního člena musí být vyplněno.");
 			}
@@ -163,9 +178,7 @@ class TeamFormComponent extends BaseComponent {
 
 		$defaults = array();
 
-
-
-		if (Nette\Environment::getUser()->isLoggedIn()) {
+		if ($this->user->isLoggedIn()) {
 			$loggedTeam = Interlos::getLoggedTeam();
 			$defaults += array(
 					"team_name"	=> $loggedTeam->name,
@@ -190,10 +203,10 @@ class TeamFormComponent extends BaseComponent {
 			$form->setCurrentGroup(null);
 			$form->addSubmit("update", "Upravit");
 			$form->onSuccess[] = array($this, "updateSubmitted");
-		}
-		else {
+		} else {
 			$form["password"]->addRule(Nette\Forms\Form::FILLED, "Není vyplněno heslo týmu.");
 			$form->setCurrentGroup(null);
+			$form->addReCaptcha('recaptcha', $label = 'Ochrana před spamboty', $required = TRUE, $message = 'Jste živý člověk?');
 			$form->addSubmit("insert", "Registrovat");
 			$form->onSuccess[] = array($this, "insertSubmitted");
 		}
@@ -207,39 +220,30 @@ class TeamFormComponent extends BaseComponent {
 	private function insertCompetitorsFromValues($team, $values) {
 		$competitors = $this->loadCompetitorsFromValues($values);
 		foreach($competitors AS $competitor) {
-			if (!empty($competitor['otherschool'])) {
-				$competitor['school'] = Interlos::schools()->insert($competitor['otherschool']);
+			if (!empty($competitor['name']) && empty($competitor['school']) && !empty($competitor['otherschool'])) {
+				$schoolId = Interlos::schools()->getByName($competitor['otherschool']);
+				if ($schoolId) {
+					$competitor['school'] = $schoolId;
+				} else {
+					$competitor['school'] = $schoolId = Interlos::schools()->insert($competitor['otherschool']);
+				}
 			}
 			Interlos::competitors()->insert($team, $competitor['school'], $competitor['name']);
 		}
 	}
 
 	private function loadCompetitorsFromValues($values) {
-		$competitors = array();
-		$schoolsToInsert = array();
+		$competitors = [];
 		for($i=1; $i <= 5; $i++) {
 			if (!empty($values[$i."_competitor_name"])) {
-				$competitor = array();
+				$competitor = [];
 				$competitor["name"]		= $values[$i."_competitor_name"];
 				$competitor["school"]	= $values[$i."_school"];
 				$competitor["otherschool"]	= $values[$i."_otherschool"];
-				if (!empty($competitor["otherschool"])) {
-					$schoolsToInsert[] = $competitor["otherschool"];
-				}
 				$competitors[] = $competitor;
 			}
 		}
-		if(count($schoolsToInsert) === 0) {
-			$schoolExists = 0;
-		} else {
-			$schoolExists = Interlos::schools()->findAll()->where("[name] IN %l", $schoolsToInsert)->count();
-		}
-		if ($schoolExists) {
-			return FALSE;
-		}
-		else {
-			return $competitors;
-		}
+		return $competitors;
 	}
 
 }

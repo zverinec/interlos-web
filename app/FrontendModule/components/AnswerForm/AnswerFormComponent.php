@@ -1,8 +1,19 @@
 <?php
+
+use Nette\Security\User;
+use Nette\Utils\Strings;
 use Tracy\Debugger;
 
 class AnswerFormComponent extends BaseComponent
 {
+
+	/** @var User */
+	private $user;
+
+	public function __construct(User $user) {
+		parent::__construct();
+		$this->user = $user;
+	}
 
 	public function formSubmitted(Nette\Forms\Form $form) {
 		if (\Interlos::getLoggedTeam() == null) {
@@ -17,9 +28,9 @@ class AnswerFormComponent extends BaseComponent
 
 		try {
 			$task = Interlos::tasks()->find($values["task"]);
-			$solution = strtoupper(strtr($values["solution"], array(" " => "")));
+			$solution = Strings::toAscii(Strings::upper(strtr($values["solution"], array(" " => ""))));
 			Interlos::answers()->insert(Interlos::getLoggedTeam()->id_team, $values["task"], $solution);
-			if (\Nette\Utils\Strings::upper($task->code) == \Nette\Utils\Strings::upper($solution)) {
+			if (Strings::upper($task->code) == Strings::upper($solution)) {
 				$this->getPresenter()->flashMessage("Vaše odpověď je správně.", "success");
 			}
 			else {
@@ -37,7 +48,7 @@ class AnswerFormComponent extends BaseComponent
 				return;
 			}
 		}
-		catch(DibiDriverException $e) {
+		catch(\Dibi\DriverException $e) {
 			if ($e->getCode() == 1062) {
 				$this->getPresenter()->flashMessage("Na zadaný úkol jste již takto jednou odpovídali.", "error");
 			}
@@ -60,7 +71,7 @@ class AnswerFormComponent extends BaseComponent
 
 		// Tasks
 		$tasks = Interlos::tasks()
-			->findAllAvaiable(Interlos::getLoggedTeam()->id_team)
+			->findAllAvailable(Interlos::getLoggedTeam()->id_team)
 			->fetchPairs("id_task", "whole_name");
 		$form->addSelect("task", "Úkol", $tasks )
 				->setPrompt("--- Vyberte ---")
@@ -78,7 +89,7 @@ class AnswerFormComponent extends BaseComponent
 
 	protected function startUp() {
 		parent::startUp();
-		if (!Nette\Environment::getUser()->isLoggedIn()) {
+		if (!$this->user->isLoggedIn()) {
 			throw new Nette\InvalidStateException("There is no logged team.");
 		}
 		if (Interlos::isGameEnd()) {

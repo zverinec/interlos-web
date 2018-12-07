@@ -2,8 +2,8 @@
 
 namespace FrontModule;
 
-use Nette,
-	Model;
+use Exception;
+use Nette;
 use Tracy\Debugger;
 
 

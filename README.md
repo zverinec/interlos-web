@@ -8,9 +8,9 @@ Maintenance: Jan Drábek <me@jandrabek.cz>
 Requirements
 ------------
 
-- PHP >= 5.5
-- PHP in congfiguration to run Nette framework, see http://doc.nette.org/cs/requirements
-- MySQL (MariaDB) database
+- PHP >= 7.0
+- PHP in configuration to run Nette framework, see http://doc.nette.org/cs/requirements
+- MySQL (or MariaDB) database
 
 Hardware
 --------
@@ -25,11 +25,11 @@ Installation
 
 1. Checkout this repository
 2. Set WWW dir to /public/
-3. Run `composer update` from root. When installing production server use `--no-dev` to use minified nette.
+3. Run `composer install` from root. When installing production server use `--no-dev` to use minified nette.
 4. Copy /app/config/config.local.neon.example to /app/config/config.local.neon and overwrite parameters of config.neon (DB credentials...)
 5. Make directories /temp and /log writable
 6. Create database schema executing /resources/db/tables.sql and /resources/db/views.sql
-7. Create temporary tables
+7. Create temporary tables (by running CRON manually)
 
 
 Config
@@ -37,6 +37,7 @@ Config
 - Set mails which are used for sending mail
 - Set cron and admin keys (randomly generated long password)
 - Set database credentials
+- Set smtp delivery and test registration e-mails
 
 
 Creating new contest
@@ -71,9 +72,11 @@ Running the contest
 4. Udpate page with proper URLs where the files are hosted.
 5. Run CRON job (generating statistics)
    /cron/database?admin-key=hesloproadmin OR /cron/database?cron-key=hesloprocron NEVER BOTH OF THEM
-6. Run it! Test answering with testing team and then remove the answer.
+6. Run it! Test answering with testing team and then remove the answer in the database.
 7. Monitor server performance.
 8. Disable CRON jobs
+
+The statistics are automatically hidden 30 minutes before game end. Admins can get access by appending `?admin-key=hesloproadmin` to the URL.
 
 Performance
 -----------
@@ -120,10 +123,10 @@ Test:
 1. that you can access index.php with index.php and / path
 2. that PHP is running
 3. that you cannot access other files in directory by direct path
-4. that scripts works - renamess .htaccess in proper time (permission to the parent dir must be set correctly).
+4. that scripts works - renames .htaccess in proper time (permission to the parent dir must be set correctly).
 
 
-Running the contest
+After the contest
 -------------------
 
 1. Disable CRON job.
@@ -133,3 +136,26 @@ Running the contest
 5. Save table with full statistics into static HTML (see previous yearXXXX).
 6. Save list of teams into static HTML (see previous teamsYearXXXX).
 7. Add entry to archive page about the year.
+
+
+Developing locally
+------------------
+
+Use following setup for docker composition as we need real Apache and MySQL (as PHP built-in-server doesn't handle HTTPS, and with `secure` cookie flag you cannot use the system).
+
+```bash
+$ cd .                  # project root
+$ nano .env             # IP address to bind (docker-machine vs native docker!)
+$ docker-compose up
+```
+
+Then you have to manually install database via `http://${IP}:8080` (see `docker-compose.yml` for credentials).
+Afterwards the application is available via `https://${IP}` and `http://${IP}` (should be redirected immediately).
+
+Database is persistent between up & downs and stored in `.mysql` directory.
+
+Various notes
+-------------
+
+MySQL database handles timestamp and datetime types differently (timestamp is stored in UTC, datetime "as is") then translation to
+current connection timezone is done see (https://www.eversql.com/mysql-datetime-vs-timestamp-column-types-which-one-i-should-use/).
