@@ -125,6 +125,21 @@ Test:
 3. that you cannot access other files in directory by direct path
 4. that scripts works - renames .htaccess in proper time (permission to the parent dir must be set correctly).
 
+Doing erratas
+-------------
+
+The system doesn't support multiple correct answers and later acceptance of additional correct answers is difficult and needs to be done due to following reasons:
+
+- There is unique key on code, team and task, therefore the changes needs to be done to always keep this constraint.
+- The correct answer needs to be manually added, or some other wrong option on that task needs to be modified (after removal on the correct answer), however do not forget:
+    - The teams could (and typically at least some) get to the correct answer in the end, in such situation the correct answer has to be removed and some wrong answer has to be updated with the original correct code.
+  (When doing this in batch you will need to use "temporary" table to store which IDs are to remove and which are to update)
+    - All answers after the new correct answer should be removed (as their penalisation would still be counted).
+    - With some task, the team could answer another wrong answer which should be evaluated as correct but was not found by the organisators yet!
+    - There is no history or no going back! (There is `log` table but that is usable only for humans, not for automated queries and restoration.)
+    - Preferred way is manual, when doing batch updates always backup database prior running the destroying queries.
+    - Each such change can change scores of multiple teams (not only the team with the changed answer!) due to the penalisation for solved as nth, be aware of that and do not forget to update the results by running the CRON (especially when game has ended).
+
 
 After the contest
 -------------------
