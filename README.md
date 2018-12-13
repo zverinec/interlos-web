@@ -69,12 +69,13 @@ Running the contest
 1. Create series of task (ciphers, logical, programming) in table `serie` (fill `to_show` properly, to prevent answering before release whole series)
 2. Populate table `task` with correct answers. Provide codes in upper case (just for case)
 3. Update config - set page with in game information which will be shown below the header after the game beginning.
-4. Udpate page with proper URLs where the files are hosted.
-5. Run CRON job (generating statistics)
-   /cron/database?admin-key=hesloproadmin OR /cron/database?cron-key=hesloprocron NEVER BOTH OF THEM
-6. Run it! Test answering with testing team and then remove the answer in the database.
-7. Monitor server performance.
-8. Disable CRON jobs
+4. Udpate page (`app/FrontendModule/templates/Game/default.latte`) with proper URLs where the files are hosted.
+5. Upload files for tasks and check web server has access to change file name `.htacess` to `.old-haccess`.
+6. Run CRON job (generating statistics)
+   /cron/database?admin-key=hesloproadmin OR /cron/database?cron-key=hesloprocron NEVER BOTH OF THEM.
+7. Run it! Test answering with testing team and then remove the answer in the database.
+8. Monitor server performance.
+9. Disable CRON jobs
 
 The statistics are automatically hidden 30 minutes before game end. Admins can get access by appending `?admin-key=hesloproadmin` to the URL.
 
