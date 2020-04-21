@@ -1,0 +1,242 @@
+<!--?xml version="1.0" encoding="utf-8" ?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="content-language" content="cz">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+	<link rel="icon" href="https://interlos.fi.muni.https://interlos.fi.muni.cz/images/favicon.ico" type="image/x-icon">
+	<title>InterLoS – Přidej se k organizátorům!</title>
+
+</head>
+<body>
+	<div class="root">
+		<div class="header">
+			<div class="header-line">&nbsp;</div>
+			<div class="contents">
+				<a href="https://interlos.fi.muni.cz/">
+					<span class="block header-logo" title="InterLoS – INTERnetová LOgická Soutěž">&nbsp;</span>
+					<span class="block header-name" title="InterLoS – INTERnetová LOgická Soutěž">&nbsp;</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="main">
+
+			<div class="contents">
+<div id="flashes">
+</div>
+
+<div class="main-block">
+	<h1>Přidej se k organizátorům!</h1>
+
+	<p>Chceš poznat ostatní aktivní studenty na FI a dalších fakultách MU? Chceš si zkusit něco nového? Chceš se podívat na přípravu akce z té druhé strany? Zapoj se do organizace každoroční internetové soutěže InterLoS.</p>
+
+	<h2>Co je to za soutěž?</h2>
+
+	<p>Účastníci InterLoSa v pětičlenných týmech získávají body za programátorské, logické i šifrovací úlohy – a vítězi patří nikdy nehynoucí sláva. Loni se zúčastnilo 223 týmů, celkem zhruba 850 účastníků z řad středoškoláků, vysokoškoláků i starších luštitelů.</p>
+
+	<p>Podrobné informace o hře, <a href="https://interlos.fi.muni.cz/default/about">pravidla</a> a <a href="https://interlos.fi.muni.cz/game/">úkoly</a> z minulých ročníků si můžeš prohlédnout na <a href="https://interlos.fi.muni.cz/">webu hry</a>.
+
+	<h2>A jak do toho zapadám já?</h2>
+
+	<p>Soutěž probíhá začátkem prosince, nicméně s přípravami je potřeba začít už teď! Láká tě vymyslet si vlastní úlohu? Nechceš nic vymýšlet, ale klidně dotáhneš nápad do finální podoby? Zkusíš úlohy testovat? Nebo jsi prostě zvědavý/á? Můžeš se účastnit pravidelných setkání, nebo se zapojit čistě externě – a taky cokoli mezi tím.</p>
+
+	<p>Zaujali jsme tě?</p>
+
+	<p><a class="cta-button" href="mailto:interlos@fi.muni.cz">Přidej se!</a></p>
+
+	<p><small>Tešíme sa na vás!</small></p>
+</div>			</div>
+		</div>
+
+		<div class="footer">
+			<div class="contents">
+				<a class="footer-fi left" href="https://fi.muni.cz/">losí organizátory zajišťuje<br>Fakulta Informatiky MU</a>
+				<a href="https://www.facebook.com/interlos" class="footer-facebook">&nbsp;</a>
+				<div class="footer-contact">
+					<br>
+					<a href="mailto:%69%6e%74%65%72%6c%6f%73@%66%69.%6d%75%6e%69.%63%7a">interlos[at]fi.muni.cz</a>
+				</div>
+				<div class="cleaner-both">&nbsp;</div>
+			</div>
+			<div class="footer-line">&nbsp;</div>
+		</div>
+
+	</div>
+
+<style>
+/* InterLoS stylesheet
+used colors:
+    dark brown: rgb(45,22,15)
+    light brown: rgb(216,181,94)
+    base field opacity: 0.25
+*/
+
+/* Open Sans font import (Google font API) */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800&subset=latin,latin-ext);
+
+/* top elements - body, root, contents, cleaners, frames */
+body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-size: 90%; line-height: 1.4em; color: rgb(45,22,15); background-color: rgb(255,255,255); text-align: left; margin: 0; padding: 0; height: 100%; background-image: url("https://interlos.fi.muni.cz/images/background.png"); background-repeat: repeat; }
+.root { position: absolute; min-height: 100%; min-width: 100%; padding: 0; margin: 0; }
+@media only screen and (min-width: 500px) {
+	p {
+		text-align: justify;
+	}
+}
+
+.cleaner-both { display: block; height: 0; overflow: hidden; clear: both; }
+.cleaner-right { display: block; height: 0; overflow: hidden; clear: right; }
+.block { display: block; }
+
+.contents { padding: 0 10px 0 10px; min-width: 320px; max-width: 1200px; margin: 0 auto 0 auto; }
+@media only screen and (min-width: 825px) {
+	.header-team-name { width: 290px; }
+	.contents { width: 90%; }
+}
+@media only screen and (min-width: 950px) {
+	.contents { width: 80%; }
+}
+
+/* info page */
+.info-frame { height: 200px; width: 100%; margin: 0 0 30px 0; border: none; }
+.info-webpage { min-height: 115px; padding: 15px 30px 20px 30px; background-color: rgba(216,181,94,0.25); }
+.info-time { float: left; width: 50px; font-weight: bold; margin: 0 0 5px 0; }
+.info-message { overflow:hidden; margin: 0 0 5px 0; }
+
+/* header */
+.header { min-height: 110px; width: 100%; margin: 0 0 20px 0; }
+.header-line { overflow: hidden; width: 100%; height: 10px; background-color: rgb(45,22,15); border-width: 0 0 2px 0; border-style: solid; border-color: rgb(216,181,94); box-shadow: 0 0 10px rgb(45,22,15); }
+.header-logo { position: relative; top: -12px; height: 110px; width: 90px; float: left; background-color: rgb(216,181,94); background-image: url("https://interlos.fi.muni.cz/images/logo-logo.png"); background-repeat: no-repeat; box-shadow: 4px 4px 10px rgba(45,22,15,0.6); }
+.header-name { height: 100px; width: 230px; float: left; background-image: url("https://interlos.fi.muni.cz/images/logo-name.png"); background-repeat: no-repeat; }
+
+.header-login-panel { min-height: 30px; max-width: 420px; float:right; background-color: rgba(216,181,94,0.25); font-size: 10pt; line-height: 30px; vertical-align: middle; }
+.header-team-name, .header-team-name a { float: left; height: 30px; max-width: 290px; padding: 0 10px 0 10px; font-weight: bold; text-decoration: none; }
+.header-loginout { float: right; height: 30px; width: 70px; padding: 0 30px 0 10px; background-repeat: no-repeat; }
+.header-loginout:hover { background-position: 0 -30px; color: rgb(216,181,94); }
+.header-login { background-image: url("https://interlos.fi.muni.cz/images/login.png"); }
+.header-logout { background-image: url("https://interlos.fi.muni.cz/images/logout.png"); }
+
+.menu { height: 70px; width: 60px; float: right; display: block; background-repeat: no-repeat; text-align: center; font-weight: bold; font-size: 9pt; line-height: 90pt; vertical-align: bottom; }
+.menu:hover { background-position: 0 -70px; color: rgb(216,181,94) }
+.menu-home { background-image: url("https://interlos.fi.muni.cz/images/home.png"); }
+.menu-about { background-image: url("https://interlos.fi.muni.cz/images/about.png"); }
+.menu-archive { background-image: url("https://interlos.fi.muni.cz/images/archive.png"); }
+.menu-puzzles { background-image: url("https://interlos.fi.muni.cz/images/puzzles.png"); }
+.menu-teams { background-image: url("https://interlos.fi.muni.cz/images/teams.png"); }
+.menu-discussions { background-image: url("https://interlos.fi.muni.cz/images/discussions.png"); }
+.menu-register { background-image: url("https://interlos.fi.muni.cz/images/register.png"); }
+.menu-settings { background-image: url("https://interlos.fi.muni.cz/images/settings.png"); }
+
+/* footer */
+.footer { position: absolute; bottom: 0; height: 46px; width: 100%; }
+.footer-line { overflow: hidden; width: 100%; height: 4px; background-color: rgb(45,22,15); border-width: 2px 0 0 0; border-style: solid; border-color: rgb(216,181,94); box-shadow: 0 0 15px rgba(45,22,15,0.8); }
+.footer-facebook { height: 40px; width: 120px; float: right; background-image: url("https://interlos.fi.muni.cz/images/facebook.png"); text-decoration:none; }
+.footer-facebook:hover { background-position: 0 40px; }
+.footer-contact { padding: 6px 0 6px 0; float: right; font-size: 9pt; line-height: 11pt; text-align: right; }
+.footer-fi { float: left; display: block; height: 40px; padding-left: 45px; background-image: url("https://interlos.fi.muni.cz/images/logo-fi-footer.png"); background-position: 0 0; background-repeat: no-repeat; text-decoration:none; font-size: 9pt; line-height: 13pt; }
+.footer-fi:hover { background-position: 0 -40px; }
+
+/* main */
+.main { width: 100%; margin: 0 0 70px 0; padding: 0; }
+.main-block { padding: 15px 30px 20px 30px; margin: 0 0 30px 0; background-color: rgba(216,181,94,0.25); }
+
+/* basic html, basic emphasis */
+h1 { font-size: 200%; line-height: 140%; margin: 0 0 0.3em 0; }
+h2 { font-size: 130%; font-weight: bold; margin: 0.9em 0 0.5em 0; }
+p { margin: 0 0 0.8em 0; }
+ol { margin: 0; }
+ul { margin: 0; }
+ol>li, ul>li { margin: 0 0 5px 0; }
+a { color: rgb(45,22,15); text-decoration: underline; font-weight: normal; }
+a img { border: none; }
+a:hover { color: rgb(216,181,94); }
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+.hr { height: 3px; width: 100%; margin: 20px 0 10px 0; overflow: hidden; background-color: rgba(216,181,94,0.25); }
+
+/* tables */
+table th, td { padding: 2px 10px 2px 10px; overflow: hidden; }
+table th { background-color: rgb(216,181,94); }
+table { min-width: 90%; max-width: 1000px; margin: 10px auto 20px auto; }
+tr.even { background-color: rgba(216,181,94,0.25); }
+.center { text-align: center; }
+
+/* discussion */
+.discussion-team { float: left; margin: 0 0 5px 0; font-weight: bold;  }
+.discussion-date { float: right; font-size: 75%; }
+.discussion-main { padding: 10px 15px 5px 15px; margin: 0 0 10px 0; background-color: rgba(216,181,94,0.25); }
+.discussion-reply { margin: 0 0 20px 80px; }
+.discussion-add { height: 25px; padding: 5px 0 0 30px; background-image: url("https://interlos.fi.muni.cz/images/discussion-add.png"); background-position: 0 0; background-repeat: no-repeat; }
+.discussion-add:hover { background-position: 0 -30px; color: rgb(216,181,94); }
+.paginator { margin: 20px 0 20px 0; }
+.paginator a, .paginator span { margin-right: 0.3em; padding: 0.2em 0.5em; background-color: rgba(216,181,94,0.25); text-decoration: none; }
+.paginator .current { font-weight: bold; }
+
+/* forms */
+fieldset { border-color: rgb(45,22,15); border-width: 1px; border-style: dashed; margin-bottom: 10px; }
+textarea { border: none; padding: 5px; background-color: rgba(216,181,94,0.25); color: rgb(45,22,15); font-size: 120%; }
+form th { background-color: transparent; }
+legend { font-weight: bold; background-color: rgb(216,181,94); padding: 5px 10px 5px 10px;}
+input, select { border: none; padding: 5px; background-color: rgba(216,181,94,0.25); color: rgb(45,22,15); }
+input:disabled { background-color: rgb(216,181,94); }
+input.button { border-style: solid; border-width: 2px; border-color: rgb(216,181,94);; padding: 5px 15px 5px 15px; background-color: rgb(216,181,94); color: rgb(45,22,15); font-weight: bold; }
+input.button:hover { border-color: rgb(45,22,15); }
+label { float: right; }
+label:after { content: ":"; }
+
+/* messages */
+ul.error { list-style: none; background: none; padding: 0px; }
+.main-message, .flash, ul.error li { min-height: 30px; padding: 10px 30px 10px 60px; margin: 0 0 10px 0; font-size: 120%; line-height: 30px; font-weight: bold; background-repeat: no-repeat; }
+.ok, .success { background-color: rgba(194,224,182,0.25); color: rgb(26,110,0);  background-image: url("https://interlos.fi.muni.cz/images/ok.png"); }
+.nok, .error, ul.error li { background-color: rgba(247,198,198,0.25); color: rgb(186,13,13);  background-image: url("https://interlos.fi.muni.cz/images/nok.png"); background-repeat: no-repeat; }
+
+
+/* extra */
+.large-text { font-size: 1.5em; }
+.inline-image { display: inline; }
+div#clock { float: right; }
+div#logos a { margin: 30px; margin-left: 20px; margin-right: 20px; display: block; float: left; }
+table#overview { margin: 0px; min-width: auto; display: block; }
+table#overview th { font-size: 1.2em; background: inherit; padding: 5px 0 5px 0; }
+.posterLandscape { float: right; margin: 0 0 10px 20px; border: none; width: 50%; height: 50%; }
+.poster { float: right; margin: 0 0 10px 20px; border: none; width: 50%; height: 50%; }
+#chat textarea { float: left; width: 70%}
+#chat label:after { content: ""; }
+#chat input.button { float: right; width: 26%; min-width: 140px; }
+@media only screen and (max-width: 700px) {
+	#chat textarea { width: 98%; }
+	#chat input.button { clear:both; float: left; }
+}
+*::-webkit-input-placeholder { color: rgb(186,13,13); }
+*:-moz-placeholder { color: rgb(186,13,13); }
+*:-ms-input-placeholder { color: rgb(186,13,13);
+}
+
+@media only screen and (min-width: 1200px) {
+	.posterLandscape { width: 499px; height: 356px; }
+	.poster { width: 212px; height: 300px; }
+}
+
+/* scoring */
+#score-stats-wrapper { }
+table#score-stats { margin: 0px; }
+#score-stats td,#score-stats th { min-width: 40px; }
+#score-stats th { padding: 2px; }
+#score-stats td.team { font-weight: bolder; }
+#score-stats td.done { background-color: rgb(26,110,0); color: white; }
+#score-stats tr:nth-child(odd) { background: rgba(216, 181, 94, 0.15); }
+#score-stats tr:hover { background: rgba(216, 181, 94, 0.4); }
+#answer-history td.code { background-color: rgb(186,13,13); color: white;}
+#answer-history .correct td.code { background-color: rgb(26,110,0); color: white; }
+.cta-button {
+	display: inline-block; padding: 10px 20px; background-color:rgb(216,181,94);
+	margin: 10px auto;
+	text-decoration: none;
+}
+.cta-button:hover {
+	color: rgb(225, 206, 200);
+	background-color: rgb(155, 125, 49);
+	text-decoration: none;
+}
+</style>
+</body></html>
