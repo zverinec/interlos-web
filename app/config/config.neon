@@ -50,6 +50,7 @@ http:
 		img-src:
 			- self
 			- 'data:'
+			- https://fadmin.fi.muni.cz/piwik/
 		style-src:
 			- self
 			- https://fonts.googleapis.com
