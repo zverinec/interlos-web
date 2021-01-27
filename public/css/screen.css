@@ -66,8 +66,8 @@ body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-siz
 .footer-facebook { height: 40px; width: 120px; float: right; background-image: url("../images/facebook.png"); text-decoration:none; }
 .footer-facebook:hover { background-position: 0 40px; }
 .footer-contact { padding: 6px 0 6px 0; float: right; font-size: 9pt; line-height: 11pt; text-align: right; }
-.footer-fi { float: left; display: block; height: 40px; padding-left: 45px; background-image: url("../images/logo-fi-footer.png"); background-position: 0 0; background-repeat: no-repeat; text-decoration:none; font-size: 9pt; line-height: 13pt; }
-.footer-fi:hover { background-position: 0 -40px; }
+.footer-zverinec { float: left; display: block; height: 40px; padding-left: 90px; background-image: url("../images/logo-zverinec-footer.png"); background-position: 0 0; background-repeat: no-repeat; text-decoration:none; font-size: 9pt; line-height: 13pt; }
+.footer-zverinec:hover { background-position: 0 -40px; }
 
 /* main */
 .main { width: 100%; margin: 0 0 70px 0; padding: 0; }
