@@ -108,6 +108,7 @@ CREATE TABLE `team` (
 	`email` varchar(150) COLLATE utf8_czech_ci DEFAULT NULL COMMENT 'e-mailova adresa',
 	`inserted` datetime NOT NULL COMMENT 'cas, kdy byla polozka vlozena do systemu',
 	`updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'cas, kdy byla polozka naposledy zmenena',
+    `reset_code` varchar(160) COLLATE utf8_czech_ci NULL COMMENT 'password reset code',
 	PRIMARY KEY (`id_team`),
 	UNIQUE KEY `id_year` (`id_year`,`name`),
 	UNIQUE KEY `id_year_2` (`id_year`,`email`),

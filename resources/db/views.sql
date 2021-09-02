@@ -15,6 +15,7 @@ CREATE VIEW `view_team` AS
 			`team`.`category`,
 			`team`.`email`,
 			`team`.`inserted`,
+			`team`.`reset_code`,
 			CAST(COALESCE (`team`.`updated`, `team`.`inserted`) AS DATETIME) AS `updated` -- This bypass the problematic default value in views (zeros instead of CURRENT_TIMESTAMP) which causes problem on temporary table creation
 		FROM `team`
 		INNER JOIN `view_current_year` USING(`id_year`)

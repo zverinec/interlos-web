@@ -315,4 +315,8 @@ class Interlos {
 		return self::$container->getByType(\Nette\Http\Session::class)->getSection($namespace);
 	}
 
+	public static function cleanPasswordResetTokens() {
+		self::teams()->update(['reset_code' => null])->where("[reset_code] IS NOT NULL AND updated < DATE_SUB(NOW(),INTERVAL 2 DAY)")->execute();
+	}
+
 }

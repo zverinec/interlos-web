@@ -2,12 +2,14 @@
 namespace FrontModule;
 
 use Nette\Application\BadRequestException;
+use Nette\Mail\IMailer;
 use Nette\Security\AuthenticationException;
 
 class DefaultPresenter extends BasePresenter {
 
 	public function actionLogout() {
 		$this->user->logout(TRUE);
+		\Interlos::cleanPasswordResetTokens();
 		$this->redirect("default");
 	}
 
@@ -25,7 +27,13 @@ class DefaultPresenter extends BasePresenter {
 	}
 
 	public function renderLogin() {
+		\Interlos::cleanPasswordResetTokens();
 		$this->setPagetitle("Přihlásit se");
+	}
+
+	public function renderResetPassword($code = '') {
+		\Interlos::cleanPasswordResetTokens();
+		$this->setPagetitle("Změna hesla");
 	}
 
 	// ----- PROTECTED METHODS
@@ -36,7 +44,14 @@ class DefaultPresenter extends BasePresenter {
 	}
 
 	protected function createComponentLogin($name) {
-		return new \LoginFormComponent();
+		$comp = new \LoginFormComponent($this->context->getByType(IMailer::class));
+		$comp->setMailParameters($this->context->parameters['mail']);
+		return $comp;
+	}
+
+	protected function createComponentResetPassword($name) {
+		$comp = new \ResetPasswordFormComponent($this->getParameter('code'), $this->getParameter('name'));
+		return $comp;
 	}
 
 }
