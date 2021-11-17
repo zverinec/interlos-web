@@ -5,12 +5,17 @@ use Dibi\Fluent;
 
 class TeamsModel extends AbstractModel
 {
+	const COLLEGE = 'college';
+	const HIGH_SCHOOL = 'high_school';
+	const OTHER = 'other';
 
-	const COLLEGE	= 'college';
-
-	const HIGH_SCHOOL	= 'high_school';
-
-	const OTHER		= 'other';
+	const SRC_NOT_DEFINED = NULL;
+	const SRC_HISTORY = 'history';
+	const SRC_FRIENDS = 'friends';
+	const SRC_FB = 'facebook';
+	const SRC_IG = 'instagram';
+	const SRC_PAPER = 'paper';
+	const SRC_EMAIL = 'email';
 
 	public function find($id) {
 	$this->checkEmptiness($id, "id");
@@ -28,7 +33,7 @@ class TeamsModel extends AbstractModel
 	return $this->getConnection()->dataSource("SELECT * FROM [tmp_total_result]");
 	}
 
-	public function insert($name, $email, $category, $password) {
+	public function insert($name, $email, $category, $password, $source) {
 	$this->checkEmptiness($name, "name");
 	$this->checkEmptiness($email, "email");
 	$this->checkEmptiness($category, "category");
@@ -40,7 +45,8 @@ class TeamsModel extends AbstractModel
 		"category"	=> $category,
 		"password"	=> $password,
 		"inserted"	=> new DateTime(),
-		"id_year"	=> Interlos::years()->findCurrent()->id_year
+		"id_year"	=> Interlos::years()->findCurrent()->id_year,
+		"source"	=> $source
 	))->execute();
 	$return = $this->getConnection()->getInsertId();
 	$this->log($return, "team_inserted", "The team [$name] has been inserted.");

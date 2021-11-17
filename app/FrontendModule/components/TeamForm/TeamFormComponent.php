@@ -58,7 +58,8 @@ class TeamFormComponent extends BaseComponent {
 					$values["team_name"],
 					$values["email"],
 					$values["category"],
-					$values["password"]
+					$values["password"],
+					$values["source"]
 			);
 			// Send e-mail
 			/** @var \Nette\Bridges\ApplicationLatte\Template $template */
@@ -97,7 +98,8 @@ class TeamFormComponent extends BaseComponent {
 		try {
 			// Update the team
 			$changes = array(
-					"category"  => $values["category"]
+					"category" => $values["category"],
+					"source" => $values["source"]
 			);
 			if(isSet($values["email"])) {
 				$changes["email"] = $values["email"];
@@ -159,6 +161,17 @@ class TeamFormComponent extends BaseComponent {
 		$schools = Interlos::schools()->findAll()->orderBy("name")->fetchPairs("id_school", "name");
 		$schools = array(NULL => "-- Nevyplněno/jiná --") + $schools;
 
+		// Source
+		$form->addSelect("source", "Odkud jste se o soutěži dozvěděli", array(
+				TeamsModel::SRC_HISTORY => "soutěžili jsme v minulosti",
+				TeamsModel::SRC_FB => "z facebooku",
+				TeamsModel::SRC_IG => "z instagramu",
+				TeamsModel::SRC_PAPER => "z plakátku",
+				TeamsModel::SRC_FRIENDS => "od známých",
+				TeamsModel::SRC_EMAIL => "z e-mailu",
+				TeamsModel::SRC_NOT_DEFINED => "nevyplněno / jiné",
+		));
+
 		// Members
 		for ($i=1; $i<=self::NUMBER_OF_MEMBERS; $i++) {
 			$form->addGroup("$i. člen");
@@ -184,6 +197,7 @@ class TeamFormComponent extends BaseComponent {
 					"team_name"	=> $loggedTeam->name,
 					"email"	=> $loggedTeam->email,
 					"category"	=> $loggedTeam->category,
+					"source"	=> $loggedTeam->source,
 					"id_team"	=> $loggedTeam->id_team
 			);
 			$competitors = Interlos::competitors()->findAllByTeam($loggedTeam->id_team)->orderBy("id_competitor")->fetchAll();
