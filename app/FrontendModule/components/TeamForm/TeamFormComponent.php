@@ -197,7 +197,7 @@ class TeamFormComponent extends BaseComponent {
 					"team_name"	=> $loggedTeam->name,
 					"email"	=> $loggedTeam->email,
 					"category"	=> $loggedTeam->category,
-					"source"	=> $loggedTeam->source,
+					"source"	=> $loggedTeam->source === NULL ? '' : $loggedTeam->source,
 					"id_team"	=> $loggedTeam->id_team
 			);
 			$competitors = Interlos::competitors()->findAllByTeam($loggedTeam->id_team)->orderBy("id_competitor")->fetchAll();
