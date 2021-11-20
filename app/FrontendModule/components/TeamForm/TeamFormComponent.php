@@ -59,7 +59,7 @@ class TeamFormComponent extends BaseComponent {
 					$values["email"],
 					$values["category"],
 					$values["password"],
-					$values["source"]
+					$values["source"] === '' ? NULL : $values["source"]
 			);
 			// Send e-mail
 			/** @var \Nette\Bridges\ApplicationLatte\Template $template */
@@ -99,7 +99,7 @@ class TeamFormComponent extends BaseComponent {
 			// Update the team
 			$changes = array(
 					"category" => $values["category"],
-					"source" => $values["source"]
+					"source" => $values["source"] === '' ? NULL : $values["source"]
 			);
 			if(isSet($values["email"])) {
 				$changes["email"] = $values["email"];
