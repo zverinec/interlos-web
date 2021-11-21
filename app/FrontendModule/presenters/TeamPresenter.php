@@ -18,7 +18,7 @@ class TeamPresenter extends BasePresenter
 	{
 		$this->setPageTitle("Seznam týmů");
 		$this->getComponent("teamList")->setSource(
-			\Interlos::teams()->findAll()
+			\Interlos::teams()->findAll()->orderBy("name")
 		);
 		$this->getTemplate()->categories = array(
 			\TeamsModel::HIGH_SCHOOL => "Středoškoláci",
