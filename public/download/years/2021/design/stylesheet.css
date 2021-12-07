@@ -1,0 +1,90 @@
+/*d InterLoS stylesheet 
+used colors:
+    dark brown: rgb(45,22,15)
+    light brown: rgb(216,181,94)
+    base field opacity: 0.25
+*/
+
+/* Open Sans font import (Google font API) */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800&subset=latin,latin-ext);
+
+/* top elements - body, root, contents, cleaners, frames */
+body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-size: 90%; line-height: 1.4em; color: rgb(45,22,15); background-color: rgb(255,255,255); text-align:justify; margin: 0; padding: 0; height: 100%; background-image: url("background.png"); background-repeat: repeat; }
+.root { position: absolute; min-height: 100%; min-width: 100%; padding: 0; margin: 0; }
+
+.cleaner-both { display: block; height: 0; overflow: hidden; clear: both; }
+.cleaner-right { display: block; height: 0; overflow: hidden; clear: right; }
+.block { display: block; }
+
+.contents { padding: 0 10px 0 10px; min-width: 320px; max-width: 1200px; margin: 0 auto 0 auto; }
+@media only screen and (min-width: 825px) {
+	.header-team-name { width: 290px; }
+	.contents { width: 90%; }
+}
+@media only screen and (min-width: 950px) {
+	.contents { width: 80%; }
+}
+
+/* info page */
+.info-frame { height: 150px; width: 100%; margin: 0 0 30px 0; border: none; }
+.info-webpage { min-height: 115px; padding: 15px 30px 20px 30px; background-color: rgba(216,181,94,0.25); }
+.info-time { float: left; width: 50px; font-weight: bold; margin: 0 0 5px 0; }
+.info-message { overflow:hidden; margin: 0 0 5px 0; }
+
+/* header */
+.header { min-height: 110px; width: 100%; margin: 0 0 20px 0; }
+.header-line { overflow: hidden; width: 100%; height: 10px; background-color: rgb(45,22,15); border-width: 0 0 2px 0; border-style: solid; border-color: rgb(216,181,94); box-shadow: 0 0 10px rgb(45,22,15); }
+.header-logo { position: relative; top: -12px; height: 110px; width: 90px; float: left; background-color: rgb(216,181,94); background-image: url("logo-logo.png"); background-repeat: no-repeat; box-shadow: 4px 4px 10px rgba(45,22,15,0.6); }
+.header-name { height: 100px; width: 230px; float: left; background-image: url("logo-name.png"); background-repeat: no-repeat; }
+.header-year { height: 55px; width: 270px; position: relative; top: -12px; float: right; padding: 10px 0 0 0; background-color: rgb(216,181,94); text-align: center; box-shadow: 4px 4px 10px rgba(45,22,15,0.6); }
+
+/* footer */
+.footer { position: absolute; bottom: 0; height: 6px; width: 100%; }
+.footer-line { overflow: hidden; width: 100%; height: 4px; background-color: rgb(45,22,15); border-width: 2px 0 0 0; border-style: solid; border-color: rgb(216,181,94); box-shadow: 0 0 15px rgba(45,22,15,0.8); }
+.footer-facebook { height: 40px; width: 100px; float: left; background-image: url("facebook.png"); }
+.footer-facebook:hover { background-position: 0 40px; }
+.footer-contact { padding: 6px 0 6px 0; float: right; font-size: 9pt; line-height: 11pt; text-align: right; }
+
+/* main */
+.main { width: 100%; padding: 0; }
+.main-block { padding: 15px 30px 20px 30px; margin: 0 0 30px 0; background-color: rgba(216,181,94,0.25); }
+
+/* basic html, basic emphasis */
+h1 { font-size: 200%; line-height: 140%; margin: 0 0 0.3em 0;}
+h2 { font-size: 130%; font-weight: bold; margin: 0.9em 0 0.5em 0; }
+p { margin: 0 0 0.8em 0; }
+ol { margin: 0; }
+ul { margin: 0; }
+ol>li, ul>li { margin: 0 0 5px 0; }
+a { color: rgb(45,22,15); text-decoration: underline; font-weight: normal; }
+a:hover { color: rgb(216,181,94); }
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+
+/* site-specific CSS */
+table th, td { padding: 2px 10px 2px 10px; overflow: hidden; }
+table th { background-color: rgb(216,181,94); }
+table { min-width: 90%; max-width: 1000px; margin: 10px auto 20px auto; }
+tr.even { background-color: rgba(216,181,94,0.25); }
+.center { text-align: center; }
+.hr { height: 3px; width: 100%; margin: 20px 0 10px 0; overflow: hidden; background-color: rgba(216,181,94,0.25); }
+
+/* forms */
+fieldset { border-color: rgb(45,22,15); border-width: 1px; border-style: dashed; margin-bottom: 10px; }
+form th { background-color: transparent; }
+input, select { border: none; padding: 5px; background-color: rgba(216,181,94,0.25); color: rgb(45,22,15); }
+input:disabled { background-color: rgb(216,181,94); }
+input.button { border-style: solid; border-width: 2px; border-color: rgb(216,181,94);; padding: 5px 15px 5px 15px; background-color: rgb(216,181,94); color: rgb(45,22,15); font-weight: bold; }
+input.button:hover { border-color: rgb(45,22,15); }
+label { float: right; }
+label:after { content: ":"; }
+
+/* extras */
+span.date { font-family: monospace; display: block; clear: both;}
+div.time-to-refresh { float: right; font-size: 110%; padding: 8px; margin-right: 10px; }
+.ok, .nok, .neutral { min-height: 30px; padding: 5px 10px 0px; margin: 0 0 5px 0; font-size: 100%; font-weight: bold; background-repeat: no-repeat; }
+.ok { background-color: rgba(194,224,182,0.25); color: rgb(26,110,0); }
+.nok { background-color: rgba(247,198,198,0.25); color: rgb(186,13,13);  }
+.window-opener { text-decoration: none; float: right; border-style: solid; border-width: 2px; border-color: rgb(216,181,94);; padding: 5px 15px 5px 15px; background-color: rgb(216,181,94); font-weight: bold; }
+.window-opener:hover { color: rgb(45,22,15); border-color: rgb(45,22,15); }
+h1.lefted { float: left; }
