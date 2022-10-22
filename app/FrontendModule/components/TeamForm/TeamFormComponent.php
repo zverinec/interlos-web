@@ -40,7 +40,7 @@ class TeamFormComponent extends BaseComponent {
 			$form->addError('Momentálně neprobíhá registrace.');
 			return;
 		}
-		$values		= $form->getValues();
+		$values = $form->getValues();
 		$competitors= $this->loadCompetitorsFromValues($values);
 		if (!$competitors) {
 			$this->getPresenter()->flashMessage("Pokoušíte se vložit školu, která již existuje.", "error");
@@ -52,14 +52,22 @@ class TeamFormComponent extends BaseComponent {
 			$this->getPresenter()->flashMessage("Tým se stejným názvem nebo kontaktním e-mailem již existuje", "error");
 			return;
 		}
+
+		// This is a hack protection agains spambots (they usually insert same string to all text fields)
+		$names = array_map(function ($c) { return $c["name"]; }, $competitors);
+		if ((count(array_unique($names)) < count($names)) && (count($names) > 1)) {
+			$form->addError('Jména členů musí být různá.');
+			return;
+		}
+
 		try {
 			// Insert team
 			$insertedTeam = Interlos::teams()->insert(
-					$values["team_name"],
-					$values["email"],
-					$values["category"],
-					$values["password"],
-					$values["source"] === '' ? NULL : $values["source"]
+				$values["team_name"],
+				$values["email"],
+				$values["category"],
+				$values["password"],
+				$values["source"] === '' ? NULL : $values["source"]
 			);
 			// Send e-mail
 			/** @var \Nette\Bridges\ApplicationLatte\Template $template */
@@ -84,8 +92,6 @@ class TeamFormComponent extends BaseComponent {
 			Debugger::log($e, Debugger::EXCEPTION);
 			return;
 		}
-
-
 	}
 
 	public function updateSubmitted(Nette\Forms\Form $form) {
@@ -98,8 +104,8 @@ class TeamFormComponent extends BaseComponent {
 		try {
 			// Update the team
 			$changes = array(
-					"category" => $values["category"],
-					"source" => $values["source"] === '' ? NULL : $values["source"]
+				"category" => $values["category"],
+				"source" => $values["source"] === '' ? NULL : $values["source"]
 			);
 			if(isSet($values["email"])) {
 				$changes["email"] = $values["email"];
@@ -143,14 +149,14 @@ class TeamFormComponent extends BaseComponent {
 		$form->addPassword("password", "Heslo");
 		$form->addPassword("password_check", "Kontrola hesla")
 			->setRequired(false)
-				->addConditionOn($form["password"], Nette\Forms\Form::FILLED)
-				->addRule(Nette\Forms\Form::EQUAL, "Heslo a kontrola hesla se neshodují.", $form["password"]);
+			->addConditionOn($form["password"], Nette\Forms\Form::FILLED)
+			->addRule(Nette\Forms\Form::EQUAL, "Heslo a kontrola hesla se neshodují.", $form["password"]);
 
 		// Category
 		$form->addSelect("category", "Kategorie", array(
-				TeamsModel::HIGH_SCHOOL	=> "Středoškoláci",
-				TeamsModel::COLLEGE	=> "Vysokoškoláci",
-				TeamsModel::OTHER	=> "Ostatní",
+			TeamsModel::HIGH_SCHOOL	=> "Středoškoláci",
+			TeamsModel::COLLEGE	=> "Vysokoškoláci",
+			TeamsModel::OTHER	=> "Ostatní",
 		));
 
 		// E-mails
@@ -163,13 +169,13 @@ class TeamFormComponent extends BaseComponent {
 
 		// Source
 		$form->addSelect("source", "Odkud jste se o soutěži dozvěděli", array(
-				TeamsModel::SRC_HISTORY => "soutěžili jsme v minulosti",
-				TeamsModel::SRC_FB => "z facebooku",
-				TeamsModel::SRC_IG => "z instagramu",
-				TeamsModel::SRC_PAPER => "z plakátku",
-				TeamsModel::SRC_FRIENDS => "od známých",
-				TeamsModel::SRC_EMAIL => "z e-mailu",
-				TeamsModel::SRC_NOT_DEFINED => "nevyplněno / jiné",
+			TeamsModel::SRC_HISTORY => "soutěžili jsme v minulosti",
+			TeamsModel::SRC_FB => "z facebooku",
+			TeamsModel::SRC_IG => "z instagramu",
+			TeamsModel::SRC_PAPER => "z plakátku",
+			TeamsModel::SRC_FRIENDS => "od známých",
+			TeamsModel::SRC_EMAIL => "z e-mailu",
+			TeamsModel::SRC_NOT_DEFINED => "nevyplněno / jiné",
 		));
 
 		// Members
@@ -194,18 +200,18 @@ class TeamFormComponent extends BaseComponent {
 		if ($this->user->isLoggedIn()) {
 			$loggedTeam = Interlos::getLoggedTeam();
 			$defaults += array(
-					"team_name"	=> $loggedTeam->name,
-					"email"	=> $loggedTeam->email,
-					"category"	=> $loggedTeam->category,
-					"source"	=> $loggedTeam->source === NULL ? '' : $loggedTeam->source,
-					"id_team"	=> $loggedTeam->id_team
+				"team_name"	=> $loggedTeam->name,
+				"email"	=> $loggedTeam->email,
+				"category"	=> $loggedTeam->category,
+				"source"	=> $loggedTeam->source === NULL ? '' : $loggedTeam->source,
+				"id_team"	=> $loggedTeam->id_team
 			);
 			$competitors = Interlos::competitors()->findAllByTeam($loggedTeam->id_team)->orderBy("id_competitor")->fetchAll();
 			$counter = 1;
 			foreach($competitors AS $competitor) {
 				$defaults += array(
-						$counter . "_competitor_name"	=> $competitor->name,
-						$counter . "_school"		=> $competitor->id_school
+					$counter . "_competitor_name" => $competitor->name,
+					$counter . "_school" => $competitor->id_school
 				);
 				$counter++;
 			}
@@ -251,9 +257,9 @@ class TeamFormComponent extends BaseComponent {
 		for($i=1; $i <= 5; $i++) {
 			if (!empty($values[$i."_competitor_name"])) {
 				$competitor = [];
-				$competitor["name"]		= $values[$i."_competitor_name"];
-				$competitor["school"]	= $values[$i."_school"];
-				$competitor["otherschool"]	= $values[$i."_otherschool"];
+				$competitor["name"] = $values[$i."_competitor_name"];
+				$competitor["school"] = $values[$i."_school"];
+				$competitor["otherschool"] = $values[$i."_otherschool"];
 				$competitors[] = $competitor;
 			}
 		}
