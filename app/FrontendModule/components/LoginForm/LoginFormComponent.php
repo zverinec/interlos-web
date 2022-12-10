@@ -83,10 +83,10 @@ class LoginFormComponent extends BaseComponent
 		$form->addPassword("password", "Heslo")
 			->addRule(Nette\Forms\Form::FILLED, "Heslo musí být vyplněno.");
 
-		$form->addReCaptcha('recaptcha', $label = 'Ochrana před spamboty', $required = TRUE, $message = 'Jste živý člověk?');
+		$recaptcha = $form->addReCaptcha('recaptcha', $label = 'Ochrana před spamboty', $required = TRUE, $message = 'Jste živý člověk?');
 		$form->addSubmit("login", "Přihlásit se");
 		$form->addSubmit("reset", "Resetovat heslo")
-			->setValidationScope([$nameField]);
+			->setValidationScope([$nameField, $recaptcha]);
 		$form->onSuccess[] = array($this, "formSubmitted");
 
 		return $form;
