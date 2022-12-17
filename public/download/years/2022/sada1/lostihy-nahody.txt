@@ -1,0 +1,10 @@
+Jdi zpět o 3 pole.
+Jdi o 3 pole vpřed.
+Jdi zpět na Start. (Bez 4000.)
+Jedeš se zúčastnit chovatelského kurzu. Postoupíš vpřed na nejbližší pole Chovatel losů. Při průchodu Startem obdržíš 4000.
+Jdi vpřed na pole Parkoviště. Při průchodu Startem obdržíš 4000.
+Přesuň se na pole Los Karlos. (Bez 4000.)
+Jdi zpět na nejbližší pole Finance. (Bez 4000.)
+Přesuň se na poslední pole ve hře (Los Nalosovi).
+Jdi zpět na nejbližší pole Finance. (Bez 4000.)
+Jdi zpět na Start. (Bez 4000.)
