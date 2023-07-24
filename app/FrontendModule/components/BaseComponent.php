@@ -1,14 +1,15 @@
 <?php
+
+use Nette\Application\UI\Template;
+use Nette\ComponentModel\IComponent;
+
 abstract class BaseComponent extends Nette\Application\UI\Control {
-	public function __construct() {
-		parent::__construct();
 
-	}
-
-	protected function attached($form)
+	public function __construct()
 	{
-		parent::attached($form);
-		$this->startUp();
+		$this->monitor(\Nette\Application\UI\Presenter::class, function ($presenter): void {
+			$this->startUp();
+		});
 	}
 
 	public function render() {
@@ -17,13 +18,13 @@ abstract class BaseComponent extends Nette\Application\UI\Control {
 
 	}
 
-	protected function createTemplate() {
+	protected function createTemplate(): Template {
 		$template = parent::createTemplate();
 
-		$componentName = strtr($this->getReflection()->getName(), array("Component" => ""));
+		$componentName = strtr(self::getReflection()->getName(), array("Component" => ""));
 
 		$template->setFile(
-				dirname(__FILE__) . "/" .
+				__DIR__ . "/" .
 				$componentName . "/" .
 				ExtraString::lowerFirst($componentName) . ".latte"
 		);
@@ -32,15 +33,15 @@ abstract class BaseComponent extends Nette\Application\UI\Control {
 	}
 
 	protected function getPath() {
-		$componentName = strtr($this->getReflection()->getName(), array("Component" => ""));
-		return dirname(__FILE__) . "/" . $componentName . "/";
+		$componentName = strtr(self::getReflection()->getName(), array("Component" => ""));
+		return __DIR__ . "/" . $componentName . "/";
 	}
 
 	protected function beforeRender() {
 
 	}
 
-	protected function createComponentFlashMessages($name) {
+	protected function createComponentFlashMessages() {
 		return new FlashMessagesComponent();
 	}
 

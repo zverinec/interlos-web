@@ -2,7 +2,7 @@
 
 use Dibi\DriverException;
 use Nette\Forms\Form;
-use Nette\Mail\IMailer;
+use Nette\Mail\Mailer;
 use Nette\Security\User;
 use Tracy\Debugger;
 
@@ -17,13 +17,11 @@ class TeamFormComponent extends BaseComponent {
 
 	private $mailParams;
 
-	/** @var User */
-	private $user;
+	private User $user;
 
-	/** @var IMailer */
-	private $mailer;
+	private Mailer $mailer;
 
-	public function __construct(User $user, IMailer $mailer) {
+	public function __construct(User $user, Mailer $mailer) {
 		parent::__construct();
 		$this->user = $user;
 		$this->mailer = $mailer;
@@ -70,9 +68,8 @@ class TeamFormComponent extends BaseComponent {
 				$values["source"] === '' ? NULL : $values["source"]
 			);
 			// Send e-mail
-			/** @var \Nette\Bridges\ApplicationLatte\Template $template */
+			/** @var \Nette\Bridges\ApplicationLatte\Template&\Nette\Application\UI\Template $template */
 			$template = InterlosTemplate::loadTemplate($this->createTemplate());
-			$template->getLatte()->addFilter(null, 'Nette\Templating\Helpers::loader');
 			$template->setFile(__DIR__ . "/../../templates/mail/registration.latte");
 			$template->team = $values["team_name"];
 			$template->id = $insertedTeam;
@@ -208,7 +205,7 @@ class TeamFormComponent extends BaseComponent {
 			);
 			$competitors = Interlos::competitors()->findAllByTeam($loggedTeam->id_team)->orderBy("id_competitor")->fetchAll();
 			$counter = 1;
-			foreach($competitors AS $competitor) {
+			foreach($competitors as $competitor) {
 				$defaults += array(
 					$counter . "_competitor_name" => $competitor->name,
 					$counter . "_school" => $competitor->id_school
@@ -226,7 +223,8 @@ class TeamFormComponent extends BaseComponent {
 		} else {
 			$form["password"]->addRule(Nette\Forms\Form::FILLED, "Není vyplněno heslo týmu.");
 			$form->setCurrentGroup(null);
-			$form->addReCaptcha('recaptcha', $label = 'Ochrana před spamboty', $required = TRUE, $message = 'Jste živý člověk?');
+			$form->addReCaptcha('recaptcha', $label = 'Ochrana před spamboty', $required = TRUE, $message = 'Jste živý člověk?')
+				->setRequired('Ochrana před spamboty je povinná.');
 			$form->addSubmit("insert", "Registrovat");
 			$form->onSuccess[] = array($this, "insertSubmitted");
 		}
@@ -239,7 +237,7 @@ class TeamFormComponent extends BaseComponent {
 
 	private function insertCompetitorsFromValues($team, $values) {
 		$competitors = $this->loadCompetitorsFromValues($values);
-		foreach($competitors AS $competitor) {
+		foreach($competitors as $competitor) {
 			if (!empty($competitor['name']) && empty($competitor['school']) && !empty($competitor['otherschool'])) {
 				$schoolId = Interlos::schools()->getByName($competitor['otherschool']);
 				if ($schoolId) {

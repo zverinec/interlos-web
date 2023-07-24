@@ -23,15 +23,15 @@ class GamePresenter extends BasePresenter
 		$this->setPageTitle("Historie odpovědí");
 	}
 
-	protected function createComponentAnswerForm($name) {
+	protected function createComponentAnswerForm() {
 		return new \AnswerFormComponent($this->getUser());
 	}
 
-	protected function createComponentAnswerHistory($name) {
+	protected function createComponentAnswerHistory() {
 		return new \AnswerHistoryComponent();
 	}
 
-	protected function createComponentTaskStats($name) {
+	protected function createComponentTaskStats() {
 		return new \TaskStatsComponent();
 	}
 

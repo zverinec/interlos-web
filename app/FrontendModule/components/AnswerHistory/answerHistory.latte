@@ -7,7 +7,7 @@
 			<th>odpověď</th>
 		</tr>
 	</thead>
-	{foreach $history AS $answer}
+	{foreach $history as $answer}
 	<tr{if isset($correct[$answer->id_answer])} class="correct"{/if}>
 		<td>{$answer->id_answer}</td>
 		<td>{$tasks[$answer->id_task]->whole_name}</td>

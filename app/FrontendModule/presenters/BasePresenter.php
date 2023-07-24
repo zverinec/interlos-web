@@ -3,30 +3,39 @@ namespace FrontModule;
 
 use Exception;
 use Nette\Application\UI\Presenter;
+use Nette\Application\UI\Template;
 
 class BasePresenter extends Presenter {
 
+	private ?string $infoPage;
+
+	protected array $mailParameters;
+
+	public function injectParameters(?string $infoPage, array $mail): void
+	{
+		$this->infoPage = $infoPage;
+		$this->mailParameters = $mail;
+	}
 	public function setPageTitle($pageTitle) {
 		$this->getTemplate()->pageTitle = $pageTitle;
 	}
 
 	// ----- PROTECTED METHODS
 
-	protected function createComponentClock($name) {
+	protected function createComponentClock() {
 		return new \ClockComponent();
 	}
 
-	protected function createComponentFlashMessages($name) {
+	protected function createComponentFlashMessages() {
 		return new \FlashMessagesComponent();
 	}
-	protected function createComponentInfoList($name) {
+	protected function createComponentInfoList() {
 		$comp = new \InfoListComponent();
-		$params = $this->context->getParameters();
-		$comp->setInfoPageUrl($params['infoPage']);
+		$comp->setInfoPageUrl($this->infoPage);
 		return $comp;
 	}
 
-	protected function createTemplate() {
+	protected function createTemplate(): Template {
 		$template = parent::createTemplate();
 		$template->today = date("Y-m-d H:i:s");
 
@@ -36,7 +45,7 @@ class BasePresenter extends Presenter {
 	protected function beforeRender()
 	{
 		parent::beforeRender();
-		$this->getTemplate()->noticeBoard = isset($this->context->getParameters()['infoPage']) ? $this->context->getParameters()['infoPage'] : null;
+		$this->getTemplate()->noticeBoard = $this->infoPage;
 	}
 
 	protected function startUp() {

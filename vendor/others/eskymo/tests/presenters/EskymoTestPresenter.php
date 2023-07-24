@@ -4,10 +4,10 @@
  *
  * @author Jan Papousek
  */
-abstract class EskymoTestPresenter extends Presenter
+abstract class EskymoTestPresenter extends \Nette\Application\UI\Presenter
 {
 
-	protected function createTemplate() {
+	protected function createTemplate(): \Nette\Application\UI\Template {
 		$template = parent::createTemplate();
 
 		$template->registerFilter('CurlyBracketsFilter::invoke');

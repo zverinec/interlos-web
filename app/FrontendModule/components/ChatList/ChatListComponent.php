@@ -22,8 +22,10 @@ class ChatListComponent extends BaseListComponent {
 		}
 		// Insert a chat post
 		try {
-			$id = Interlos::chat()->insert(
-					Interlos::getUser()->getIdentity()->id_team,
+			/** @var \Nette\Security\SimpleIdentity $identity */
+			$identity = Interlos::getUser()->getIdentity();
+			Interlos::chat()->insert(
+					$identity->id_team,
 					$values["content"],
 					$values['id_parent']
 			);
@@ -58,7 +60,7 @@ class ChatListComponent extends BaseListComponent {
 		return $paginator;
 	}
 
-	protected function createComponentChatForm($name) {
+	protected function createComponentChatForm() {
 		$self = $this;
 		return new \Nette\Application\UI\Multiplier(function ($parentPost) use($self) {
 			$form = new BaseForm();
@@ -71,7 +73,7 @@ class ChatListComponent extends BaseListComponent {
 
 			$form->addTextArea("content",null, 80, 6)
 				->addRule(Nette\Forms\Form::FILLED, "Obsah příspěvku není vyplněn.")
-				->setAttribute('placeholder', 'Zde zadejte text vašeho příspěvku.');
+				->setHtmlAttribute('placeholder', 'Zde zadejte text vašeho příspěvku.');
 
 			$form->addSubmit("chatSubmit","Přidat příspěvek");
 			$form->onSuccess[] = array($self, "chatSubmitted");

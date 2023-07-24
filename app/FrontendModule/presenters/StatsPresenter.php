@@ -13,7 +13,7 @@ class StatsPresenter extends BasePresenter
 		$this->template->available = $this->template->available && (\Interlos::areStatsShown() || \Interlos::isAdminAccess());
 	}
 
-	protected function createComponentScoreList($name) {
+	protected function createComponentScoreList() {
 		return new \ScoreListComponent();
 	}
 

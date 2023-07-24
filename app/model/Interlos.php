@@ -164,11 +164,11 @@ class Interlos {
         $propertiesToStore = array("game-end", "game-started", "registration-end", "registration-started", "time");
         $session = self::getSessionNamespace("admin.property");
         if (self::isAdminPropertyAvailableInURL("reset-admin-properties")) {
-            foreach($propertiesToStore AS $property) {
+            foreach($propertiesToStore as $property) {
                 $session[$property] = NULL;
             }
         }
-        foreach($propertiesToStore AS $property) {
+        foreach($propertiesToStore as $property) {
             if (self::isAdminPropertyAvailableInURL($property)) {
                 self::storeAdminProperty($property);
             }

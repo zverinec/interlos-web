@@ -1,5 +1,5 @@
 <div id="flashes">
-	{foreach $control->getParent()->getTemplate()->flashes AS $flash}
+	{foreach $control->getParent()->getTemplate()->flashes as $flash}
 	<div class="flash {$flash->type}">
 		{$flash->message}
 	</div>

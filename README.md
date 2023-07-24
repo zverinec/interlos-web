@@ -3,14 +3,16 @@ InterLoS website with online scoring system
 
 Authors: Jan Papoušek and Jan Drábek
 
-Maintenance: Jan Drábek <me@jandrabek.cz>
+Maintenance: Jan Drábek <jan@drabek.cz>
 
 Requirements
 ------------
 
-- PHP >= 7.0
+- PHP >= 8.2
 - PHP in configuration to run Nette framework, see http://doc.nette.org/cs/requirements
-- MySQL (or MariaDB) database
+- MariaDB 10.6 (MySQL a MariaDB of higher version may not work due to slight differences in behaviour)
+- Composer to install dependencies
+- For local deployment CLI tool `loopbind` installed via `composer global require kiwicom/loopbind`.
 
 Hardware
 --------
@@ -162,11 +164,12 @@ Use following setup for docker composition as we need real Apache and MySQL (as 
 ```bash
 $ cd .                  # project root
 $ nano .env             # IP address to bind (docker-machine vs native docker!)
+$ loopbind apply        # apply IP address and hosts
 $ docker-compose up
 ```
 
 Then you have to manually install database via `http://${IP}:8080` (see `docker-compose.yml` for credentials).
-Afterwards the application is available via `https://${IP}` and `http://${IP}` (should be redirected immediately).
+Afterward the application is available via `https://interlos.test`, `https://${IP}` and `http://${IP}` (should be redirected immediately).
 
 Database is persistent between up & downs and stored in `.mysql` directory.
 

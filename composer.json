@@ -1,21 +1,23 @@
 {
-	"name": "jandrabek/interlos",
+	"name": "zverinec/interlos-web",
 	"description": "InterLoS website with online evaluation and scoring system at http://interlos.fi.muni.cz",
 	"minimum-stability": "stable",
 	"authors": [
 		{
 			"name": "Jan Drábek",
-			"email": "me@jandrabek.cz"
+			"email": "jan@drabek.cz"
 		},
 		{
 			"name": "Jan Papoušek"
 		}
 	],
 	"require": {
-		"nette/nette": "2.4.*",
-		"dibi/dibi": "3.x",
-		"texy/texy": "2.9.*",
-		"nextras/mail-panel": "^2.4",
-		"contributte/recaptcha": "^3.1"
+		"php": ">=8.2",
+		"ext-intl": "*",
+		"nette/nette": "^3.2",
+		"dibi/dibi": "^4.2",
+		"texy/texy": "^3.1",
+		"nextras/mail-panel": "^2.6.2",
+		"contributte/recaptcha": "^3.5"
 	}
 }

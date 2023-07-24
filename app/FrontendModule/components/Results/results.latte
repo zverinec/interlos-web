@@ -1,5 +1,5 @@
 {if Interlos::isGameStarted()}
-	{foreach $categories AS $category => $name}
+	{foreach $categories as $category => $name}
 		<h2 id="{$category}" class="center">{$name}</h2>
 		<table class="results" cellspacing="0">
 			<thead>
@@ -12,7 +12,7 @@
 				</tr>
 			</thead>
 			{if isset($teams[$category])}
-				{foreach $teams[$category] AS $team}
+				{foreach $teams[$category] as $team}
 				<tr{if $iterator->isEven()} class="even"{/if}>
 					<td>{$iterator->getCounter()}</td>
 					<td>{$team->name}</td>
