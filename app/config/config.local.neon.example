@@ -19,7 +19,7 @@ dibi:
 #
 #services:
 #	nette.mailer:
-#		class: Nette\Mail\IMailer
+#		type: Nette\Mail\IMailer
 #		factory: Nextras\MailPanel\FileMailer(%tempDir%/mail-panel-mails)
 
 # On production
@@ -30,5 +30,5 @@ mail:
 	port: 25
 	username: foo
 	password: bar
-	secure:                     # allowed values ssl, tls., null
+	encryption:                     # allowed values ssl, tls, null
 	timeout: 100

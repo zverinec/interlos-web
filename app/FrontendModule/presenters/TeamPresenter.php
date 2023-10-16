@@ -1,10 +1,14 @@
 <?php
 namespace FrontModule;
 
-use Nette\Mail\IMailer;
+use Nette\DI\Attributes\Inject;
+use Nette\Mail\Mailer;
 
 class TeamPresenter extends BasePresenter
 {
+
+	#[Inject]
+	public Mailer $mailer;
 
 	public function renderDefault()
 	{
@@ -47,18 +51,18 @@ class TeamPresenter extends BasePresenter
 
 	// ---- PROTECTED METHODS
 
-	protected function createComponentTeamForm($name)
+	protected function createComponentTeamForm()
 	{
-		$comp = new \TeamFormComponent($this->getUser(), $this->context->getByType(IMailer::class));
-		$comp->setMailParameters($this->context->parameters['mail']);
+		$comp = new \TeamFormComponent($this->getUser(), $this->mailer);
+		$comp->setMailParameters($this->mailParameters);
 		return $comp;
 	}
 
-	protected function createComponentResults($name) {
+	protected function createComponentResults() {
 		return new \ResultsComponent();
 	}
 
-	protected function createComponentTeamList($name)
+	protected function createComponentTeamList()
 	{
 		return new \TeamListComponent();
 	}

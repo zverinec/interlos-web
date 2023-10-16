@@ -1,6 +1,6 @@
 <div id="score-stats-wrapper">
 	<table id="score-stats" cellspacing="0">
-	{foreach $teams AS $team}
+	{foreach $teams as $team}
 		{if $iterator->getCounter() % 10 == 1}
 			<tr>
 				<th>#</th>
@@ -8,7 +8,7 @@
 				<th>&sum;</th>
 				<th>+</th>
 				<th>-</th>
-				{foreach $tasks AS $task}
+				{foreach $tasks as $task}
 					<th title="{$task->whole_name}">{$task->code_name}&nbsp;{mb_substr($task->name,0, 3)}{if mb_strlen($task->name) > 3}&hellip;{/if}</th>
 				{/foreach}
 			</tr>
@@ -41,7 +41,7 @@
 					0
 				{/if}
 			</td>
-			{foreach $tasks AS $task}
+			{foreach $tasks as $task}
 				{if !isset($score[$team->id_team]) || !isset($score[$team->id_team][$task->id_task]) || $score[$team->id_team][$task->id_task]->inserted == NULL}
 					<td class="empty">X</td>
 				{else}

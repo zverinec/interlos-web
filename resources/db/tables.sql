@@ -47,7 +47,7 @@ CREATE TABLE `competitor` (
 DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log` (
 	`id_log` int(25) unsigned NOT NULL AUTO_INCREMENT COMMENT 'identifikator',
-	`id_team` int(25) unsigned NOT NULL COMMENT 'tym, ktereho se zaznam tyka',
+	`id_team` int(25) unsigned NULL COMMENT 'tym, ktereho se zaznam tyka',
 	`type` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL COMMENT 'typ zaznamu',
 	`text` text COLLATE utf8_czech_ci NOT NULL COMMENT 'text zaznamu',
 	`inserted` datetime NOT NULL COMMENT 'cas, kdy byla polozka vlozena do systemu',

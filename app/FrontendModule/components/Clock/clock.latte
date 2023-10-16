@@ -1,5 +1,5 @@
 <script type="text/javascript" n:nonce>
-	var time_server = 1000 * {php echo microtime(true); };
+	var time_server = 1000 * {$microtime};
 	var time_offset = time_server - (new Date()).getTime();
 	function time_set() {
 	var local_time = new Date();

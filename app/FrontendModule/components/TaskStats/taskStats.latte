@@ -11,7 +11,7 @@
 				<th>špatně</th>
 			</tr>
 		</thead>
-		{foreach $tasks AS $task}
+		{foreach $tasks as $task}
 			<tr{if $iterator->isEven()} class="even"{/if}>
 				<td>{$task->code_name}</td>
 				<td>{$task->name}</td>

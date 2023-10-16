@@ -1,4 +1,4 @@
 {control flashMessages}
-{if $valid}
+{if isset($valid) && $valid}
 	{control form}
 {/if}

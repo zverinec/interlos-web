@@ -28,15 +28,11 @@ final class Helpers {
 		throw new InvalidArgumentException("helper argument is empty");
 	}
 	switch ($helper) {
-		case "date": return array(get_class(), 'dateFormatHelper');
-		break;
-		case "time": return array(get_class(), 'timeFormatHelper');
-		break;
-		case "translate": return array(get_class(), 'translateHelper');
-		break;
-		case "timeOnly": return array(get_class(), "timeOnlyHelper");
-		break;
-		case 'texy': return array(get_class(), "texyHelper");
+		case "date": return array(__CLASS__, 'dateFormatHelper');
+		case "time": return array(__CLASS__, 'timeFormatHelper');
+		case "translate": return array(__CLASS__, 'translateHelper');
+		case "timeOnly": return array(__CLASS__, "timeOnlyHelper");
+		case 'texy': return array(__CLASS__, "texyHelper");
 		default:
 		throw new DataNotFoundException("helper: $helper");
 	}
@@ -77,6 +73,9 @@ final class Helpers {
 	}
 
 	public static function timeOnlyHelper($time) {
+		if ($time === null) {
+			return $time;
+		}
 		if ($time instanceof DateTimeInterface) {
 			return $time->format('H:i:s');
 		}
@@ -101,7 +100,6 @@ final class Helpers {
 			self::$texy = new Texy();
 			self::$texy->allowed['html/tag'] = false;
             self::$texy->allowed['html/comment'] = false;
-			self::$texy->encoding = 'utf-8';
 		}
 		return self::$texy;
 	}

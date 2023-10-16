@@ -1,28 +1,30 @@
 <?php
 namespace FrontModule;
 
-use Nette\Application\BadRequestException;
-use Nette\Mail\IMailer;
-use Nette\Security\AuthenticationException;
+use Nette\DI\Attributes\Inject;
+use Nette\Mail\Mailer;
 
 class DefaultPresenter extends BasePresenter {
 
-	public function actionLogout() {
+	#[Inject]
+	public Mailer $mailer;
+
+	public function actionLogout(): never {
 		$this->user->logout(TRUE);
 		\Interlos::cleanPasswordResetTokens();
 		$this->redirect("default");
 	}
 
-	public function renderChat() {
+	public function renderChat(): void {
 		$this->getComponent("chat")->setSource(\Interlos::chat()->findAll());
 		$this->setPageTitle("Diskuse");
 	}
 
-	public function renderDefault() {
+	public function renderDefault(): void {
 		$this->setPagetitle("INTERnetová LOgická Soutěž");
 	}
 
-	public function renderLastYears() {
+	public function renderLastYears(): void {
 		$this->setPagetitle("Minulé ročníky");
 	}
 
@@ -38,18 +40,17 @@ class DefaultPresenter extends BasePresenter {
 
 	// ----- PROTECTED METHODS
 
-	protected function createComponentChat($name) {
-		$chat = new \ChatListComponent();
-		return $chat;
+	protected function createComponentChat() {
+		return new \ChatListComponent();
 	}
 
-	protected function createComponentLogin($name) {
-		$comp = new \LoginFormComponent($this->context->getByType(IMailer::class));
-		$comp->setMailParameters($this->context->parameters['mail']);
+	protected function createComponentLogin() {
+		$comp = new \LoginFormComponent($this->mailer);
+		$comp->setMailParameters($this->mailParameters);
 		return $comp;
 	}
 
-	protected function createComponentResetPassword($name) {
+	protected function createComponentResetPassword() {
 		$comp = new \ResetPasswordFormComponent($this->getParameter('code'), $this->getParameter('name'));
 		return $comp;
 	}

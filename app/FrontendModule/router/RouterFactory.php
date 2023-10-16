@@ -1,6 +1,6 @@
 <?php
 
-use Nette\Application\IRouter;
+use Nette\Routing\Router;
 use Nette\StaticClass;
 
 
@@ -8,10 +8,7 @@ final class RouterFactory
 {
     use StaticClass;
 
-    /**
-     * @return IRouter
-     */
-    public static function createRouter()
+    public static function createRouter(): Router
     {
         return FrontModule::createRouter("Front");
     }

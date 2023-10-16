@@ -1,16 +1,15 @@
 <?php
 
-use Nette\Mail\IMailer;
+use Nette\Mail\Mailer;
 use Tracy\Debugger;
 
 class LoginFormComponent extends BaseComponent
 {
 	private $mailParams;
 
-	/** @var IMailer */
-	private $mailer;
+	private Mailer $mailer;
 
-	public function __construct(IMailer $mailer) {
+	public function __construct(Mailer $mailer) {
 		parent::__construct();
 		$this->mailer = $mailer;
 	}
@@ -32,9 +31,8 @@ class LoginFormComponent extends BaseComponent
 			$code = sha1(\Nette\Utils\Random::generate(160));
 			Interlos::teams()->update(['reset_code' => $code])->where("[id_team] = %i", $row->id_team)->execute();
 			// Send e-mail
-			/** @var \Nette\Bridges\ApplicationLatte\Template $template */
+			/** @var \Nette\Bridges\ApplicationLatte\Template&\Nette\Application\UI\Template $template */
 			$template = InterlosTemplate::loadTemplate($this->createTemplate());
-			$template->getLatte()->addFilter(null, 'Nette\Templating\Helpers::loader');
 			$template->setFile(__DIR__ . "/../../templates/mail/resetPassword.latte");
 			$template->team = $values['name'];
 			$template->id = $row->id_team;
@@ -55,7 +53,7 @@ class LoginFormComponent extends BaseComponent
 			Interlos::getUser()->login($values['name'], $values['password']);
 		}
 		catch(Nette\Security\AuthenticationException $e) {
-			if ($e->getCode() == Nette\Security\IAuthenticator::IDENTITY_NOT_FOUND) {
+			if ($e->getCode() == Nette\Security\Authenticator::IDENTITY_NOT_FOUND) {
 			$this->getPresenter()->flashMessage("Daný tým neexistuje.", "error");
 			}
 			else {
@@ -83,7 +81,8 @@ class LoginFormComponent extends BaseComponent
 		$form->addPassword("password", "Heslo")
 			->addRule(Nette\Forms\Form::FILLED, "Heslo musí být vyplněno.");
 
-		$recaptcha = $form->addReCaptcha('recaptcha', $label = 'Ochrana před spamboty', $required = TRUE, $message = 'Jste živý člověk?');
+		$recaptcha = $form->addReCaptcha('recaptcha', $label = 'Ochrana před spamboty', $required = TRUE, $message = 'Jste živý člověk?')
+			->setRequired('Ochrana před spamboty je povinná.');
 		$form->addSubmit("login", "Přihlásit se");
 		$form->addSubmit("reset", "Resetovat heslo")
 			->setValidationScope([$nameField, $recaptcha]);

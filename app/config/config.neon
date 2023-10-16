@@ -31,6 +31,7 @@ application:
 	errorPresenter: Front:Error
 
 http:
+	cookieSecure: true
 	headers:
 		X-XSS-Protection: "1; mode=block"
 		X-Content-Type-Options: nosniff
@@ -69,7 +70,6 @@ session:
 	#savePath: "%tempDir%/sessions"
 	#saveHandler: files
 	autoStart: true
-	cookieSecure: true
 	expiration: 14 days
 
 services:
@@ -91,6 +91,10 @@ extensions:
 	recaptcha: Contributte\ReCaptcha\DI\ReCaptchaExtension
 
 recaptcha:
-	secretKey: 6LeRKngUAAAAADvEUMwK9PeeOEP0ptv213FumZI9
-	siteKey: 6LeRKngUAAAAAFHf_Yuwon1Et8H5t1imMeTATBgQ
+	secretKey: 6Lc4KngUAAAAAFfW1LLr9M07wa7vC5IyM0AndDtu
+	siteKey: 6Lc4KngUAAAAAE2cyj5FMv2lwXjBx9X1OhaZFoBY
 
+decorator:
+  \FrontModule\BasePresenter:
+  	setup:
+  	  - injectParameters(%infoPage%, %mail%)

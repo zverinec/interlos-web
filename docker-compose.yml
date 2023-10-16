@@ -13,7 +13,7 @@ services:
         ports:
           - ${IP}:8080:8080
     db:
-        image: mysql:5.7.24
+        image: mariadb:10.6
         restart: always
         user: mysql
         ports:
@@ -21,7 +21,7 @@ services:
         volumes:
            - ./.mysql:/var/lib/mysql
         environment:
-           MYSQL_ROOT_PASSWORD: root
-           MYSQL_USER: user
-           MYSQL_PASSWORD: password
-           MYSQL_DATABASE: interlos_production
+           MARIADB_ROOT_PASSWORD: root
+           MARIADB_USER: user
+           MARIADB_PASSWORD: password
+           MARIADB_DATABASE: interlos_production
