@@ -10,12 +10,13 @@ class TeamsModel extends AbstractModel
 	const OTHER = 'other';
 
 	const SRC_NOT_DEFINED = NULL;
-	const SRC_HISTORY = 'history';
+	const SRC_WEB = 'web';
 	const SRC_FRIENDS = 'friends';
 	const SRC_FB = 'facebook';
 	const SRC_IG = 'instagram';
 	const SRC_PAPER = 'paper';
 	const SRC_EMAIL = 'email';
+	const SRC_PUZZLE = 'puzzle';
 
 	public function find($id) {
 	$this->checkEmptiness($id, "id");

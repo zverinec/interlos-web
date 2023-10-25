@@ -166,12 +166,13 @@ class TeamFormComponent extends BaseComponent {
 
 		// Source
 		$form->addSelect("source", "Odkud jste se o soutěži dozvěděli", array(
-			TeamsModel::SRC_HISTORY => "soutěžili jsme v minulosti",
+			TeamsModel::SRC_WEB => "z tohoto webu",
 			TeamsModel::SRC_FB => "z facebooku",
 			TeamsModel::SRC_IG => "z instagramu",
 			TeamsModel::SRC_PAPER => "z plakátku",
 			TeamsModel::SRC_FRIENDS => "od známých",
 			TeamsModel::SRC_EMAIL => "z e-mailu",
+			TeamsModel::SRC_PUZZLE => "šifrovačky.cz",
 			TeamsModel::SRC_NOT_DEFINED => "nevyplněno / jiné",
 		));
 
