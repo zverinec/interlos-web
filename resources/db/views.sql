@@ -105,15 +105,16 @@ CREATE VIEW `view_answer_monitor` AS
 			`answer`.`id_answer`,
 			`answer`.`id_team`,
 			`answer`.`id_task`,
-            `task`.`name` as task_name,
+			`task`.`name` as task_name,
 			`answer`.`code` as answer,
-            `task`.`code` as correct_answer,
+			`task`.`code` as correct_answer,
 			`answer`.`inserted`,
 			CAST(COALESCE (`answer`.`updated`, `answer`.`inserted`) AS DATETIME) AS `updated` -- This bypass the problematic default value in views (zeros instead of CURRENT_TIMESTAMP) which causes problem on temporary table creation
 		FROM `answer`
 		INNER JOIN `task` USING(`id_task`)
 		INNER JOIN `serie` USING(`id_serie`)
-		INNER JOIN `view_current_year` USING(`id_year`);
+		INNER JOIN `view_current_year` USING(`id_year`)
+		WHERE `answer`.`code` != `task`.`code`;
 
 DROP VIEW IF EXISTS `view_correct_answer`;
 CREATE VIEW `view_correct_answer` AS
