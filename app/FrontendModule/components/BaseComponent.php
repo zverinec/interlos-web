@@ -18,7 +18,7 @@ abstract class BaseComponent extends Nette\Application\UI\Control {
 
 	}
 
-	protected function createTemplate(): Template {
+	protected function createTemplate(?string $class = null): Template {
 		$template = parent::createTemplate();
 
 		$componentName = strtr(self::getReflection()->getName(), array("Component" => ""));

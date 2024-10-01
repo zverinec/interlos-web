@@ -7,7 +7,7 @@
 abstract class EskymoTestPresenter extends \Nette\Application\UI\Presenter
 {
 
-	protected function createTemplate(): \Nette\Application\UI\Template {
+	protected function createTemplate(?string $class = null): \Nette\Application\UI\Template {
 		$template = parent::createTemplate();
 
 		$template->registerFilter('CurlyBracketsFilter::invoke');

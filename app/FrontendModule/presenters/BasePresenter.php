@@ -35,7 +35,7 @@ class BasePresenter extends Presenter {
 		return $comp;
 	}
 
-	protected function createTemplate(): Template {
+	protected function createTemplate(?string $class = null): Template {
 		$template = parent::createTemplate();
 		$template->today = date("Y-m-d H:i:s");
 
