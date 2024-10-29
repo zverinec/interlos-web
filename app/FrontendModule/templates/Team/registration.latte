@@ -3,7 +3,7 @@
 {block #content}
 	<div class="main-block">
 		<h1>Registrace týmu</h1>
-		{if Interlos::isRegistrationStarted()}
+		{if Interlos::isRegistrationActive()}
 			{control teamForm}
 		{else}
 			<p><strong>Momentálně neprobíhá registrace, ta probíhá typicky měsíc před konáním soutěže.</strong></p>
