@@ -178,7 +178,7 @@ class TeamFormComponent extends BaseComponent {
 
 		// Members
 		for ($i=1; $i<=self::NUMBER_OF_MEMBERS; $i++) {
-			$form->addGroup("$i. člen". ini_get("session.gc_maxlifetime"));
+			$form->addGroup("$i. člen");
 			$form->addText($i."_competitor_name", "Jméno");
 			$form->addSelect($i."_school", "Škola", $schools)
 				->setRequired(false)
