@@ -45,12 +45,13 @@ class DefaultPresenter extends BasePresenter {
 	}
 
 	protected function createComponentLogin() {
-		return new \LoginFormComponent();
+		$comp = new \LoginFormComponent($this->mailer);
+		$comp->setMailParameters($this->mailParameters);
+		return $comp;
 	}
 
 	protected function createComponentResetPassword() {
-		$comp = new \ResetPasswordFormComponent($this->getParameter('code'), $this->getParameter('name'), $this->mailer);
-		$comp->setMailParameters($this->mailParameters);
+		$comp = new \ResetPasswordFormComponent($this->getParameter('code'), $this->getParameter('name'));
 		return $comp;
 	}
 
