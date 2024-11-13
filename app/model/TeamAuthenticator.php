@@ -12,12 +12,12 @@ class TeamAuthenticator implements Authenticator
 	const TEAM = "team";
 
 	public function authenticate(string $user, string $password): IIdentity {
-		$name		= $user;
+		$email		= $user;
 		$password	= self::passwordHash($password);
-		$row = Interlos::teams()->findAll()->where("[name] = %s", $name)->fetch();
+		$row = Interlos::teams()->findAll()->where("[email] = %s", $email)->fetch();
 		if (empty($row)) {
 			throw new Nette\Security\AuthenticationException(
-				"Tým '$name' neexistuje.",
+				"Pod e-mailem '$email' není nikdo zaregistrovaný.",
 				Authenticator::IDENTITY_NOT_FOUND
 			);
 		}
@@ -27,7 +27,7 @@ class TeamAuthenticator implements Authenticator
 				Authenticator::INVALID_CREDENTIAL
 			);
 		}
-		return new Nette\Security\SimpleIdentity($name, self::TEAM, array("id_team" => $row["id_team"], "role" => self::TEAM));
+		return new Nette\Security\SimpleIdentity($row["name"], self::TEAM, array("id_team" => $row["id_team"], "role" => self::TEAM));
 	}
 
 	public static function passwordHash($password) {
