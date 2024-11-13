@@ -14,10 +14,10 @@ class LoginFormComponent extends BaseComponent
 		}
 
 		try {
-			Interlos::getUser()->login($values['name'], $values['password']);
+			Interlos::getUser()->login($values['email'], $values['password']);
 		} catch (Nette\Security\AuthenticationException $e) {
 			if ($e->getCode() == Nette\Security\Authenticator::IDENTITY_NOT_FOUND) {
-				$this->getPresenter()->flashMessage("Daný tým neexistuje.", "error");
+				$this->getPresenter()->flashMessage("Pod tímto e-mailem není zaregistrován žádný tým", "error");
 			} else {
 				$this->getPresenter()->flashMessage("Nesprávné heslo", "error");
 			}
@@ -35,7 +35,7 @@ class LoginFormComponent extends BaseComponent
 	protected function createComponentForm($name) {
 		$form = new BaseForm($this, $name);
 
-		$nameField = $form->addText("name", "Název týmu");
+		$nameField = $form->addText("email", "Týmový e-mail");
 
 		$form->addPassword("password", "Heslo");
 
