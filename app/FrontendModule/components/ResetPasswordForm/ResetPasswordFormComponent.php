@@ -78,7 +78,7 @@ class ResetPasswordFormComponent extends BaseComponent
 		if ($this->codeFromUrl == '') {
 			$nameField = $form->addText("name", "Název týmu");
 
-			$form->addSubmit("reset", "Resetovat heslo")
+			$form->addSubmit("reset", "Změnit heslo")
 				->setValidationScope([$nameField]);
 			$form->onSuccess[] = array($this, "formSubmitted");
 		}

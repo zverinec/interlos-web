@@ -40,7 +40,7 @@ class LoginFormComponent extends BaseComponent
 		$form->addPassword("password", "Heslo");
 
 		$form->addSubmit("login", "Přihlásit se");
-		$form->addSubmit("reset", "Resetovat heslo")
+		$form->addSubmit("reset", "Změnit heslo")
 			->setValidationScope([$nameField]);
 		$form->onSuccess[] = array($this, "formSubmitted");
 
