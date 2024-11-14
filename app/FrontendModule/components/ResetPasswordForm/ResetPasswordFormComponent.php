@@ -29,9 +29,9 @@ class ResetPasswordFormComponent extends BaseComponent
 		$values = $form->getValues();
 
 		if ($this->codeFromUrl == '') {
-			$row = Interlos::teams()->findAll()->where("[name] = %s", $values['name'])->fetch();
+			$row = Interlos::teams()->findAll()->where("[email] = %s", $values['email'])->fetch();
 			if (!$row) {
-				$this->getPresenter()->flashMessage("Daný tým neexistuje.", "error");
+				$this->getPresenter()->flashMessage("Pod tímto e-mailem není zaregistrován žádný tým", "error");
 				return;
 			}
 			// Insert team
@@ -76,7 +76,7 @@ class ResetPasswordFormComponent extends BaseComponent
 		$form = new BaseForm($this, $name);
 
 		if ($this->codeFromUrl == '') {
-			$nameField = $form->addText("name", "Název týmu");
+			$nameField = $form->addText("email", "Týmový e-mail");
 
 			$form->addSubmit("reset", "Resetovat heslo")
 				->setValidationScope([$nameField]);
