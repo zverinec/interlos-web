@@ -104,6 +104,13 @@ class TeamFormComponent extends BaseComponent {
 				"category" => $values["category"],
 				"source" => $values["source"] === '' ? NULL : $values["source"]
 			);
+			if(!empty($values["team_name"])) {
+				$changes["name"] = $values["team_name"];
+			}
+			$nameUsed = Interlos::teams()->findAll()->where("[name] = %s", $values["team_name"], " AND [id_team] != %s", $values["id_team"])->count();
+			if($nameUsed != 0) {
+				throw new DuplicityException("Daný tým již exituje");
+			}
 			if(isSet($values["email"])) {
 				$changes["email"] = $values["email"];
 			}
@@ -213,7 +220,6 @@ class TeamFormComponent extends BaseComponent {
 				);
 				$counter++;
 			}
-			$form["team_name"]->setDisabled();
 			if (Interlos::isRegistrationEnd()) {
 				$form["email"]->setDisabled();
 			}
