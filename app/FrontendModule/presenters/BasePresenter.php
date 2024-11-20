@@ -7,62 +7,62 @@ use Nette\Application\UI\Template;
 
 class BasePresenter extends Presenter {
 
-	private ?string $infoPage;
+    private ?string $infoPage;
 
-	protected array $mailParameters;
+    protected array $mailParameters;
 
-	public function injectParameters(?string $infoPage, array $mail): void
-	{
-		$this->infoPage = $infoPage;
-		$this->mailParameters = $mail;
-	}
-	public function setPageTitle($pageTitle) {
-		$this->getTemplate()->pageTitle = $pageTitle;
-	}
+    public function injectParameters(?string $infoPage, array $mail): void
+    {
+        $this->infoPage = $infoPage;
+        $this->mailParameters = $mail;
+    }
+    public function setPageTitle($pageTitle) {
+        $this->getTemplate()->pageTitle = $pageTitle;
+    }
 
-	// ----- PROTECTED METHODS
+    // ----- PROTECTED METHODS
 
-	protected function createComponentClock() {
-		return new \ClockComponent();
-	}
+    protected function createComponentClock() {
+        return new \ClockComponent();
+    }
 
-	protected function createComponentFlashMessages() {
-		return new \FlashMessagesComponent();
-	}
-	protected function createComponentInfoList() {
-		$comp = new \InfoListComponent();
-		$comp->setInfoPageUrl($this->infoPage);
-		return $comp;
-	}
+    protected function createComponentFlashMessages() {
+        return new \FlashMessagesComponent();
+    }
+    protected function createComponentInfoList() {
+        $comp = new \InfoListComponent();
+        $comp->setInfoPageUrl($this->infoPage);
+        return $comp;
+    }
 
-	protected function createTemplate(?string $class = null): Template {
-		$template = parent::createTemplate();
-		$template->today = date("Y-m-d H:i:s");
+    protected function createTemplate(?string $class = null): Template {
+        $template = parent::createTemplate();
+        $template->today = date("Y-m-d H:i:s");
 
-		return \InterlosTemplate::loadTemplate($template);
-	}
+        return \InterlosTemplate::loadTemplate($template);
+    }
 
-	protected function beforeRender()
-	{
-		parent::beforeRender();
-		$this->getTemplate()->noticeBoard = $this->infoPage;
-	}
+    protected function beforeRender()
+    {
+        parent::beforeRender();
+        $this->getTemplate()->noticeBoard = $this->infoPage;
+    }
 
-	protected function startUp() {
-		parent::startup();
-		\Interlos::prepareAdminProperties();
-		\Interlos::createAdminMessages();
-	}
+    protected function startUp() {
+        parent::startup();
+        \Interlos::prepareAdminProperties();
+        \Interlos::createAdminMessages();
+    }
 
-	protected function check($componentName) {
-		try {
-			$this->getComponent($componentName);
-			$this->getTemplate()->available = TRUE;
-		}
-		catch(Exception $e) {
-			$this->flashMessage("Statistiky jsou momentálně nedostupné. Pravděpodobně dochází k přepočítávání.", "error");
-			$this->getTemplate()->available = FALSE;
-		}
-	}
+    protected function check($componentName) {
+        try {
+            $this->getComponent($componentName);
+            $this->getTemplate()->available = TRUE;
+        }
+        catch(Exception $e) {
+            $this->flashMessage("Statistiky jsou momentálně nedostupné. Pravděpodobně dochází k přepočítávání.", "error");
+            $this->getTemplate()->available = FALSE;
+        }
+    }
 
 }

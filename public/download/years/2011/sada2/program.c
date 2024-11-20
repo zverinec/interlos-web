@@ -35,10 +35,10 @@ int main(){
         swap(i%DELKA, 0);
     }
 
-	for (i=1; i<DELKA; i++){
+    for (i=1; i<DELKA; i++){
         prvni_pole[i] += prvni_pole[i-1];
     }
-	
+    
     for (i=0; i<DELKA; i++)
         for (j=0; j<DELKA-1; j++)
             if (druhe_pole[j] > druhe_pole[j+1])

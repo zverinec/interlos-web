@@ -1,25 +1,25 @@
 {foreach $teams as $category => $teamsInCategory}
-	{var $numberOfCategoryTeams = count($teamsInCategory)}
-	{var $numberOfCategoryCompetitors = $countTeamsFunction($teamsInCategory, $competitors)}
-	<h2 id="{$category}">{$categories[$category]}</h2>
-	<p><em>Týmů: {$numberOfCategoryTeams}, hráčů: {$numberOfCategoryCompetitors}</em></p>
-	<ol>
-		{foreach $teamsInCategory as $team}
-		<li>
-			{var $count = 0}
-			{if isset($competitors[$team->id_team])}
-				{var $count = count($competitors[$team->id_team])}
-			{/if}
-			<strong>{$team->name}</strong> ({if $count === 0}?{else}{$count}{/if}):
-				{if isset($competitors[$team->id_team])}
-					{foreach $competitors[$team->id_team] as $competitor}
-						{$competitor->name} {if $competitor->school_name != NULL}({$competitor->school_name}){/if}{if !$iterator->isLast()}, {/if}
-					{/foreach}
-				{else}
-				informace o členech týmu nejsou dostupné
-				{/if}
-		</li>
-		{/foreach}
-	</ol>
+    {var $numberOfCategoryTeams = count($teamsInCategory)}
+    {var $numberOfCategoryCompetitors = $countTeamsFunction($teamsInCategory, $competitors)}
+    <h2 id="{$category}">{$categories[$category]}</h2>
+    <p><em>Týmů: {$numberOfCategoryTeams}, hráčů: {$numberOfCategoryCompetitors}</em></p>
+    <ol>
+        {foreach $teamsInCategory as $team}
+        <li>
+            {var $count = 0}
+            {if isset($competitors[$team->id_team])}
+                {var $count = count($competitors[$team->id_team])}
+            {/if}
+            <strong>{$team->name}</strong> ({if $count === 0}?{else}{$count}{/if}):
+                {if isset($competitors[$team->id_team])}
+                    {foreach $competitors[$team->id_team] as $competitor}
+                        {$competitor->name} {if $competitor->school_name != NULL}({$competitor->school_name}){/if}{if !$iterator->isLast()}, {/if}
+                    {/foreach}
+                {else}
+                informace o členech týmu nejsou dostupné
+                {/if}
+        </li>
+        {/foreach}
+    </ol>
 {/foreach}
 

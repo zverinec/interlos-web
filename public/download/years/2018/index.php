@@ -10,16 +10,16 @@
       <title>INTERnetová LOgická SOutěž &ndash; Aktuální informace</title>
       <script>
          window.onload = (function () {
-         	var countdown = 5*60;
-         	function secondPassed() {
-         		countdown -= 1;
-         		if(countdown == 0) {
-         			location.reload();
-         		}
-         		document.getElementById("remaining-time").innerHTML = countdown;
-         	};
-         	document.getElementById("remaining-time").innerHTML = countdown;
-         	window.setInterval(secondPassed, 1000);
+             var countdown = 5*60;
+             function secondPassed() {
+                 countdown -= 1;
+                 if(countdown == 0) {
+                     location.reload();
+                 }
+                 document.getElementById("remaining-time").innerHTML = countdown;
+             };
+             document.getElementById("remaining-time").innerHTML = countdown;
+             window.setInterval(secondPassed, 1000);
          });
       </script>
    </head>

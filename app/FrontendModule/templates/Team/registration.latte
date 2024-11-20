@@ -1,18 +1,18 @@
 {extends ../@layout.latte}
 
 {block #content}
-	<div class="main-block">
-		<h1>Registrace týmu</h1>
-		{if Interlos::isRegistrationActive()}
-			{control teamForm}
-		{else}
-			<p><strong>Momentálně neprobíhá registrace, ta probíhá typicky měsíc před konáním soutěže.</strong></p>
-		{/if}
+    <div class="main-block">
+        <h1>Registrace týmu</h1>
+        {if Interlos::isRegistrationActive()}
+            {control teamForm}
+        {else}
+            <p><strong>Momentálně neprobíhá registrace, ta probíhá typicky měsíc před konáním soutěže.</strong></p>
+        {/if}
 
-	</div>
+    </div>
 {/block}
 
 {block #head}
-	{include parent}
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+    {include parent}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 {/block}

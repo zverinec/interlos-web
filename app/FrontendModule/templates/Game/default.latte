@@ -1,83 +1,83 @@
 {extends ../@layout.latte}
 {block content}
 <div class="main-block">
-	<h1>Soutěžní úkoly</h1>
-	<p>Zadání sad se v určený čas objeví na níže uvedených adresách. Všechny adresy obsahují stejnou informaci a jsou uvedeny pouze pro zálohu (nikdy tedy není žádná úmyslně skrytá informace v rozdílech mezi verzemi).</p>
+    <h1>Soutěžní úkoly</h1>
+    <p>Zadání sad se v určený čas objeví na níže uvedených adresách. Všechny adresy obsahují stejnou informaci a jsou uvedeny pouze pro zálohu (nikdy tedy není žádná úmyslně skrytá informace v rozdílech mezi verzemi).</p>
 
-	<p>V případě výpadku serveru, na kterém běží systém hry nebo v případě opravy/upřesnění zadání obdržíte informace prostřednictvím stránky s informacemi, která se po přihlášení týmu automaticky zobrazuje v záhlaví každé stránky. V opravdu urgentních případech (kdy stránku s informacemi nelze načíst) budete informováni e-mailem na adresu, kterou jste uvedli při registraci.</p>
+    <p>V případě výpadku serveru, na kterém běží systém hry nebo v případě opravy/upřesnění zadání obdržíte informace prostřednictvím stránky s informacemi, která se po přihlášení týmu automaticky zobrazuje v záhlaví každé stránky. V opravdu urgentních případech (kdy stránku s informacemi nelze načíst) budete informováni e-mailem na adresu, kterou jste uvedli při registraci.</p>
 
-	{if true || Interlos::isGameStarted()}
-	<table id="puzzle-sources" cellspacing="0">
-		<thead><tr>
-			<th>popis</th>
-			<th>čas dostupnosti</th>
-			<th>InterLoS server</th>
-			<th>mirror 1 (interlos.cz)</th>
-			<th>mirror 2 (iamroot.eu)</th>
-		</tr></thead>
-		<tbody>
+    {if true || Interlos::isGameStarted()}
+    <table id="puzzle-sources" cellspacing="0">
+        <thead><tr>
+            <th>popis</th>
+            <th>čas dostupnosti</th>
+            <th>InterLoS server</th>
+            <th>mirror 1 (interlos.cz)</th>
+            <th>mirror 2 (iamroot.eu)</th>
+        </tr></thead>
+        <tbody>
 
-		<tr>
-			<td>zadání sady 1</td>
-			<td>od 15:00</td>
-			<td><a href="https://interlos.fi.muni.cz/download/years/2023/sada1/">sada 1</a></td>
-			<td><a href="https://interlos.cz/sada1/">sada 1</a></td>
-			<td><a href="https://interlos2.iamroot.eu/sada1/">sada 1</a></td>
-		</tr>
-		<tr class="even">
-			<td>zadání sady 2</td>
-			<td>od 16:30</td>
-			<td><a href="https://interlos.fi.muni.cz/download/years/2023/sada2/">sada 2</a></td>
-			<td><a href="https://interlos.cz/sada2/">sada 2</a></td>
-			<td><a href="https://interlos2.iamroot.eu/sada2/">sada 2</a></td>
-		</tr>
-		<tr class="odd">
-			<td>zadání sady 3</td>
-			<td>od 18:00</td>
-			<td><a href="https://interlos.fi.muni.cz/download/years/2023/sada3/">sada 3</a></td>
-			<td><a href="https://interlos.cz/sada3/">sada 3</a></td>
-			<td><a href="https://interlos2.iamroot.eu/sada3/">sada 3</a></td>
-		</tr>
-		<tr class="even">
-			<td>řešení všech sad</td>
-			<td>od 20:01</td>
-			<td><a href="https://interlos.fi.muni.cz/download/years/2023/reseni/">řešení</a></td>
-			<td><a href="https://interlos.cz/reseni/">řešení</a></td>
-			<td><a href="https://interlos2.iamroot.eu/reseni/">řešení</a></td>
-		</tr>
-		</tbody>
-	</table>
-	{else}
-	<p><strong>Žádná zveřejněná zadání</strong></p>
-	{/if}
+        <tr>
+            <td>zadání sady 1</td>
+            <td>od 15:00</td>
+            <td><a href="https://interlos.fi.muni.cz/download/years/2023/sada1/">sada 1</a></td>
+            <td><a href="https://interlos.cz/sada1/">sada 1</a></td>
+            <td><a href="https://interlos2.iamroot.eu/sada1/">sada 1</a></td>
+        </tr>
+        <tr class="even">
+            <td>zadání sady 2</td>
+            <td>od 16:30</td>
+            <td><a href="https://interlos.fi.muni.cz/download/years/2023/sada2/">sada 2</a></td>
+            <td><a href="https://interlos.cz/sada2/">sada 2</a></td>
+            <td><a href="https://interlos2.iamroot.eu/sada2/">sada 2</a></td>
+        </tr>
+        <tr class="odd">
+            <td>zadání sady 3</td>
+            <td>od 18:00</td>
+            <td><a href="https://interlos.fi.muni.cz/download/years/2023/sada3/">sada 3</a></td>
+            <td><a href="https://interlos.cz/sada3/">sada 3</a></td>
+            <td><a href="https://interlos2.iamroot.eu/sada3/">sada 3</a></td>
+        </tr>
+        <tr class="even">
+            <td>řešení všech sad</td>
+            <td>od 20:01</td>
+            <td><a href="https://interlos.fi.muni.cz/download/years/2023/reseni/">řešení</a></td>
+            <td><a href="https://interlos.cz/reseni/">řešení</a></td>
+            <td><a href="https://interlos2.iamroot.eu/reseni/">řešení</a></td>
+        </tr>
+        </tbody>
+    </table>
+    {else}
+    <p><strong>Žádná zveřejněná zadání</strong></p>
+    {/if}
 </div>
 <div class="main-block">
-	<h1>Odevzdat řešení</h1>
-	{if  $user->isLoggedIn()}
-		{control answerForm}
-	{else}
-		<p><strong>Odevzdávání je zpřístupněno pouze přihlášeným týmům v čase hry.</strong></p>
-	{/if}
+    <h1>Odevzdat řešení</h1>
+    {if  $user->isLoggedIn()}
+        {control answerForm}
+    {else}
+        <p><strong>Odevzdávání je zpřístupněno pouze přihlášeným týmům v čase hry.</strong></p>
+    {/if}
 </div>
 <div class="main-block">
-	<h1>Historie odpovědí</h1>
-	{if  $user->isLoggedIn()}
-		{control answerHistory}
-	{else}
-		<p><strong>Historie odpovědí je zpřístupněna pouze přihlášeným týmům v čase hry.</strong></p>
-	{/if}
+    <h1>Historie odpovědí</h1>
+    {if  $user->isLoggedIn()}
+        {control answerHistory}
+    {else}
+        <p><strong>Historie odpovědí je zpřístupněna pouze přihlášeným týmům v čase hry.</strong></p>
+    {/if}
 </div>
 <div class="main-block">
-	<h1>Statistika úkolů</h1>
-	{if $available}
-		<p>Podrobnou statistiku celé hry najdete na <a href="{plink Stats:}">samostatné stránce</a>.</p>
-		{control taskStats}
-	{else}
-		{if !Interlos::areStatsShown()}
-			<div class="flash error"><strong>Pořadí týmů není v posledních 30 minutách hry k dispozici.</strong></div>
-		{else}
-			<p>Momentálně nedostupné. Vyčkejte prosím chvíli.</p>
-		{/if}
-	{/if}
+    <h1>Statistika úkolů</h1>
+    {if $available}
+        <p>Podrobnou statistiku celé hry najdete na <a href="{plink Stats:}">samostatné stránce</a>.</p>
+        {control taskStats}
+    {else}
+        {if !Interlos::areStatsShown()}
+            <div class="flash error"><strong>Pořadí týmů není v posledních 30 minutách hry k dispozici.</strong></div>
+        {else}
+            <p>Momentálně nedostupné. Vyčkejte prosím chvíli.</p>
+        {/if}
+    {/if}
 </div>
 {/block}

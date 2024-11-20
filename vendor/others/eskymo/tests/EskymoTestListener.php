@@ -7,12 +7,12 @@
 abstract class EskymoTestListener extends EskymoObject
 {
 
-	public function addError(IEskymoTest $test, Exception $e) {}
+    public function addError(IEskymoTest $test, Exception $e) {}
 
-	public function addFailure(IEskymoTest $test, EskymoTestFailure $e) {}
+    public function addFailure(IEskymoTest $test, EskymoTestFailure $e) {}
 
-	public function endMethod(IEskymoTest $test, $code) {}
+    public function endMethod(IEskymoTest $test, $code) {}
 
-	public function startMethod(IEskymoTest $test) {}
+    public function startMethod(IEskymoTest $test) {}
 }
 

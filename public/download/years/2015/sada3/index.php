@@ -19,37 +19,37 @@ if(new DateTime() >= new DateTime("2015-12-06 18:00:00")) {
 </head>
 <div class="root">
     <div class="header">
-	<div class="header-line">&nbsp;</div>
-	<div class="contents">
-		<a href="http://interlos.fi.muni.cz/">
-			<span class="block header-logo" title="InterLoS - INTERnetová LOgická Soutěž">&nbsp;</span>
-			<span class="block header-name" title="InterLoS - INTERnetová LOgická Soutěž">&nbsp;</span>
-		</a>
-		<div class="header-year"><h1>ročník 2015</h1></div>
-		<div class="cleaner-both">&nbsp;</div>
-	</div>
+    <div class="header-line">&nbsp;</div>
+    <div class="contents">
+        <a href="http://interlos.fi.muni.cz/">
+            <span class="block header-logo" title="InterLoS - INTERnetová LOgická Soutěž">&nbsp;</span>
+            <span class="block header-name" title="InterLoS - INTERnetová LOgická Soutěž">&nbsp;</span>
+        </a>
+        <div class="header-year"><h1>ročník 2015</h1></div>
+        <div class="cleaner-both">&nbsp;</div>
+    </div>
     </div>
     
     <div class="main">
-	<div class="contents">
-		<div class="main-block">
-		<h1>Zadání 3. sady</h1>
-		<p>Všechna (textová zadání) v jednom PDF souboru: <a href="sada3.pdf">sada3.pdf</a></p>
-		<h2>Přiložené soubory</h2>
-		<ul>
-			<li><a href="P7-record.zip">P7-record.zip</a> (P7 ICAO rozhlas)</li>
-      			<li><a href="P8-vstup.txt">P8-vstup.txt</a> (P8 Tramtárie)</li>
-      			<li><a href="P9-spizy.txt">P9-spizy.txt</a> (P9 Špízy)</li>
-			<li><a href="LosGagMemes.zip">Vybrané memečka nahraná soutěžícími v rámci úkolu</a> (L9 LosGAG)</li>
-		</ul>
-		<div class="hr">&nbsp;</div>
-		<p>Veškeré problémy s úlohami a odevzdávacím systémem hlaste z e-mailové adresy uvedené v profilu týmu na adresu <a href="mailto:interlos@fi.muni.cz"><span class="bold">interlos@fi.muni.cz</span></a>. V předmětu e-mailu musí být uvedeno ID týmu, který najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>
-		</div>
-	</div>
+    <div class="contents">
+        <div class="main-block">
+        <h1>Zadání 3. sady</h1>
+        <p>Všechna (textová zadání) v jednom PDF souboru: <a href="sada3.pdf">sada3.pdf</a></p>
+        <h2>Přiložené soubory</h2>
+        <ul>
+            <li><a href="P7-record.zip">P7-record.zip</a> (P7 ICAO rozhlas)</li>
+                  <li><a href="P8-vstup.txt">P8-vstup.txt</a> (P8 Tramtárie)</li>
+                  <li><a href="P9-spizy.txt">P9-spizy.txt</a> (P9 Špízy)</li>
+            <li><a href="LosGagMemes.zip">Vybrané memečka nahraná soutěžícími v rámci úkolu</a> (L9 LosGAG)</li>
+        </ul>
+        <div class="hr">&nbsp;</div>
+        <p>Veškeré problémy s úlohami a odevzdávacím systémem hlaste z e-mailové adresy uvedené v profilu týmu na adresu <a href="mailto:interlos@fi.muni.cz"><span class="bold">interlos@fi.muni.cz</span></a>. V předmětu e-mailu musí být uvedeno ID týmu, který najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>
+        </div>
+    </div>
     </div>
     
     <div  class="footer">
-	<div class="footer-line">&nbsp;</div>
+    <div class="footer-line">&nbsp;</div>
     </div>
  
 </div>

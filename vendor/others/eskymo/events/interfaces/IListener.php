@@ -2,6 +2,6 @@
 interface IListener extends IEskymoObject
 {
 
-	function listen(IEvent $event);
+    function listen(IEvent $event);
 
 }

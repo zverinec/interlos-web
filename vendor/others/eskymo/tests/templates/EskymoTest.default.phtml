@@ -2,172 +2,172 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta http-equiv="content-language" content="cs" />
-	<title>Eskymo tests</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-language" content="cs" />
+    <title>Eskymo tests</title>
 </head>
 <style>
 body {
-	font: 9pt/1.5 Verdana, sans-serif;
+    font: 9pt/1.5 Verdana, sans-serif;
 }
 dl, dt, dd {
-	margin:0;
+    margin:0;
 }
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 #test-info {
-	color: white;
-	display: block;
-	padding: 5px 10px;
+    color: white;
+    display: block;
+    padding: 5px 10px;
 }
 #test-info dt {
-	display: block;
-	float: left;
-	font-weight: bold;
-	margin-right: 10px;
+    display: block;
+    float: left;
+    font-weight: bold;
+    margin-right: 10px;
 }
 #test-info dd {
-	display: block;
-	float: left;
-	margin-right: 10px;
+    display: block;
+    float: left;
+    margin-right: 10px;
 }
 dl.success{
-	background: green;
+    background: green;
 }
 dl.not-success{
-	background: #DB1000;
+    background: #DB1000;
 }
 h2.test {
-	border-bottom-style: solid;
-	border-bottom-width: 2px;
-	font-size: 120%;
-	padding: 5px 10px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    font-size: 120%;
+    padding: 5px 10px;
 }
 h2.success {
-	color: green;
-	border-color: green;
+    color: green;
+    border-color: green;
 }
 h2.success a {
-	color: green;
+    color: green;
 }
 h2.not-success {
-	color: #DB1000;
-	border-color: #DB1000;
+    color: #DB1000;
+    border-color: #DB1000;
 }
 h2.not-success a {
-	color: #DB1000;
+    color: #DB1000;
 }
 .test-methods li {
-	display: block;
-	margin-bottom: 10px;
-	border-bottom-style: dashed;
-	border-bottom-width: 1px;
+    display: block;
+    margin-bottom: 10px;
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
 }
 .test-methods li.passed {
-	border-bottom-color: green;
+    border-bottom-color: green;
 }
 .test-methods li.skipped {
-	border-bottom-color: gray;
+    border-bottom-color: gray;
 }
 .test-methods li.error {
-	border-bottom-color: #DB1000;
+    border-bottom-color: #DB1000;
 }
 .test-methods li .info {
-	color: white;
-	display: block;
-	float: left;
-	width: 70px;
-	text-align: center;
-	padding: 5px;
-	font-weight: bold;
-	margin-right: 20px;
+    color: white;
+    display: block;
+    float: left;
+    width: 70px;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    margin-right: 20px;
 }
 .test-methods li.passed .info {
-	background: green;
+    background: green;
 }
 .test-methods li.skipped .info {
-	background: gray;
+    background: gray;
 }
 .test-methods li.error .info {
-	background: #DB1000;
+    background: #DB1000;
 }
 .test-methods li .method {
-	display: block;
-	padding: 5px;
+    display: block;
+    padding: 5px;
 }
 li.error dl {
-	padding-left: 200px;
+    padding-left: 200px;
 }
 li.error dl dt {
-	display: block;
-	float: left;
-	width: 70px;
-	font-weight: bold;
+    display: block;
+    float: left;
+    width: 70px;
+    font-weight: bold;
 }
 li.error dl dd {
 }
 
 </style>
 <body>
-	<h1>Eskymo tests</h1>
+    <h1>Eskymo tests</h1>
 
-	<dl id="test-info" class="{if count($tested) == $successful}success{else}not-success{/if}">
-		<dt>Number of test classes:</dt>
-		<dd>{=count($tested)}</dd>
-		<dt>Successful:</dt>
-		<dd>{$successful}</dd>
-		<br clear="all" />
-	</dl>
+    <dl id="test-info" class="{if count($tested) == $successful}success{else}not-success{/if}">
+        <dt>Number of test classes:</dt>
+        <dd>{=count($tested)}</dd>
+        <dt>Successful:</dt>
+        <dd>{$successful}</dd>
+        <br clear="all" />
+    </dl>
 
 
-	{foreach $tested AS $test => $results}
-		<h2 class="test {if $results->isSuccessful()}success{else}not-success{/if}">
-			<a href="{link show, $test}">{$test}</a>
-		</h2>
-		<ul class="test-methods">
-			{foreach $results->getTested() AS $method => $result}
-				{if $result === EskymoTestResult::PASSED}
-					<li class="passed"><span class="info">passed</span><span class="method">{$method}</span></li>
-				{else}
-					{if $result === EskymoTestResult::SKIPPED}
-						<li class="skipped"><span class="info">skipped</span><span class="method">{$method}</span></li>
-					{else}
-						<li class="error">
-							<span class="info">{if $result instanceof EskymoTestFailure}failure{else}error{/if}</span>
-							<span class="method"><a href="{link show $test,$method}">{$method}</a></span>
-							<dl>
-								{if $result instanceof EskymoTestFailure}
-									<dt>Message</dt>
-										<dd>{$result->getMessage()}</dd>
-									<?php
-										$info = ExtraArray::firstValue($result->getTrace());
-									?>
-									<dt>File</dt>
-										<dd>{$info["file"]}</dd>
-									<dt>Line</dt>
-										<dd>{$info["line"]}</dd>
-								{else}
-									<dt>Type</dt>
-										<dd>{=get_class($result)}</dd>
-									<dt>Message</dt>
-										<dd>{$result->getMessage()}</dd>
-									<dt>Code</dt>
-										<dd>{$result->getCode()}</dd>
-									<dt>File</dt>
-										<dd>{$result->getFile()}</dd>
-									<dt>Line</dt>
-										<dd>{$result->getLine()}</dd>
-								{/if}
-							</dl>
-						</li>
-					{/if}
-				{/if}
-			{/foreach}
-		</ul>
-	{/foreach}
+    {foreach $tested AS $test => $results}
+        <h2 class="test {if $results->isSuccessful()}success{else}not-success{/if}">
+            <a href="{link show, $test}">{$test}</a>
+        </h2>
+        <ul class="test-methods">
+            {foreach $results->getTested() AS $method => $result}
+                {if $result === EskymoTestResult::PASSED}
+                    <li class="passed"><span class="info">passed</span><span class="method">{$method}</span></li>
+                {else}
+                    {if $result === EskymoTestResult::SKIPPED}
+                        <li class="skipped"><span class="info">skipped</span><span class="method">{$method}</span></li>
+                    {else}
+                        <li class="error">
+                            <span class="info">{if $result instanceof EskymoTestFailure}failure{else}error{/if}</span>
+                            <span class="method"><a href="{link show $test,$method}">{$method}</a></span>
+                            <dl>
+                                {if $result instanceof EskymoTestFailure}
+                                    <dt>Message</dt>
+                                        <dd>{$result->getMessage()}</dd>
+                                    <?php
+                                        $info = ExtraArray::firstValue($result->getTrace());
+                                    ?>
+                                    <dt>File</dt>
+                                        <dd>{$info["file"]}</dd>
+                                    <dt>Line</dt>
+                                        <dd>{$info["line"]}</dd>
+                                {else}
+                                    <dt>Type</dt>
+                                        <dd>{=get_class($result)}</dd>
+                                    <dt>Message</dt>
+                                        <dd>{$result->getMessage()}</dd>
+                                    <dt>Code</dt>
+                                        <dd>{$result->getCode()}</dd>
+                                    <dt>File</dt>
+                                        <dd>{$result->getFile()}</dd>
+                                    <dt>Line</dt>
+                                        <dd>{$result->getLine()}</dd>
+                                {/if}
+                            </dl>
+                        </li>
+                    {/if}
+                {/if}
+            {/foreach}
+        </ul>
+    {/foreach}
 </body>
 </html>

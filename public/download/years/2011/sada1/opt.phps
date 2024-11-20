@@ -16,11 +16,11 @@ echo f($A, $B, $C) . "\n";
  */
 function f($A, $B, $C)
 {
-	$s = 0;
-	for ($i = 0; $i < $C; $i++) {
-		$s = ($s + $A * g($B, $i, h($i))) % h($i+1);
-	}
-	return $s % h($C);
+    $s = 0;
+    for ($i = 0; $i < $C; $i++) {
+        $s = ($s + $A * g($B, $i, h($i))) % h($i+1);
+    }
+    return $s % h($C);
 }
 
 
@@ -32,11 +32,11 @@ function f($A, $B, $C)
  */
 function g($a, $b, $c)
 {
-	$r = 1;
-	for ($i = 0; $i < $b; $i++) {
-		$r = ($r * $a) % $c;
-	}
-	return $r;
+    $r = 1;
+    for ($i = 0; $i < $b; $i++) {
+        $r = ($r * $a) % $c;
+    }
+    return $r;
 }
 
 
@@ -46,25 +46,25 @@ function g($a, $b, $c)
  */
 function h($i)
 {
-	$p = array();
-	$p[1] = 2;
-	$pc = 1;
-	do {
-		$n = $p[$pc];
-		$ok = false;
-		do {
-			$thisOk = true;
-			$n++;
-			for ($j = 1; $j <= $pc; $j++) {
-				if ($n % $p[$j] == 0) $thisOk = false;
-			}
-			if ($thisOk) $ok = true;
-		} while (!$ok);
+    $p = array();
+    $p[1] = 2;
+    $pc = 1;
+    do {
+        $n = $p[$pc];
+        $ok = false;
+        do {
+            $thisOk = true;
+            $n++;
+            for ($j = 1; $j <= $pc; $j++) {
+                if ($n % $p[$j] == 0) $thisOk = false;
+            }
+            if ($thisOk) $ok = true;
+        } while (!$ok);
 
-		$pc++;
-		$p[$pc] = $n;
-	} while ($pc < 9999);
-	return $p[ m($i) ];
+        $pc++;
+        $p[$pc] = $n;
+    } while ($pc < 9999);
+    return $p[ m($i) ];
 }
 
 
@@ -74,11 +74,11 @@ function h($i)
  */
 function m($i)
 {
-	$k = 6543 ^ $i;
-	for ($n = 0; $n < (3456 & $i); $n++) {
-		for ($j = 0; $j < $i; $j++) {
-			$k = $k ^ $j;
-		}
-	}
-	return $i ^ $k;
+    $k = 6543 ^ $i;
+    for ($n = 0; $n < (3456 & $i); $n++) {
+        for ($j = 0; $j < $i; $j++) {
+            $k = $k ^ $j;
+        }
+    }
+    return $i ^ $k;
 }

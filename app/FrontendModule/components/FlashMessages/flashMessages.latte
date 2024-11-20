@@ -1,7 +1,7 @@
 <div id="flashes">
-	{foreach $control->getParent()->getTemplate()->flashes as $flash}
-	<div class="flash {$flash->type}">
-		{$flash->message}
-	</div>
-	{/foreach}
+    {foreach $control->getParent()->getTemplate()->flashes as $flash}
+    <div class="flash {$flash->type}">
+        {$flash->message}
+    </div>
+    {/foreach}
 </div>

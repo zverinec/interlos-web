@@ -1,7 +1,7 @@
 Deny from all
 <FilesMatch "^$">
-	Allow from all
+    Allow from all
 </FilesMatch>
 <FilesMatch "index.php">
-	Allow from all
+    Allow from all
 </FilesMatch>

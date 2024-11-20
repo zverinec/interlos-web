@@ -5,25 +5,25 @@
 
 int getNthPerson(int n)
 {
-	for (int count = 1; ; count *= 2) {
-		for (int person = 0; person < 5; person++) {
-			n -= count;
-			if (n <= 0) {
-				return person;
-			}
-		}
-	}
+    for (int count = 1; ; count *= 2) {
+        for (int person = 0; person < 5; person++) {
+            n -= count;
+            if (n <= 0) {
+                return person;
+            }
+        }
+    }
 }
 
 int main()
 {
-	int positions[6] = { 10, 100, 1000, 10000, 100000, 1000000 };
+    int positions[6] = { 10, 100, 1000, 10000, 100000, 1000000 };
 
-	for (int i = 0; i < 6; i++) {
-		printf("%c", 'A'+getNthPerson(positions[i]));
-	}
+    for (int i = 0; i < 6; i++) {
+        printf("%c", 'A'+getNthPerson(positions[i]));
+    }
 
-	printf("\n");
+    printf("\n");
 
-	return 0;
+    return 0;
 }

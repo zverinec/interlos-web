@@ -21,9 +21,9 @@ char word[1048576];
 
 int main()
 {
-	while (scanf("%s", word) == 1) {
+    while (scanf("%s", word) == 1) {
                 for (int i = 0; i < 13; i++) {
-			if (strcmp(word, codes[i]) == 0) {
+            if (strcmp(word, codes[i]) == 0) {
                             if(i<10)
                                 printf("%d", i);
                             else if(i==10)
@@ -32,10 +32,10 @@ int main()
                                 printf(":");
                             else
                                 printf(" ");
-			}
-		}
-	}
-	printf("\n");
+            }
+        }
+    }
+    printf("\n");
 
-	return 0;
+    return 0;
 }

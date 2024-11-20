@@ -1,28 +1,28 @@
 {if !empty($tasks)}
-	<table id="task-stats" cellspacing="0">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>název</th>
-				<th>nejhorší</th>
-				<th>nejlepší</th>
-				<th>průměrný</th>
-				<th>správně</th>
-				<th>špatně</th>
-			</tr>
-		</thead>
-		{foreach $tasks as $task}
-			<tr{if $iterator->isEven()} class="even"{/if}>
-				<td>{$task->code_name}</td>
-				<td>{$task->name}</td>
-				<td>{$task->worst_time|timeOnly}</td>
-				<td>{$task->best_time|timeOnly}</td>
-				<td>{$task->avg_time|timeOnly}</td>
-				<td>{$task->count_correct_answer}</td>
-				<td>{$task->count_incorrect_answer}</td>
-			</tr>
-		{/foreach}
-	</table>
+    <table id="task-stats" cellspacing="0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>název</th>
+                <th>nejhorší</th>
+                <th>nejlepší</th>
+                <th>průměrný</th>
+                <th>správně</th>
+                <th>špatně</th>
+            </tr>
+        </thead>
+        {foreach $tasks as $task}
+            <tr{if $iterator->isEven()} class="even"{/if}>
+                <td>{$task->code_name}</td>
+                <td>{$task->name}</td>
+                <td>{$task->worst_time|timeOnly}</td>
+                <td>{$task->best_time|timeOnly}</td>
+                <td>{$task->avg_time|timeOnly}</td>
+                <td>{$task->count_correct_answer}</td>
+                <td>{$task->count_incorrect_answer}</td>
+            </tr>
+        {/foreach}
+    </table>
 {else}
-	<p><strong>Zatím nejsou dostupné žádné statistiky.</strong></p>
+    <p><strong>Zatím nejsou dostupné žádné statistiky.</strong></p>
 {/if}

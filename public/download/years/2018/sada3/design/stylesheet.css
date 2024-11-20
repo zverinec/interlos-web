@@ -18,11 +18,11 @@ body { font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif; font-siz
 
 .contents { padding: 0 10px 0 10px; min-width: 320px; max-width: 1200px; margin: 0 auto 0 auto; }
 @media only screen and (min-width: 825px) {
-	.header-team-name { width: 290px; }
-	.contents { width: 90%; }
+    .header-team-name { width: 290px; }
+    .contents { width: 90%; }
 }
 @media only screen and (min-width: 950px) {
-	.contents { width: 80%; }
+    .contents { width: 80%; }
 }
 
 /* info page */

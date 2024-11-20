@@ -1,47 +1,47 @@
 {if Interlos::isGameStarted()}
-	{foreach $categories as $category => $name}
-		<h2 id="{$category}" class="center">{$name}</h2>
-		<table class="results" cellspacing="0">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>tým</th>
-					<th>celkem bodů</th>
-					<th>bonusové body</th>
-					<th>záporné body</th>
-				</tr>
-			</thead>
-			{if isset($teams[$category])}
-				{foreach $teams[$category] as $team}
-				<tr{if $iterator->isEven()} class="even"{/if}>
-					<td>{$iterator->getCounter()}</td>
-					<td>{$team->name}</td>
-					<td>
-						{if !empty($team->score)}
-							{$team->score}
-						{else}
-							0
-						{/if}
-					</td>
-					<td>
-						{if isset($bonus[$team->id_team])}
-							{$bonus[$team->id_team]->score}
-						{else}
-							0
-						{/if}
-					</td>
-					<td>
-						{if isset($penality[$team->id_team])}
-							{$penality[$team->id_team]->score}
-						{else}
-							0
-						{/if}
-					</td>
-				</tr>
-				{/foreach}
-			{/if}
-		</table>
-	{/foreach}
+    {foreach $categories as $category => $name}
+        <h2 id="{$category}" class="center">{$name}</h2>
+        <table class="results" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>tým</th>
+                    <th>celkem bodů</th>
+                    <th>bonusové body</th>
+                    <th>záporné body</th>
+                </tr>
+            </thead>
+            {if isset($teams[$category])}
+                {foreach $teams[$category] as $team}
+                <tr{if $iterator->isEven()} class="even"{/if}>
+                    <td>{$iterator->getCounter()}</td>
+                    <td>{$team->name}</td>
+                    <td>
+                        {if !empty($team->score)}
+                            {$team->score}
+                        {else}
+                            0
+                        {/if}
+                    </td>
+                    <td>
+                        {if isset($bonus[$team->id_team])}
+                            {$bonus[$team->id_team]->score}
+                        {else}
+                            0
+                        {/if}
+                    </td>
+                    <td>
+                        {if isset($penality[$team->id_team])}
+                            {$penality[$team->id_team]->score}
+                        {else}
+                            0
+                        {/if}
+                    </td>
+                </tr>
+                {/foreach}
+            {/if}
+        </table>
+    {/foreach}
 {else}
-	<p><strong>Pořadí týmů bude dostupné až po začátku hry.</strong></p>
+    <p><strong>Pořadí týmů bude dostupné až po začátku hry.</strong></p>
 {/if}
