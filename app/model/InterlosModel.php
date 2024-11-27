@@ -2,8 +2,8 @@
 interface InterlosModel
 {
 
-    function find($id);
+	function find($id);
 
-    function findAll();
+	function findAll();
 
 }

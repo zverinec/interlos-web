@@ -32,12 +32,12 @@
 
 {foreach $posts as $subposts}
 	{var $post = $subposts[0]}
-    <div class="discussion-main" id="post-{$post['post_id_chat']}">
+	<div class="discussion-main" id="post-{$post['post_id_chat']}">
 		<span class="discussion-team">{$post['post_team_name']}</span>
 		<span class="discussion-date">{$post['post_inserted']|time}</span>
 		<div class="cleaner-both">&nbsp;</div>
 		{$post['post_content']|texy|noescape}
-    </div>
+	</div>
 	{foreach $subposts as $subpost}
 		{continueIf empty($subpost['reply_id_chat'])}
 		<div class="discussion-reply" id="post-{$subpost['reply_id_chat']}">
