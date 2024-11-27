@@ -49,7 +49,7 @@ class SimpleInserter implements IInserter
 	 * @return IInserter
 	 * @throws NullPointerException if the $table is empty
 	 */
-    public static function createInserter($table) {
+	public static function createInserter($table) {
 		if (empty($table)) {
 			throw new NullPointerException("table");
 		}

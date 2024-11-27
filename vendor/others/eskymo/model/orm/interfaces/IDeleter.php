@@ -18,8 +18,8 @@
 interface IDeleter
 {
 	
-    /**
-     * @param integer $id 
+	/**
+	 * @param integer $id 
 	 * @return boolean
 	 * @throws InvalidStateException if the record cannot be deleted
 	 */

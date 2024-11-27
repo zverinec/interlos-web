@@ -7,20 +7,20 @@ w = im.width
 h = im.height
 
 def step(x, y):
-    num = 0
-    i = 0
-    for dy in range(-1, 2):
-        for dx in range(-1, 2):
-            g = 0 if im.getpixel(( (x + dx)%w , (y + dy)%h ))[0] == 0 else 1
-            num += (2 ** i) * g;
-            i += 1
-    return (0, 0, 0) if ca[num] == 0 else (255, 255, 255)
+	num = 0
+	i = 0
+	for dy in range(-1, 2):
+		for dx in range(-1, 2):
+			g = 0 if im.getpixel(( (x + dx)%w , (y + dy)%h ))[0] == 0 else 1
+			num += (2 ** i) * g;
+			i += 1
+	return (0, 0, 0) if ca[num] == 0 else (255, 255, 255)
 
 for i in range(10): # steps
-    nim = Image.new("RGB", (w, h), "white")
-    for y in range(w):
-        for x in range(h):
-            nim.putpixel((x, y), step(x, y))
-    im = nim
+	nim = Image.new("RGB", (w, h), "white")
+	for y in range(w):
+		for x in range(h):
+			nim.putpixel((x, y), step(x, y))
+	im = nim
 
 im.save("out.png")

@@ -6,10 +6,10 @@ use Nette\StaticClass;
 
 final class RouterFactory
 {
-    use StaticClass;
+	use StaticClass;
 
-    public static function createRouter(): Router
-    {
-        return FrontModule::createRouter("Front");
-    }
+	public static function createRouter(): Router
+	{
+		return FrontModule::createRouter("Front");
+	}
 }

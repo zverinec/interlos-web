@@ -35,9 +35,9 @@ End;
 
 Function h(i : LongInt) : LongInt;
 Var p : Array[0..9999] of LongInt;
-    pc, n : LongInt;
-    ok, thisOk : Boolean;
-    j : LongInt;
+	pc, n : LongInt;
+	ok, thisOk : Boolean;
+	j : LongInt;
 Begin
 	pc := 1;
 	p[1] := 2;

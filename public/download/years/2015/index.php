@@ -38,8 +38,8 @@
 		</div>
 		</div>
 	<?php } ?>
-    
-    <div class="main">
+	
+	<div class="main">
 	<div class="contents" <?php if (isset($_GET['headless'])) { echo 'style="padding: 0px; width: 100%;max-width: inherit;"';  }   ?>>
 		<div class="main-block">
 			<h1 class="lefted">Aktuální informace</h1>
@@ -47,77 +47,77 @@
 
 			<div class="cleaner-both">&nbsp;</div>
 
-                        <div class="neutral">
-                                <div class="info-time">19:30</div>
-                                <div class="info-message">After párty ve Dřevákovi ve 20:30 (<a href="http://www.udrevaka.cz/">http://www.udrevaka.cz/</a>)!</div>
-                        </div>
+						<div class="neutral">
+								<div class="info-time">19:30</div>
+								<div class="info-message">After párty ve Dřevákovi ve 20:30 (<a href="http://www.udrevaka.cz/">http://www.udrevaka.cz/</a>)!</div>
+						</div>
 
 			<div class="neutral">
-                                <div class="info-time">19:30</div>
-                                <div class="info-message">Poslední půlhodina hry!</div>
-                        </div>
+								<div class="info-time">19:30</div>
+								<div class="info-message">Poslední půlhodina hry!</div>
+						</div>
 
 			<div class="nok">
-                                <div class="info-time">18:20</div>
-                                <div class="info-message">Kvůli chybě ve vstupu úlohy P9 Špízy jsme uznávali špatné heslo. To je nyní opraveno.</div>
-                        </div>
+								<div class="info-time">18:20</div>
+								<div class="info-message">Kvůli chybě ve vstupu úlohy P9 Špízy jsme uznávali špatné heslo. To je nyní opraveno.</div>
+						</div>
 				
-                        <div class="nok">
-                                <div class="info-time">18:20</div>
-                                <div class="info-message">V úloze P9 Špízy jsme našli chybu. Stáhněte si nový vstup a zadání ze standardního umístění.</div>
-                        </div>
+						<div class="nok">
+								<div class="info-time">18:20</div>
+								<div class="info-message">V úloze P9 Špízy jsme našli chybu. Stáhněte si nový vstup a zadání ze standardního umístění.</div>
+						</div>
 
 			<div class="ok">
-                                <div class="info-time">18:00</div>
-                                <div class="info-message">Třetí sada zveřejněna. Přejeme příjemný finiš..</div>
-                        </div>
+								<div class="info-time">18:00</div>
+								<div class="info-message">Třetí sada zveřejněna. Přejeme příjemný finiš..</div>
+						</div>
 
 			<div class="neutral">
-                                <div class="info-time">17:40</div>
-                                <div class="info-message">Všechny úlohy druhé sady jsou řešitelné a to nás opravdu těší... Zbývá 20 minut do další sady.</div>
-                        </div>
+								<div class="info-time">17:40</div>
+								<div class="info-message">Všechny úlohy druhé sady jsou řešitelné a to nás opravdu těší... Zbývá 20 minut do další sady.</div>
+						</div>
 
 			<div class="nok">
-                                <div class="info-time">17:30</div>
-                                <div class="info-message">V úloze P6 Podmořská procházka ve výsledném hesle nesčítejte zaplavené oblasti po řádcích.</div>
-                        </div>
+								<div class="info-time">17:30</div>
+								<div class="info-message">V úloze P6 Podmořská procházka ve výsledném hesle nesčítejte zaplavené oblasti po řádcích.</div>
+						</div>
 
 			<div class="neutral">
-                                <div class="info-time">17:05</div>
-                                <div class="info-message"><a target="_new" href="https://www.facebook.com/interlos/photos/a.388323821270221.1073741828.369734636462473/640197516082849/?type=3&theater">Fotka týmu ze štábu</a>.</div>
-                        </div>
+								<div class="info-time">17:05</div>
+								<div class="info-message"><a target="_new" href="https://www.facebook.com/interlos/photos/a.388323821270221.1073741828.369734636462473/640197516082849/?type=3&theater">Fotka týmu ze štábu</a>.</div>
+						</div>
 
-                        <div class="ok">
-                                <div class="info-time">16:30</div>
-                                <div class="info-message">Druhá sada zveřejněna.</div>
-                        </div>
+						<div class="ok">
+								<div class="info-time">16:30</div>
+								<div class="info-message">Druhá sada zveřejněna.</div>
+						</div>
 
-                        <div class="neutral">
-                                <div class="info-time">15:57</div>
-                                <div class="info-message">Z radosti týmu, že všechny šifry jsou luštitelné, začal organizátorský tým přepadávat po vzoru <a href="https://www.youtube.com/watch?v=QqreRufrkxM">španělské inkvizice</a> týmy ve stejné budově.</div>
-                        </div>
+						<div class="neutral">
+								<div class="info-time">15:57</div>
+								<div class="info-message">Z radosti týmu, že všechny šifry jsou luštitelné, začal organizátorský tým přepadávat po vzoru <a href="https://www.youtube.com/watch?v=QqreRufrkxM">španělské inkvizice</a> týmy ve stejné budově.</div>
+						</div>
 
-                        <div class="neutral">
-                                <div class="info-time">15:37</div>
-                                <div class="info-message">Ve štábu panuje veselá atmosféra z dosavadního průběhu :-)</div>
-                        </div>
+						<div class="neutral">
+								<div class="info-time">15:37</div>
+								<div class="info-message">Ve štábu panuje veselá atmosféra z dosavadního průběhu :-)</div>
+						</div>
 			
 			<div class="ok">
-                                <div class="info-time">15:00</div>
-                                <div class="info-message">Štastný nový InterLoS!</div>
-                        </div>
+								<div class="info-time">15:00</div>
+								<div class="info-message">Štastný nový InterLoS!</div>
+						</div>
 
 			<div class="ok">
-                                <div class="info-time">14:45</div>
-                                <div class="info-message">Všechno je připraveno ke hře! Přejeme hodně úspěchů!</div>
-                        </div>
+								<div class="info-time">14:45</div>
+								<div class="info-message">Všechno je připraveno ke hře! Přejeme hodně úspěchů!</div>
+						</div>
 
 		<div class="hr">&nbsp;</div>
 		<p>Veškeré problémy s úlohami a odevzdávacím systémem hlaste z e-mailové adresy uvedené v profilu týmu na adresu <a href="mailto:interlos@fi.muni.cz"><span class="bold">interlos@fi.muni.cz</span></a>.
 		V předmětu e-mailu musí být uvedeno ID týmu <?php if (isset($_GET['subject'])) echo '(' . htmlspecialchars($_GET['subject']) . ')'; ?>. Svoje ID také najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>
 		</div>
 	</div>
-    </div>
+	</div>
 
 	<?php if (!isset($_GET['headless']) || !$_GET['headless']) { ?>
 		<div  class="footer">

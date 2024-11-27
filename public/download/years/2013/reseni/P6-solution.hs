@@ -66,9 +66,9 @@ zehlene = [ pradlo | pradlo <- vsechnoPradlo, delkaAkce Zehlit pradlo /= Preskoc
 
 -- tímto typem budeme reprezentovat rozvrh
 data Rozvrh = Rozvrh
-    { akce :: [ (Akce, [ Pradlo ] ) ]
-    , cas :: Int
-    } deriving ( Show, Eq )
+	{ akce :: [ (Akce, [ Pradlo ] ) ]
+	, cas :: Int
+	} deriving ( Show, Eq )
 
 -- rozvrh a je lepší rozvrh než rozvrh b pokud je kratší, porovnání na časech
 lepsiRozvrh :: Rozvrh -> Rozvrh -> Ordering
@@ -77,68 +77,68 @@ lepsiRozvrh a b = compare (cas a) (cas b)
 -- fukce najde nejlepší rozvrh pro daný seznam prádla
 solve :: [ Pradlo ] -> Rozvrh
 solve pradlo = minimumBy lepsiRozvrh -- spočítáme minimum podle kritéria lepsiRozvrh
-        -- vytváříme seznam všech možných rozvrhů
-        [ Rozvrh { akce = seznam, cas = casPrani }
-        | prat <- permutations prane -- postupně do pr přiřazuj permutace prádla k praní
-        , zdimat <- permutations zdimane -- pro kazdé pořadí prádla k praní zkus
-                                     -- všechny permutace ždímání
-        , susit <- permutations susene -- stejně tak pro sušení
-        , zehlit <- permutations zehlene -- a žehlení
-          -- vytvoříme seznam dvojic, kde každá obsahuje akci
-          -- a pořadí prádla v němž se má akce na prádle provádět
-        , let seznam = [ (Prat, prat), (Zdimat, zdimat), (Susit, susit), (Zehlit, zehlit) ]
-          -- spocitame jak dlouho trva prani
-        , let casPrani = vyper seznam
-        ]
+		-- vytváříme seznam všech možných rozvrhů
+		[ Rozvrh { akce = seznam, cas = casPrani }
+		| prat <- permutations prane -- postupně do pr přiřazuj permutace prádla k praní
+		, zdimat <- permutations zdimane -- pro kazdé pořadí prádla k praní zkus
+									 -- všechny permutace ždímání
+		, susit <- permutations susene -- stejně tak pro sušení
+		, zehlit <- permutations zehlene -- a žehlení
+		  -- vytvoříme seznam dvojic, kde každá obsahuje akci
+		  -- a pořadí prádla v němž se má akce na prádle provádět
+		, let seznam = [ (Prat, prat), (Zdimat, zdimat), (Susit, susit), (Zehlit, zehlit) ]
+		  -- spocitame jak dlouho trva prani
+		, let casPrani = vyper seznam
+		]
   where
-    -- při výpočtu budeme postupovat postupně po akcích, u každého prádla
-    -- si budeme pamatovat, kdy zkončila předchozí akce na tomto prádle
-    --
-    -- tato funkce jen inicializuje proměnné pro funkci vyper'
-    -- a vrátí její výsledek (čas skončení poslední akce na posledním prádle)
-    vyper :: [ (Akce, [ Pradlo ] ) ] -> Int
-    vyper akce = vyper' akce nulovaMapa 0
+	-- při výpočtu budeme postupovat postupně po akcích, u každého prádla
+	-- si budeme pamatovat, kdy zkončila předchozí akce na tomto prádle
+	--
+	-- tato funkce jen inicializuje proměnné pro funkci vyper'
+	-- a vrátí její výsledek (čas skončení poslední akce na posledním prádle)
+	vyper :: [ (Akce, [ Pradlo ] ) ] -> Int
+	vyper akce = vyper' akce nulovaMapa 0
 
-    vyper' :: [ (Akce, [Pradlo] ) ] -> Map Pradlo Int -> Int -> Int
-    -- pokud máme prázdný seznam akcí, je čas konce poslední prováděné akce
-    -- i časem konce všech akcí
-    vyper' [] koncePredchozi konecPosledni = konecPosledni
-    -- pokud máme nějakou akci a prádlo na začátku, nejprve to zpracujeme
-    -- a pak půjdeme na další
-    -- v proměnné koncePredchozi máme uložené konce předchozí akce pro
-    -- jednotlivá prádla
-    vyper' ((akce, pradlo) : dalsi) koncePredchozi konecPosledni =
-            -- zjistíme kdy tuhle akci dokončí jednotlivé prádlo, na začátku
-            -- je stroj připravený (může pracovat od času 0).
-        let noveKonce = konceAkce akce pradlo koncePredchozi 0
-            -- konec této akce odpovídá konci jejího provádění na posledním prádle
-            konecTeto = noveKonce ! (last pradlo)
-            -- vypereme další
-        in  vyper' dalsi noveKonce (max konecPosledni konecTeto)
+	vyper' :: [ (Akce, [Pradlo] ) ] -> Map Pradlo Int -> Int -> Int
+	-- pokud máme prázdný seznam akcí, je čas konce poslední prováděné akce
+	-- i časem konce všech akcí
+	vyper' [] koncePredchozi konecPosledni = konecPosledni
+	-- pokud máme nějakou akci a prádlo na začátku, nejprve to zpracujeme
+	-- a pak půjdeme na další
+	-- v proměnné koncePredchozi máme uložené konce předchozí akce pro
+	-- jednotlivá prádla
+	vyper' ((akce, pradlo) : dalsi) koncePredchozi konecPosledni =
+			-- zjistíme kdy tuhle akci dokončí jednotlivé prádlo, na začátku
+			-- je stroj připravený (může pracovat od času 0).
+		let noveKonce = konceAkce akce pradlo koncePredchozi 0
+			-- konec této akce odpovídá konci jejího provádění na posledním prádle
+			konecTeto = noveKonce ! (last pradlo)
+			-- vypereme další
+		in  vyper' dalsi noveKonce (max konecPosledni konecTeto)
 
-    konceAkce :: Akce -> [ Pradlo ] -> Map Pradlo Int -> Int -> Map Pradlo Int
-    -- pokud už v této akci memáme další prádlo k obsloužení, vrátíme
-    -- mapu konců akce
-    konceAkce _    []         koncePredchozi volnoOd = koncePredchozi
-    -- pokud máme prádlo p a pak nějaké další (pradlo), zjistíme
-    -- konec provádění akce pro p a pak pro ostatní
-    konceAkce akce (p:pradlo) koncePredchozi volnoOd =
-            -- začít s p můžu nejdříve v čase kdy je volný "stroj" na akci
-            -- po zpracování poředchozího prádla a kdy je hotova předchozí
-            -- akce s tímto prádlem
-        let muzuZacit = max volnoOd (koncePredchozi ! p)
-            Trva cas  = delkaAkce akce p -- získáme čas trvání akce
-            dokonceno = muzuZacit + cas
-        in  -- aktualizujeme konce poslední akce pro toto prádlo a zpracujeme další
-            konceAkce akce pradlo (aktualizujKonce koncePredchozi p dokonceno) dokonceno
+	konceAkce :: Akce -> [ Pradlo ] -> Map Pradlo Int -> Int -> Map Pradlo Int
+	-- pokud už v této akci memáme další prádlo k obsloužení, vrátíme
+	-- mapu konců akce
+	konceAkce _	[]		 koncePredchozi volnoOd = koncePredchozi
+	-- pokud máme prádlo p a pak nějaké další (pradlo), zjistíme
+	-- konec provádění akce pro p a pak pro ostatní
+	konceAkce akce (p:pradlo) koncePredchozi volnoOd =
+			-- začít s p můžu nejdříve v čase kdy je volný "stroj" na akci
+			-- po zpracování poředchozího prádla a kdy je hotova předchozí
+			-- akce s tímto prádlem
+		let muzuZacit = max volnoOd (koncePredchozi ! p)
+			Trva cas  = delkaAkce akce p -- získáme čas trvání akce
+			dokonceno = muzuZacit + cas
+		in  -- aktualizujeme konce poslední akce pro toto prádlo a zpracujeme další
+			konceAkce akce pradlo (aktualizujKonce koncePredchozi p dokonceno) dokonceno
 
-    -- konce akce aktualizujeme tak, že "přeplácname" hodnotu v mapě
-    aktualizujKonce :: Map Pradlo Int -> Pradlo -> Int -> Map Pradlo Int
-    aktualizujKonce stareKonce aktualizovanePradlo novyKonec
-        = insert aktualizovanePradlo novyKonec stareKonce
+	-- konce akce aktualizujeme tak, že "přeplácname" hodnotu v mapě
+	aktualizujKonce :: Map Pradlo Int -> Pradlo -> Int -> Map Pradlo Int
+	aktualizujKonce stareKonce aktualizovanePradlo novyKonec
+		= insert aktualizovanePradlo novyKonec stareKonce
 
-    -- mapa která pro každé prádlo říká, že konce předchozí akce nastal v čase 0
-    nulovaMapa = fromList (zip vsechnoPradlo [0,0..])
+	-- mapa která pro každé prádlo říká, že konce předchozí akce nastal v čase 0
+	nulovaMapa = fromList (zip vsechnoPradlo [0,0..])
 
 -- vypočítáme a vypíšeme řešení
 main = print (solve vsechnoPradlo)

@@ -13,9 +13,9 @@
 /**
  * The file name filter.
  *
- * @author      Jan Papousek
+ * @author	  Jan Papousek
  * @version		$Id: FileNameFilter.php 61 2009-08-04 21:24:36Z jan.papousek $
- * @see         IFileFilter
+ * @see		 IFileFilter
  */
 class FileNameFilter extends /*Nette\*/Object implements IFileFilter
 {

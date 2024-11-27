@@ -17,32 +17,32 @@ def knapsack(X, n, w):
   """
   m = []
   for i in range(n + 1):
-    ml = []
-    for j in range(w + 1):
-      ml.append(0)
-    m.append(ml)
+	ml = []
+	for j in range(w + 1):
+	  ml.append(0)
+	m.append(ml)
 
   for i in range(1, n + 1):
-    for j in range(w + 1):
-      if X[i - 1] > j:
-        m[i][j] = m[i-1][j]
-      else:
-        no = m[i-1][j]
-        yes = m[i-1][j-X[i - 1]] + X[i - 1]
-        if yes > no:
-          m[i][j] = yes
-        else:
-          m[i][j] = no
+	for j in range(w + 1):
+	  if X[i - 1] > j:
+		m[i][j] = m[i-1][j]
+	  else:
+		no = m[i-1][j]
+		yes = m[i-1][j-X[i - 1]] + X[i - 1]
+		if yes > no:
+		  m[i][j] = yes
+		else:
+		  m[i][j] = no
   i = n
   k = w
   b = [0 for i in range(n)]
   while i > 0 and k > 0:
-    if m[i][k] != m[i - 1][k]:
-      b[i - 1] = 1
-      i -= 1
-      k -= X[i]
-    else:
-      i -= 1
+	if m[i][k] != m[i - 1][k]:
+	  b[i - 1] = 1
+	  i -= 1
+	  k -= X[i]
+	else:
+	  i -= 1
   return m[n][w], b
 
 if __name__ == "__main__":
@@ -52,13 +52,13 @@ if __name__ == "__main__":
   n = len(C)
   results = []
   for i in range(n):
-    c = C[i]
-    k, b = knapsack(X, len(X), c)
-    # Check whether we can fill the i-th sack full of items.
-    if c == k:
-      # yep
-      results.append(1)
-    else:
-      # nope
-      results.append(0)
+	c = C[i]
+	k, b = knapsack(X, len(X), c)
+	# Check whether we can fill the i-th sack full of items.
+	if c == k:
+	  # yep
+	  results.append(1)
+	else:
+	  # nope
+	  results.append(0)
   print("".join(map(str, results)))

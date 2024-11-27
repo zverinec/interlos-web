@@ -1,9 +1,9 @@
 <?php
 date_default_timezone_set('Europe/Prague');
 if(new DateTime() >= new DateTime("2014-12-06 18:00:00")) {
-        @rename(".htaccess",'.htaccess-old');
+		@rename(".htaccess",'.htaccess-old');
 } else {
-        die('Treti sada bude zpristupnena az v 18:00.');
+		die('Treti sada bude zpristupnena az v 18:00.');
 }
 ?>
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -18,7 +18,7 @@ if(new DateTime() >= new DateTime("2014-12-06 18:00:00")) {
   <title>3. sada &ndash; INTERnetová LOgická SOutěž</title>
 </head>
 <div class="root">
-    <div class="header">
+	<div class="header">
 	<div class="header-line">&nbsp;</div>
 	<div class="contents">
 		<a href="http://interlos.fi.muni.cz/">
@@ -28,9 +28,9 @@ if(new DateTime() >= new DateTime("2014-12-06 18:00:00")) {
 		<div class="header-year"><h1>ročník 2014</h1></div>
 		<div class="cleaner-both">&nbsp;</div>
 	</div>
-    </div>
-    
-    <div class="main">
+	</div>
+	
+	<div class="main">
 	<div class="contents">
 		<div class="main-block">
 		<h1>Zadání 3. sady</h1>
@@ -47,11 +47,11 @@ if(new DateTime() >= new DateTime("2014-12-06 18:00:00")) {
 		<p>Veškeré problémy s úlohami a odevzdávacím systémem hlaste z e-mailové adresy uvedené v profilu týmu na adresu <a href="mailto:interlos@fi.muni.cz"><span class="bold">interlos@fi.muni.cz</span></a>. V předmětu e-mailu musí být uvedeno ID týmu, který najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>
 		</div>
 	</div>
-    </div>
-    
-    <div  class="footer">
+	</div>
+	
+	<div  class="footer">
 	<div class="footer-line">&nbsp;</div>
-    </div>
+	</div>
  
 </div>
 </body>

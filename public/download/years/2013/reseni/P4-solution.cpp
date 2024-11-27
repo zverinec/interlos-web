@@ -19,13 +19,13 @@ map<EditorTransformer*,trans_code_t> transformerIds;
 
 class Editor
 {
-  string buf;                 // buffer: textovy obsah editoru
-  cursor_pos_t cursor;        // pozice kurzoru v ramci textu
-  bool shift;                 // drzime Shift?
-  bool recordingMacro;        // nahrava se prave ted makro?
+  string buf;				 // buffer: textovy obsah editoru
+  cursor_pos_t cursor;		// pozice kurzoru v ramci textu
+  bool shift;				 // drzime Shift?
+  bool recordingMacro;		// nahrava se prave ted makro?
   vector<trans_code_t> macro; // nahrane makro
 public:  Editor() : buf(), cursor(0), shift(false), recordingMacro(false),
-             macro(vector<trans_code_t>(0))
+			 macro(vector<trans_code_t>(0))
   {}
 
   // prace s kurzorem
@@ -56,8 +56,8 @@ public:  Editor() : buf(), cursor(0), shift(false), recordingMacro(false),
   bool isRecordingMacro() const { return recordingMacro; }
   const vector<trans_code_t>& getMacro() const { return macro; }
   void pushMacroInstruction(EditorTransformer* instr) {
-    assert(instr != NULL);
-    macro.push_back(transformerIds.at(instr));
+	assert(instr != NULL);
+	macro.push_back(transformerIds.at(instr));
   }
   void popMacroInstruction() { macro.pop_back(); }
   void clearMacro() { macro.clear(); }
@@ -67,28 +67,28 @@ public:  Editor() : buf(), cursor(0), shift(false), recordingMacro(false),
 
   // relacni operatory, aby se dal Editor pouzit ve vyhledavaci mape
   bool operator < (const Editor& other) const {
-    if (cursor != other.cursor) {
-      return (cursor < other.cursor);
-    }
-    if (shift != other.shift) {
-      return (shift < other.shift);
-    }
-    if (recordingMacro != other.recordingMacro) {
-      return recordingMacro < other.recordingMacro;
-    }
-    if (macro != other.macro) {
-      return macro < other.macro;
-    }
-    return (buf < other.buf);
+	if (cursor != other.cursor) {
+	  return (cursor < other.cursor);
+	}
+	if (shift != other.shift) {
+	  return (shift < other.shift);
+	}
+	if (recordingMacro != other.recordingMacro) {
+	  return recordingMacro < other.recordingMacro;
+	}
+	if (macro != other.macro) {
+	  return macro < other.macro;
+	}
+	return (buf < other.buf);
   }
 
   bool operator == (const Editor& other) const {
-    return (cursor == other.cursor
-      && shift == other.shift
-      && recordingMacro == other.recordingMacro
-      && buf == other.buf
-      && macro == other.macro
-    );
+	return (cursor == other.cursor
+	  && shift == other.shift
+	  && recordingMacro == other.recordingMacro
+	  && buf == other.buf
+	  && macro == other.macro
+	);
   }
 
   bool operator != (const Editor& other) const { return !(*this == other); }
@@ -97,13 +97,13 @@ public:  Editor() : buf(), cursor(0), shift(false), recordingMacro(false),
 
 ostream& operator<<(ostream& out, const Editor& ed) {
   out << "buf: '" << ed.getBuf() << "' cursor: " << ed.getCursor()
-      << " shift: " << boolalpha << ed.getShift()
-      << " recording: " << ed.isRecordingMacro()
-      << " macro def:";
+	  << " shift: " << boolalpha << ed.getShift()
+	  << " recording: " << ed.isRecordingMacro()
+	  << " macro def:";
   for (vector<trans_code_t>::const_iterator i = ed.getMacro().begin();
-       i != ed.getMacro().end(); ++i)
+	   i != ed.getMacro().end(); ++i)
   {
-    out << " " << *i;
+	out << " " << *i;
   }
   out << "|";
   return out;
@@ -125,14 +125,14 @@ class CharacterInserter : public EditorTransformer {
   const char charToInsert;
 public:
   CharacterInserter(char charToInsert)
-    : EditorTransformer(toupper(charToInsert)), charToInsert(charToInsert) {}
+	: EditorTransformer(toupper(charToInsert)), charToInsert(charToInsert) {}
   void perform(Editor& editor) {
-    editor.insertChar(charToInsert);
-    if (editor.isRecordingMacro()) editor.pushMacroInstruction(this);
+	editor.insertChar(charToInsert);
+	if (editor.isRecordingMacro()) editor.pushMacroInstruction(this);
   }
   void undo(Editor& editor) {
-    editor.backspaceChar();
-    if (editor.isRecordingMacro()) editor.popMacroInstruction();
+	editor.backspaceChar();
+	if (editor.isRecordingMacro()) editor.popMacroInstruction();
   }
 };
 
@@ -141,18 +141,18 @@ class Backspacer : public EditorTransformer {
 public:
   Backspacer() : EditorTransformer('9'), deletedChar() {}
   void perform(Editor& editor) {
-    if (editor.isCursorAtBeginning()) {
-      deletedChar = 0;
-    }
-    else {
-      deletedChar = editor.getCharBeforeCursor();
-      editor.backspaceChar();
-    }
-    if (editor.isRecordingMacro()) editor.pushMacroInstruction(this);
+	if (editor.isCursorAtBeginning()) {
+	  deletedChar = 0;
+	}
+	else {
+	  deletedChar = editor.getCharBeforeCursor();
+	  editor.backspaceChar();
+	}
+	if (editor.isRecordingMacro()) editor.pushMacroInstruction(this);
   }
   void undo(Editor& editor) {
-    if (deletedChar) editor.insertChar(deletedChar);
-    if (editor.isRecordingMacro()) editor.popMacroInstruction();
+	if (deletedChar) editor.insertChar(deletedChar);
+	if (editor.isRecordingMacro()) editor.popMacroInstruction();
   }
 };
 
@@ -161,21 +161,21 @@ class Deleter : public EditorTransformer {
 public:
   Deleter() : EditorTransformer('3'), deletedChar() {}
   void perform(Editor& editor) {
-    if (editor.isCursorAtEnd()) {
-      deletedChar = 0;
-    }
-    else {
-      deletedChar = editor.getCharAfterCursor();
-      editor.deleteChar();
-    }
-    if (editor.isRecordingMacro()) editor.pushMacroInstruction(this);
+	if (editor.isCursorAtEnd()) {
+	  deletedChar = 0;
+	}
+	else {
+	  deletedChar = editor.getCharAfterCursor();
+	  editor.deleteChar();
+	}
+	if (editor.isRecordingMacro()) editor.pushMacroInstruction(this);
   }
   void undo(Editor& editor) {
-    if (deletedChar) {
-      editor.insertChar(deletedChar);
-      editor.moveCursorLeft();
-    }
-    if (editor.isRecordingMacro()) editor.popMacroInstruction();
+	if (deletedChar) {
+	  editor.insertChar(deletedChar);
+	  editor.moveCursorLeft();
+	}
+	if (editor.isRecordingMacro()) editor.popMacroInstruction();
   }
 };
 
@@ -191,15 +191,15 @@ class CursorMover : public EditorTransformer {
   cursor_pos_t origCurPos;
 public:
   CursorMover(void (Editor::* moverFn)(), char code)
-    : EditorTransformer(code), moverFn(moverFn), origCurPos() {}
+	: EditorTransformer(code), moverFn(moverFn), origCurPos() {}
   void perform(Editor& editor) {
-    origCurPos = editor.getCursor();
-    (editor.*moverFn)();
-    if (editor.isRecordingMacro()) editor.pushMacroInstruction(this);
+	origCurPos = editor.getCursor();
+	(editor.*moverFn)();
+	if (editor.isRecordingMacro()) editor.pushMacroInstruction(this);
   }
   void undo(Editor& editor) {
-    editor.setCursor(origCurPos);
-    if (editor.isRecordingMacro()) editor.popMacroInstruction();
+	editor.setCursor(origCurPos);
+	if (editor.isRecordingMacro()) editor.popMacroInstruction();
   }
 };
 
@@ -208,15 +208,15 @@ class MacroRecordingStarter : public EditorTransformer {
 public:
   MacroRecordingStarter() : EditorTransformer('2'), origMacro(NULL) {}
   void perform(Editor& editor) {
-    assert(!editor.isRecordingMacro());
-    origMacro = editor.getMacro();
-    editor.clearMacro();
-    editor.switchRecordingMacro();
+	assert(!editor.isRecordingMacro());
+	origMacro = editor.getMacro();
+	editor.clearMacro();
+	editor.switchRecordingMacro();
   }
   void undo(Editor& editor) {
-    assert(editor.isRecordingMacro());
-    editor.switchRecordingMacro();
-    editor.setMacro(origMacro);
+	assert(editor.isRecordingMacro());
+	editor.switchRecordingMacro();
+	editor.setMacro(origMacro);
   }
 };
 
@@ -224,12 +224,12 @@ class MacroRecordingStopper : public EditorTransformer {
 public:
   MacroRecordingStopper() : EditorTransformer('2') {}
   void perform(Editor& editor) {
-    assert(editor.isRecordingMacro());
-    editor.switchRecordingMacro();
+	assert(editor.isRecordingMacro());
+	editor.switchRecordingMacro();
   }
   void undo(Editor& editor) {
-    assert(!editor.isRecordingMacro());
-    editor.switchRecordingMacro();
+	assert(!editor.isRecordingMacro());
+	editor.switchRecordingMacro();
   }
 };
 
@@ -238,8 +238,8 @@ class MacroRunner : public EditorTransformer {
 public:
   MacroRunner() : EditorTransformer('5'), origState() {}
   void perform(Editor& editor) {
-    origState = editor;
-    editor.runMacro();
+	origState = editor;
+	editor.runMacro();
   }
   void undo(Editor& editor) { editor = origState; }
 };
@@ -271,7 +271,7 @@ EditorTransformer* transformers[] = {
 void Editor::runMacro() {
   vector<trans_code_t> instrs(macro);
   for (vector<trans_code_t>::iterator i = instrs.begin(); i != instrs.end(); ++i) {
-    transformers[*i]->perform(*this);
+	transformers[*i]->perform(*this);
   }
 }
 
@@ -293,34 +293,34 @@ template<typename Key>
 struct discovered_map : map<Key, pair<discovered_map_iterator<Key>,char> > {};
 
 discovered_map<Editor> discovered; // mapa stavu editoru na predchozi stavy editoru;
-                                   // pod discovered[st] je odkaz na stav, ktery stavu st predchazel
+								   // pod discovered[st] je odkaz na stav, ktery stavu st predchazel
 
 
 /**
  * Ze stavu state provede zadanou transformaci a zaradi takto ziskany stav do
  * fronty k dalsimu zpracovani.
  *
- * @param state       stav, ktery prozkoumat
+ * @param state	   stav, ktery prozkoumat
  * @param stateIter   odkaz do mapy stavu na tento stav
- * @param qNext       fronta, do ktere dat novy naslednicky stav
+ * @param qNext	   fronta, do ktere dat novy naslednicky stav
  * @param transformer transformer, ktery aplikovat
  */
 void discover(
-      Editor& state, const discovered_map<Editor>::iterator& stateIter,
-      queue<discovered_map<Editor>::iterator>& qNext,
-      EditorTransformer& transformer);
+	  Editor& state, const discovered_map<Editor>::iterator& stateIter,
+	  queue<discovered_map<Editor>::iterator>& qNext,
+	  EditorTransformer& transformer);
 
 
 int main(int argc, char* argv[])
 {
   if (argc != 3) {
-    cerr << "Usage: " << argv[0] << " SRCTEXT DESTTEXT" << endl;
-    return 1;
+	cerr << "Usage: " << argv[0] << " SRCTEXT DESTTEXT" << endl;
+	return 1;
   }
 
   // naplnit si vyhledavaci mapu transformeru
   for (size_t i = 1; i < sizeof(transformers)/sizeof(transformers[0]); i++) {
-    transformerIds[transformers[i]] = i;
+	transformerIds[transformers[i]] = i;
   }
 
   srcBuf = string(argv[1]);
@@ -337,84 +337,84 @@ int main(int argc, char* argv[])
 
   // v mape discovered si ke kazdemu editoru pamatujeme jeho predchudce a kod operace, ktera jej upravila
   pair<discovered_map<Editor>::iterator, bool> insertResult =
-    discovered.insert(make_pair(editor, make_pair(discovered.end(), 0)));
+	discovered.insert(make_pair(editor, make_pair(discovered.end(), 0)));
 
   q.push(insertResult.first);
 
   for ( ; ; ) {
-    assert(!q.empty());
-    const discovered_map<Editor>::iterator& stateIter = q.front();
-    Editor state = stateIter->first;
+	assert(!q.empty());
+	const discovered_map<Editor>::iterator& stateIter = q.front();
+	Editor state = stateIter->first;
 
-    // do fronty pridame vsechny nasledniky aktualniho stavu
-    // ...ale jen ty, kteri davaji smysl
-    // prozkoumavane stavy radime abecedne dle stisknute klavesy
-    bool wasShift = state.getShift();
+	// do fronty pridame vsechny nasledniky aktualniho stavu
+	// ...ale jen ty, kteri davaji smysl
+	// prozkoumavane stavy radime abecedne dle stisknute klavesy
+	bool wasShift = state.getShift();
 
-    if (wasShift) state.releaseShift();
+	if (wasShift) state.releaseShift();
 
-    discover(state, stateIter, q, insLowerL);
-    discover(state, stateIter, q, insLowerO);
+	discover(state, stateIter, q, insLowerL);
+	discover(state, stateIter, q, insLowerO);
 
-    if (wasShift) {
-      state.pressShift();
-      discover(state, stateIter, q, insUpperS);
-      state.releaseShift();
-    }
+	if (wasShift) {
+	  state.pressShift();
+	  discover(state, stateIter, q, insUpperS);
+	  state.releaseShift();
+	}
 
-    if (!state.isCursorAtEnd()) discover(state, stateIter, q, endMover);
+	if (!state.isCursorAtEnd()) discover(state, stateIter, q, endMover);
 
-    if (state.isRecordingMacro()) discover(state, stateIter, q, macroRecStopper);
-    else discover(state, stateIter, q, macroRecStarter);
+	if (state.isRecordingMacro()) discover(state, stateIter, q, macroRecStopper);
+	else discover(state, stateIter, q, macroRecStarter);
 
-    if (!state.isCursorAtEnd()) discover(state, stateIter, q, deleter);
-    if (!state.isCursorAtBeginning()) discover(state, stateIter, q, leftMover);
-    if (!state.getMacro().empty()) discover(state, stateIter, q, macroRunner);
-    if (!state.isCursorAtEnd()) discover(state, stateIter, q, rightMover);
-    if (!state.isCursorAtBeginning()) discover(state, stateIter, q, homeMover);
-    if (!wasShift) discover(state, stateIter, q, shiftPresser);
-    if (!state.isCursorAtBeginning()) discover(state, stateIter, q, backspacer);
+	if (!state.isCursorAtEnd()) discover(state, stateIter, q, deleter);
+	if (!state.isCursorAtBeginning()) discover(state, stateIter, q, leftMover);
+	if (!state.getMacro().empty()) discover(state, stateIter, q, macroRunner);
+	if (!state.isCursorAtEnd()) discover(state, stateIter, q, rightMover);
+	if (!state.isCursorAtBeginning()) discover(state, stateIter, q, homeMover);
+	if (!wasShift) discover(state, stateIter, q, shiftPresser);
+	if (!state.isCursorAtBeginning()) discover(state, stateIter, q, backspacer);
 
-    q.pop();
+	q.pop();
   }
 }
 
 void discover(
-      Editor& state, const discovered_map<Editor>::iterator& stateIter,
-      queue<discovered_map<Editor>::iterator>& q,
-      EditorTransformer& transformer)
+	  Editor& state, const discovered_map<Editor>::iterator& stateIter,
+	  queue<discovered_map<Editor>::iterator>& q,
+	  EditorTransformer& transformer)
 {
   transformer.perform(state); // zkusit provest pozadovanou transformaci
 
   // zkusit, jestli jsme tento naslednicky stav jiz videli
   // pokud ne, vlozi se na nej odkaz, i s kodem transformace
   pair<discovered_map<Editor>::iterator,bool> ins =
-    discovered.insert(make_pair(state, make_pair(stateIter, transformer.getCode())));
+	discovered.insert(make_pair(state, make_pair(stateIter, transformer.getCode())));
   if (ins.second) {
-    // dosud neznamy stav
-    if (state.getBuf() == dstBuf) {
-      cerr << "Nalezeno!" << endl;
-        cerr << "Editor:    " << state << endl;
-        // kody dostaneme pozpatky - pres zasobnik je otocime do spravneho poradi
-        stack<char> result;
-        pair<discovered_map<Editor>::iterator,char> prevPair = discovered.at(state);
-        char prevOp = prevPair.second;
-        discovered_map<Editor>::iterator prevIter = prevPair.first;
-        while (prevIter != discovered.end()) {
-          cerr << "predchozi: " << prevIter->first << endl;
-          result.push(prevOp);
-          prevOp = prevIter->second.second;
-          prevIter = prevIter->second.first;
-        }
-        while (!result.empty()) {
-          cout << result.top();
-          result.pop();
-        }
-        cout << endl;
-        exit(0);
-    }
+	// dosud neznamy stav
+	if (state.getBuf() == dstBuf) {
+	  cerr << "Nalezeno!" << endl;
+		cerr << "Editor:	" << state << endl;
+		// kody dostaneme pozpatky - pres zasobnik je otocime do spravneho poradi
+		stack<char> result;
+		pair<discovered_map<Editor>::iterator,char> prevPair = discovered.at(state);
+		char prevOp = prevPair.second;
+		discovered_map<Editor>::iterator prevIter = prevPair.first;
+		while (prevIter != discovered.end()) {
+		  cerr << "predchozi: " << prevIter->first << endl;
+		  result.push(prevOp);
+		  prevOp = prevIter->second.second;
+		  prevIter = prevIter->second.first;
+		}
+		while (!result.empty()) {
+		  cout << result.top();
+		  result.pop();
+		}
+		cout << endl;
+		exit(0);
+	}
 
-    q.push(ins.first); // zaradit pro dalsi zpracovani
+	q.push(ins.first); // zaradit pro dalsi zpracovani
   }
 
   transformer.undo(state); // vratit do puvodniho stavu pro dalsi transformace

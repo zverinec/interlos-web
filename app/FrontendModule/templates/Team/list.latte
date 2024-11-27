@@ -1,24 +1,24 @@
 {extends ../@layout.latte}
 
 {block #content}
-    {if Interlos::isGameStarted()}
-        <div class="main-block">
-            <h1>Statistika týmů</h1>
-            <p>Podrobnou statistiku celé hry najdete na <a href="{plink Stats:}">samostatné stránce</a>.</p>
-            {if $available}
-                <p>Statistiky nemusí být zcela aktuální. Údaje pravidelně přepočítáváme.</p>
-                {control results}
-            {else}
-                {if !Interlos::areStatsShown()}
-                    <p><strong>Pořadí týmů není v posledních 30 minutách hry k dispozici.</strong></p>
-                {else}
-                    <p>Momentálně nedostupné. Vyčkejte prosím chvíli.</p>
-                {/if}
-            {/if}
-        </div>
-    {/if}
-    <div class="main-block">
-        <h1>Seznam týmů</h1>
-        {control teamList}
-    </div>
+	{if Interlos::isGameStarted()}
+		<div class="main-block">
+			<h1>Statistika týmů</h1>
+			<p>Podrobnou statistiku celé hry najdete na <a href="{plink Stats:}">samostatné stránce</a>.</p>
+			{if $available}
+				<p>Statistiky nemusí být zcela aktuální. Údaje pravidelně přepočítáváme.</p>
+				{control results}
+			{else}
+				{if !Interlos::areStatsShown()}
+					<p><strong>Pořadí týmů není v posledních 30 minutách hry k dispozici.</strong></p>
+				{else}
+					<p>Momentálně nedostupné. Vyčkejte prosím chvíli.</p>
+				{/if}
+			{/if}
+		</div>
+	{/if}
+	<div class="main-block">
+		<h1>Seznam týmů</h1>
+		{control teamList}
+	</div>
 {/block}

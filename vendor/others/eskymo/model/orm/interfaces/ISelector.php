@@ -18,8 +18,8 @@
 interface ISelector 
 {
 	
-    /**
-     * @param integer $id 
+	/**
+	 * @param integer $id 
 	 * @return IEntity
 	 */
 	function find($id);

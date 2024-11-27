@@ -2,68 +2,68 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="12cm" height="10cm" viewBox="0 0 2800 500"
-     xmlns="http://www.w3.org/2000/svg" version="1.1">
+	 xmlns="http://www.w3.org/2000/svg" version="1.1">
 
 
   <rect x="100" y="-30" width="150" height="150"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
   <rect x="-200" y="-30" width="300" height="300"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
   <circle cx="250" cy="100" r="200"
-        fill="blue" stroke="blue" stroke-width="10"  />
+		fill="blue" stroke="blue" stroke-width="10"  />
 
 
 
   <rect x="600" y="-30" width="200" height="200"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
   <rect x="600" y="170" width="200" height="200"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
  <circle cx="700" cy="100" r="200"
-        fill="blue" stroke="blue" stroke-width="10"  />
+		fill="blue" stroke="blue" stroke-width="10"  />
 
 
 
   <rect x="1100" y="-200" width="290" height="400"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
  <circle cx="1150" cy="100" r="200"
-        fill="blue" stroke="blue" stroke-width="10"  />
+		fill="blue" stroke="blue" stroke-width="10"  />
 
 
    <rect x="1580" y="-50" width="250" height="150"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
   <rect x="1580" y="100" width="250" height="150"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
  <circle cx="1600" cy="100" r="200"
-        fill="blue" stroke="blue" stroke-width="10"  />
+		fill="blue" stroke="blue" stroke-width="10"  />
 
 
 
    <rect x="1820" y="0" width="230" height="450"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
   <rect x="2050" y="0" width="230" height="350"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
  <circle cx="2050" cy="100" r="200"
-        fill="blue" stroke="blue" stroke-width="10"  />
+		fill="blue" stroke="blue" stroke-width="10"  />
 
 
 
   <rect x="2400" y="-30" width="200" height="200"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
   <rect x="2400" y="170" width="200" height="200"
-        fill="navy" stroke="navy" stroke-width="10"  />
+		fill="navy" stroke="navy" stroke-width="10"  />
 
  <circle cx="2500" cy="100" r="200"
-        fill="blue" stroke="blue" stroke-width="10"  />
+		fill="blue" stroke="blue" stroke-width="10"  />
 
 
 

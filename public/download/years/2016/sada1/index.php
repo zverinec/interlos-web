@@ -30,8 +30,8 @@ if(new DateTime() >= new DateTime("2016-12-04 15:00:00")) {
 			<div class="cleaner-both">&nbsp;</div>
 		</div>
 		</div>
-	    
-    <div class="main">
+		
+	<div class="main">
 	<div class="contents">
 		<div class="main-block">
 			<h1>Zadání 1. sady</h1>
@@ -39,7 +39,7 @@ if(new DateTime() >= new DateTime("2016-12-04 15:00:00")) {
 		<h2>Přiložené soubory</h2>
 		<ul>
 			<li><a href="P1-input.txt">P1-input.txt</a> (P1 Losotoč)</li>
-      			<li><a href="P3-input.txt">P3-input.txt</a> (P3 Tower Defense)</li>
+	  			<li><a href="P3-input.txt">P3-input.txt</a> (P3 Tower Defense)</li>
  			<li><a href="S1-zadani.mp3">S1-zadani.mp3</a> (S1 Losparáda)</li>
 		</ul>
 
@@ -48,7 +48,7 @@ if(new DateTime() >= new DateTime("2016-12-04 15:00:00")) {
 		V předmětu e-mailu musí být uvedeno ID týmu . Svoje ID také najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>
 		</div>
 	</div>
-    </div>
+	</div>
 
 			<div  class="footer">
 		<div class="footer-line">&nbsp;</div>

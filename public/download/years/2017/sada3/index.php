@@ -30,8 +30,8 @@ if(new DateTime() >= new DateTime("2017-12-10 18:00:00")) {
 			<div class="cleaner-both">&nbsp;</div>
 		</div>
 		</div>
-	    
-    <div class="main">
+		
+	<div class="main">
 	<div class="contents">
 		<div class="main-block">
 			<h1>Zadání 3. sady</h1>
@@ -39,12 +39,12 @@ if(new DateTime() >= new DateTime("2017-12-10 18:00:00")) {
 		<h2>Přiložené soubory</h2>
 		<ul>
 			<li><a href="P7-batoh.txt">P7-batoh.txt</a> (P7 Batoh)</li>
-            <li><a href="P8-example.txt">P8-example.txt</a> (P8 Mooze)</li>
-            <li><a href="P8-assignment.zip">P8-assignment.zip</a> (P8 Mooze)</li>
-            <li><a href="P9-povodny.png">P9-povodny.png</a> (P9 Transformácia)</li>
-            <li><a href="P9-pravidla.txt">P9-pravidla.txt</a> (P9 Transformácia)</li>
-            <li><a href="S8-plakaty.pdf">S8-plakaty.pdf</a> (S8 Plakáty)</li>
-            <li><a href="S9-zvuky.ogg">S9-zvuky.ogg</a> (S9 Zvuky)</li>
+			<li><a href="P8-example.txt">P8-example.txt</a> (P8 Mooze)</li>
+			<li><a href="P8-assignment.zip">P8-assignment.zip</a> (P8 Mooze)</li>
+			<li><a href="P9-povodny.png">P9-povodny.png</a> (P9 Transformácia)</li>
+			<li><a href="P9-pravidla.txt">P9-pravidla.txt</a> (P9 Transformácia)</li>
+			<li><a href="S8-plakaty.pdf">S8-plakaty.pdf</a> (S8 Plakáty)</li>
+			<li><a href="S9-zvuky.ogg">S9-zvuky.ogg</a> (S9 Zvuky)</li>
 		</ul>
 
 		<div class="hr">&nbsp;</div>
@@ -52,7 +52,7 @@ if(new DateTime() >= new DateTime("2017-12-10 18:00:00")) {
 		V předmětu e-mailu musí být uvedeno ID týmu . Svoje ID také najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>
 		</div>
 	</div>
-    </div>
+	</div>
 
 			<div  class="footer">
 		<div class="footer-line">&nbsp;</div>

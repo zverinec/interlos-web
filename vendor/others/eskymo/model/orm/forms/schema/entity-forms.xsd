@@ -4,79 +4,79 @@
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <xs:element	name="entity-forms">
+	<xs:element	name="entity-forms">
 	<xs:complexType>
-	    <xs:sequence>
+		<xs:sequence>
 		<xs:element name="form" type="entity-form" maxOccurs="unbounded" />
-	    </xs:sequence>
+		</xs:sequence>
 	</xs:complexType>
-    </xs:element>
+	</xs:element>
 
-    <xs:complexType name="entity-form">
+	<xs:complexType name="entity-form">
 	<xs:all>
-	    <xs:element name="attribute" type="form-attribute" minOccurs="0" maxOccurs="unbounded" />
-	    <xs:element name="group" type="group" minOccurs="0" maxOccurs="unbounded" />
+		<xs:element name="attribute" type="form-attribute" minOccurs="0" maxOccurs="unbounded" />
+		<xs:element name="group" type="group" minOccurs="0" maxOccurs="unbounded" />
 	</xs:all>
 	<xs:attribute name="name" type="xs:string" use="required"/>
 	<xs:attribute name="entity" type="xs:string" use="required"/>
 	<xs:attribute name="extends" type="xs:string" use="optional"/>
-    </xs:complexType>
+	</xs:complexType>
 
-    <xs:complexType name="group">
+	<xs:complexType name="group">
 	<xs:all>
-	    <xs:element name="attribute" type="form-attribute" maxOccurs="unbounded" />
+		<xs:element name="attribute" type="form-attribute" maxOccurs="unbounded" />
 	</xs:all>
 	<xs:attribute name="name" type="xs:string" use="optional" />
-    </xs:complexType>
+	</xs:complexType>
 
-    <xs:complexType name="form-attribute">
+	<xs:complexType name="form-attribute">
 	<xs:all>
-	    <xs:element name="label" type="xs:string" minOccurs="0" />
-	    <xs:element name="with-resource" type="form-attribute-element" minOccurs="0" />
-	    <xs:element name="without-resource" type="form-attribute-element" minOccurs="0" />
-	    <xs:element name="rules" type="rules" minOccurs="0" />
+		<xs:element name="label" type="xs:string" minOccurs="0" />
+		<xs:element name="with-resource" type="form-attribute-element" minOccurs="0" />
+		<xs:element name="without-resource" type="form-attribute-element" minOccurs="0" />
+		<xs:element name="rules" type="rules" minOccurs="0" />
 	</xs:all>
 	<xs:attribute name="name" type="xs:string" use="required"/>
-    </xs:complexType>
+	</xs:complexType>
 
-    <xs:complexType name="form-attribute-element">
+	<xs:complexType name="form-attribute-element">
 	<xs:all>
-	    <xs:element name="label" type="xs:string" minOccurs="0" />
-	    <xs:element name="type" type="form-attribute-element-type" minOccurs="0" />
+		<xs:element name="label" type="xs:string" minOccurs="0" />
+		<xs:element name="type" type="form-attribute-element-type" minOccurs="0" />
 	</xs:all>
-    </xs:complexType>
+	</xs:complexType>
 
-    <xs:simpleType name="form-attribute-element-type">
+	<xs:simpleType name="form-attribute-element-type">
 	<xs:restriction base="xs:string">
-	    <xs:enumeration value="checkbox" />
-	    <xs:enumeration value="hidden" />
-	    <xs:enumeration value="password" />
-	    <xs:enumeration value="radiobox" />
-	    <xs:enumeration value="selectbox" />
-	    <xs:enumeration value="textarea" />
-	    <xs:enumeration value="textinput" />
+		<xs:enumeration value="checkbox" />
+		<xs:enumeration value="hidden" />
+		<xs:enumeration value="password" />
+		<xs:enumeration value="radiobox" />
+		<xs:enumeration value="selectbox" />
+		<xs:enumeration value="textarea" />
+		<xs:enumeration value="textinput" />
 	</xs:restriction>
-    </xs:simpleType>
+	</xs:simpleType>
 
-    <xs:complexType name="rules">
+	<xs:complexType name="rules">
 	<xs:sequence>
-	    <xs:element name="rule" type="rule" maxOccurs="unbounded" />
+		<xs:element name="rule" type="rule" maxOccurs="unbounded" />
 	</xs:sequence>
-    </xs:complexType>
+	</xs:complexType>
 
-    <xs:complexType name="rule">
+	<xs:complexType name="rule">
 	<xs:all>
-	    <xs:element name="type" type="rule-type" />
-	    <xs:element name="message" type="xs:string" />
-	    <xs:element name="arg" type="xs:string" minOccurs="0" />
+		<xs:element name="type" type="rule-type" />
+		<xs:element name="message" type="xs:string" />
+		<xs:element name="arg" type="xs:string" minOccurs="0" />
 	</xs:all>
-    </xs:complexType>
+	</xs:complexType>
 
-    <xs:simpleType name="rule-type">
+	<xs:simpleType name="rule-type">
 	<xs:restriction base="xs:string">
-	    <xs:enumeration value="filled" />
-	    <xs:enumeration value="email" />
+		<xs:enumeration value="filled" />
+		<xs:enumeration value="email" />
 	</xs:restriction>
-    </xs:simpleType>
+	</xs:simpleType>
 
 </xs:schema>

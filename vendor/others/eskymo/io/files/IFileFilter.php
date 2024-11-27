@@ -13,10 +13,10 @@
 /**
  * This interface is designed to be implementde by file filters.
  *
- * @author      Jan Papousek
+ * @author	  Jan Papousek
  * @version		$Id: IFileFilter.php 61 2009-08-04 21:24:36Z jan.papousek $
- * @see         FileTypeFilter
- * @see         FileNameFilter
+ * @see		 FileTypeFilter
+ * @see		 FileNameFilter
  */
 interface IFileFilter
 {

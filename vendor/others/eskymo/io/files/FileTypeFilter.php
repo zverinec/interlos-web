@@ -13,9 +13,9 @@
 /**
  * The file type filter.
  *
- * @author      Jan Papousek
+ * @author	  Jan Papousek
  * @version		$Id: FileTypeFilter.php 61 2009-08-04 21:24:36Z jan.papousek $
- * @see         FileType
+ * @see		 FileType
  */
 class FileTypeFilter extends /*Object\*/Object
 {

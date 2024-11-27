@@ -48,7 +48,7 @@ class SimpleDeleter implements IDeleter
 	 * @return IDeleter
 	 * @throws NullPointerException if the $table is empty
 	 */
-    public static function createDeleter($table) {
+	public static function createDeleter($table) {
 		if (empty($table)) {
 			throw new NullPointerException("table");
 		}

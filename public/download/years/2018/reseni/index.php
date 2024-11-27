@@ -31,7 +31,7 @@ if(new DateTime() >= new DateTime("2018-12-09 20:00:59")) {
 		</div>
 		</div>
 
-    <div class="main">
+	<div class="main">
 	<div class="contents">
 		<div class="main-block">
 			<h1>Řešení</h1>
@@ -51,7 +51,7 @@ if(new DateTime() >= new DateTime("2018-12-09 20:00:59")) {
 		V předmětu e-mailu musí být uvedeno ID týmu . Svoje ID také najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>
 		</div>
 	</div>
-    </div>
+	</div>
 
 			<div  class="footer">
 		<div class="footer-line">&nbsp;</div>

@@ -61,9 +61,9 @@ class TeamsModel extends AbstractModel
 
 	public function getCategories() {
 		return array(
-			self::COLLEGE	    => "Vysokoškoláci",
+			self::COLLEGE		=> "Vysokoškoláci",
 			self::HIGH_SCHOOL => "Středoškoláci",
-			self::OTHER	    => "Ostatní"
+			self::OTHER		=> "Ostatní"
 		);
 	}
 

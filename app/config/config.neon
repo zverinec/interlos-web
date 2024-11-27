@@ -12,7 +12,7 @@ parameters:
 	keys:
 		cron: hesloprocron
 		admin: hesloproadmin
-	infoPage: https://interlos.cz/    # Has to be on HTTPS as mixed content is not allowed.
+	infoPage: https://interlos.cz/	# Has to be on HTTPS as mixed content is not allowed.
 
 dibi:
 	driver: mysqli

@@ -25,10 +25,10 @@ dibi:
 # On production
 
 mail:
-	smtp: true                  # switches to SmtpMailer from SendmailMailer
+	smtp: true				  # switches to SmtpMailer from SendmailMailer
 	host: smtp.example.com
 	port: 25
 	username: foo
 	password: bar
-	encryption:                     # allowed values ssl, tls, null
+	encryption:					 # allowed values ssl, tls, null
 	timeout: 100

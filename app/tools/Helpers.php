@@ -99,7 +99,7 @@ final class Helpers {
 		if (!isset(self::$texy)) {
 			self::$texy = new Texy();
 			self::$texy->allowed['html/tag'] = false;
-            self::$texy->allowed['html/comment'] = false;
+			self::$texy->allowed['html/comment'] = false;
 		}
 		return self::$texy;
 	}

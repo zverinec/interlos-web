@@ -17,7 +17,7 @@
  */
 interface IInserter
 {
-    
+	
 	/**
 	 * @param array
 	 * @return int

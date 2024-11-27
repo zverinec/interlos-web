@@ -31,7 +31,7 @@ if(new DateTime() >= new DateTime("2018-12-09 15:00:00")) {
 		</div>
 		</div>
 
-    <div class="main">
+	<div class="main">
 	<div class="contents">
 		<div class="main-block">
 			<h1>Zadání 1. sady</h1>
@@ -39,7 +39,7 @@ if(new DateTime() >= new DateTime("2018-12-09 15:00:00")) {
 		<h2>Přiložené soubory</h2>
 		<ul>
 				<li><a href="P2-input.json" download="P2-input.json">P2-input.json</a> (P2 Uhádni cestu)</li>
-        <li><a href="P3-input.txt" download="P3-input.txt">P3-input.txt</a> (P3 Nezvestná)</li>
+		<li><a href="P3-input.txt" download="P3-input.txt">P3-input.txt</a> (P3 Nezvestná)</li>
 		</ul>
 
 		<div class="hr">&nbsp;</div>
@@ -47,7 +47,7 @@ if(new DateTime() >= new DateTime("2018-12-09 15:00:00")) {
 		V předmětu e-mailu musí být uvedeno ID týmu . Svoje ID také najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>
 		</div>
 	</div>
-    </div>
+	</div>
 
 			<div  class="footer">
 		<div class="footer-line">&nbsp;</div>

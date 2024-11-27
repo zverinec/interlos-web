@@ -13,9 +13,9 @@
 /**
  * This class represents file type.
  *
- * @author      Jan Papousek
+ * @author	  Jan Papousek
  * @version		$Id: FileType.php 84 2009-08-25 10:35:25Z jan.papousek $
- * @see         FileTypeFilter
+ * @see		 FileTypeFilter
  */
 class FileType extends /*Nette\*/Object
 {

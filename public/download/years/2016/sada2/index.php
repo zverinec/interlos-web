@@ -30,8 +30,8 @@ if(new DateTime() >= new DateTime("2016-12-04 16:30:00")) {
 			<div class="cleaner-both">&nbsp;</div>
 		</div>
 		</div>
-	    
-    <div class="main">
+		
+	<div class="main">
 	<div class="contents">
 		<div class="main-block">
 			<h1>Zadání 2. sady</h1>
@@ -39,11 +39,11 @@ if(new DateTime() >= new DateTime("2016-12-04 16:30:00")) {
 		<h2>Přiložené soubory</h2>
 		<ul>
 			<li><a href="P5-input.txt">P5-input.txt</a> (P5 PotLOSk)</li>
-      			<li><a href="P6-input.txt">P6-input.txt</a> (P6 LHD)</li>
+	  			<li><a href="P6-input.txt">P6-input.txt</a> (P6 LHD)</li>
 			<li><a href="L4-rozhovor_1.mp3">L4-rozhovor_1.mp3</a> (L4 Mince)</li>
-      			<li><a href="L4-rozhovor_2.mp3">L4-rozhovor_2.mp3</a> (L4 Mince)</li>
+	  			<li><a href="L4-rozhovor_2.mp3">L4-rozhovor_2.mp3</a> (L4 Mince)</li>
 			<li><a href="L4-rozhovor_3.mp3">L4-rozhovor_3.mp3</a> (L4 Mince)</li>
-      			<li><a href="S4-navod.pdf">S4-navod.pdf</a> (S4 Šifra s návodem)</li>
+	  			<li><a href="S4-navod.pdf">S4-navod.pdf</a> (S4 Šifra s návodem)</li>
 		</ul>
 
 		<div class="hr">&nbsp;</div>
@@ -51,7 +51,7 @@ if(new DateTime() >= new DateTime("2016-12-04 16:30:00")) {
 		V předmětu e-mailu musí být uvedeno ID týmu . Svoje ID také najdete <a href="http://interlos.fi.muni.cz/">na stránce soutěže</a> v záhlaví stránky vedle jména.</p>
 		</div>
 	</div>
-    </div>
+	</div>
 
 			<div  class="footer">
 		<div class="footer-line">&nbsp;</div>

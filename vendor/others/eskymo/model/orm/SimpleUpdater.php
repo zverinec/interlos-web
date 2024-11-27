@@ -49,7 +49,7 @@ class SimpleUpdater implements IUpdater
 	 * @return IUpdater
 	 * @throws NullPointerException if the $table is empty
 	 */
-    public static function createUpdater($table) {
+	public static function createUpdater($table) {
 		if (empty($table)) {
 			throw new NullPointerException("table");
 		}

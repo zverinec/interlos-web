@@ -13,7 +13,7 @@
 /**
  * This exception means the situation when a variable is empty and shouldn't be.
  *
- * @author      Jan Papousek
- * @version     $Id$
+ * @author	  Jan Papousek
+ * @version	 $Id$
  */
 class NullPointerException extends Exception {}

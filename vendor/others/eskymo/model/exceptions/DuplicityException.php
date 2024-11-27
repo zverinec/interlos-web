@@ -5,5 +5,5 @@
  */
 class DuplicityException extends LogicException
 {
-    //put your code here
+	//put your code here
 }

@@ -8,10 +8,10 @@
  * For more information please see http://extras.nettephp.com
  *
  * @copyright  Copyright (c) 2009 David Grudl
- * @license    New BSD License
- * @link       http://extras.nettephp.com
- * @package    Nette Extras
- * @version    $Id: VisualPaginator.php 4 2009-07-14 15:22:02Z david@grudl.com $
+ * @license	New BSD License
+ * @link	   http://extras.nettephp.com
+ * @package	Nette Extras
+ * @version	$Id: VisualPaginator.php 4 2009-07-14 15:22:02Z david@grudl.com $
  */
 
 /*use Nette\Application\Control;*/
@@ -23,9 +23,9 @@
 /**
  * Visual paginator control.
  *
- * @author     David Grudl
+ * @author	 David Grudl
  * @copyright  Copyright (c) 2009 David Grudl
- * @package    Nette Extras
+ * @package	Nette Extras
  */
 class VisualPaginatorComponent extends BaseComponent
 {

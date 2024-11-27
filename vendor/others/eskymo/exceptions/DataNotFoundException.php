@@ -13,7 +13,7 @@
 /**
  * This exception means the situation when the resource is not found.
  *
- * @author      Jan Papousek
- * @version     $Id$
+ * @author	  Jan Papousek
+ * @version	 $Id$
  */
 class DataNotFoundException extends Exception {}
