@@ -114,7 +114,8 @@ CREATE VIEW `view_answer_monitor` AS
 		INNER JOIN `task` USING(`id_task`)
 		INNER JOIN `serie` USING(`id_serie`)
 		INNER JOIN `view_current_year` USING(`id_year`)
-		WHERE `answer`.`code` != `task`.`code`;
+		WHERE `answer`.`code` != `task`.`code`
+		ORDER BY `answer`.`id_answer` DESC;
 
 DROP VIEW IF EXISTS `view_correct_answer`;
 CREATE VIEW `view_correct_answer` AS
