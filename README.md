@@ -110,7 +110,7 @@ Deny from all
 ```
 
 Prepare index.php for each serie:
-```
+```php
 <?php
 date_default_timezone_set('Europe/Prague');
 if(new DateTime() >= new DateTime("2013-11-30 15:00:00")) {
