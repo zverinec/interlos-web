@@ -18,6 +18,6 @@
 		"dibi/dibi": "^4.2",
 		"texy/texy": "^3.1",
 		"nextras/mail-panel": "^2.6.2",
-		"contributte/recaptcha": "^3.5"
+		"drabek-digital/captcha": "^2.0"
 	}
 }

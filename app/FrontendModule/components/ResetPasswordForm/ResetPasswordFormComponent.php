@@ -101,7 +101,7 @@ class ResetPasswordFormComponent extends BaseComponent
 				->addRule(Nette\Forms\Form::FILLED, "Heslo pro kontrolu musí být vyplněno.")
 				->addRule(\Nette\Forms\Form::EQUAL, 'Hesla se musí shodovat', $form['password']);
 
-			$form->addReCaptcha('recaptcha', $label = 'Ochrana před spamboty', $required = TRUE, $message = 'Jste živý člověk?')
+			$form->addCaptcha('recaptcha', 'Ochrana před spamboty')
 				->setRequired('Ochrana před spamboty je povinná.');
 			$form->addSubmit("reset", "Nastavit nové heslo");
 			$form->onSuccess[] = array($this, "formSubmitted");
