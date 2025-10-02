@@ -32,3 +32,7 @@ mail:
 	password: bar
 	encryption:                     # allowed values ssl, tls, null
 	timeout: 100
+
+captcha:
+	siteKey: ""
+	secretKey: ""

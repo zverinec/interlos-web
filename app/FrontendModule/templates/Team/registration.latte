@@ -12,7 +12,10 @@
 	</div>
 {/block}
 
-{block #head}
+{block #footer}
 	{include parent}
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+	{DrabekDigital\Captcha\Assets\CaptchaFrontend::getJavascriptStatic(\DrabekDigital\Captcha\Enums\CaptchaType::TURNSTILE)|noescape}
+	<script n:nonce>
+		{DrabekDigital\Captcha\Assets\CaptchaFrontend::getLocalJavascriptStatic()|replace: '<script>', ''|replace: '</script>', ''|noescape}
+	</script>
 {/block}
