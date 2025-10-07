@@ -41,7 +41,7 @@ class ResetPasswordFormComponent extends BaseComponent
 			/** @var \Nette\Bridges\ApplicationLatte\Template&\Nette\Application\UI\Template $template */
 			$template = InterlosTemplate::loadTemplate($this->createTemplate());
 			$template->setFile(__DIR__ . "/../../templates/mail/resetPassword.latte");
-			$template->team = $values['name'];
+			$template->team = $values['name'] ?? $row->name;
 			$template->id = $row->id_team;
 			$template->code = $code;
 			$mail = new Nette\Mail\Message();
@@ -65,7 +65,7 @@ class ResetPasswordFormComponent extends BaseComponent
 
 			Interlos::teams()->update(['reset_code' => null, 'password' => TeamAuthenticator::passwordHash($values['password'])])->where("[id_team] = %i", $row->id_team)->execute();
 			$this->getPresenter()->flashMessage("Týmu '".$row->name."' bylo úspěšně změněho heslo a byl rovnou přihlášen.", "success");
-			Interlos::getUser()->login($values['name'], $values['password']);
+			Interlos::getUser()->login($row->email, $values['password']);
 			$this->getPresenter()->redirect("Team:default");
 		}
 	}
@@ -101,7 +101,7 @@ class ResetPasswordFormComponent extends BaseComponent
 				->addRule(Nette\Forms\Form::FILLED, "Heslo pro kontrolu musí být vyplněno.")
 				->addRule(\Nette\Forms\Form::EQUAL, 'Hesla se musí shodovat', $form['password']);
 
-			$form->addReCaptcha('recaptcha', $label = 'Ochrana před spamboty', $required = TRUE, $message = 'Jste živý člověk?')
+			$form->addCaptcha('recaptcha', 'Ochrana před spamboty')
 				->setRequired('Ochrana před spamboty je povinná.');
 			$form->addSubmit("reset", "Nastavit nové heslo");
 			$form->onSuccess[] = array($this, "formSubmitted");
