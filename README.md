@@ -173,6 +173,13 @@ Afterward the application is available via `https://interlos.test`, `https://${I
 
 Database is persistent between up & downs and stored in `.mysql` directory.
 
+
+Cloudflare Turnstiles
+---------------------
+
+If you need to manage the Turnsiles keys, the InterLoS Cloudflare account can be accessed with the `interprancer@gmail.com` Google account. For credentials, ask a member of the committee.
+
+
 Various notes
 -------------
 
