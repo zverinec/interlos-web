@@ -15,6 +15,7 @@
 		"php": ">=8.2",
 		"ext-intl": "*",
 		"nette/nette": "^3.2",
+		"nette/application": "~3.2.0",
 		"dibi/dibi": "^4.2",
 		"texy/texy": "^3.1",
 		"nextras/mail-panel": "^2.6.2",
